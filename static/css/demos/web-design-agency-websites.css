@@ -1,0 +1,62 @@
+@import url("./business-websites.css");
+
+:root {
+    --demo-accent: #2563eb;
+    --demo-soft: #eef4ff;
+    --demo-ink: #071827;
+}
+
+.demo-hero {
+    min-height: 660px;
+    display: flex;
+    align-items: center;
+    background:
+        radial-gradient(circle at 80% 14%, rgba(22, 163, 74, 0.2), transparent 30%),
+        linear-gradient(135deg, #071827 0%, #10263a 58%, #2563eb 100%);
+    color: #fff;
+}
+
+.demo-hero h1,
+.demo-hero p {
+    color: #fff;
+}
+
+.demo-preview {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+}
+
+.demo-window-bar {
+    background: rgba(7, 24, 39, 0.8);
+}
+
+.demo-window-body strong {
+    color: #fff;
+}
+
+.demo-window-body p {
+    color: rgba(255, 255, 255, 0.76);
+}
+
+.demo-vibe-grid span {
+    min-height: 112px;
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.demo-vibe-grid span:nth-child(1) {
+    grid-column: span 2;
+    background: linear-gradient(135deg, #2563eb, #16a34a);
+}
+
+.demo-band {
+    background: var(--demo-soft);
+}
+
+@media (max-width: 760px) {
+    .demo-vibe-grid span:nth-child(1) {
+        grid-column: auto;
+    }
+}

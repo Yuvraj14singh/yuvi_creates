@@ -1,0 +1,5 @@
+@import url("./business-websites.css");
+:root { --demo-accent: #147fb3; --demo-soft: #e7f4fb; }
+.demo-preview { background: linear-gradient(160deg, #ffffff 0%, #e7f4fb 100%); }
+.demo-vibe-grid span:nth-child(1) { min-height: 132px; }
+.demo-vibe-grid span:nth-child(2) { border-left: 5px solid var(--demo-accent); }

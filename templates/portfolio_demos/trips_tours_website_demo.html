@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Trips & Tours Website Demo | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}
+<main class="pd pd-travel">
+    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
+    <section class="pd-hero">
+        <div class="container pd-grid">
+            <div>
+                <p class="pd-kicker">Travel website demo</p>
+                <h1>Himalayan Trails</h1>
+                <p>Tour website with package cards, itinerary sections, destination gallery, pricing, and booking enquiry.</p>
+                <div class="pd-actions">
+                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=travel">View Travel Packages</a>
+                    <a class="btn btn-secondary" href="#tours">View Tours</a>
+                </div>
+            </div>
+            <div class="pd-showcase">
+                <span>4D / 3N</span>
+                <strong>Manali Adventure Tour</strong>
+                <small>Itinerary, inclusions, gallery, enquiry CTA</small>
+            </div>
+        </div>
+    </section>
+    <section class="pd-section" id="tours">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Tour packages</p>
+            <h2>A travel homepage that makes destinations easy to compare.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><strong>Manali escape</strong><p>4D/3N itinerary, hotel, transfer, local sightseeing, and adventure add-ons.</p></article>
+            <article><strong>Goa weekend</strong><p>Beach stay, party night, cruise option, gallery, and starting price.</p></article>
+            <article><strong>Kashmir premium</strong><p>Custom itinerary, houseboat, cab, meals, and enquiry-first booking flow.</p></article>
+        </div>
+    </section>
+    <section class="pd-section pd-muted">
+        <div class="container pd-split">
+            <div><p class="pd-kicker">Booking flow</p><h2>Let travellers ask for exact dates, group size, and budget.</h2><p>Perfect for travel agencies, tour planners, homestays, and destination operators.</p></div>
+            <div class="pd-offer-card"><strong>Starting from</strong><span>₹8,999/person</span><p>Lead form can collect destination, date, people, and phone.</p></div>
+        </div>
+    </section>
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Trip feeling</p>
+            <h2>Adventure, stays, memories, and clear itinerary sections to sell the experience.</h2>
+        </div>
+        <div class="container pd-gallery">
+            <div><span>Mountain Views</span></div>
+            <div><span>Group Trips</span></div>
+            <div><span>Hotel Gallery</span></div>
+            <div><span>Day Plans</span></div>
+        </div>
+    </section>
+    <section class="pd-section pd-final">
+        <div class="container pd-final-box">
+            <p class="pd-kicker">Travel conversion page</p>
+            <h2>Packages, itinerary, inclusions, photos, and WhatsApp booking flow built to get enquiries.</h2>
+            <a class="btn btn-primary" href="{% url 'packages' %}?focus=travel">Build Travel Website Like This</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

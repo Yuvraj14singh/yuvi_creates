@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Salon Makeup Artist Demo | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}
+<main class="pd pd-salon">
+    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
+    <section class="pd-hero">
+        <div class="container pd-grid">
+            <div>
+                <p class="pd-kicker">Beauty booking demo</p>
+                <h1>LuxeGlow Studio</h1>
+                <p>A premium salon and makeup artist homepage for bridal packages, service menus, beauty portfolio, reviews, and WhatsApp appointment booking.</p>
+                <div class="pd-actions">
+                    <a class="btn btn-primary" href="#services">View Services</a>
+                    <a class="btn btn-secondary" href="{% url 'packages' %}?focus=salon">View Salon Packages</a>
+                </div>
+            </div>
+            <div class="pd-showcase">
+                <span>Signature package</span>
+                <strong>Bridal HD Makeup</strong>
+                <small>Trial look, hair styling, draping, touch-up kit, and booking flow.</small>
+            </div>
+        </div>
+    </section>
+    <section class="pd-section" id="services">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Services</p>
+            <h2>Soft, elegant sections that make beauty services easy to choose.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><strong>Bridal Makeup</strong><p>HD, airbrush, engagement, reception, and party looks.</p><small>Starting ₹7,999</small></article>
+            <article><strong>Salon Services</strong><p>Hair spa, styling, facial, nails, waxing, and grooming packages.</p><small>Packages available</small></article>
+            <article><strong>Makeup Artist Portfolio</strong><p>Before/after gallery, client looks, event shoots, and Instagram CTA.</p><small>Gallery ready</small></article>
+        </div>
+    </section>
+    <section class="pd-section pd-muted">
+        <div class="container pd-split">
+            <div><p class="pd-kicker">Booking trust</p><h2>Show timings, location, reviews, and package details before clients message.</h2><p>Perfect for salons, bridal makeup artists, beauty studios, nail artists, and personal care brands.</p></div>
+            <div class="pd-offer-card"><strong>Book appointment</strong><span>WhatsApp booking</span><p>Name, service, date, event type, and phone number.</p></div>
+        </div>
+    </section>
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Beauty portfolio</p>
+            <h2>Aesthetic gallery blocks that feel premium and client-ready.</h2>
+        </div>
+        <div class="container pd-gallery">
+            <div><span>Bridal Looks</span></div>
+            <div><span>Hair Styling</span></div>
+            <div><span>Client Reviews</span></div>
+            <div><span>Studio Visit</span></div>
+        </div>
+    </section>
+    <section class="pd-section pd-final">
+        <div class="container pd-final-box">
+            <p class="pd-kicker">Beauty website flow</p>
+            <h2>Want a premium salon or makeup artist website like this?</h2>
+            <a class="btn btn-primary" href="{% url 'contact' %}">Contact Me</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

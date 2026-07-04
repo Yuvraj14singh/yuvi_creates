@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Payment Failed | Yuvi Creates{% endblock %}
+{% block meta_description %}Payment failed or could not be verified for Yuvi Creates booking.{% endblock %}
+{% block content %}
+<section class="section status-section">
+    <div class="container status-card">
+        <span class="status-icon warning">!</span>
+        <h1>Payment could not be completed.</h1>
+        <p>Your booking payment was not verified. Please try again or contact on WhatsApp.</p>
+        {% if booking %}
+            <div class="status-details">
+                <p><strong>Package:</strong> {{ booking.selected_package }}</p>
+                <p><strong>Price:</strong> {{ booking.package_price }}</p>
+                <p><strong>Status:</strong> {{ booking.payment_status }}</p>
+            </div>
+        {% endif %}
+        <a class="btn btn-secondary" href="{% url 'packages' %}">Choose Package Again</a>
+    </div>
+</section>
+{% endblock %}

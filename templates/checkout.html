@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Checkout | Yuvi Creates{% endblock %}
+{% block meta_description %}Book a Yuvi Creates website package with secure Razorpay payment.{% endblock %}
+{% block content %}
+<section class="page-hero section checkout-hero">
+    <div class="container narrow">
+        <p class="eyebrow">Checkout</p>
+        <h1>Book your selected website package.</h1>
+        <p class="lead">Pay online securely and receive confirmation after verified payment.</p>
+    </div>
+</section>
+<section class="section">
+    <div class="container checkout-grid">
+        <aside class="summary-card">
+            <span class="tag">Selected package</span>
+            <h2>{{ selected_package.title }}</h2>
+            <p class="price">{{ selected_package.price }}</p>
+            <p>{{ selected_package.summary|default:selected_package.short_description }}</p>
+            <h3>Package summary</h3>
+            <ul class="feature-list">
+                {% for feature in features|slice:":7" %}<li>{{ feature }}</li>{% endfor %}
+            </ul>
+            <h3>Scope limits</h3>
+            <ul class="limit-list">
+                {% for limit in limits %}<li>{{ limit }}</li>{% endfor %}
+            </ul>
+        </aside>
+        <form class="form-card checkout-form" method="post">
+            {% csrf_token %}
+            <div class="checkout-form-head">
+                <div>
+                    <p class="eyebrow">Secure payment</p>
+                    <h2>Client details</h2>
+                </div>
+                <span class="payment-pill">Razorpay</span>
+            </div>
+            <p class="form-intro">Fill the required client details, choose the amount you want to pay for this package, and continue to Razorpay.</p>
+            <div class="form-grid">
+                {% for field in form %}
+                    {% if field.name != "payment_method" %}
+                        <label {% if field.name == "payable_amount" %}class="span-2 amount-row"{% endif %}>
+                            <span class="field-label">
+                                <span>{{ field.label }}{% if field.field.required %}<strong class="required-star">*</strong>{% endif %}</span>
+                                {% if not field.field.required %}<em>Optional</em>{% endif %}
+                            </span>
+                            {{ field }}
+                            {% if field.help_text %}<small class="help-text">{{ field.help_text }}</small>{% endif %}
+                            {% for error in field.errors %}<small class="error">{{ error }}</small>{% endfor %}
+                        </label>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="payment-action">
+                <p class="secure-note">Razorpay will charge the exact amount entered above.</p>
+                <button class="btn btn-primary" type="submit">Pay Securely</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% if payment %}
+<form id="razorpay-callback-form" method="post" action="{{ payment.callback_url }}">
+    <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+    <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
+    <input type="hidden" name="razorpay_signature" id="razorpay_signature">
+</form>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    const razorpayOptions = {
+        key: "{{ payment.razorpay_key }}",
+        amount: "{{ payment.booking.payment_amount_paise }}",
+        currency: "INR",
+        name: "Yuvi Creates",
+        description: "{{ payment.booking.selected_package|escapejs }}",
+        order_id: "{{ payment.razorpay_order_id }}",
+        callback_url: "{{ payment.callback_url }}",
+        prefill: {
+            name: "{{ payment.booking.client_name|escapejs }}",
+            email: "{{ payment.booking.email|escapejs }}",
+            contact: "{{ payment.booking.phone|escapejs }}"
+        },
+        notes: {
+            booking_id: "{{ payment.booking.pk }}",
+            package: "{{ payment.booking.selected_package|escapejs }}"
+        },
+        theme: {
+            color: "#168766"
+        },
+        handler: function (response) {
+            document.getElementById("razorpay_payment_id").value = response.razorpay_payment_id;
+            document.getElementById("razorpay_order_id").value = response.razorpay_order_id;
+            document.getElementById("razorpay_signature").value = response.razorpay_signature;
+            document.getElementById("razorpay-callback-form").submit();
+        },
+        modal: {
+            ondismiss: function () {
+                window.location.href = "{% url 'payment_pending' %}?booking={{ payment.booking.pk }}";
+            }
+        }
+    };
+    const razorpayCheckout = new Razorpay(razorpayOptions);
+    window.addEventListener("load", function () {
+        razorpayCheckout.open();
+    });
+</script>
+{% endif %}
+{% endblock %}

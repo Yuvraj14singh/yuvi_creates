@@ -1,0 +1,21 @@
+<svg width="720" height="520" viewBox="0 0 720 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Website planning workspace</title>
+  <desc id="desc">Illustration of a premium website dashboard and planning notes.</desc>
+  <rect width="720" height="520" rx="18" fill="#F5F8F7"/>
+  <rect x="58" y="62" width="604" height="348" rx="14" fill="#071827"/>
+  <rect x="90" y="102" width="250" height="32" rx="8" fill="#D4A64A"/>
+  <rect x="90" y="154" width="355" height="18" rx="9" fill="#FFFFFF" opacity=".9"/>
+  <rect x="90" y="188" width="294" height="14" rx="7" fill="#FFFFFF" opacity=".55"/>
+  <rect x="90" y="238" width="132" height="48" rx="8" fill="#168766"/>
+  <rect x="238" y="238" width="132" height="48" rx="8" fill="#FFFFFF" opacity=".12"/>
+  <rect x="452" y="102" width="154" height="184" rx="12" fill="#FFFFFF" opacity=".1"/>
+  <circle cx="529" cy="164" r="42" fill="#D4A64A"/>
+  <rect x="488" y="226" width="82" height="12" rx="6" fill="#FFFFFF" opacity=".7"/>
+  <rect x="90" y="326" width="516" height="34" rx="8" fill="#FFFFFF" opacity=".09"/>
+  <rect x="108" y="338" width="118" height="10" rx="5" fill="#FFFFFF" opacity=".55"/>
+  <rect x="250" y="338" width="156" height="10" rx="5" fill="#FFFFFF" opacity=".35"/>
+  <rect x="430" y="338" width="122" height="10" rx="5" fill="#FFFFFF" opacity=".35"/>
+  <rect x="130" y="430" width="460" height="38" rx="10" fill="#FFFFFF"/>
+  <rect x="160" y="444" width="120" height="10" rx="5" fill="#168766"/>
+  <rect x="306" y="444" width="254" height="10" rx="5" fill="#071827" opacity=".22"/>
+</svg>

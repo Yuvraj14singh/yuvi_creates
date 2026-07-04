@@ -1,0 +1,5 @@
+@import url("./business-websites.css");
+:root { --demo-accent: #0891b2; --demo-soft: #cffafe; }
+.demo-vibe-grid { grid-template-columns: 1.2fr 0.9fr 0.7fr 1fr; }
+.demo-vibe-grid span { min-height: 120px; }
+@media (max-width: 760px) { .demo-vibe-grid { grid-template-columns: 1fr; } }

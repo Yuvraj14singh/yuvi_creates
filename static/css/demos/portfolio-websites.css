@@ -1,0 +1,4 @@
+@import url("./business-websites.css");
+:root { --demo-accent: #2563eb; --demo-soft: #dbeafe; }
+.demo-vibe-grid span { min-height: 112px; }
+.demo-vibe-grid span:nth-child(2), .demo-vibe-grid span:nth-child(3) { background: #fff; }

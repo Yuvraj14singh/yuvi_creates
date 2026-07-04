@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Web Design Agency Demo | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}
+<main class="pd pd-agency">
+    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
+    <section class="pd-hero">
+        <div class="container pd-grid">
+            <div>
+                <p class="pd-kicker">Web design agency demo</p>
+                <h1>LaunchCraft Studio</h1>
+                <p>A modern agency-style website for web design services, process, portfolio previews, package offers, testimonials, and quote enquiries.</p>
+                <div class="pd-actions">
+                    <a class="btn btn-primary" href="#services">Get Website</a>
+                    <a class="btn btn-secondary" href="{% url 'portfolio' %}">View Work</a>
+                </div>
+            </div>
+            <div class="pd-showcase">
+                <span>Website package</span>
+                <strong>Business website launch</strong>
+                <small>Hero, services, proof, contact flow, responsive build, and launch support.</small>
+            </div>
+        </div>
+    </section>
+    <section class="pd-section" id="services">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Services</p>
+            <h2>A demo that convinces local businesses your web work is professional.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><strong>Business Websites</strong><p>Clean pages for services, proof, packages, contact, and mobile users.</p></article>
+            <article><strong>Landing Pages</strong><p>Focused campaign pages for offers, events, launches, and lead generation.</p></article>
+            <article><strong>Django Web Apps</strong><p>Forms, admin panels, database logic, and API-ready backend structure.</p></article>
+        </div>
+    </section>
+    <section class="pd-section pd-muted">
+        <div class="container pd-split">
+            <div><p class="pd-kicker">Process</p><h2>Requirement, layout, development, review, and launch in a clear flow.</h2><p>Good agency pages show clients what happens next, what they need to provide, and how the project moves forward.</p></div>
+            <div class="pd-offer-card"><strong>Starting package</strong><span>₹12,000+</span><p>Business-ready website with responsive design and enquiry CTA.</p></div>
+        </div>
+    </section>
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Portfolio preview</p>
+            <h2>Show different industries so clients can imagine their own website.</h2>
+        </div>
+        <div class="container pd-gallery">
+            <div><span>Restaurant Demo</span></div>
+            <div><span>Gym Website</span></div>
+            <div><span>Travel Page</span></div>
+            <div><span>Real Estate</span></div>
+        </div>
+    </section>
+    <section class="pd-section pd-final">
+        <div class="container pd-final-box">
+            <p class="pd-kicker">Agency conversion page</p>
+            <h2>Want a web design service page like this for your own brand?</h2>
+            <a class="btn btn-primary" href="{% url 'contact' %}">Contact Me</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

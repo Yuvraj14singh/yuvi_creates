@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Personal Portfolio Website Demo | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}
+<main class="pd pd-personal">
+    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
+    <section class="pd-hero">
+        <div class="container pd-grid">
+            <div>
+                <p class="pd-kicker">Personal brand demo</p>
+                <h1>Aarav Mehta</h1>
+                <p>Portfolio website for creators, developers, coaches, freelancers, and consultants.</p>
+                <div class="pd-actions">
+                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=portfolio">View Portfolio Packages</a>
+                    <a class="btn btn-secondary" href="#work">View Work</a>
+                </div>
+            </div>
+            <div class="pd-showcase">
+                <span>Featured work</span>
+                <strong>12 Projects · 6 Case Studies</strong>
+                <small>Services, testimonials, and enquiry flow</small>
+            </div>
+        </div>
+    </section>
+    <section class="pd-section" id="work">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Portfolio home</p>
+            <h2>A personal site that sells your work without feeling boring.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><strong>Hero story</strong><p>Who you help, what you do, and the strongest proof above the fold.</p></article>
+            <article><strong>Case studies</strong><p>Project cards with goals, process, outcome, and clear contact CTA.</p></article>
+            <article><strong>Services</strong><p>Offer blocks for consulting, design, development, coaching, or content.</p></article>
+        </div>
+    </section>
+    <section class="pd-section pd-muted">
+        <div class="container pd-split">
+            <div><p class="pd-kicker">Trust section</p><h2>Testimonials, logos, stats, and a simple enquiry form.</h2><p>Great for freelancers, creators, job seekers, consultants, and personal brands.</p></div>
+            <div class="pd-offer-card"><strong>Available for projects</strong><span>2 slots this month</span><p>Clean CTA for leads, calls, or portfolio enquiries.</p></div>
+        </div>
+    </section>
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Personal brand energy</p>
+            <h2>Make your work feel premium with proof, services, and strong positioning.</h2>
+        </div>
+        <div class="container pd-gallery">
+            <div><span>Case Studies</span></div>
+            <div><span>Services</span></div>
+            <div><span>Testimonials</span></div>
+            <div><span>Contact CTA</span></div>
+        </div>
+    </section>
+    <section class="pd-section pd-final">
+        <div class="container pd-final-box">
+            <p class="pd-kicker">Premium portfolio page</p>
+            <h2>Turn your skills into a polished brand site that people remember.</h2>
+            <a class="btn btn-primary" href="{% url 'packages' %}?focus=portfolio">Build Portfolio Like This</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

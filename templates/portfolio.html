@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Portfolio | Yuvi Creates{% endblock %}
+{% block meta_description %}Demo website projects for restaurants, cafes, trips and tours, shops, gyms, personal brands, and service businesses.{% endblock %}
+{% block content %}
+<section class="page-hero section">
+    <div class="container narrow">
+        <p class="eyebrow">Portfolio</p>
+        <h1>Work examples for practical, polished business websites.</h1>
+        <p class="lead">These demo projects show the kind of structure, flow, and presentation I create for different client types.</p>
+    </div>
+</section>
+<section class="section">
+    <div class="container card-grid three">
+        {% for project in projects %}
+            <article class="portfolio-card reveal">
+                <div class="project-thumb" role="img" aria-label="{{ project.title }} preview"></div>
+                <div class="portfolio-card-body">
+                    <h2>{{ project.title }}</h2>
+                    <p>{{ project.description }}</p>
+                    <span>{{ project.tech_stack }}</span>
+                </div>
+                <div class="portfolio-card-action">
+                    {% if project.project_url %}
+                        <a class="btn btn-small" href="{{ project.project_url }}" target="_blank" rel="noreferrer">View Project</a>
+                    {% else %}
+                        <a class="btn btn-small" href="{% url 'portfolio_demo' project.pk project.title|slugify %}">View Demo</a>
+                    {% endif %}
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

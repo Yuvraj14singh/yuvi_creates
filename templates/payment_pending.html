@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Payment Pending | Yuvi Creates{% endblock %}
+{% block meta_description %}Booking request received and payment pending.{% endblock %}
+{% block content %}
+<section class="section status-section">
+    <div class="container status-card">
+        <span class="status-icon">✓</span>
+        <h1>Your booking request is pending.</h1>
+        <p>Payment was not completed yet. You can retry from the packages page or contact on WhatsApp.</p>
+        {% if booking %}
+            <div class="status-details">
+                <p><strong>Package:</strong> {{ booking.selected_package }}</p>
+                <p><strong>Price:</strong> {{ booking.package_price }}</p>
+                <p><strong>Status:</strong> {{ booking.payment_status }}</p>
+            </div>
+        {% endif %}
+        <a class="btn btn-primary" href="{% url 'home' %}">Back to Home</a>
+    </div>
+</section>
+{% endblock %}

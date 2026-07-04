@@ -1,0 +1,6 @@
+@import url("./business-websites.css");
+:root { --demo-accent: #475569; --demo-soft: #f1f5f9; }
+.demo-preview { background: #0f172a; }
+.demo-window-body strong { color: #fff; }
+.demo-window-body p { color: rgba(255, 255, 255, 0.72); }
+.demo-vibe-grid span { background: #1e293b; color: #fff; border-color: #334155; }

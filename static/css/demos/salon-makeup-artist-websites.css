@@ -1,0 +1,65 @@
+@import url("./business-websites.css");
+
+:root {
+    --demo-accent: #be4778;
+    --demo-soft: #fff0f6;
+    --demo-ink: #2b1420;
+}
+
+.demo-hero {
+    min-height: 660px;
+    display: flex;
+    align-items: center;
+    background:
+        radial-gradient(circle at 82% 14%, rgba(216, 164, 95, 0.24), transparent 30%),
+        linear-gradient(135deg, #fff0f6 0%, #ffffff 55%, #fff8ee 100%);
+}
+
+.demo-preview {
+    border-color: rgba(190, 71, 120, 0.24);
+    background: linear-gradient(160deg, #ffffff 0%, #fff0f6 100%);
+}
+
+.demo-window-bar {
+    background: var(--demo-ink);
+}
+
+.demo-vibe-grid span {
+    min-height: 112px;
+    border-color: rgba(190, 71, 120, 0.22);
+    background: linear-gradient(180deg, #ffffff, #fff7fb);
+}
+
+.demo-vibe-grid span:nth-child(1) {
+    grid-column: span 2;
+    min-height: 142px;
+    background: linear-gradient(135deg, #2b1420, #be4778);
+    color: #fff;
+}
+
+.demo-vibe-grid span:nth-child(3)::after {
+    content: "";
+    display: block;
+    width: 96px;
+    height: 54px;
+    margin-top: 16px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #be4778, #d8a45f);
+    opacity: 0.35;
+}
+
+.demo-band {
+    background: linear-gradient(135deg, #2b1420, #be4778);
+    color: #fff;
+}
+
+.demo-band .demo-kicker,
+.demo-band h2 {
+    color: #fff;
+}
+
+@media (max-width: 760px) {
+    .demo-vibe-grid span:nth-child(1) {
+        grid-column: auto;
+    }
+}

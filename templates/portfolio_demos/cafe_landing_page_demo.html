@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Cafe Landing Page Demo | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}
+<main class="pd pd-cafe">
+    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
+    <section class="pd-hero">
+        <div class="container pd-grid">
+            <div>
+                <p class="pd-kicker">Cafe launch demo</p>
+                <h1>Brew & Bloom</h1>
+                <p>A warm one-page cafe website for coffee lovers, daily offers, ambience photos, menu highlights, and visit CTA.</p>
+                <div class="pd-actions">
+                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=restaurant">View Cafe Packages</a>
+                    <a class="btn btn-secondary" href="#cafe-menu">See Menu</a>
+                </div>
+            </div>
+            <div class="pd-showcase">
+                <span>Today’s brew</span>
+                <strong>Caramel Cold Brew</strong>
+                <small>Buy 1 get 1 before 5 PM</small>
+                <div class="pd-cup">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pd-section" id="cafe-menu">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Menu preview</p>
+            <h2>Simple sections that make people want to visit.</h2>
+        </div>
+        <div class="container pd-menu">
+            <span>Espresso</span><span>Cold Coffee</span><span>Waffles</span><span>Sandwiches</span>
+        </div>
+    </section>
+    <section class="pd-section pd-muted">
+        <div class="container pd-cards three">
+            <article><strong>Cozy ambience</strong><p>Photo blocks for seating, counter, outdoor space, and cafe corners.</p></article>
+            <article><strong>Daily offers</strong><p>Highlight combos, festive drinks, student offers, and happy hours.</p></article>
+            <article><strong>Visit CTA</strong><p>Map, hours, WhatsApp, call button, and Instagram link in one flow.</p></article>
+        </div>
+    </section>
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Cafe mood</p>
+            <h2>Warm sections for menu cravings, photos, offers, and weekend visits.</h2>
+        </div>
+        <div class="container pd-gallery">
+            <div><span>Latte Bar</span></div>
+            <div><span>Brunch Table</span></div>
+            <div><span>Cozy Corners</span></div>
+            <div><span>Live Offers</span></div>
+        </div>
+    </section>
+    <section class="pd-section pd-final">
+        <div class="container pd-final-box">
+            <p class="pd-kicker">Visitor-ready cafe page</p>
+            <h2>Make people feel the coffee, ambience, and offer before they even arrive.</h2>
+            <a class="btn btn-primary" href="{% url 'packages' %}?focus=restaurant">Build Cafe Website Like This</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

@@ -1,0 +1,5 @@
+@import url("./business-websites.css");
+:root { --demo-accent: #0f766e; --demo-soft: #e3f7f4; }
+.demo-preview { max-width: 420px; margin-left: auto; border-radius: 28px; }
+.demo-window-bar { border-radius: 28px 28px 0 0; }
+.demo-vibe-grid { grid-template-columns: 1fr; }

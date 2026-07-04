@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Restaurant Website Demo | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}
+<main class="pd pd-restaurant">
+    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
+    <section class="pd-hero">
+        <div class="container pd-grid">
+            <div>
+                <p class="pd-kicker">Fine dining demo</p>
+                <h1>Maison Spice</h1>
+                <p>Premium restaurant website with a polished first impression, menu highlights, gallery, location, offers, and WhatsApp reservation flow.</p>
+                <div class="pd-actions">
+                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=restaurant">View Restaurant Packages</a>
+                    <a class="btn btn-secondary" href="#menu">Explore Demo</a>
+                </div>
+            </div>
+            <div class="pd-showcase pd-menu-board">
+                <span>Chef special</span>
+                <strong>Paneer Steak · ₹420</strong>
+                <small>Fresh herbs, smoked sauce, seasonal sides</small>
+                <div class="pd-mini-list">
+                    <p><b>Open today</b> 12 PM - 11 PM</p>
+                    <p><b>Reservation</b> WhatsApp in one tap</p>
+                    <p><b>Rating</b> 4.8 from 320 guests</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pd-strip">
+        <div class="container pd-stats">
+            <span>Signature menu</span><span>Table booking</span><span>Gallery</span><span>Google map</span>
+        </div>
+    </section>
+    <section class="pd-section" id="menu">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Website sections</p>
+            <h2>Everything a restaurant visitor checks before calling.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><strong>Menu highlights</strong><p>Starters, mains, desserts, beverages, price blocks, and chef recommendations.</p></article>
+            <article><strong>Ambience gallery</strong><p>Interior, food, table setup, parties, and events displayed in a clean grid.</p></article>
+            <article><strong>Reservation flow</strong><p>WhatsApp table enquiry, map, opening hours, and quick call button.</p></article>
+        </div>
+    </section>
+    <section class="pd-section pd-muted">
+        <div class="container pd-split">
+            <div>
+                <p class="pd-kicker">Special offer</p>
+                <h2>Weekend tasting menu</h2>
+                <p>Use this area for offers, events, live music nights, buffet announcements, or chef specials.</p>
+            </div>
+            <div class="pd-offer-card">
+                <strong>Family dinner combo</strong>
+                <span>₹1,499 for two</span>
+                <p>Starter, main course, dessert, and drinks.</p>
+            </div>
+        </div>
+    </section>
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Restaurant vibe</p>
+            <h2>Food, ambience, offers, and reservation trust on one premium homepage.</h2>
+        </div>
+        <div class="container pd-gallery">
+            <div><span>Signature Plates</span></div>
+            <div><span>Dining Space</span></div>
+            <div><span>Guest Reviews</span></div>
+            <div><span>Table Booking</span></div>
+        </div>
+    </section>
+    <section class="pd-section pd-final">
+        <div class="container pd-final-box">
+            <p class="pd-kicker">Premium restaurant flow</p>
+            <h2>Menu, gallery, location, offers, and WhatsApp reservation built to turn visitors into diners.</h2>
+            <a class="btn btn-primary" href="{% url 'packages' %}?focus=restaurant">Build Restaurant Website Like This</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

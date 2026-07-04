@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Payment Success | Yuvi Creates{% endblock %}
+{% block meta_description %}Payment verified successfully for Yuvi Creates booking.{% endblock %}
+{% block content %}
+<section class="section status-section">
+    <div class="container status-card">
+        <span class="status-icon">✓</span>
+        <h1>Payment received successfully.</h1>
+        <p>Your booking is confirmed. I will contact you on WhatsApp/email with the next steps.</p>
+        {% if booking %}
+            <div class="status-details">
+                <p><strong>Package:</strong> {{ booking.selected_package }}</p>
+                <p><strong>Price:</strong> {{ booking.package_price }}</p>
+                <p><strong>Payment ID:</strong> {{ booking.razorpay_payment_id }}</p>
+                <p><strong>Status:</strong> {{ booking.payment_status }}</p>
+            </div>
+        {% endif %}
+        <a class="btn btn-primary" href="{% url 'home' %}">Back to Home</a>
+    </div>
+</section>
+{% endblock %}

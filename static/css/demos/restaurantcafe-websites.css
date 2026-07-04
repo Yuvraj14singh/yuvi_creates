@@ -1,0 +1,5 @@
+@import url("./business-websites.css");
+:root { --demo-accent: #b45309; --demo-soft: #fff3d8; }
+.demo-preview { background: linear-gradient(160deg, #fffaf0 0%, #ffffff 100%); }
+.demo-vibe-grid span { border-radius: 8px 8px 18px 8px; }
+.demo-vibe-grid span:nth-child(1)::after { content: ""; display: block; width: 48px; height: 8px; margin-top: 18px; border-radius: 999px; background: var(--demo-accent); }

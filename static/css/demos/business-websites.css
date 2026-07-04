@@ -1,0 +1,27 @@
+:root { --demo-accent: #168766; --demo-soft: #e7f6f0; --demo-ink: #071827; }
+.demo-hero { padding: 86px 0; background: linear-gradient(135deg, var(--demo-soft), #ffffff); }
+.demo-hero-grid, .demo-grid, .demo-cta { display: grid; gap: 34px; align-items: center; }
+.demo-hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr); }
+.demo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.demo-kicker { margin: 0 0 12px; color: var(--demo-accent); font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; }
+.demo-hero h1 { margin: 0; color: var(--demo-ink); font-size: clamp(2.4rem, 6vw, 4.6rem); line-height: 1.02; }
+.demo-hero p, .demo-panel p { color: #667789; font-size: 1.05rem; }
+.demo-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.demo-preview, .demo-panel { border: 1px solid #dfe7ec; border-radius: 8px; background: #fff; box-shadow: 0 24px 70px rgba(7, 24, 39, 0.1); }
+.demo-preview { overflow: hidden; }
+.demo-window-bar { display: flex; gap: 8px; padding: 14px; background: #071827; }
+.demo-window-bar span { width: 10px; height: 10px; border-radius: 50%; background: var(--demo-accent); }
+.demo-window-body { padding: 28px; }
+.demo-window-body strong { color: var(--demo-ink); font-size: 1.35rem; }
+.demo-window-body em { display: block; margin: 8px 0 16px; color: var(--demo-accent); font-style: normal; font-weight: 800; }
+.demo-vibe-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+.demo-vibe-grid span { min-height: 86px; padding: 14px; border: 1px solid color-mix(in srgb, var(--demo-accent) 22%, #dfe7ec); border-radius: 8px; background: var(--demo-soft); color: var(--demo-ink); font-weight: 800; }
+.demo-section { padding: 78px 0; }
+.demo-panel { padding: 28px; }
+.demo-panel h2, .demo-cta h2 { margin-top: 0; color: var(--demo-ink); }
+.demo-list { padding: 0; margin: 0; list-style: none; }
+.demo-list li { margin: 12px 0; padding-left: 26px; position: relative; }
+.demo-list li::before { content: "✓"; position: absolute; left: 0; color: var(--demo-accent); font-weight: 800; }
+.demo-band { background: var(--demo-soft); }
+.demo-cta { grid-template-columns: 1fr auto; }
+@media (max-width: 760px) { .demo-hero-grid, .demo-grid, .demo-cta, .demo-vibe-grid { grid-template-columns: 1fr; } }

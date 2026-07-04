@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}PitchQI Demo | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}
+<main class="pd pd-pitchqi">
+    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
+    <section class="pd-hero">
+        <div class="container pd-grid">
+            <div>
+                <p class="pd-kicker">Cricket intelligence</p>
+                <h1>PitchQI Dashboard</h1>
+                <p>A cricket project interface for match insights, player signals, pitch context, and analysis cards.</p>
+                <div class="pd-actions">
+                    <a class="btn btn-primary" href="#dashboard-preview">View Dashboard Preview</a>
+                    <a class="btn btn-secondary" href="#signals">See Signals</a>
+                </div>
+            </div>
+            <div class="pd-showcase pd-dashboard-card">
+                <span>Match signal</span>
+                <strong>Spin impact: High</strong>
+                <small>Venue, weather, form, and matchup notes</small>
+                <div class="pd-mini-list">
+                    <p><b>Venue</b> Chennai</p>
+                    <p><b>Dew</b> Medium</p>
+                    <p><b>Risk</b> Toss dependent</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pd-section" id="dashboard-preview">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Dashboard preview</p>
+            <h2>Data cards that make cricket decisions easier to scan.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><strong>Pitch Read</strong><p>Surface pace, bounce, spin help, and dew expectation.</p></article>
+            <article><strong>Player Signals</strong><p>Recent form, role clarity, matchup value, and captaincy cues.</p></article>
+            <article><strong>Team Lens</strong><p>Probable XI notes, batting depth, bowling phases, and risk flags.</p></article>
+        </div>
+    </section>
+    <section class="pd-section pd-muted" id="signals">
+        <div class="container pd-split">
+            <div><p class="pd-kicker">Analysis flow</p><h2>Match page, player page, venue notes, and prediction cards.</h2><p>When you add your real PitchQI URL in admin, the portfolio card can open the live project directly.</p></div>
+            <div class="pd-offer-card"><strong>Signal score</strong><span>82 / 100</span><p>Combines form, role, conditions, and matchup weight.</p></div>
+        </div>
+    </section>
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Product interface</p>
+            <h2>A serious dashboard vibe with clean data, cards, and scan-friendly insights.</h2>
+        </div>
+        <div class="container pd-gallery">
+            <div><span>Match Center</span></div>
+            <div><span>Player Form</span></div>
+            <div><span>Venue Data</span></div>
+            <div><span>AI Notes</span></div>
+        </div>
+    </section>
+    <section class="pd-section pd-final">
+        <div class="container pd-final-box">
+            <p class="pd-kicker">Dashboard demo</p>
+            <h2>Designed like a real cricket intelligence product, ready to link with your live PitchQI project.</h2>
+            <a class="btn btn-primary" href="#dashboard-preview">Explore Dashboard Blocks</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

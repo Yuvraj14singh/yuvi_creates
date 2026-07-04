@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Contact & Enquiry | Yuvi Creates{% endblock %}
+{% block meta_description %}Send a website enquiry to Yuvi Creates for restaurant, cafe, trips and tours, shop, gym, small business, or personal brand projects.{% endblock %}
+{% block content %}
+<section class="page-hero section">
+    <div class="container narrow">
+        <p class="eyebrow">Contact</p>
+        <h1>Tell me what you want to build.</h1>
+        <p class="lead">Share your business details, preferred package, and requirements. Your enquiry will be saved and reviewed from the Django admin.</p>
+    </div>
+</section>
+<section class="section">
+    <div class="container contact-grid">
+        <form class="form-card" method="post">
+            {% csrf_token %}
+            <div class="form-grid">
+                {% for field in form %}
+                    <label {% if field.name == "message" %}class="span-2"{% endif %}>
+                        <span class="field-label">
+                            <span>{{ field.label }}{% if field.field.required %}<strong class="required-star">*</strong>{% endif %}</span>
+                            {% if not field.field.required %}<em>Optional</em>{% endif %}
+                        </span>
+                        {{ field }}
+                        {% for error in field.errors %}<small class="error">{{ error }}</small>{% endfor %}
+                    </label>
+                {% endfor %}
+            </div>
+            <button class="btn btn-primary" type="submit">Send Enquiry</button>
+        </form>
+        <aside class="contact-panel">
+            <h2>Prefer WhatsApp?</h2>
+            <p>Send a quick message with your business type, city, and website requirement.</p>
+            <a class="btn btn-whatsapp wide" href="https://wa.me/916353346509" target="_blank" rel="noreferrer">Message on WhatsApp</a>
+            <div class="contact-detail">
+                <span>Email</span>
+                <strong>contact.yuvicreates@gmail.com</strong>
+            </div>
+            <div class="contact-detail">
+                <span>Response</span>
+                <strong>Usually within 24 hours</strong>
+            </div>
+        </aside>
+    </div>
+</section>
+{% endblock %}

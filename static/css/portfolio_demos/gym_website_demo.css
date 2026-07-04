@@ -1,0 +1,49 @@
+.pd { color: #172330; }
+.pd-hero { padding: 92px 0; }
+.pd-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr); gap: 42px; align-items: center; }
+.pd-kicker { font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+.pd h1 { margin: 0; color: #071827; font-size: clamp(2.7rem, 6vw, 5rem); line-height: 1; }
+.pd-hero p { max-width: 680px; font-size: 1.1rem; color: #667789; }
+.pd-showcase, .pd-cards article { border: 1px solid rgba(22, 135, 102, 0.26); border-radius: 8px; background: #fff; padding: 28px; box-shadow: 0 22px 54px rgba(22, 135, 102, 0.12); }
+.pd-showcase span { color: #168766; font-weight: 800; }
+.pd-showcase strong { display: block; margin: 14px 0 8px; color: #071827; font-size: 1.5rem; }
+.pd-section { padding: 70px 0; }
+.pd-cards { display: grid; gap: 20px; }
+.pd-cards.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pd-hero { background: linear-gradient(135deg, #e7f6f0, #ffffff); }
+.pd-kicker, .pd-showcase span { color: #168766; }
+.pd-showcase, .pd-cards article { border-color: rgba(22, 135, 102, 0.26); box-shadow: 0 22px 54px rgba(22, 135, 102, 0.12); }
+.pd-cards article { background: linear-gradient(180deg, #ffffff, #e7f6f0); }
+@media (max-width: 760px) { .pd-grid, .pd-cards.three { grid-template-columns: 1fr; } }
+.pd { --accent: #16a34a; --accent-2: #ef4444; --dark: #071827; --soft: #e7f6f0; background: #fbfffd; }
+.pd-hero { position: relative; overflow: hidden; min-height: 680px; display: flex; align-items: center; background: radial-gradient(circle at 82% 18%, rgba(239, 68, 68, 0.18), transparent 28%), linear-gradient(135deg, #e7f6f0, #ffffff 48%, #f9fffc); }
+.pd h1 { max-width: 760px; }
+.pd-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+.pd .btn-secondary { background: #fff; color: var(--dark); border: 1px solid rgba(7, 24, 39, 0.16); box-shadow: none; }
+.pd-gym-card { min-height: 360px; background: linear-gradient(155deg, #071827, #123d32); color: #fff; border-color: rgba(22, 163, 74, 0.35); }
+.pd-gym-card strong { color: #fff; font-size: 2rem; }
+.pd-gym-card small { color: rgba(255,255,255,.72); }
+.pd-workout-bars { display: grid; gap: 12px; margin-top: 34px; }
+.pd-workout-bars i { display: block; height: 18px; border-radius: 99px; background: linear-gradient(90deg, var(--accent-2), var(--accent)); }
+.pd-workout-bars i:nth-child(2) { width: 72%; }
+.pd-workout-bars i:nth-child(3) { width: 48%; }
+.pd-strip { padding: 22px 0; background: var(--dark); color: #fff; }
+.pd-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.pd-stats span { padding: 16px; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; text-align: center; font-weight: 800; }
+.pd-section-head { margin-bottom: 28px; }
+.pd-section-head h2, .pd-split h2, .pd-final h2 { margin: 0; max-width: 900px; color: var(--dark); font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.05; }
+.pd-muted { background: var(--soft); }
+.pd-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .58fr); gap: 28px; align-items: center; }
+.pd-offer-card { border-radius: 8px; padding: 32px; background: var(--dark); color: #fff; box-shadow: 0 24px 58px rgba(7, 24, 39, .16); }
+.pd-offer-card strong, .pd-offer-card span { display: block; }
+.pd-offer-card strong { font-size: 1.4rem; }
+.pd-offer-card span { margin: 10px 0; color: #86efac; font-size: 2rem; font-weight: 900; }
+.pd-gallery { display: grid; grid-template-columns: 1.2fr .8fr .8fr 1.2fr; gap: 16px; }
+.pd-gallery div { min-height: 260px; border-radius: 8px; padding: 22px; display: flex; align-items: end; background: linear-gradient(135deg, rgba(7,24,39,.96), rgba(22,163,74,.72)); color: #fff; box-shadow: 0 20px 45px rgba(7,24,39,.12); }
+.pd-gallery div:nth-child(even) { transform: translateY(28px); background: linear-gradient(135deg, rgba(239,68,68,.85), rgba(7,24,39,.92)); }
+.pd-gallery span { font-size: 1.2rem; font-weight: 900; }
+.pd-final { background: linear-gradient(135deg, #071827, #123d32); color: #fff; }
+.pd-final-box { text-align: center; max-width: 980px; }
+.pd-final h2 { color: #fff; margin: 0 auto 26px; }
+.pd-final .pd-kicker { color: #86efac; }
+@media (max-width: 900px) { .pd-stats, .pd-gallery, .pd-split { grid-template-columns: 1fr; } .pd-gallery div:nth-child(even) { transform: none; } .pd-hero { min-height: auto; } }

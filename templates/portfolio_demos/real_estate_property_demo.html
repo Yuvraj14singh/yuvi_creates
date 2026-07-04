@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Real Estate Property Demo | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}
+<main class="pd pd-real-estate">
+    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
+    <section class="pd-hero">
+        <div class="container pd-grid">
+            <div>
+                <p class="pd-kicker">Premium property advisor demo</p>
+                <h1>UrbanNest Realty</h1>
+                <p>A clean, trustworthy real estate homepage for property listings, location-focused trust, consultation bookings, and serious buyer enquiries.</p>
+                <div class="pd-actions">
+                    <a class="btn btn-primary" href="#listings">View Listings</a>
+                    <a class="btn btn-secondary" href="{% url 'packages' %}?focus=real-estate">View Real Estate Packages</a>
+                </div>
+            </div>
+            <div class="pd-showcase pd-property-card">
+                <span>Featured property</span>
+                <strong>3 BHK Sky Residence</strong>
+                <small>Sector 62 · Ready to move · Starting ₹1.45 Cr</small>
+                <div class="pd-property-preview">
+                    <p><b>Area</b> 1,740 sq.ft.</p>
+                    <p><b>Visit</b> Same-day site tour</p>
+                    <p><b>Support</b> Loan + paperwork guidance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pd-strip">
+        <div class="container pd-stats">
+            <span>120+ properties</span><span>8 locations</span><span>Site visit booking</span><span>Verified listings</span>
+        </div>
+    </section>
+    <section class="pd-section" id="listings">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Property listings</p>
+            <h2>Make premium properties easy to compare and enquire about.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><strong>Luxury apartment</strong><p>3 BHK · Sector 62 · ₹1.45 Cr</p><small>Balcony, parking, clubhouse, metro access.</small></article>
+            <article><strong>Builder floor</strong><p>4 BHK · South City · ₹2.1 Cr</p><small>Independent floor, lift, stilt parking, premium interiors.</small></article>
+            <article><strong>Commercial space</strong><p>950 sq.ft. · Main road · ₹85 L</p><small>High visibility, rental potential, verified documents.</small></article>
+        </div>
+    </section>
+    <section class="pd-section pd-muted">
+        <div class="container pd-split">
+            <div>
+                <p class="pd-kicker">Advisor trust</p>
+                <h2>Show locations, experience, verification process, and consultation flow.</h2>
+                <p>Perfect for property advisors, brokers, builders, rental agencies, and real estate consultants who need premium trust before a phone call.</p>
+            </div>
+            <div class="pd-offer-card">
+                <strong>Book consultation</strong>
+                <span>Free property shortlist</span>
+                <p>Collect budget, location, property type, timeline, and phone number.</p>
+            </div>
+        </div>
+    </section>
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Location-led homepage</p>
+            <h2>Corporate, clean, and serious enough for high-ticket property leads.</h2>
+        </div>
+        <div class="container pd-gallery">
+            <div><span>Premium Listings</span></div>
+            <div><span>Location Map</span></div>
+            <div><span>Site Visit Flow</span></div>
+            <div><span>Buyer Trust</span></div>
+        </div>
+    </section>
+    <section class="pd-section pd-form-section">
+        <div class="container pd-split">
+            <div>
+                <p class="pd-kicker">Enquiry form preview</p>
+                <h2>Let buyers request a callback with clear property details.</h2>
+            </div>
+            <form class="pd-demo-form">
+                <label>Name<input type="text" placeholder="Your name"></label>
+                <label>Budget<input type="text" placeholder="₹80L - ₹1.5Cr"></label>
+                <label>Location<input type="text" placeholder="Preferred location"></label>
+                <button class="btn btn-primary" type="button">Request Callback</button>
+            </form>
+        </div>
+    </section>
+    <section class="pd-section pd-final">
+        <div class="container pd-final-box">
+            <p class="pd-kicker">Premium property website</p>
+            <h2>Want a real estate website like this for your advisory, brokerage, or property business?</h2>
+            <a class="btn btn-primary" href="{% url 'packages' %}?focus=real-estate">Build Real Estate Website Like This</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

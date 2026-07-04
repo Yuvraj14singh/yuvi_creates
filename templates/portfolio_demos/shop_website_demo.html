@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Shop Website Demo | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}
+<main class="pd pd-shop">
+    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
+    <section class="pd-hero">
+        <div class="container pd-grid">
+            <div>
+                <p class="pd-kicker">Local shop demo</p>
+                <h1>Urban Kart Store</h1>
+                <p>Shop website concept with product highlights, offers, store location, gallery, and WhatsApp lead flow.</p>
+                <div class="pd-actions">
+                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=shop">View Shop Packages</a>
+                    <a class="btn btn-secondary" href="#products">Browse Products</a>
+                </div>
+            </div>
+            <div class="pd-showcase">
+                <span>Weekend offer</span>
+                <strong>20% off selected products</strong>
+                <small>Product categories and enquiry CTA</small>
+            </div>
+        </div>
+    </section>
+    <section class="pd-section" id="products">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Storefront preview</p>
+            <h2>Products, offers, and store details in a clean mobile-friendly flow.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><strong>New arrivals</strong><p>Product cards with price, category, photo space, and enquiry action.</p></article>
+            <article><strong>Offers</strong><p>Festival sale, combo packs, clearance items, and limited-time discounts.</p></article>
+            <article><strong>Store visit</strong><p>Map, store hours, WhatsApp order, call button, and Instagram link.</p></article>
+        </div>
+    </section>
+    <section class="pd-section pd-muted">
+        <div class="container pd-split">
+            <div><p class="pd-kicker">Sales CTA</p><h2>Turn product interest into WhatsApp enquiries.</h2><p>Useful for boutiques, electronics, grocery, gifts, local stores, and showrooms.</p></div>
+            <div class="pd-offer-card"><strong>Featured product</strong><span>₹899</span><p>One-tap enquiry with product name pre-filled.</p></div>
+        </div>
+    </section>
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Store vibe</p>
+            <h2>A premium-looking storefront for products, offers, and local trust.</h2>
+        </div>
+        <div class="container pd-gallery">
+            <div><span>Best Sellers</span></div>
+            <div><span>New Arrivals</span></div>
+            <div><span>Festive Offers</span></div>
+            <div><span>Store Location</span></div>
+        </div>
+    </section>
+    <section class="pd-section pd-final">
+        <div class="container pd-final-box">
+            <p class="pd-kicker">Sales-ready shop page</p>
+            <h2>Show products beautifully and send buyers straight to WhatsApp enquiry.</h2>
+            <a class="btn btn-primary" href="{% url 'packages' %}?focus=shop">Build Shop Website Like This</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

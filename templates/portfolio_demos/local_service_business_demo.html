@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Local Service Business Demo | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}
+<main class="pd pd-service">
+    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
+    <section class="pd-hero">
+        <div class="container pd-grid">
+            <div>
+                <p class="pd-kicker">Service business demo</p>
+                <h1>PrimeFix Services</h1>
+                <p>Service-provider website with pricing, FAQs, testimonials, location, and lead enquiry flow.</p>
+                <div class="pd-actions">
+                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=small-business">View Service Packages</a>
+                    <a class="btn btn-secondary" href="#services">See Services</a>
+                </div>
+            </div>
+            <div class="pd-showcase">
+                <span>Popular service</span>
+                <strong>Same-day repair visit</strong>
+                <small>Call, WhatsApp, and enquiry form ready</small>
+            </div>
+        </div>
+    </section>
+    <section class="pd-section" id="services">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Service blocks</p>
+            <h2>Make the business look trustworthy before the client calls.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><strong>Transparent pricing</strong><p>Starting prices, visit charges, and service inclusions shown clearly.</p></article>
+            <article><strong>FAQs</strong><p>Answer timing, warranty, payment, location coverage, and support questions.</p></article>
+            <article><strong>Local trust</strong><p>Testimonials, photos, service area, Google map, and quick enquiry.</p></article>
+        </div>
+    </section>
+    <section class="pd-section pd-muted">
+        <div class="container pd-split">
+            <div><p class="pd-kicker">Lead flow</p><h2>Clients can request a visit in under a minute.</h2><p>Best for repair, cleaning, salon, clinic, coaching, and home-service businesses.</p></div>
+            <div class="pd-offer-card"><strong>Request callback</strong><span>Name + phone + issue</span><p>Simple form that feels easy, not heavy.</p></div>
+        </div>
+    </section>
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Local trust</p>
+            <h2>Show service quality, coverage area, pricing clarity, and real reviews.</h2>
+        </div>
+        <div class="container pd-gallery">
+            <div><span>Service Area</span></div>
+            <div><span>Before / After</span></div>
+            <div><span>Customer Reviews</span></div>
+            <div><span>Quick Callback</span></div>
+        </div>
+    </section>
+    <section class="pd-section pd-final">
+        <div class="container pd-final-box">
+            <p class="pd-kicker">Lead-focused service site</p>
+            <h2>Make the business look reliable and make enquiries easy from mobile.</h2>
+            <a class="btn btn-primary" href="{% url 'packages' %}?focus=small-business">Build Service Website Like This</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

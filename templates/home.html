@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Yuvi Creates | Premium Freelance Web Developer{% endblock %}
+{% block meta_description %}Professional websites for restaurants, cafes, trips and tours, shops, gyms, service providers, and personal brands.{% endblock %}
+{% block content %}
+<section class="hero section">
+    <div class="container hero-grid">
+        <div class="hero-copy reveal">
+            <p class="eyebrow">Freelance web developer for every business type</p>
+            <h1>I build clean, responsive websites that help businesses look more professional online.</h1>
+            <p class="lead">Websites for restaurants, cafes, trips and tours, small businesses, personal brands, shops, gyms, salons, institutes, and service providers.</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="{% url 'packages' %}">View Packages</a>
+                <a class="btn btn-secondary" href="{% url 'contact' %}">Get Website Quote</a>
+            </div>
+            <div class="trust-row" aria-label="Trust highlights">
+                <span>Mobile-first</span>
+                <span>WhatsApp CTA</span>
+                <span>SEO basics</span>
+                <span>Business-ready pages</span>
+            </div>
+        </div>
+        <div class="hero-panel reveal">
+            <img src="{% static 'images/workspace-placeholder.svg' %}" alt="Modern website planning workspace illustration">
+            <div class="metric-card">
+                <strong>Launch-ready</strong>
+                <span>Clear design, responsive build, admin-backed forms.</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container section-heading">
+        <p class="eyebrow">Industries I cover</p>
+        <h2>One website system, adapted for your exact business.</h2>
+        <p>Whether you sell food, trips, services, classes, products, or your personal brand, the website is planned around enquiries, bookings, calls, WhatsApp, and trust.</p>
+    </div>
+    <div class="container industry-grid">
+        <article class="industry-card reveal"><span>01</span><h3>Restaurants & cafes</h3><p>Menu, gallery, offers, map, table enquiry, QR menu, and WhatsApp orders.</p></article>
+        <article class="industry-card reveal"><span>02</span><h3>Trips & tours</h3><p>Tour packages, itineraries, destination pages, enquiry forms, and booking leads.</p></article>
+        <article class="industry-card reveal"><span>03</span><h3>Shops & local stores</h3><p>Product highlights, store details, offers, contact flow, and location visibility.</p></article>
+        <article class="industry-card reveal"><span>04</span><h3>Gyms & fitness</h3><p>Membership plans, trainer profiles, transformations, timings, and lead forms.</p></article>
+        <article class="industry-card reveal"><span>05</span><h3>Personal brands</h3><p>Portfolio, services, testimonials, case studies, and professional contact flow.</p></article>
+        <article class="industry-card reveal"><span>06</span><h3>Service providers</h3><p>Service pages, pricing, FAQs, proof, calls, WhatsApp, and enquiry management.</p></article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container section-heading">
+        <p class="eyebrow">What I build</p>
+        <h2>Website services shaped around real business goals.</h2>
+    </div>
+    <div class="container card-grid three">
+        {% for service in services %}
+            <a class="service-card service-card-link reveal" href="{% url 'service_demo' service.pk service.title|slugify %}">
+                <span class="card-index">{{ service.icon }}</span>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+            </a>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section surface">
+    <div class="container split">
+        <div>
+            <p class="eyebrow">Business website packages</p>
+            <h2>Clear packages for business sites, restaurant sites, and tour/travel websites.</h2>
+            <p>Choose a starting point, share your content, and get a professional website flow built around calls, WhatsApp, location, bookings, enquiries, and trust.</p>
+        </div>
+        <a class="btn btn-primary" href="{% url 'packages' %}">Explore all packages</a>
+    </div>
+    <div class="container card-grid four">
+        {% for package in packages %}
+            <article class="price-card reveal">
+                <div class="price-card-main">
+                    <span class="tag package-tag">{{ package.category }}</span>
+                    <h3>{{ package.title }}</h3>
+                    <p class="price">{{ package.price }}</p>
+                    <p class="package-copy">{{ package.short_description }}</p>
+                </div>
+                <a class="btn btn-small" href="{{ package.get_absolute_url }}">Choose Package</a>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="container section-heading">
+        <p class="eyebrow">What every business site gets</p>
+        <h2>The important things clients expect are already planned.</h2>
+    </div>
+    <div class="container card-grid three">
+        <article class="service-card reveal"><span class="card-index">A</span><h3>Professional homepage</h3><p>Clear headline, service proof, CTA buttons, trust sections, and clean mobile layout.</p></article>
+        <article class="service-card reveal"><span class="card-index">B</span><h3>Lead enquiry flow</h3><p>Contact forms, WhatsApp links, call buttons, package interest, and admin-saved enquiries.</p></article>
+        <article class="service-card reveal"><span class="card-index">C</span><h3>Launch support</h3><p>Domain, hosting, basic SEO setup, responsive checks, and final handover guidance.</p></article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container value-grid">
+        <div class="section-heading left">
+            <p class="eyebrow">Why choose me</p>
+            <h2>A practical website partner for small teams.</h2>
+            <p>I focus on clean layouts, mobile experience, clear CTAs, and launch details that make a business feel more trustworthy online.</p>
+        </div>
+        <div class="check-list">
+            <p>Responsive layouts for phones, tablets, and desktops.</p>
+            <p>Clear WhatsApp, call, map, and enquiry journeys.</p>
+            <p>Admin-ready enquiry and booking records.</p>
+            <p>Domain, hosting, and launch guidance when needed.</p>
+            <p>Pages planned for your industry: tours, menus, products, portfolios, services, or bookings.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section surface">
+    <div class="container about-home-grid">
+        <div class="about-photo-panel reveal">
+            {% if about_profile and about_profile.photo %}
+                <img src="{{ about_profile.photo.url }}" alt="{{ about_profile.name }}">
+            {% else %}
+                <img src="{% static 'images/profile-placeholder.svg' %}" alt="Yuvi Creates profile placeholder">
+            {% endif %}
+        </div>
+        <div class="about-home-copy reveal">
+            <p class="eyebrow">About me</p>
+            <h2>Yuvraj Singh — a web developer focused on practical, business-ready websites.</h2>
+            <p>I’m a BCA final year student and web developer building clean, responsive websites with Python, Django, HTML, CSS, JavaScript, APIs, and AI-style integrations.</p>
+            <p>I help businesses, creators, and personal brands create websites that present their services clearly and make it easier for customers to contact them.</p>
+            <div class="about-highlights">
+                <span>Django backend</span>
+                <span>Responsive design</span>
+                <span>API integration</span>
+                <span>Business websites</span>
+            </div>
+            <strong>Yuvraj Singh · BCA final year student and web developer</strong>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="{% url 'about' %}">Read About Me</a>
+                <a class="btn btn-secondary" href="{% url 'portfolio' %}">View Demos</a>
+            </div>
+            <div class="social-links">
+                <a class="social-link" href="https://www.linkedin.com/in/yuvraj-singh-127b88280/" target="_blank" rel="noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.4 8h4.2v15H.4V8Zm7.3 0h4v2.05h.06c.56-1.06 1.93-2.18 3.98-2.18 4.25 0 5.03 2.8 5.03 6.44V23h-4.18v-7.7c0-1.84-.03-4.2-2.56-4.2-2.56 0-2.95 2-2.95 4.06V23H7.7V8Z"/></svg>
+                    <span>LinkedIn</span>
+                </a>
+                <a class="social-link" href="https://github.com/Yuvraj14singh" target="_blank" rel="noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56v-2.14c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18A11.1 11.1 0 0 1 12 6.05c.98 0 1.96.13 2.88.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.42.36.78 1.07.78 2.16v3.12c0 .31.21.67.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container section-heading">
+        <p class="eyebrow">Client reviews</p>
+        <h2>Feedback that helps new clients feel confident.</h2>
+    </div>
+    <div class="container testimonial-grid">
+        {% if reviews %}
+            {% for review in reviews %}
+                <article class="testimonial-card reveal">
+                    <span class="stars" aria-label="{{ review.rating }} out of 5 stars">{{ review.stars }}</span>
+                    <p>“{{ review.quote }}”</p>
+                    <strong>{{ review.client_name }}{% if review.business_name %}, {{ review.business_name }}{% endif %}</strong>
+                </article>
+            {% endfor %}
+        {% else %}
+            <article class="testimonial-card reveal"><p>“The site looks professional on mobile and customers can message us directly from every important section.”</p><strong>Restaurant owner demo</strong></article>
+            <article class="testimonial-card reveal"><p>“Tour packages, itinerary details, and enquiry forms are now organized clearly for new leads.”</p><strong>Travel business demo</strong></article>
+            <article class="testimonial-card reveal"><p>“Our services, pricing, FAQs, and contact flow finally look clean and business-ready.”</p><strong>Service brand demo</strong></article>
+        {% endif %}
+    </div>
+</section>
+
+<section class="section surface">
+    <div class="container section-heading">
+        <p class="eyebrow">Selected work</p>
+        <h2>Demo projects for the kinds of clients I serve.</h2>
+    </div>
+    <div class="container card-grid three">
+        {% for project in projects %}
+            <article class="portfolio-card reveal">
+                <div class="project-thumb" role="img" aria-label="{{ project.title }} preview"></div>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description }}</p>
+                <span>{{ project.tech_stack }}</span>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="container process-preview">
+        <div>
+            <p class="eyebrow">Process</p>
+            <h2>From first discussion to launch support.</h2>
+        </div>
+        <ol class="timeline compact">
+            <li>Requirement discussion</li>
+            <li>Planning and layout</li>
+            <li>Development and review</li>
+            <li>Launch/setup support</li>
+        </ol>
+    </div>
+</section>
+
+<section class="section final-cta">
+    <div class="container cta-box">
+        <h2>Ready to make your business look sharper online?</h2>
+        <p>Share your business type, package interest, and rough content. I’ll help you choose the right website scope.</p>
+        <div>
+            <a class="btn btn-primary" href="{% url 'contact' %}">Get Website Quote</a>
+            <a class="btn btn-secondary" href="{% url 'packages' %}">View Packages</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

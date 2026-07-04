@@ -1,0 +1,21 @@
+@import url("./business-websites.css");
+:root { --demo-accent: #168766; --demo-soft: #e7f6f0; --demo-ink: #071827; }
+.demo-hero { background: linear-gradient(135deg, #f5f8f7 0%, #e7f6f0 58%, #ffffff 100%); }
+.demo-preview { border-color: rgba(22, 135, 102, 0.26); background: #fff; }
+.demo-vibe-grid span {
+    background: linear-gradient(180deg, #ffffff 0%, var(--demo-soft) 100%);
+    color: var(--demo-ink);
+    border-color: rgba(22, 135, 102, 0.24);
+    text-transform: none;
+}
+.demo-vibe-grid span:nth-child(1) { position: relative; }
+.demo-vibe-grid span:nth-child(1)::after {
+    content: "";
+    display: block;
+    width: 74px;
+    height: 12px;
+    margin-top: 16px;
+    border-radius: 999px;
+    background: var(--navy);
+    box-shadow: 28px 0 0 var(--demo-accent), -28px 0 0 var(--demo-accent);
+}

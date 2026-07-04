@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Services | Yuvi Creates{% endblock %}
+{% block meta_description %}Website services for restaurants, cafes, trips and tours, personal brands, shops, gyms, and service providers.{% endblock %}
+{% block content %}
+<section class="page-hero section">
+    <div class="container narrow">
+        <p class="eyebrow">Services</p>
+        <h1>Clean website services for any business that needs a professional online presence.</h1>
+        <p class="lead">From restaurant menus and tour packages to service pages and personal portfolios, every website is built around clarity, mobile usability, and enquiry flow.</p>
+    </div>
+</section>
+<section class="section surface">
+    <div class="container section-heading">
+        <p class="eyebrow">Business types</p>
+        <h2>I can build a website for almost any client category.</h2>
+    </div>
+    <div class="container industry-strip">
+        <span>Restaurants</span>
+        <span>Cafes</span>
+        <span>Trips & tours</span>
+        <span>Travel agencies</span>
+        <span>Gyms</span>
+        <span>Real estate</span>
+        <span>Shops</span>
+        <span>Salons</span>
+        <span>Clinics</span>
+        <span>Coaches</span>
+        <span>Institutes</span>
+        <span>Personal brands</span>
+        <span>Service providers</span>
+    </div>
+</section>
+<section class="section">
+    <div class="container card-grid three">
+        {% for service in services %}
+            <a class="service-card service-card-link reveal" href="{% url 'service_demo' service.pk service.title|slugify %}">
+                <span class="card-index">{{ service.icon }}</span>
+                <h2>{{ service.title }}</h2>
+                <p>{{ service.description }}</p>
+            </a>
+        {% endfor %}
+    </div>
+</section>
+<section class="section surface">
+    <div class="container section-heading">
+        <p class="eyebrow">Common deliverables</p>
+        <h2>Useful pages and features that make the website business-ready.</h2>
+    </div>
+    <div class="container card-grid three">
+        <article class="service-card reveal"><h2>Core pages</h2><p>Home, About, Services, Portfolio/Work, Pricing, FAQ, Contact, and policy pages if needed.</p></article>
+        <article class="service-card reveal"><h2>Industry pages</h2><p>Menu pages, tour packages, product showcases, trainer pages, gallery pages, or booking enquiry pages.</p></article>
+        <article class="service-card reveal"><h2>Conversion tools</h2><p>WhatsApp CTA, call button, Google Map, enquiry forms, package booking, testimonials, and trust sections.</p></article>
+    </div>
+</section>
+{% endblock %}

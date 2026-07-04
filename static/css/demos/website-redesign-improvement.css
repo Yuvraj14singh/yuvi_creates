@@ -1,0 +1,4 @@
+@import url("./business-websites.css");
+:root { --demo-accent: #ea580c; --demo-soft: #ffedd5; }
+.demo-vibe-grid span:nth-child(1) { opacity: 0.72; }
+.demo-vibe-grid span:nth-child(2) { border: 2px solid var(--demo-accent); }

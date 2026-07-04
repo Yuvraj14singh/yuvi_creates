@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ service.title }} Demo | Yuvi Creates{% endblock %}
+{% block meta_description %}Demo page for {{ service.title }} by Yuvi Creates.{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static demo_css %}">
+{% endblock %}
+{% block content %}
+<section class="demo-hero demo-{{ demo_slug }}">
+    <div class="container demo-hero-grid">
+        <div>
+            <p class="demo-kicker">{{ service.icon }} · Demo page</p>
+            <h1>{{ service.title }}</h1>
+            <p>{{ service.description }}</p>
+            <div class="demo-actions">
+                <a class="btn btn-primary" href="{% url 'contact' %}">Start Similar Project</a>
+                <a class="btn btn-secondary" href="{{ package_url }}">View Packages</a>
+            </div>
+        </div>
+        <div class="demo-preview" aria-label="{{ service.title }} preview">
+            <div class="demo-window-bar"><span></span><span></span><span></span></div>
+            <div class="demo-window-body">
+                <strong>{{ service.title }}</strong>
+                <em>{{ details.vibe }}</em>
+                <p>{{ details.cta }}</p>
+                <div class="demo-vibe-grid">
+                    {% for item in details.visual_items %}
+                        <span>{{ item }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="demo-section">
+    <div class="container demo-grid">
+        <article class="demo-panel">
+            <p class="demo-kicker">Best for</p>
+            <h2>{{ details.audience|capfirst }}</h2>
+            <p>{{ details.cta }}</p>
+        </article>
+        <article class="demo-panel">
+            <p class="demo-kicker">Page flow</p>
+            <h2>Sections this demo would include</h2>
+            <ul class="demo-list">
+                {% for section in details.sections %}
+                    <li>{{ section }}</li>
+                {% endfor %}
+            </ul>
+        </article>
+    </div>
+</section>
+
+<section class="demo-section demo-band">
+    <div class="container demo-cta">
+        <div>
+            <p class="demo-kicker">Ready to build</p>
+            <h2>Use this as a starting point for your own website.</h2>
+        </div>
+        <a class="btn btn-primary" href="{{ package_url }}">View Packages</a>
+    </div>
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{% static demo_js %}"></script>
+{% endblock %}
