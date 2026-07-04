@@ -52,8 +52,6 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
-
-
 ROOT_URLCONF = "yuvi_creates.urls"
 
 TEMPLATES = [
