@@ -160,7 +160,7 @@ PORTFOLIO = [
     ("Cafe Landing Page Demo", "A warm cafe landing page designed for offers, ambience, menu highlights, and visits.", "HTML, CSS, JavaScript"),
     ("Gym Website Demo", "A conversion-focused gym website with plans, trainer highlights, and mobile CTA.", "Django, CSS, JavaScript"),
     ("Personal Portfolio Website", "A clean personal brand portfolio with services, case studies, and enquiry flow.", "Django, HTML, CSS"),
-    ("Cricket Project: PitchQI", "A cricket intelligence project presented with dashboard-style content and structured insights.", "Python, Django, JavaScript"),
+    ("Cricket Intelligence Dashboard Demo", "A cricket intelligence project presented with dashboard-style content and structured insights.", "Python, Django, JavaScript"),
     ("Real Estate Property Demo", "A premium property advisor homepage with listings, location trust, consultation CTA, and enquiry flow.", "Django, HTML, CSS, JavaScript"),
     ("Trips & Tours Website Demo", "A travel website concept with package cards, itinerary sections, destination gallery, and booking enquiry flow.", "Django, HTML, CSS, JavaScript"),
     ("Local Service Business Demo", "A polished service-provider website with pricing, FAQs, testimonials, and contact flow.", "Django, HTML, CSS, JavaScript"),

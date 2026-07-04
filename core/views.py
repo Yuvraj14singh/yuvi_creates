@@ -211,6 +211,11 @@ PORTFOLIO_DEMO_DETAILS = {
         "css": "css/portfolio_demos/personal_portfolio_website.css",
         "js": "js/portfolio_demos/personal_portfolio_website.js",
     },
+    "cricket-intelligence-dashboard-demo": {
+        "template": "portfolio_demos/pitchqi_demo.html",
+        "css": "css/portfolio_demos/pitchqi_demo.css",
+        "js": "js/portfolio_demos/pitchqi_demo.js",
+    },
     "cricket-project-pitchqi": {
         "template": "portfolio_demos/pitchqi_demo.html",
         "css": "css/portfolio_demos/pitchqi_demo.css",
@@ -275,6 +280,9 @@ def ensure_default_content():
             title=title,
             defaults={"description": description, "tech_stack": stack, "order": index},
         )
+    PortfolioProject.objects.filter(title="Cricket Project: PitchQI").update(
+        title="Cricket Intelligence Dashboard Demo"
+    )
 
 
 def package_features(package):
