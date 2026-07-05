@@ -1,0 +1,15 @@
+@import url("./business-websites.css");
+
+:root {
+    --demo-accent: #0f766e;
+    --demo-soft: #e8f7f3;
+}
+
+.demo-pet-shop-websites .demo-preview {
+    border-color: rgba(15, 118, 110, 0.26);
+    box-shadow: 0 24px 58px rgba(15, 118, 110, 0.14);
+}
+
+.demo-pet-shop-websites .demo-vibe-grid span {
+    box-shadow: inset 0 -4px 0 color-mix(in srgb, var(--demo-accent) 24%, transparent);
+}

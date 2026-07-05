@@ -43,6 +43,10 @@
                         <p>Price range: ₹30,000 to ₹45,000.</p>
                     {% elif category == "Premium Restaurant Website" %}
                         <p>Price range: ₹50,000 to ₹75,000+.</p>
+                    {% elif category == "Salon & Makeup Artist Websites" %}
+                        <p>Professional websites for salons, beauty studios, bridal makeup artists, and personal beauty brands.</p>
+                    {% elif category == "Pet Shop Websites" %}
+                        <p>Professional websites for pet shops, pet supply stores, grooming services, and pet care brands.</p>
                     {% else %}
                         <p>Price: ₹80,000+ for advanced custom systems, admin panels, bookings, online ordering, or payment integration.</p>
                     {% endif %}
@@ -61,14 +65,25 @@
                             <ul class="feature-list">
                                 {% for feature in item.features %}<li>{{ feature }}</li>{% endfor %}
                             </ul>
-                            <h4>Scope limits</h4>
-                            <ul class="limit-list">
-                                {% for limit in item.limits %}<li>{{ limit }}</li>{% endfor %}
-                            </ul>
+                            {% if item.limits %}
+                                <h4>Scope limits</h4>
+                                <ul class="limit-list">
+                                    {% for limit in item.limits %}<li>{{ limit }}</li>{% endfor %}
+                                </ul>
+                            {% endif %}
                             <a class="btn btn-primary" href="{{ item.package.get_absolute_url }}">Book This Package</a>
                         </article>
                     {% endfor %}
                 </div>
+                {% if category == "Salon & Makeup Artist Websites" %}
+                    <div class="note-box package-scope-note">
+                        Final pricing depends on the number of pages, services, gallery images, booking flow, admin panel requirement, content availability, and final scope.
+                    </div>
+                {% elif category == "Pet Shop Websites" %}
+                    <div class="note-box package-scope-note">
+                        Final pricing depends on the number of pages, product categories, gallery images, admin panel needs, content availability, and final scope. Ecommerce, online payment, cart, and inventory systems are quoted separately.
+                    </div>
+                {% endif %}
             </div>
         {% endfor %}
         <div class="note-box">

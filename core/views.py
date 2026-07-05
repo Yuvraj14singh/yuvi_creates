@@ -83,6 +83,14 @@ DEMO_DETAILS = {
         "visual_items": ["Bridal package", "Service menu", "Gallery", "Booking CTA"],
         "package_focus": "salon",
     },
+    "pet-shop-websites": {
+        "audience": "pet shops, pet supply stores, grooming services, and pet care brands",
+        "sections": ["Store hero", "Product categories", "Grooming/services", "Offers", "Map and WhatsApp enquiry"],
+        "cta": "Show products, services, store trust, and enquiry options in a friendly local-shop flow.",
+        "vibe": "Pet shop storefront and enquiry page",
+        "visual_items": ["Product shelves", "Grooming CTA", "Offers", "Store map"],
+        "package_focus": "pet-shop",
+    },
     "web-design-agency-websites": {
         "audience": "freelancers, agencies, studios, consultants, and service brands selling website work",
         "sections": ["Agency hero", "Services", "Process", "Portfolio preview", "Quote CTA"],
@@ -108,7 +116,7 @@ DEMO_DETAILS = {
         "package_focus": "portfolio",
     },
     "small-business-websites": {
-        "audience": "shops, gyms, salons, classes, service providers, and local businesses",
+        "audience": "service providers, clinics, consultants, repair services, tutors, and local professionals",
         "sections": ["Business intro", "Services", "Why choose us", "Gallery", "Contact"],
         "cta": "Create a simple, trustworthy online presence for local customers.",
         "vibe": "Small business trust page",
@@ -166,9 +174,11 @@ PACKAGE_FOCUS_CATEGORIES = {
         "Advanced Restaurant System",
     ],
     "digital-menu": ["Digital Menu / Single Page Website"],
+    "salon": ["Salon & Makeup Artist Websites"],
+    "pet-shop": ["Pet Shop Websites"],
 }
 
-for focus_key in ("shop", "gym", "real-estate", "salon", "landing", "portfolio", "small-business", "redesign", "responsive", "seo", "launch"):
+for focus_key in ("shop", "gym", "real-estate", "landing", "portfolio", "small-business", "redesign", "responsive", "seo", "launch"):
     PACKAGE_FOCUS_CATEGORIES[focus_key] = PACKAGE_FOCUS_CATEGORIES["business"]
 
 PACKAGE_FOCUS_LABELS = {
@@ -176,7 +186,8 @@ PACKAGE_FOCUS_LABELS = {
     "shop": "Shop and local store website packages",
     "gym": "Gym and fitness website packages",
     "real-estate": "Real estate website packages",
-    "salon": "Salon and makeup artist website packages",
+    "salon": "Salon & Makeup Artist Websites",
+    "pet-shop": "Pet shop website packages",
     "landing": "Landing page website packages",
     "portfolio": "Portfolio website packages",
     "small-business": "Small business website packages",
@@ -245,6 +256,11 @@ PORTFOLIO_DEMO_DETAILS = {
         "template": "portfolio_demos/salon_makeup_artist_demo.html",
         "css": "css/portfolio_demos/salon_makeup_artist_demo.css",
         "js": "js/portfolio_demos/salon_makeup_artist_demo.js",
+    },
+    "pet-shop-website-demo": {
+        "template": "portfolio_demos/pet_shop_website_demo.html",
+        "css": "css/portfolio_demos/pet_shop_website_demo.css",
+        "js": "js/portfolio_demos/pet_shop_website_demo.js",
     },
     "web-design-agency-demo": {
         "template": "portfolio_demos/web_design_agency_demo.html",
