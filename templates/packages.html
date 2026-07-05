@@ -47,6 +47,8 @@
                         <p>Professional websites for salons, beauty studios, bridal makeup artists, and personal beauty brands.</p>
                     {% elif category == "Pet Shop Websites" %}
                         <p>Professional websites for pet shops, pet supply stores, grooming services, and pet care brands.</p>
+                    {% elif category == "Hotel Websites" %}
+                        <p>Professional websites for hotels, guest houses, lodges, boutique stays, banquet hotels, and resorts.</p>
                     {% else %}
                         <p>Price: ₹80,000+ for advanced custom systems, admin panels, bookings, online ordering, or payment integration.</p>
                     {% endif %}
@@ -60,6 +62,16 @@
                             </div>
                             <h3>{{ item.package.title }}</h3>
                             <p class="price">{{ item.package.price }}</p>
+                            {% if item.timeline or item.best_for %}
+                                <div class="package-meta">
+                                    {% if item.timeline %}
+                                        <p><strong>Timeline:</strong> {{ item.timeline }}</p>
+                                    {% endif %}
+                                    {% if item.best_for %}
+                                        <p><strong>Best for:</strong> {{ item.best_for }}</p>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
                             <p>{{ item.package.short_description }}</p>
                             <h4>Included features</h4>
                             <ul class="feature-list">
@@ -82,6 +94,10 @@
                 {% elif category == "Pet Shop Websites" %}
                     <div class="note-box package-scope-note">
                         Final pricing depends on the number of pages, product categories, gallery images, admin panel needs, content availability, and final scope. Ecommerce, online payment, cart, and inventory systems are quoted separately.
+                    </div>
+                {% elif category == "Hotel Websites" %}
+                    <div class="note-box package-scope-note">
+                        Final pricing depends on the number of pages, room categories, gallery images, enquiry flow, admin panel needs, content availability, and final scope. Online booking engine, payment gateway, real-time room availability, and hotel management systems are quoted separately.
                     </div>
                 {% endif %}
             </div>

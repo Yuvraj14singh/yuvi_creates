@@ -890,6 +890,22 @@ h3 {
     margin: 0 0 18px;
 }
 
+.package-meta {
+    display: grid;
+    gap: 8px;
+    margin: 8px 0 16px;
+}
+
+.package-meta p {
+    margin: 0;
+    padding: 9px 12px;
+    border: 1px solid rgba(212, 166, 74, 0.34);
+    border-radius: 8px;
+    background: rgba(212, 166, 74, 0.1);
+    color: var(--navy);
+    font-size: 0.92rem;
+}
+
 .price-card.full h4 {
     margin: 18px 0 10px;
 }

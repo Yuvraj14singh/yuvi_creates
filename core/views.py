@@ -91,6 +91,14 @@ DEMO_DETAILS = {
         "visual_items": ["Product shelves", "Grooming CTA", "Offers", "Store map"],
         "package_focus": "pet-shop",
     },
+    "hotel-websites": {
+        "audience": "hotels, guest houses, lodges, boutique stays, banquet hotels, and resorts",
+        "sections": ["Hotel hero", "Room categories", "Amenities", "Gallery", "Booking enquiry CTA"],
+        "cta": "Show rooms, amenities, location, trust, and enquiry options in a premium hospitality flow.",
+        "vibe": "Hotel room and booking enquiry page",
+        "visual_items": ["Room cards", "Amenities", "Gallery", "Map CTA"],
+        "package_focus": "hotel",
+    },
     "web-design-agency-websites": {
         "audience": "freelancers, agencies, studios, consultants, and service brands selling website work",
         "sections": ["Agency hero", "Services", "Process", "Portfolio preview", "Quote CTA"],
@@ -176,6 +184,7 @@ PACKAGE_FOCUS_CATEGORIES = {
     "digital-menu": ["Digital Menu / Single Page Website"],
     "salon": ["Salon & Makeup Artist Websites"],
     "pet-shop": ["Pet Shop Websites"],
+    "hotel": ["Hotel Websites"],
 }
 
 for focus_key in ("shop", "gym", "real-estate", "landing", "portfolio", "small-business", "redesign", "responsive", "seo", "launch"):
@@ -188,6 +197,7 @@ PACKAGE_FOCUS_LABELS = {
     "real-estate": "Real estate website packages",
     "salon": "Salon & Makeup Artist Websites",
     "pet-shop": "Pet shop website packages",
+    "hotel": "Hotel website packages",
     "landing": "Landing page website packages",
     "portfolio": "Portfolio website packages",
     "small-business": "Small business website packages",
@@ -262,6 +272,11 @@ PORTFOLIO_DEMO_DETAILS = {
         "css": "css/portfolio_demos/pet_shop_website_demo.css",
         "js": "js/portfolio_demos/pet_shop_website_demo.js",
     },
+    "hotel-website-demo": {
+        "template": "portfolio_demos/hotel_website_demo.html",
+        "css": "css/portfolio_demos/hotel_website_demo.css",
+        "js": "js/portfolio_demos/hotel_website_demo.js",
+    },
     "web-design-agency-demo": {
         "template": "portfolio_demos/web_design_agency_demo.html",
         "css": "css/portfolio_demos/web_design_agency_demo.css",
@@ -305,8 +320,31 @@ def package_features(package):
     return [line.strip() for line in package.included_features.splitlines() if line.strip()]
 
 
+def package_prefixed_value(package, prefix):
+    prefix = prefix.lower()
+    for line in package.scope_limits.splitlines():
+        clean_line = line.strip()
+        if clean_line.lower().startswith(prefix):
+            return clean_line.split(":", 1)[1].strip()
+    return ""
+
+
+def package_timeline(package):
+    return package_prefixed_value(package, "timeline:")
+
+
+def package_best_for(package):
+    return package_prefixed_value(package, "best for:")
+
+
 def package_limits(package):
-    return [line.strip() for line in package.scope_limits.splitlines() if line.strip()]
+    return [
+        line.strip()
+        for line in package.scope_limits.splitlines()
+        if line.strip()
+        and not line.strip().lower().startswith("timeline:")
+        and not line.strip().lower().startswith("best for:")
+    ]
 
 
 def razorpay_is_configured():
@@ -409,6 +447,8 @@ def packages(request):
         grouped.setdefault(package.category, []).append(
             {
                 "package": package,
+                "timeline": package_timeline(package),
+                "best_for": package_best_for(package),
                 "features": package_features(package),
                 "limits": package_limits(package),
             }

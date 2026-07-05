@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Hotel Website Demo | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}
+<main class="pd pd-hotel">
+    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
+    <section class="pd-hero">
+        <div class="container pd-grid">
+            <div>
+                <p class="pd-kicker">Hotel website demo</p>
+                <h1>Aranya Grand Stay</h1>
+                <p>A premium hotel website concept for room categories, amenities, dining, nearby attractions, guest trust, and WhatsApp booking enquiries.</p>
+                <div class="pd-actions">
+                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=hotel">View Hotel Packages</a>
+                    <a class="btn btn-secondary" href="#rooms">Explore Rooms</a>
+                </div>
+            </div>
+            <div class="pd-showcase pd-room-card">
+                <span>Signature room</span>
+                <strong>Deluxe Mountain View</strong>
+                <small>King bed · Breakfast · City center access</small>
+                <div class="pd-room-preview">
+                    <p><b>Check-in</b> 12:00 PM</p>
+                    <p><b>Amenities</b> Wi-Fi, AC, dining, parking</p>
+                    <p><b>Enquiry</b> WhatsApp booking request</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pd-strip">
+        <div class="container pd-stats">
+            <span>Room categories</span><span>Amenities</span><span>Guest reviews</span><span>Booking enquiry</span>
+        </div>
+    </section>
+
+    <section class="pd-section" id="rooms">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Room presentation</p>
+            <h2>Let guests compare rooms, amenities, and enquiry options quickly.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><strong>Classic Room</strong><p>Budget-friendly stay with essential amenities and clean room details.</p><small>Good for guest houses and lodges.</small></article>
+            <article><strong>Deluxe Room</strong><p>Better photos, features, occupancy, and enquiry CTA for premium room types.</p><small>Useful for hotels and boutique stays.</small></article>
+            <article><strong>Suite / Family Room</strong><p>Room highlights, inclusions, gallery, and direct call or WhatsApp enquiry.</p><small>Clear flow for family and group stays.</small></article>
+        </div>
+    </section>
+
+    <section class="pd-section pd-muted">
+        <div class="container pd-split">
+            <div>
+                <p class="pd-kicker">Hospitality trust</p>
+                <h2>Show rooms, amenities, location, nearby attractions, reviews, and enquiry flow.</h2>
+                <p>Perfect for hotels, guest houses, lodges, boutique stays, banquet hotels, and resorts that need a polished web presence without a real-time booking engine.</p>
+            </div>
+            <div class="pd-offer-card">
+                <strong>Booking enquiry</strong>
+                <span>Room request form</span>
+                <p>Collect guest name, dates, room type, phone number, and notes for callback.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Stay experience</p>
+            <h2>A refined hotel website flow for room discovery and confident enquiries.</h2>
+        </div>
+        <div class="container pd-gallery">
+            <div><span>Room Gallery</span></div>
+            <div><span>Dining</span></div>
+            <div><span>Banquet</span></div>
+            <div><span>Nearby Attractions</span></div>
+        </div>
+    </section>
+
+    <section class="pd-section pd-form-section">
+        <div class="container pd-split">
+            <div>
+                <p class="pd-kicker">Enquiry form preview</p>
+                <h2>Make booking enquiries simple without adding payment or live availability.</h2>
+            </div>
+            <form class="pd-demo-form">
+                <label>Name<input type="text" placeholder="Guest name"></label>
+                <label>Room type<input type="text" placeholder="Deluxe / Suite"></label>
+                <label>Travel dates<input type="text" placeholder="Check-in to check-out"></label>
+                <button class="btn btn-primary" type="button">Request Callback</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="pd-section pd-final">
+        <div class="container pd-final-box">
+            <p class="pd-kicker">Hotel-ready website</p>
+            <h2>Want a hotel website like this for your stay, lodge, banquet hotel, or resort?</h2>
+            <a class="btn btn-primary" href="{% url 'packages' %}?focus=hotel">Build Hotel Website Like This</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

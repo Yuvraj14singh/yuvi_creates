@@ -6,14 +6,15 @@ SERVICES = [
     ("Real Estate / Property Websites", "Premium property advisor websites with listings, locations, trust sections, consultation flow, and enquiry forms.", "05"),
     ("Salon & Makeup Artist Websites", "Professional websites for salons, beauty studios, bridal makeup artists, and personal beauty brands.", "06"),
     ("Pet Shop Websites", "Professional websites for pet shops, pet supply stores, grooming services, and pet care brands.", "07"),
-    ("Web Design / Agency Websites", "Modern agency-style websites with services, process, portfolio preview, packages, trust sections, and quote CTA.", "08"),
-    ("Landing Pages", "Focused single-page websites for offers, launches, services, and lead generation.", "09"),
-    ("Portfolio Websites", "Personal brand websites for creators, professionals, coaches, and freelancers.", "10"),
-    ("Small Business Websites", "Clean websites for service providers, clinics, consultants, repair services, tutors, and local professionals.", "11"),
-    ("Website Redesign / Improvement", "Improve layout, mobile experience, clarity, speed, and conversion flow.", "12"),
-    ("Responsive Website Development", "Websites built to work smoothly across desktop, tablet, and mobile screens.", "13"),
-    ("Basic SEO-Friendly Website Setup", "Clean page structure, titles, descriptions, alt text, and search-friendly basics.", "14"),
-    ("Domain/Hosting Setup Support", "Guidance for connecting domain, hosting, SSL, and launch setup.", "15"),
+    ("Hotel Websites", "Professional websites for hotels, guest houses, lodges, boutique stays, banquet hotels, and resorts.", "08"),
+    ("Web Design / Agency Websites", "Modern agency-style websites with services, process, portfolio preview, packages, trust sections, and quote CTA.", "09"),
+    ("Landing Pages", "Focused single-page websites for offers, launches, services, and lead generation.", "10"),
+    ("Portfolio Websites", "Personal brand websites for creators, professionals, coaches, and freelancers.", "11"),
+    ("Small Business Websites", "Clean websites for service providers, clinics, consultants, repair services, tutors, and local professionals.", "12"),
+    ("Website Redesign / Improvement", "Improve layout, mobile experience, clarity, speed, and conversion flow.", "13"),
+    ("Responsive Website Development", "Websites built to work smoothly across desktop, tablet, and mobile screens.", "14"),
+    ("Basic SEO-Friendly Website Setup", "Clean page structure, titles, descriptions, alt text, and search-friendly basics.", "15"),
+    ("Domain/Hosting Setup Support", "Guidance for connecting domain, hosting, SSL, and launch setup.", "16"),
 ]
 
 PACKAGES = [
@@ -229,6 +230,31 @@ PACKAGES = [
         "included_features": ["Premium custom design", "Product category pages", "Detailed product/service pages", "Grooming appointment enquiry", "Pet care information sections", "Packages/offers section", "Advanced gallery", "Testimonials/reviews", "FAQ section", "WhatsApp and call CTA flow", "Google Map", "Basic admin panel for limited products, offers, and gallery updates", "Mobile responsive design", "Basic SEO", "Speed optimization", "Launch/setup support"],
         "scope_limits": ["Final scope depends on products, services, gallery size, and admin panel needs", "Basic admin panel is for limited product/offer/gallery updates only", "Full ecommerce, online payment, cart, stock management, and advanced inventory system are not included", "Ecommerce/payment/inventory system will be quoted separately", "Includes 1-2 rounds of minor revisions"],
     },
+    {
+        "category": "Hotel Websites",
+        "title": "Basic Hotel Website",
+        "price": "₹18,000+",
+        "short_description": "A clean starter website for small hotels, guest houses, lodges, and budget stays that need essential details and booking enquiries.",
+        "included_features": ["Home page", "About hotel", "Rooms overview", "Basic amenities section", "Gallery up to 8-10 images", "Timings / check-in / check-out info", "Google Map", "Call button", "WhatsApp booking enquiry button", "Contact section", "Instagram/social link", "Mobile responsive design", "Basic SEO-friendly setup"],
+        "scope_limits": ["Timeline: 5-7 days", "Best for: Small hotels, guest houses, lodges, and budget stays.", "Best for hotels that need a simple online presence.", "No online booking system, payment gateway, real-time room availability, or admin panel included."],
+    },
+    {
+        "category": "Hotel Websites",
+        "title": "Professional Hotel Website",
+        "price": "₹32,000+",
+        "short_description": "A stronger hotel website for better room presentation, guest trust, location clarity, and booking enquiries.",
+        "included_features": ["Home page", "About section", "Room categories section", "Room detail sections", "Amenities section", "Dining / restaurant section if available", "Banquet / conference section if available", "Gallery up to 15 images", "Testimonials/reviews section", "Nearby places section", "WhatsApp booking enquiry flow", "Contact form", "Google Map", "Call button", "Instagram/social link", "Mobile responsive design", "Basic SEO", "Basic speed optimization", "Launch/setup support"],
+        "scope_limits": ["Timeline: 8-12 days", "Best for: Hotels that want better room presentation, stronger trust, and clear booking enquiries.", "Best for hotels that want guests to check rooms, amenities, location, and enquiry options clearly.", "Online payment, real-time booking engine, advanced booking management, and admin panel are not included."],
+        "is_featured": True,
+    },
+    {
+        "category": "Hotel Websites",
+        "title": "Premium Hotel Website",
+        "price": "₹55,000+",
+        "short_description": "A premium hotel website with custom design, room pages, strong trust sections, enquiry flow, and limited admin control.",
+        "included_features": ["Premium custom design", "Home page", "About hotel", "Room category pages", "Detailed room pages", "Amenities section", "Dining / restaurant page", "Banquet / conference page", "Gallery section", "Nearby attractions section", "Testimonials/reviews", "FAQ section", "Booking enquiry form", "WhatsApp and call CTA flow", "Google Map", "Basic admin panel for limited room, gallery, and offer updates", "Mobile responsive design", "Basic SEO", "Speed optimization", "Launch/setup support"],
+        "scope_limits": ["Timeline: 12-20 days", "Best for: Premium hotels, boutique hotels, banquet hotels, resorts, and hotel brands.", "Basic admin panel is for limited room, offer, and gallery updates only.", "Online booking engine, payment gateway, real-time room availability, advanced booking calendar, and hotel management system are not included.", "These advanced systems will be quoted separately if required."],
+    },
 ]
 
 PORTFOLIO = [
@@ -243,5 +269,6 @@ PORTFOLIO = [
     ("Shop Website Demo", "A local shop website concept with product highlights, offers, location, and WhatsApp lead flow.", "HTML, CSS, JavaScript"),
     ("Salon Makeup Artist Demo", "A premium beauty website concept with services, bridal packages, gallery, testimonials, and WhatsApp booking.", "HTML, CSS, JavaScript"),
     ("Pet Shop Website Demo", "A friendly pet shop website concept with product categories, grooming enquiries, offers, reviews, and WhatsApp lead flow.", "Django, HTML, CSS, JavaScript"),
+    ("Hotel Website Demo", "A premium hotel website concept with room categories, amenities, gallery, nearby attractions, and booking enquiry flow.", "Django, HTML, CSS, JavaScript"),
     ("Web Design Agency Demo", "A modern agency-style homepage with services, process, portfolio preview, pricing, and project quote CTA.", "Django, HTML, CSS, JavaScript"),
 ]
