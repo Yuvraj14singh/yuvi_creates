@@ -949,3 +949,117 @@ def payment_callback(request):
     booking.payment_status = PaymentBooking.PaymentStatus.FAILED
     booking.save(update_fields=["razorpay_payment_id", "razorpay_signature", "payment_status"])
     return redirect(reverse("payment_failed") + f"?booking={booking.pk}")
+
+
+from django.http import HttpResponse
+from django.urls import reverse
+
+
+def sitemap_xml(request):
+    base_url = "https://yuvicreates-production.up.railway.app"
+
+    urls = [
+        "/",
+        "/about/",
+        "/services/",
+        "/packages/",
+        "/portfolio/",
+        "/contact/",
+    ]
+
+    xml = ['<?xml version="1.0" encoding="UTF-8"?>']
+    xml.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+
+    for path in urls:
+        xml.append("  <url>")
+        xml.append(f"    <loc>{base_url}{path}</loc>")
+        xml.append("    <priority>0.8</priority>")
+        xml.append("  </url>")
+
+    xml.append("</urlset>")
+
+    return HttpResponse("\n".join(xml), content_type="application/xml")
+
+
+from django.http import HttpResponse
+from django.urls import reverse
+
+
+def sitemap_xml(request):
+    base_url = "https://yuvicreates-production.up.railway.app"
+
+    urls = [
+        "/",
+        "/about/",
+        "/services/",
+        "/packages/",
+        "/portfolio/",
+        "/contact/",
+    ]
+
+    xml = ['<?xml version="1.0" encoding="UTF-8"?>']
+    xml.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+
+    for path in urls:
+        xml.append("  <url>")
+        xml.append(f"    <loc>{base_url}{path}</loc>")
+        xml.append("    <priority>0.8</priority>")
+        xml.append("  </url>")
+
+    xml.append("</urlset>")
+
+    return HttpResponse("\n".join(xml), content_type="application/xml")
+
+
+from django.http import HttpResponse
+
+from django.urls import reverse
+
+def sitemap_xml(request):
+    base_url = "https://yuvicreates-production.up.railway.app"
+    urls = [
+        # Main public pages
+
+        "/",
+        "/services/",
+        "/packages/",
+        "/portfolio/",
+        "/process/",
+        "/about/",
+        "/contact/",
+        "/faq/",
+
+        # Portfolio demo pages
+        "/portfolio/demo/cafe-landing-page-demo/",
+        "/portfolio/demo/gym-website-demo/",
+        "/portfolio/demo/hotel-website-demo/",
+        "/portfolio/demo/local-service-business-demo/",
+        "/portfolio/demo/personal-portfolio-website/",
+        "/portfolio/demo/pet-shop-website-demo/",
+        "/portfolio/demo/pitchqi-demo/",
+        "/portfolio/demo/real-estate-property-demo/",
+        "/portfolio/demo/restaurant-website-demo/",
+        "/portfolio/demo/salon-makeup-artist-demo/",
+        "/portfolio/demo/shop-website-demo/",
+        "/portfolio/demo/trips-tours-website-demo/",
+        "/portfolio/demo/web-design-agency-demo/",
+        "/portfolio/demo/wedding-event-planner-website-demo/",
+    ]
+    xml = ['<?xml version="1.0" encoding="UTF-8"?>']
+    xml.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+    for path in urls:
+        xml.append("  <url>")
+        xml.append(f"    <loc>{base_url}{path}</loc>")
+        xml.append("    <priority>0.8</priority>")
+        xml.append("  </url>")
+    xml.append("</urlset>")
+    return HttpResponse("\n".join(xml), content_type="application/xml")
+
+def robots_txt(request):
+    content = """User-agent: *
+Allow: /
+Sitemap: https://yuvicreates-production.up.railway.app/sitemap.xml
+
+"""
+
+    return HttpResponse(content, content_type="text/plain")
