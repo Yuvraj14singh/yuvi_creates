@@ -1,5 +1,9 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 from django.urls import reverse
+
+
+User = get_user_model()
 
 
 class Service(models.Model):
@@ -152,3 +156,263 @@ class PaymentBooking(models.Model):
 
     def __str__(self):
         return f"{self.client_name} - {self.selected_package}"
+
+
+class ServiceCategory(models.Model):
+    name = models.CharField(max_length=140, unique=True)
+    slug = models.SlugField(max_length=160, unique=True)
+    description = models.TextField(blank=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["name"]
+        verbose_name_plural = "Service categories"
+
+    def __str__(self):
+        return self.name
+
+
+class Client(models.Model):
+    class LeadSource(models.TextChoices):
+        GOOGLE_MAPS = "Google Maps", "Google Maps"
+        INSTAGRAM = "Instagram", "Instagram"
+        WHATSAPP = "WhatsApp", "WhatsApp"
+        LINKEDIN = "LinkedIn", "LinkedIn"
+        REFERRAL = "Referral", "Referral"
+        OFFLINE = "Offline", "Offline"
+        WEBSITE_FORM = "Website Form", "Website Form"
+        OTHER = "Other", "Other"
+
+    class CommunicationChannel(models.TextChoices):
+        WHATSAPP = "WhatsApp", "WhatsApp"
+        INSTAGRAM = "Instagram", "Instagram"
+        CALL = "Call", "Call"
+        EMAIL = "Email", "Email"
+        LINKEDIN = "LinkedIn", "LinkedIn"
+        OFFLINE = "Offline", "Offline"
+        OTHER = "Other", "Other"
+
+    service_category = models.ForeignKey(ServiceCategory, on_delete=models.PROTECT, related_name="clients")
+    business_name = models.CharField(max_length=180)
+    contact_person = models.CharField(max_length=140)
+    phone = models.CharField(max_length=40, blank=True)
+    whatsapp = models.CharField(max_length=40, blank=True)
+    email = models.EmailField(blank=True)
+    business_type = models.CharField(max_length=140, blank=True)
+    city = models.CharField(max_length=120, blank=True)
+    address = models.TextField(blank=True)
+    instagram_link = models.URLField(blank=True)
+    google_maps_link = models.URLField(blank=True)
+    current_website = models.URLField(blank=True)
+    business_logo = models.FileField(upload_to="client_logos/", blank=True)
+    lead_source = models.CharField(max_length=40, choices=LeadSource.choices, default=LeadSource.OTHER)
+    communication_channel = models.CharField(
+        max_length=40,
+        choices=CommunicationChannel.choices,
+        default=CommunicationChannel.WHATSAPP,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["business_name"]
+
+    def __str__(self):
+        return self.business_name
+
+
+class ClientProject(models.Model):
+    class ProjectStatus(models.TextChoices):
+        LEAD = "Lead", "Lead"
+        CONTACTED = "Contacted", "Contacted"
+        INTERESTED = "Interested", "Interested"
+        PROPOSAL_SENT = "Proposal Sent", "Proposal Sent"
+        CLIENT_FINALISED = "Client Finalised", "Client Finalised"
+        ADVANCE_PAID = "Advance Paid", "Advance Paid"
+        CONTENT_PENDING = "Content Pending", "Content Pending"
+        IN_DEVELOPMENT = "In Development", "In Development"
+        REVIEW = "Review", "Review"
+        REVISION = "Revision", "Revision"
+        COMPLETED = "Completed", "Completed"
+        DELIVERED = "Delivered", "Delivered"
+        MAINTENANCE = "Maintenance", "Maintenance"
+        CANCELLED = "Cancelled", "Cancelled"
+
+    class PaymentStatus(models.TextChoices):
+        NOT_PAID = "Not Paid", "Not Paid"
+        ADVANCE_PAID = "Advance Paid", "Advance Paid"
+        PARTIALLY_PAID = "Partially Paid", "Partially Paid"
+        FULLY_PAID = "Fully Paid", "Fully Paid"
+        REFUNDED = "Refunded", "Refunded"
+
+    class Priority(models.TextChoices):
+        LOW = "Low", "Low"
+        MEDIUM = "Medium", "Medium"
+        HIGH = "High", "High"
+        URGENT = "Urgent", "Urgent"
+
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="projects")
+    project_type = models.CharField(max_length=140, blank=True)
+    package_selected = models.CharField(max_length=180, blank=True)
+    final_scope_summary = models.TextField(blank=True)
+    pages_required = models.TextField(blank=True)
+    features_required = models.TextField(blank=True)
+    admin_panel_required = models.BooleanField(default=False)
+    payment_gateway_required = models.BooleanField(default=False)
+    maintenance_required = models.BooleanField(default=False)
+    quoted_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    advance_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    remaining_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        help_text="Auto-updated from quoted amount, advance, and saved payments.",
+    )
+    payment_status = models.CharField(
+        max_length=30,
+        choices=PaymentStatus.choices,
+        default=PaymentStatus.NOT_PAID,
+    )
+    project_status = models.CharField(
+        max_length=40,
+        choices=ProjectStatus.choices,
+        default=ProjectStatus.LEAD,
+    )
+    priority = models.CharField(max_length=20, choices=Priority.choices, default=Priority.MEDIUM)
+    start_date = models.DateField(null=True, blank=True)
+    expected_delivery_date = models.DateField(null=True, blank=True)
+    actual_delivery_date = models.DateField(null=True, blank=True)
+    assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    revision_rounds_included = models.PositiveIntegerField(default=1)
+    client_approval_notes = models.TextField(blank=True)
+    internal_notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.client.business_name} - {self.package_selected or self.project_type or 'Project'}"
+
+    @property
+    def received_amount(self):
+        payments_total = self.payments.aggregate(total=models.Sum("amount"))["total"] or 0
+        return self.advance_amount + payments_total
+
+    def update_remaining_amount(self):
+        self.remaining_amount = max(self.quoted_amount - self.received_amount, 0)
+        self.save(update_fields=["remaining_amount", "updated_at"])
+
+
+class ClientContentStatus(models.Model):
+    project = models.OneToOneField(ClientProject, on_delete=models.CASCADE, related_name="content_status")
+    logo_received = models.BooleanField(default=False)
+    photos_received = models.BooleanField(default=False)
+    service_details_received = models.BooleanField(default=False)
+    price_list_received = models.BooleanField(default=False)
+    about_content_received = models.BooleanField(default=False)
+    contact_details_received = models.BooleanField(default=False)
+    social_links_received = models.BooleanField(default=False)
+    testimonials_received = models.BooleanField(default=False)
+    gallery_images_received = models.BooleanField(default=False)
+    domain_access_received = models.BooleanField(default=False)
+    hosting_access_received = models.BooleanField(default=False)
+    content_notes = models.TextField(blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Content status - {self.project}"
+
+
+class ClientDomainHosting(models.Model):
+    project = models.OneToOneField(ClientProject, on_delete=models.CASCADE, related_name="domain_hosting")
+    domain_required = models.BooleanField(default=False)
+    domain_name = models.CharField(max_length=180, blank=True)
+    domain_provider = models.CharField(max_length=140, blank=True)
+    domain_expiry_date = models.DateField(null=True, blank=True)
+    hosting_required = models.BooleanField(default=False)
+    hosting_provider = models.CharField(max_length=140, blank=True)
+    hosting_plan = models.CharField(max_length=140, blank=True)
+    hosting_renewal_date = models.DateField(null=True, blank=True)
+    deployment_url = models.URLField(blank=True)
+    live_website_url = models.URLField(blank=True)
+    access_given_by_client = models.BooleanField(default=False)
+    stored_in_password_manager = models.BooleanField(default=False)
+    notes = models.TextField(
+        blank=True,
+        help_text="Do not store passwords here. Note only where access is safely stored.",
+    )
+
+    def __str__(self):
+        return f"Domain/hosting - {self.project}"
+
+
+class ClientPayment(models.Model):
+    class PaymentType(models.TextChoices):
+        ADVANCE = "Advance", "Advance"
+        PARTIAL = "Partial", "Partial"
+        FINAL = "Final", "Final"
+        MAINTENANCE = "Maintenance", "Maintenance"
+        REFUND = "Refund", "Refund"
+        OTHER = "Other", "Other"
+
+    class PaymentMode(models.TextChoices):
+        UPI = "UPI", "UPI"
+        BANK_TRANSFER = "Bank Transfer", "Bank Transfer"
+        CASH = "Cash", "Cash"
+        RAZORPAY = "Razorpay", "Razorpay"
+        OTHER = "Other", "Other"
+
+    project = models.ForeignKey(ClientProject, on_delete=models.CASCADE, related_name="payments")
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_type = models.CharField(max_length=30, choices=PaymentType.choices, default=PaymentType.PARTIAL)
+    payment_mode = models.CharField(max_length=30, choices=PaymentMode.choices, default=PaymentMode.UPI)
+    payment_date = models.DateField()
+    invoice_number = models.CharField(max_length=80, blank=True)
+    notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-payment_date", "-created_at"]
+
+    def __str__(self):
+        return f"{self.project} - {self.amount}"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.project.update_remaining_amount()
+
+
+class ClientNote(models.Model):
+    project = models.ForeignKey(ClientProject, on_delete=models.CASCADE, related_name="notes")
+    note = models.TextField()
+    next_follow_up_date = models.DateField(null=True, blank=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"Note - {self.project}"
+
+
+class ProjectProgressTask(models.Model):
+    class TaskStatus(models.TextChoices):
+        PENDING = "Pending", "Pending"
+        IN_PROGRESS = "In Progress", "In Progress"
+        DONE = "Done", "Done"
+
+    project = models.ForeignKey(ClientProject, on_delete=models.CASCADE, related_name="progress_tasks")
+    task_name = models.CharField(max_length=140)
+    status = models.CharField(max_length=20, choices=TaskStatus.choices, default=TaskStatus.PENDING)
+    order = models.PositiveIntegerField(default=0)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["order", "task_name"]
+
+    def __str__(self):
+        return f"{self.task_name} - {self.project}"

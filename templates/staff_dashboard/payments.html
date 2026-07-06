@@ -1,0 +1,48 @@
+{% extends "staff_dashboard/base.html" %}
+
+{% block title %}Payments | Yuvi Creates CRM{% endblock %}
+
+{% block staff_content %}
+<div class="staff-header">
+    <div>
+        <p class="staff-kicker">Payment tracking</p>
+        <h1>Payments</h1>
+    </div>
+</div>
+
+<div class="staff-panel table-scroll">
+    <table class="staff-table">
+        <thead>
+            <tr>
+                <th>Client</th>
+                <th>Project</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Mode</th>
+                <th>Date</th>
+                <th>Invoice</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+                <tr>
+                    <td>{{ payment.project.client.business_name }}</td>
+                    <td>{{ payment.project.package_selected|default:payment.project.project_type }}</td>
+                    <td>₹{{ payment.amount|floatformat:0 }}</td>
+                    <td>{{ payment.payment_type }}</td>
+                    <td>{{ payment.payment_mode }}</td>
+                    <td>{{ payment.payment_date }}</td>
+                    <td>{{ payment.invoice_number|default:"-" }}</td>
+                    <td class="actions">
+                        <a href="{% url 'staff_client_detail' payment.project.client_id %}">View Client</a>
+                        <a href="{% url 'staff_payment_add' payment.project_id %}">Add Payment</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="8">No payment records yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

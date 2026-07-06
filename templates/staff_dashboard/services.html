@@ -1,0 +1,24 @@
+{% extends "staff_dashboard/base.html" %}
+
+{% block title %}Service Wise Clients | Yuvi Creates{% endblock %}
+
+{% block staff_content %}
+<div class="staff-header">
+    <div>
+        <p class="staff-kicker">Grouped CRM</p>
+        <h1>Service Wise Clients</h1>
+    </div>
+</div>
+
+<div class="service-card-grid">
+    {% for category in categories %}
+        <a class="service-card" href="{% url 'staff_service_clients' category.slug %}">
+            <strong>{{ category.name }}</strong>
+            <span>{{ category.client_count }} clients · {{ category.project_count }} projects</span>
+            {% if category.description %}<p>{{ category.description }}</p>{% endif %}
+        </a>
+    {% empty %}
+        <div class="empty-state">No service categories yet. Run migrations or add categories from Django Admin.</div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "staff_dashboard/base.html" %}
+
+{% block title %}Projects | Yuvi Creates CRM{% endblock %}
+
+{% block staff_content %}
+<div class="staff-header">
+    <div>
+        <p class="staff-kicker">Delivery pipeline</p>
+        <h1>Projects</h1>
+    </div>
+</div>
+
+<form class="staff-filter" method="get">
+    <select class="form-control" name="status">
+        <option value="">All project statuses</option>
+        {% for value, label in project_statuses %}
+            <option value="{{ value }}"{% if status == value %} selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    <button class="btn btn-secondary" type="submit">Filter</button>
+</form>
+
+<div class="staff-panel">
+    {% include "staff_dashboard/project_table.html" with projects=projects %}
+</div>
+{% endblock %}

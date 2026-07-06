@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Wedding & Event Planner Website Demo | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}
+<main class="pd pd-wedding">
+    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
+    <section class="pd-hero">
+        <div class="container pd-grid">
+            <div>
+                <p class="pd-kicker">Event Planner Demo</p>
+                <h1>Plan Your Perfect Wedding & Events With Elegance</h1>
+                <p>From weddings and birthdays to corporate events and private celebrations, we create memorable experiences with thoughtful planning, beautiful decor, and smooth execution.</p>
+                <div class="pd-actions">
+                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=wedding-event">View Wedding/Event Packages</a>
+                    <a class="btn btn-secondary" href="#consultation">Book Free Consultation</a>
+                </div>
+            </div>
+            <div class="pd-showcase">
+                <span>Elegant Events Studio</span>
+                <strong>Weddings, parties, decor and event coordination</strong>
+                <small>Portfolio showcase with enquiry CTA</small>
+            </div>
+        </div>
+    </section>
+
+    <section class="pd-strip">
+        <div class="container pd-stats">
+            <span>Wedding Planning</span><span>Birthday & Private Events</span><span>Corporate Events</span><span>Decor & Theme Setup</span>
+        </div>
+    </section>
+
+    <section class="pd-section pd-muted">
+        <div class="container pd-split">
+            <div>
+                <p class="pd-kicker">About Elegant Events Studio</p>
+                <h2>Creating Beautiful Events With Personal Touch</h2>
+                <p>We help clients plan weddings, parties, celebrations, and corporate events with design, coordination, vendor support, decor planning, and a smooth guest experience from first call to final execution.</p>
+            </div>
+            <div class="pd-offer-card">
+                <strong>Planning focus</strong>
+                <span>Design + coordination</span>
+                <p>Clear event flow, vendor support, theme direction, and polished client communication.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pd-section" id="services">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Services</p>
+            <h2>Planning, styling, and coordination for meaningful events.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><strong>Wedding Planning</strong><p>Full event planning, timeline coordination, vendor support, and guest experience flow.</p></article>
+            <article><strong>Engagement & Reception</strong><p>Elegant stage setup, entry moments, decor themes, and celebration coordination.</p></article>
+            <article><strong>Birthday Parties</strong><p>Theme planning, decor direction, venue coordination, and smooth party execution.</p></article>
+            <article><strong>Corporate Events</strong><p>Professional event flow, dinner setups, launch events, and guest management planning.</p></article>
+            <article><strong>Theme Decoration</strong><p>Color palettes, floral direction, stage styling, table decor, and venue mood setting.</p></article>
+            <article><strong>Destination/Event Coordination</strong><p>Travel-aware planning, vendor coordination, checklist flow, and on-ground execution support.</p></article>
+        </div>
+    </section>
+
+    <section class="pd-section pd-muted">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Portfolio</p>
+            <h2>Past event stories shown with a premium gallery feel.</h2>
+        </div>
+        <div class="container pd-gallery">
+            <div><span>Luxury Wedding Setup</span></div>
+            <div><span>Floral Engagement Decor</span></div>
+            <div><span>Birthday Celebration</span></div>
+            <div><span>Corporate Dinner Event</span></div>
+            <div><span>Outdoor Mehendi Setup</span></div>
+            <div><span>Reception Stage Design</span></div>
+        </div>
+    </section>
+
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Demo packages</p>
+            <h2>Simple package cards help visitors understand the planning level.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><strong>Essential Event Plan</strong><p>Starting from consultation-based scope for small celebrations.</p><small>Custom Quote</small></article>
+            <article><strong>Premium Wedding Plan</strong><p>Planning, decor guidance, vendor coordination, and guest-flow support.</p><small>Starting from project scope</small></article>
+            <article><strong>Luxury Celebration Plan</strong><p>High-end planning support for multi-event celebrations and premium decor.</p><small>Custom Quote</small></article>
+        </div>
+    </section>
+
+    <section class="pd-section pd-muted">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Process</p>
+            <h2>A calm process builds confidence before clients enquire.</h2>
+        </div>
+        <div class="container pd-process">
+            <article><span>01</span><strong>Consultation</strong><p>Understand event type, guest count, venue, preferences, and budget direction.</p></article>
+            <article><span>02</span><strong>Planning & Theme</strong><p>Shape event flow, moodboard, decor theme, and execution checklist.</p></article>
+            <article><span>03</span><strong>Vendor Coordination</strong><p>Coordinate vendor requirements, timelines, and service expectations.</p></article>
+            <article><span>04</span><strong>Event Execution</strong><p>Support the event-day flow so the celebration feels smooth and polished.</p></article>
+        </div>
+    </section>
+
+    <section class="pd-section">
+        <div class="container pd-section-head">
+            <p class="pd-kicker">Client words</p>
+            <h2>Social proof makes premium event services easier to trust.</h2>
+        </div>
+        <div class="container pd-cards three">
+            <article><p>"Elegant Events Studio made our wedding planning feel effortless and beautifully organized."</p><strong>Riya Malhotra</strong></article>
+            <article><p>"The decor theme, vendor coordination, and reception flow were handled with real care."</p><strong>Arjun Mehra</strong></article>
+            <article><p>"Our corporate dinner looked polished, warm, and perfectly managed from start to finish."</p><strong>Naina Kapoor</strong></article>
+        </div>
+    </section>
+
+    <section class="pd-section pd-final" id="consultation">
+        <div class="container pd-final-box">
+            <p class="pd-kicker">Ready to Plan Your Next Event?</p>
+            <h2>Let's create a beautiful, stress-free event experience for your special day.</h2>
+            <div class="pd-actions center">
+                <a class="btn btn-primary" href="{% url 'packages' %}?focus=wedding-event">View Wedding/Event Packages</a>
+                <a class="btn btn-secondary" href="{% url 'contact' %}">Call Now</a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

@@ -7,14 +7,15 @@ SERVICES = [
     ("Salon & Makeup Artist Websites", "Professional websites for salons, beauty studios, bridal makeup artists, and personal beauty brands.", "06"),
     ("Pet Shop Websites", "Professional websites for pet shops, pet supply stores, grooming services, and pet care brands.", "07"),
     ("Hotel Websites", "Professional websites for hotels, guest houses, lodges, boutique stays, banquet hotels, and resorts.", "08"),
-    ("Web Design / Agency Websites", "Modern agency-style websites with services, process, portfolio preview, packages, trust sections, and quote CTA.", "09"),
-    ("Landing Pages", "Focused single-page websites for offers, launches, services, and lead generation.", "10"),
-    ("Portfolio Websites", "Personal brand websites for creators, professionals, coaches, and freelancers.", "11"),
-    ("Small Business Websites", "Clean websites for service providers, clinics, consultants, repair services, tutors, and local professionals.", "12"),
-    ("Website Redesign / Improvement", "Improve layout, mobile experience, clarity, speed, and conversion flow.", "13"),
-    ("Responsive Website Development", "Websites built to work smoothly across desktop, tablet, and mobile screens.", "14"),
-    ("Basic SEO-Friendly Website Setup", "Clean page structure, titles, descriptions, alt text, and search-friendly basics.", "15"),
-    ("Domain/Hosting Setup Support", "Guidance for connecting domain, hosting, SSL, and launch setup.", "16"),
+    ("Wedding & Event Planner Websites", "Premium websites for wedding planners, event planners, decorators, party organizers, and event management brands.", "09"),
+    ("Web Design / Agency Websites", "Modern agency-style websites with services, process, portfolio preview, packages, trust sections, and quote CTA.", "10"),
+    ("Landing Pages", "Focused single-page websites for offers, launches, services, and lead generation.", "11"),
+    ("Portfolio Websites", "Personal brand websites for creators, professionals, coaches, and freelancers.", "12"),
+    ("Small Business Websites", "Clean websites for service providers, clinics, consultants, repair services, tutors, and local professionals.", "13"),
+    ("Website Redesign / Improvement", "Improve layout, mobile experience, clarity, speed, and conversion flow.", "14"),
+    ("Responsive Website Development", "Websites built to work smoothly across desktop, tablet, and mobile screens.", "15"),
+    ("Basic SEO-Friendly Website Setup", "Clean page structure, titles, descriptions, alt text, and search-friendly basics.", "16"),
+    ("Domain/Hosting Setup Support", "Guidance for connecting domain, hosting, SSL, and launch setup.", "17"),
 ]
 
 PACKAGES = [
@@ -236,7 +237,7 @@ PACKAGES = [
         "price": "₹18,000+",
         "short_description": "A clean starter website for small hotels, guest houses, lodges, and budget stays that need essential details and booking enquiries.",
         "included_features": ["Home page", "About hotel", "Rooms overview", "Basic amenities section", "Gallery up to 8-10 images", "Timings / check-in / check-out info", "Google Map", "Call button", "WhatsApp booking enquiry button", "Contact section", "Instagram/social link", "Mobile responsive design", "Basic SEO-friendly setup"],
-        "scope_limits": ["Timeline: 5-7 days", "Best for: Small hotels, guest houses, lodges, and budget stays.", "Best for hotels that need a simple online presence.", "No online booking system, payment gateway, real-time room availability, or admin panel included."],
+        "scope_limits": ["Best for: Small hotels, guest houses, lodges, and budget stays.", "Best for hotels that need a simple online presence.", "No online booking system, payment gateway, real-time room availability, or admin panel included."],
     },
     {
         "category": "Hotel Websites",
@@ -244,7 +245,7 @@ PACKAGES = [
         "price": "₹32,000+",
         "short_description": "A stronger hotel website for better room presentation, guest trust, location clarity, and booking enquiries.",
         "included_features": ["Home page", "About section", "Room categories section", "Room detail sections", "Amenities section", "Dining / restaurant section if available", "Banquet / conference section if available", "Gallery up to 15 images", "Testimonials/reviews section", "Nearby places section", "WhatsApp booking enquiry flow", "Contact form", "Google Map", "Call button", "Instagram/social link", "Mobile responsive design", "Basic SEO", "Basic speed optimization", "Launch/setup support"],
-        "scope_limits": ["Timeline: 8-12 days", "Best for: Hotels that want better room presentation, stronger trust, and clear booking enquiries.", "Best for hotels that want guests to check rooms, amenities, location, and enquiry options clearly.", "Online payment, real-time booking engine, advanced booking management, and admin panel are not included."],
+        "scope_limits": ["Best for: Hotels that want better room presentation, stronger trust, and clear booking enquiries.", "Best for hotels that want guests to check rooms, amenities, location, and enquiry options clearly.", "Online payment, real-time booking engine, advanced booking management, and admin panel are not included."],
         "is_featured": True,
     },
     {
@@ -253,7 +254,32 @@ PACKAGES = [
         "price": "₹55,000+",
         "short_description": "A premium hotel website with custom design, room pages, strong trust sections, enquiry flow, and limited admin control.",
         "included_features": ["Premium custom design", "Home page", "About hotel", "Room category pages", "Detailed room pages", "Amenities section", "Dining / restaurant page", "Banquet / conference page", "Gallery section", "Nearby attractions section", "Testimonials/reviews", "FAQ section", "Booking enquiry form", "WhatsApp and call CTA flow", "Google Map", "Basic admin panel for limited room, gallery, and offer updates", "Mobile responsive design", "Basic SEO", "Speed optimization", "Launch/setup support"],
-        "scope_limits": ["Timeline: 12-20 days", "Best for: Premium hotels, boutique hotels, banquet hotels, resorts, and hotel brands.", "Basic admin panel is for limited room, offer, and gallery updates only.", "Online booking engine, payment gateway, real-time room availability, advanced booking calendar, and hotel management system are not included.", "These advanced systems will be quoted separately if required."],
+        "scope_limits": ["Best for: Premium hotels, boutique hotels, banquet hotels, resorts, and hotel brands.", "Basic admin panel is for limited room, offer, and gallery updates only.", "Online booking engine, payment gateway, real-time room availability, advanced booking calendar, and hotel management system are not included.", "These advanced systems will be quoted separately if required."],
+    },
+    {
+        "category": "Wedding & Event Planner Websites",
+        "title": "Basic Wedding/Event Planner Website",
+        "price": "₹18,000+",
+        "short_description": "A clean starter website for small event planners, decorators, party planners, and wedding service providers.",
+        "included_features": ["Home page", "About business", "Services overview", "Basic event categories section", "Portfolio/gallery up to 10 images", "Testimonials section", "Location/service area", "Call button", "WhatsApp enquiry button", "Contact section", "Instagram/social link", "Mobile responsive design", "Basic SEO-friendly setup"],
+        "scope_limits": ["Timeline: 5-7 days", "Best for: Small event planners, decorators, birthday/party planners, and wedding service providers who need a simple online presence.", "Best for simple online presence and enquiry generation.", "Portfolio photos and content should be provided by client.", "No admin panel, payment system, or advanced booking system included."],
+    },
+    {
+        "category": "Wedding & Event Planner Websites",
+        "title": "Professional Wedding/Event Planner Website",
+        "price": "₹32,000+",
+        "short_description": "A stronger event planner website with portfolio, service sections, enquiry flow, and professional brand presentation.",
+        "included_features": ["Home page", "About section", "Detailed services section", "Wedding planning section", "Birthday/party planning section", "Corporate/event planning section if available", "Decoration/theme section", "Portfolio/gallery up to 20 images", "Testimonials/reviews section", "Packages/plans section", "Enquiry/contact form", "WhatsApp enquiry flow", "Google Map/service area section", "Call button", "Instagram/social link", "Mobile responsive design", "Basic SEO", "Basic speed optimization", "Launch/setup support"],
+        "scope_limits": ["Timeline: 8-12 days", "Best for: Wedding planners and event planners who want a stronger portfolio, service sections, enquiry flow, and professional brand presentation.", "Best for businesses that want clients to check services, past work, packages, and enquiry options clearly.", "Photos, videos, package details, and content should be provided by client.", "Admin panel, payment gateway, and advanced booking calendar are not included."],
+        "is_featured": True,
+    },
+    {
+        "category": "Wedding & Event Planner Websites",
+        "title": "Premium Wedding/Event Planner Website",
+        "price": "₹55,000+",
+        "short_description": "A high-end event planner website with premium custom design, detailed pages, portfolio storytelling, and limited admin control.",
+        "included_features": ["Premium custom design", "Home page", "About business/brand story", "Detailed service pages", "Wedding planning page", "Event management page", "Decoration/theme page", "Portfolio/event gallery section", "Case study style event sections", "Packages/plans section", "Testimonials/reviews", "FAQ section", "Enquiry form", "WhatsApp and call CTA flow", "Google Map/service area section", "Basic admin panel for limited portfolio, packages, and testimonial updates", "Mobile responsive design", "Basic SEO", "Speed optimization", "Launch/setup support"],
+        "scope_limits": ["Timeline: 12-20 days", "Best for: Premium wedding planners, event management companies, decorators, luxury event brands, and agencies that need a high-end portfolio website.", "Basic admin panel is for limited portfolio, package, and testimonial updates only.", "Advanced booking calendar, CRM, online payment, vendor management, guest management, and automation systems are not included.", "These advanced systems will be quoted separately if required."],
     },
 ]
 
@@ -270,5 +296,6 @@ PORTFOLIO = [
     ("Salon Makeup Artist Demo", "A premium beauty website concept with services, bridal packages, gallery, testimonials, and WhatsApp booking.", "HTML, CSS, JavaScript"),
     ("Pet Shop Website Demo", "A friendly pet shop website concept with product categories, grooming enquiries, offers, reviews, and WhatsApp lead flow.", "Django, HTML, CSS, JavaScript"),
     ("Hotel Website Demo", "A premium hotel website concept with room categories, amenities, gallery, nearby attractions, and booking enquiry flow.", "Django, HTML, CSS, JavaScript"),
+    ("Wedding & Event Planner Website Demo", "A premium event planning website demo for weddings, parties, corporate events, decoration services, portfolio showcase, and booking enquiries.", "Event Planner Demo"),
     ("Web Design Agency Demo", "A modern agency-style homepage with services, process, portfolio preview, pricing, and project quote CTA.", "Django, HTML, CSS, JavaScript"),
 ]

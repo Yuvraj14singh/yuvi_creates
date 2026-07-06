@@ -30,6 +30,9 @@
                 <a href="{% url 'process' %}">Process</a>
                 <a href="{% url 'about' %}">About</a>
                 <a href="{% url 'contact' %}">Contact</a>
+                {% if request.user.is_staff or request.user.is_superuser %}
+                    <a href="{% url 'staff_dashboard' %}">Staff Dashboard</a>
+                {% endif %}
                 <a class="btn btn-whatsapp" href="https://wa.me/916353346509" target="_blank" rel="noreferrer">WhatsApp</a>
             </div>
         </nav>

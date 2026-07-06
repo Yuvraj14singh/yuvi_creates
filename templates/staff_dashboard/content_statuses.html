@@ -1,0 +1,54 @@
+{% extends "staff_dashboard/base.html" %}
+
+{% block title %}Content Status | Yuvi Creates CRM{% endblock %}
+
+{% block staff_content %}
+<div class="staff-header">
+    <div>
+        <p class="staff-kicker">Content collection</p>
+        <h1>Content Status</h1>
+    </div>
+</div>
+
+<div class="staff-panel table-scroll">
+    <table class="staff-table">
+        <thead>
+            <tr>
+                <th>Client</th>
+                <th>Project</th>
+                <th>Logo</th>
+                <th>Photos</th>
+                <th>Services</th>
+                <th>Price List</th>
+                <th>About</th>
+                <th>Contact</th>
+                <th>Domain</th>
+                <th>Hosting</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+                <tr>
+                    <td>{{ project.client.business_name }}</td>
+                    <td>{{ project.package_selected|default:project.project_type }}</td>
+                    <td>{% include "staff_dashboard/status_yes_no.html" with value=project.content_status.logo_received %}</td>
+                    <td>{% include "staff_dashboard/status_yes_no.html" with value=project.content_status.photos_received %}</td>
+                    <td>{% include "staff_dashboard/status_yes_no.html" with value=project.content_status.service_details_received %}</td>
+                    <td>{% include "staff_dashboard/status_yes_no.html" with value=project.content_status.price_list_received %}</td>
+                    <td>{% include "staff_dashboard/status_yes_no.html" with value=project.content_status.about_content_received %}</td>
+                    <td>{% include "staff_dashboard/status_yes_no.html" with value=project.content_status.contact_details_received %}</td>
+                    <td>{% include "staff_dashboard/status_yes_no.html" with value=project.content_status.domain_access_received %}</td>
+                    <td>{% include "staff_dashboard/status_yes_no.html" with value=project.content_status.hosting_access_received %}</td>
+                    <td class="actions">
+                        <a href="{% url 'staff_content_status' project.pk %}">Update</a>
+                        <a href="{% url 'staff_client_detail' project.client_id %}">View Client</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="11">No pending content records found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

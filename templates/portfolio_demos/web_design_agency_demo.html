@@ -12,7 +12,7 @@
                 <h1>LaunchCraft Studio</h1>
                 <p>A modern agency-style website for web design services, process, portfolio previews, package offers, testimonials, and quote enquiries.</p>
                 <div class="pd-actions">
-                    <a class="btn btn-primary" href="#services">Get Website</a>
+                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=business">View Business Packages</a>
                     <a class="btn btn-secondary" href="{% url 'portfolio' %}">View Work</a>
                 </div>
             </div>
@@ -56,7 +56,7 @@
         <div class="container pd-final-box">
             <p class="pd-kicker">Agency conversion page</p>
             <h2>Want a web design service page like this for your own brand?</h2>
-            <a class="btn btn-primary" href="{% url 'contact' %}">Contact Me</a>
+            <a class="btn btn-primary" href="{% url 'packages' %}?focus=business">View Business Packages</a>
         </div>
     </section>
 </main>

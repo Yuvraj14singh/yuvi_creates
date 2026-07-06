@@ -12,7 +12,7 @@ PACKAGES = [
         "price": "₹18,000+",
         "short_description": "A clean starter website for small hotels, guest houses, lodges, and budget stays that need essential details and booking enquiries.",
         "included_features": "Home page\nAbout hotel\nRooms overview\nBasic amenities section\nGallery up to 8-10 images\nTimings / check-in / check-out info\nGoogle Map\nCall button\nWhatsApp booking enquiry button\nContact section\nInstagram/social link\nMobile responsive design\nBasic SEO-friendly setup",
-        "scope_limits": "Timeline: 5-7 days\nBest for: Small hotels, guest houses, lodges, and budget stays.\nBest for hotels that need a simple online presence.\nNo online booking system, payment gateway, real-time room availability, or admin panel included.",
+        "scope_limits": "Best for: Small hotels, guest houses, lodges, and budget stays.\nBest for hotels that need a simple online presence.\nNo online booking system, payment gateway, real-time room availability, or admin panel included.",
         "order": 32,
     },
     {
@@ -20,7 +20,7 @@ PACKAGES = [
         "price": "₹32,000+",
         "short_description": "A stronger hotel website for better room presentation, guest trust, location clarity, and booking enquiries.",
         "included_features": "Home page\nAbout section\nRoom categories section\nRoom detail sections\nAmenities section\nDining / restaurant section if available\nBanquet / conference section if available\nGallery up to 15 images\nTestimonials/reviews section\nNearby places section\nWhatsApp booking enquiry flow\nContact form\nGoogle Map\nCall button\nInstagram/social link\nMobile responsive design\nBasic SEO\nBasic speed optimization\nLaunch/setup support",
-        "scope_limits": "Timeline: 8-12 days\nBest for: Hotels that want better room presentation, stronger trust, and clear booking enquiries.\nBest for hotels that want guests to check rooms, amenities, location, and enquiry options clearly.\nOnline payment, real-time booking engine, advanced booking management, and admin panel are not included.",
+        "scope_limits": "Best for: Hotels that want better room presentation, stronger trust, and clear booking enquiries.\nBest for hotels that want guests to check rooms, amenities, location, and enquiry options clearly.\nOnline payment, real-time booking engine, advanced booking management, and admin panel are not included.",
         "order": 33,
         "is_featured": True,
     },
@@ -29,7 +29,7 @@ PACKAGES = [
         "price": "₹55,000+",
         "short_description": "A premium hotel website with custom design, room pages, strong trust sections, enquiry flow, and limited admin control.",
         "included_features": "Premium custom design\nHome page\nAbout hotel\nRoom category pages\nDetailed room pages\nAmenities section\nDining / restaurant page\nBanquet / conference page\nGallery section\nNearby attractions section\nTestimonials/reviews\nFAQ section\nBooking enquiry form\nWhatsApp and call CTA flow\nGoogle Map\nBasic admin panel for limited room, gallery, and offer updates\nMobile responsive design\nBasic SEO\nSpeed optimization\nLaunch/setup support",
-        "scope_limits": "Timeline: 12-20 days\nBest for: Premium hotels, boutique hotels, banquet hotels, resorts, and hotel brands.\nBasic admin panel is for limited room, offer, and gallery updates only.\nOnline booking engine, payment gateway, real-time room availability, advanced booking calendar, and hotel management system are not included.\nThese advanced systems will be quoted separately if required.",
+        "scope_limits": "Best for: Premium hotels, boutique hotels, banquet hotels, resorts, and hotel brands.\nBasic admin panel is for limited room, offer, and gallery updates only.\nOnline booking engine, payment gateway, real-time room availability, advanced booking calendar, and hotel management system are not included.\nThese advanced systems will be quoted separately if required.",
         "order": 34,
     },
 ]

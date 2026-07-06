@@ -4,18 +4,47 @@ import hmac
 import json
 import urllib.error
 import urllib.request
+from functools import wraps
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.text import slugify
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Count, Q, Sum
 
 from .data import PACKAGES, PORTFOLIO, SERVICES
-from .forms import EnquiryForm, PaymentBookingForm
-from .models import AboutProfile, Package, PaymentBooking, PortfolioProject, Review, Service
+from .forms import (
+    ClientContentStatusForm,
+    ClientDomainHostingForm,
+    ClientForm,
+    ClientNoteForm,
+    ClientPaymentForm,
+    ClientProjectForm,
+    EnquiryForm,
+    PaymentBookingForm,
+    ProjectProgressTaskForm,
+)
+from .models import (
+    AboutProfile,
+    Client,
+    ClientContentStatus,
+    ClientDomainHosting,
+    ClientNote,
+    ClientPayment,
+    ClientProject,
+    Package,
+    PaymentBooking,
+    PortfolioProject,
+    ProjectProgressTask,
+    Review,
+    Service,
+    ServiceCategory,
+)
 
 
 DEMO_DETAILS = {
@@ -98,6 +127,14 @@ DEMO_DETAILS = {
         "vibe": "Hotel room and booking enquiry page",
         "visual_items": ["Room cards", "Amenities", "Gallery", "Map CTA"],
         "package_focus": "hotel",
+    },
+    "wedding-event-planner-websites": {
+        "audience": "wedding planners, event planners, decorators, party organizers, and event management brands",
+        "sections": ["Elegant hero", "Services", "Portfolio gallery", "Packages", "Enquiry CTA"],
+        "cta": "Show trust, past events, services, and enquiry options in a premium event-planning flow.",
+        "vibe": "Luxury wedding and event enquiry page",
+        "visual_items": ["Event gallery", "Service cards", "Packages", "Consultation CTA"],
+        "package_focus": "wedding-event",
     },
     "web-design-agency-websites": {
         "audience": "freelancers, agencies, studios, consultants, and service brands selling website work",
@@ -185,6 +222,7 @@ PACKAGE_FOCUS_CATEGORIES = {
     "salon": ["Salon & Makeup Artist Websites"],
     "pet-shop": ["Pet Shop Websites"],
     "hotel": ["Hotel Websites"],
+    "wedding-event": ["Wedding & Event Planner Websites"],
 }
 
 for focus_key in ("shop", "gym", "real-estate", "landing", "portfolio", "small-business", "redesign", "responsive", "seo", "launch"):
@@ -198,6 +236,7 @@ PACKAGE_FOCUS_LABELS = {
     "salon": "Salon & Makeup Artist Websites",
     "pet-shop": "Pet shop website packages",
     "hotel": "Hotel website packages",
+    "wedding-event": "Wedding & event planner website packages",
     "landing": "Landing page website packages",
     "portfolio": "Portfolio website packages",
     "small-business": "Small business website packages",
@@ -277,6 +316,11 @@ PORTFOLIO_DEMO_DETAILS = {
         "css": "css/portfolio_demos/hotel_website_demo.css",
         "js": "js/portfolio_demos/hotel_website_demo.js",
     },
+    "wedding-event-planner-website-demo": {
+        "template": "portfolio_demos/wedding_event_planner_website_demo.html",
+        "css": "css/portfolio_demos/wedding_event_planner_website_demo.css",
+        "js": "js/portfolio_demos/wedding_event_planner_website_demo.js",
+    },
     "web-design-agency-demo": {
         "template": "portfolio_demos/web_design_agency_demo.html",
         "css": "css/portfolio_demos/web_design_agency_demo.css",
@@ -316,6 +360,295 @@ def ensure_default_content():
     )
 
 
+DEFAULT_PROGRESS_TASKS = [
+    "Planning",
+    "Design Started",
+    "Homepage Completed",
+    "Inner Pages Completed",
+    "Backend Completed",
+    "Admin Panel Completed",
+    "Content Added",
+    "Mobile Responsive Check",
+    "Testing Done",
+    "Client Review Sent",
+    "Revisions Done",
+    "Final Delivery",
+]
+
+
+def is_staff_user(user):
+    return user.is_authenticated and (user.is_staff or user.is_superuser)
+
+
+def staff_required(view_func):
+    @wraps(view_func)
+    @login_required(login_url="/admin/login/")
+    def wrapped(request, *args, **kwargs):
+        if not is_staff_user(request.user):
+            return render(request, "staff_dashboard/permission_denied.html", status=403)
+        return view_func(request, *args, **kwargs)
+
+    return wrapped
+
+
+def seed_project_progress_tasks(project):
+    if project.progress_tasks.exists():
+        return
+    ProjectProgressTask.objects.bulk_create(
+        ProjectProgressTask(project=project, task_name=task_name, order=index)
+        for index, task_name in enumerate(DEFAULT_PROGRESS_TASKS, start=1)
+    )
+
+
+def project_queryset():
+    return ClientProject.objects.select_related("client", "client__service_category", "assigned_to").prefetch_related(
+        "payments", "notes", "progress_tasks"
+    )
+
+
+def staff_dashboard_context():
+    active_statuses = [
+        ClientProject.ProjectStatus.CLIENT_FINALISED,
+        ClientProject.ProjectStatus.ADVANCE_PAID,
+        ClientProject.ProjectStatus.CONTENT_PENDING,
+        ClientProject.ProjectStatus.IN_DEVELOPMENT,
+        ClientProject.ProjectStatus.REVIEW,
+        ClientProject.ProjectStatus.REVISION,
+        ClientProject.ProjectStatus.MAINTENANCE,
+    ]
+    payment_total = ClientPayment.objects.aggregate(total=Sum("amount"))["total"] or 0
+    advance_total = ClientProject.objects.aggregate(total=Sum("advance_amount"))["total"] or 0
+    quoted_total = ClientProject.objects.aggregate(total=Sum("quoted_amount"))["total"] or 0
+    pending_total = ClientProject.objects.aggregate(total=Sum("remaining_amount"))["total"] or 0
+    today = timezone.localdate()
+    return {
+        "total_clients": Client.objects.count(),
+        "active_projects": ClientProject.objects.filter(project_status__in=active_statuses).count(),
+        "pending_payments": ClientProject.objects.exclude(remaining_amount=0).count(),
+        "content_pending": ClientProject.objects.filter(project_status=ClientProject.ProjectStatus.CONTENT_PENDING).count(),
+        "completed_projects": ClientProject.objects.filter(project_status__in=[ClientProject.ProjectStatus.COMPLETED, ClientProject.ProjectStatus.DELIVERED]).count(),
+        "followups_due": ClientNote.objects.filter(next_follow_up_date__lte=today).count(),
+        "total_quoted_amount": quoted_total,
+        "total_received_amount": advance_total + payment_total,
+        "total_pending_amount": pending_total,
+    }
+
+
+@staff_required
+def staff_dashboard(request):
+    recent_projects = project_queryset()[:6]
+    return render(
+        request,
+        "staff_dashboard/dashboard.html",
+        {**staff_dashboard_context(), "recent_projects": recent_projects},
+    )
+
+
+@staff_required
+def staff_services(request):
+    categories = ServiceCategory.objects.filter(is_active=True).annotate(
+        client_count=Count("clients"),
+        project_count=Count("clients__projects"),
+    )
+    return render(request, "staff_dashboard/services.html", {"categories": categories})
+
+
+@staff_required
+def staff_service_clients(request, slug):
+    category = get_object_or_404(ServiceCategory, slug=slug, is_active=True)
+    projects = project_queryset().filter(client__service_category=category)
+    return render(request, "staff_dashboard/service_clients.html", {"category": category, "projects": projects})
+
+
+@staff_required
+def staff_clients(request):
+    clients = Client.objects.select_related("service_category").prefetch_related("projects")
+    query = request.GET.get("q", "").strip()
+    if query:
+        clients = clients.filter(
+            Q(business_name__icontains=query)
+            | Q(contact_person__icontains=query)
+            | Q(phone__icontains=query)
+            | Q(whatsapp__icontains=query)
+            | Q(email__icontains=query)
+            | Q(city__icontains=query)
+        )
+    return render(request, "staff_dashboard/clients.html", {"clients": clients, "query": query})
+
+
+@staff_required
+def staff_projects(request):
+    projects = project_queryset()
+    status = request.GET.get("status", "").strip()
+    if status:
+        projects = projects.filter(project_status=status)
+    return render(
+        request,
+        "staff_dashboard/projects.html",
+        {
+            "projects": projects,
+            "status": status,
+            "project_statuses": ClientProject.ProjectStatus.choices,
+        },
+    )
+
+
+@staff_required
+def staff_payments(request):
+    payments = ClientPayment.objects.select_related("project", "project__client").all()
+    return render(request, "staff_dashboard/payments.html", {"payments": payments})
+
+
+@staff_required
+def staff_content_statuses(request):
+    projects = project_queryset()
+    for project in projects:
+        ClientContentStatus.objects.get_or_create(project=project)
+    projects = project_queryset().filter(
+        Q(project_status=ClientProject.ProjectStatus.CONTENT_PENDING)
+        | Q(content_status__logo_received=False)
+        | Q(content_status__photos_received=False)
+        | Q(content_status__service_details_received=False)
+        | Q(content_status__contact_details_received=False)
+    ).distinct()
+    return render(request, "staff_dashboard/content_statuses.html", {"projects": projects})
+
+
+@staff_required
+def staff_followups(request):
+    today = timezone.localdate()
+    notes = ClientNote.objects.select_related("project", "project__client", "created_by").order_by(
+        "next_follow_up_date", "-created_at"
+    )
+    return render(request, "staff_dashboard/followups.html", {"notes": notes, "today": today})
+
+
+@staff_required
+def staff_client_detail(request, client_id):
+    client = get_object_or_404(Client.objects.select_related("service_category").prefetch_related("projects"), pk=client_id)
+    projects = project_queryset().filter(client=client)
+    for project in projects:
+        ClientContentStatus.objects.get_or_create(project=project)
+        ClientDomainHosting.objects.get_or_create(project=project)
+        seed_project_progress_tasks(project)
+    return render(request, "staff_dashboard/client_detail.html", {"client": client, "projects": projects})
+
+
+@staff_required
+def staff_client_form(request, client_id=None):
+    client = get_object_or_404(Client, pk=client_id) if client_id else None
+    if request.method == "POST":
+        form = ClientForm(request.POST, request.FILES, instance=client)
+        if form.is_valid():
+            client = form.save()
+            messages.success(request, "Client saved.")
+            return redirect("staff_client_detail", client_id=client.pk)
+    else:
+        form = ClientForm(instance=client)
+    return render(request, "staff_dashboard/form.html", {"form": form, "title": "Edit Client" if client else "Add New Client"})
+
+
+@staff_required
+def staff_project_form(request, client_id, project_id=None):
+    client = get_object_or_404(Client, pk=client_id)
+    project = get_object_or_404(ClientProject, pk=project_id, client=client) if project_id else None
+    if request.method == "POST":
+        form = ClientProjectForm(request.POST, instance=project)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.client = client
+            project.save()
+            project.update_remaining_amount()
+            ClientContentStatus.objects.get_or_create(project=project)
+            ClientDomainHosting.objects.get_or_create(project=project)
+            seed_project_progress_tasks(project)
+            messages.success(request, "Project saved.")
+            return redirect("staff_client_detail", client_id=client.pk)
+    else:
+        form = ClientProjectForm(instance=project)
+    return render(request, "staff_dashboard/form.html", {"form": form, "title": "Edit Project" if project else "Add Project", "client": client})
+
+
+@staff_required
+def staff_payment_form(request, project_id):
+    project = get_object_or_404(project_queryset(), pk=project_id)
+    if request.method == "POST":
+        form = ClientPaymentForm(request.POST)
+        if form.is_valid():
+            payment = form.save(commit=False)
+            payment.project = project
+            payment.save()
+            messages.success(request, "Payment added.")
+            return redirect("staff_client_detail", client_id=project.client_id)
+    else:
+        form = ClientPaymentForm()
+    return render(request, "staff_dashboard/form.html", {"form": form, "title": "Add Payment", "project": project})
+
+
+@staff_required
+def staff_note_form(request, project_id):
+    project = get_object_or_404(project_queryset(), pk=project_id)
+    if request.method == "POST":
+        form = ClientNoteForm(request.POST)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.project = project
+            note.created_by = request.user
+            note.save()
+            messages.success(request, "Note added.")
+            return redirect("staff_client_detail", client_id=project.client_id)
+    else:
+        form = ClientNoteForm()
+    return render(request, "staff_dashboard/form.html", {"form": form, "title": "Add Follow-up / Note", "project": project})
+
+
+@staff_required
+def staff_content_status_form(request, project_id):
+    project = get_object_or_404(project_queryset(), pk=project_id)
+    content_status, _ = ClientContentStatus.objects.get_or_create(project=project)
+    if request.method == "POST":
+        form = ClientContentStatusForm(request.POST, instance=content_status)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Content status updated.")
+            return redirect("staff_client_detail", client_id=project.client_id)
+    else:
+        form = ClientContentStatusForm(instance=content_status)
+    return render(request, "staff_dashboard/form.html", {"form": form, "title": "Update Content Status", "project": project})
+
+
+@staff_required
+def staff_domain_hosting_form(request, project_id):
+    project = get_object_or_404(project_queryset(), pk=project_id)
+    domain_hosting, _ = ClientDomainHosting.objects.get_or_create(project=project)
+    if request.method == "POST":
+        form = ClientDomainHostingForm(request.POST, instance=domain_hosting)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Domain and hosting details updated. Passwords were not requested or stored.")
+            return redirect("staff_client_detail", client_id=project.client_id)
+    else:
+        form = ClientDomainHostingForm(instance=domain_hosting)
+    return render(request, "staff_dashboard/form.html", {"form": form, "title": "Domain & Hosting Details", "project": project})
+
+
+@staff_required
+def staff_task_form(request, project_id, task_id=None):
+    project = get_object_or_404(project_queryset(), pk=project_id)
+    task = get_object_or_404(ProjectProgressTask, pk=task_id, project=project) if task_id else None
+    if request.method == "POST":
+        form = ProjectProgressTaskForm(request.POST, instance=task)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.project = project
+            task.save()
+            messages.success(request, "Progress task saved.")
+            return redirect("staff_client_detail", client_id=project.client_id)
+    else:
+        form = ProjectProgressTaskForm(instance=task)
+    return render(request, "staff_dashboard/form.html", {"form": form, "title": "Update Progress Task", "project": project})
+
+
 def package_features(package):
     return [line.strip() for line in package.included_features.splitlines() if line.strip()]
 
@@ -329,12 +662,12 @@ def package_prefixed_value(package, prefix):
     return ""
 
 
-def package_timeline(package):
-    return package_prefixed_value(package, "timeline:")
-
-
 def package_best_for(package):
     return package_prefixed_value(package, "best for:")
+
+
+def package_timeline(package):
+    return package_prefixed_value(package, "timeline:")
 
 
 def package_limits(package):
@@ -391,7 +724,7 @@ def home(request):
         request,
         "home.html",
         {
-            "services": Service.objects.all()[:6],
+            "services": Service.objects.all(),
             "packages": Package.objects.filter(is_featured=True)[:6],
             "projects": PortfolioProject.objects.all()[:3],
             "about_profile": AboutProfile.objects.filter(is_active=True).first(),

@@ -1,0 +1,43 @@
+<div class="table-scroll">
+    <table class="staff-table">
+        <thead>
+            <tr>
+                <th>Client Name</th>
+                <th>Business Type</th>
+                <th>Package</th>
+                <th>Amount</th>
+                <th>Payment Status</th>
+                <th>Project Status</th>
+                <th>Start Date</th>
+                <th>Delivery Date</th>
+                <th>Assigned To</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+                <tr>
+                    <td>{{ project.client.business_name }}</td>
+                    <td>{{ project.client.business_type }}</td>
+                    <td>{{ project.package_selected|default:project.project_type }}</td>
+                    <td>₹{{ project.quoted_amount|floatformat:0 }}</td>
+                    <td><span class="status-badge payment">{{ project.payment_status }}</span></td>
+                    <td><span class="status-badge">{{ project.project_status }}</span></td>
+                    <td>{{ project.start_date|default:"-" }}</td>
+                    <td>{{ project.expected_delivery_date|default:"-" }}</td>
+                    <td>{{ project.assigned_to|default:"-" }}</td>
+                    <td class="actions">
+                        <a href="{% url 'staff_client_detail' project.client_id %}">View</a>
+                        <a href="{% url 'staff_project_edit' project.client_id project.pk %}">Edit</a>
+                        <a href="{% url 'staff_project_edit' project.client_id project.pk %}">Update Status</a>
+                        <a href="{% url 'staff_payment_add' project.pk %}">Add Payment</a>
+                        <a href="{% url 'staff_note_add' project.pk %}">Add Note</a>
+                        <a href="{% url 'staff_content_status' project.pk %}">View Content Status</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="10">No projects found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

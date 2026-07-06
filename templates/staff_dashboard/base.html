@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/staff-dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="staff-shell">
+    <div class="staff-container">
+        <aside class="staff-sidebar">
+            <a class="staff-logo" href="{% url 'staff_dashboard' %}">
+                <span class="brand-mark">YC</span>
+                <span>CRM</span>
+            </a>
+            <nav class="staff-menu" aria-label="Staff dashboard navigation">
+                <a href="{% url 'staff_dashboard' %}">CRM Overview</a>
+                <a href="{% url 'staff_clients' %}">All Clients</a>
+                <a href="{% url 'staff_services' %}">Service Wise Clients</a>
+                <a href="{% url 'staff_client_add' %}">Add New Client</a>
+                <a href="{% url 'staff_projects' %}">Projects</a>
+                <a href="{% url 'staff_payments' %}">Payments</a>
+                <a href="{% url 'staff_content_statuses' %}">Content Status</a>
+                <a href="{% url 'staff_followups' %}">Follow-ups / Notes</a>
+                <a href="/admin/">Go to Django Admin</a>
+            </nav>
+        </aside>
+        <div class="staff-main">
+            {% block staff_content %}{% endblock %}
+        </div>
+    </div>
+</section>
+{% endblock %}

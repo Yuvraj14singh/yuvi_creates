@@ -1,0 +1,15 @@
+@import url("./business-websites.css");
+
+:root {
+    --demo-accent: #b76e79;
+    --demo-soft: #fff6f4;
+}
+
+.demo-wedding-event-planner-websites .demo-preview {
+    border-color: rgba(183, 110, 121, 0.26);
+    box-shadow: 0 24px 58px rgba(183, 110, 121, 0.14);
+}
+
+.demo-wedding-event-planner-websites .demo-vibe-grid span {
+    box-shadow: inset 0 -4px 0 color-mix(in srgb, var(--demo-accent) 24%, transparent);
+}

@@ -2,7 +2,17 @@ import re
 
 from django import forms
 
-from .models import Enquiry, PaymentBooking
+from .models import (
+    Client,
+    ClientContentStatus,
+    ClientDomainHosting,
+    ClientNote,
+    ClientPayment,
+    ClientProject,
+    Enquiry,
+    PaymentBooking,
+    ProjectProgressTask,
+)
 
 
 INPUT_CLASS = "form-control"
@@ -119,3 +129,160 @@ class PaymentBookingForm(forms.ModelForm):
         if len(amounts) == 1:
             return amounts[0], amounts[0] if "+" not in price else None
         return amounts[0], amounts[1]
+
+
+class StaffFormMixin:
+    textarea_rows = 4
+    required_fields = ()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name in self.required_fields:
+            if name in self.fields:
+                self.fields[name].required = True
+        for field in self.fields.values():
+            field.widget.attrs.setdefault("class", INPUT_CLASS)
+            if field.required:
+                field.widget.attrs["required"] = "required"
+            if isinstance(field.widget, forms.Textarea):
+                field.widget.attrs.setdefault("rows", self.textarea_rows)
+            if isinstance(field.widget, forms.CheckboxInput):
+                field.widget.attrs["class"] = "form-check-input"
+                field.widget.attrs.pop("required", None)
+            if isinstance(field.widget, (forms.DateInput,)):
+                field.widget.input_type = "date"
+
+
+class ClientForm(StaffFormMixin, forms.ModelForm):
+    required_fields = (
+        "service_category",
+        "business_name",
+        "contact_person",
+        "phone",
+        "business_type",
+        "city",
+        "lead_source",
+        "communication_channel",
+    )
+
+    class Meta:
+        model = Client
+        fields = [
+            "service_category",
+            "business_name",
+            "contact_person",
+            "phone",
+            "whatsapp",
+            "email",
+            "business_type",
+            "city",
+            "address",
+            "instagram_link",
+            "google_maps_link",
+            "current_website",
+            "business_logo",
+            "lead_source",
+            "communication_channel",
+        ]
+
+
+class ClientProjectForm(StaffFormMixin, forms.ModelForm):
+    required_fields = (
+        "project_type",
+        "package_selected",
+        "quoted_amount",
+        "payment_status",
+        "project_status",
+        "priority",
+        "start_date",
+        "expected_delivery_date",
+    )
+
+    class Meta:
+        model = ClientProject
+        fields = [
+            "project_type",
+            "package_selected",
+            "final_scope_summary",
+            "pages_required",
+            "features_required",
+            "admin_panel_required",
+            "payment_gateway_required",
+            "maintenance_required",
+            "quoted_amount",
+            "advance_amount",
+            "remaining_amount",
+            "payment_status",
+            "project_status",
+            "priority",
+            "start_date",
+            "expected_delivery_date",
+            "actual_delivery_date",
+            "assigned_to",
+            "revision_rounds_included",
+            "client_approval_notes",
+            "internal_notes",
+        ]
+
+
+class ClientPaymentForm(StaffFormMixin, forms.ModelForm):
+    required_fields = ("amount", "payment_type", "payment_mode", "payment_date")
+
+    class Meta:
+        model = ClientPayment
+        fields = ["amount", "payment_type", "payment_mode", "payment_date", "invoice_number", "notes"]
+
+
+class ClientNoteForm(StaffFormMixin, forms.ModelForm):
+    required_fields = ("note",)
+
+    class Meta:
+        model = ClientNote
+        fields = ["note", "next_follow_up_date"]
+
+
+class ClientContentStatusForm(StaffFormMixin, forms.ModelForm):
+    class Meta:
+        model = ClientContentStatus
+        fields = [
+            "logo_received",
+            "photos_received",
+            "service_details_received",
+            "price_list_received",
+            "about_content_received",
+            "contact_details_received",
+            "social_links_received",
+            "testimonials_received",
+            "gallery_images_received",
+            "domain_access_received",
+            "hosting_access_received",
+            "content_notes",
+        ]
+
+
+class ClientDomainHostingForm(StaffFormMixin, forms.ModelForm):
+    class Meta:
+        model = ClientDomainHosting
+        fields = [
+            "domain_required",
+            "domain_name",
+            "domain_provider",
+            "domain_expiry_date",
+            "hosting_required",
+            "hosting_provider",
+            "hosting_plan",
+            "hosting_renewal_date",
+            "deployment_url",
+            "live_website_url",
+            "access_given_by_client",
+            "stored_in_password_manager",
+            "notes",
+        ]
+
+
+class ProjectProgressTaskForm(StaffFormMixin, forms.ModelForm):
+    required_fields = ("task_name", "status", "order")
+
+    class Meta:
+        model = ProjectProgressTask
+        fields = ["task_name", "status", "order"]
