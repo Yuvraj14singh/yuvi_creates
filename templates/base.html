@@ -4,9 +4,51 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <meta name="google-site-verification" content="JfreXDuo2C5mCyIjoyYBFeNgz3iaxDLS2m5DxEYDgFU" />
-    <title>{% block title %}Yuvi Creates{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}Clean, responsive websites for restaurants, cafes, trips and tours, shops, gyms, small businesses and personal brands.{% endblock %}">
+
+    <title>{% block title %}Yuvi Creates | Website Developer for Businesses in Delhi NCR{% endblock %}</title>
+
+    <meta name="description" content="{% block meta_description %}Yuvi Creates builds clean, mobile-friendly websites for restaurants, cafes, hotels, salons, travel agencies, real estate, pet shops, gyms, and small businesses.{% endblock %}">
+
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <meta property="og:title" content="{% block og_title %}Yuvi Creates | Website Developer for Businesses{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Clean, responsive websites for restaurants, cafes, hotels, travel agencies, salons, real estate, gyms, shops, and small businesses.{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Yuvi Creates",
+      "url": "https://yuvicreates-production.up.railway.app/",
+      "founder": {
+        "@type": "Person",
+        "name": "Yuvraj Singh"
+      },
+      "areaServed": "Delhi NCR, India",
+      "serviceType": [
+        "Website Design",
+        "Web Development",
+        "Business Website Development",
+        "Restaurant Website Design",
+        "Travel Agency Website Design",
+        "Hotel Website Design",
+        "Salon Website Design",
+        "Real Estate Website Design"
+      ],
+      "sameAs": [
+        "https://github.com/Yuvraj14singh",
+        "https://www.linkedin.com/in/yuvraj-singh-127b88280/"
+      ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">

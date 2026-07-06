@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Services | Yuvi Creates{% endblock %}
-{% block meta_description %}Website services for restaurants, cafes, trips and tours, personal brands, shops, gyms, and service providers.{% endblock %}
+{% block title %}Website Design Services for Small Businesses | Yuvi Creates{% endblock %}
+{% block meta_description %}Explore website design services for restaurants, cafes, hotels, travel agencies, salons, makeup artists, real estate, gyms, pet shops, shops, and local businesses.{% endblock %}
 {% block content %}
 <section class="page-hero section">
     <div class="container narrow">
@@ -39,7 +39,7 @@
         {% for service in services %}
             <a class="service-card service-card-link reveal" href="{% url 'service_demo' service.pk service.title|slugify %}">
                 <span class="card-index">{{ service.icon }}</span>
-                <h2>{{ service.title }}</h2>
+                <h3>{{ service.title }}</h3>
                 <p>{{ service.description }}</p>
             </a>
         {% endfor %}
@@ -51,9 +51,9 @@
         <h2>Useful pages and features that make the website business-ready.</h2>
     </div>
     <div class="container card-grid three">
-        <article class="service-card reveal"><h2>Core pages</h2><p>Home, About, Services, Portfolio/Work, Pricing, FAQ, Contact, and policy pages if needed.</p></article>
-        <article class="service-card reveal"><h2>Industry pages</h2><p>Menu pages, tour packages, product showcases, trainer pages, gallery pages, or booking enquiry pages.</p></article>
-        <article class="service-card reveal"><h2>Conversion tools</h2><p>WhatsApp CTA, call button, Google Map, enquiry forms, package booking, testimonials, and trust sections.</p></article>
+        <article class="service-card reveal"><h3>Core pages</h3><p>Home, About, Services, Portfolio/Work, Pricing, FAQ, Contact, and policy pages if needed.</p></article>
+        <article class="service-card reveal"><h3>Industry pages</h3><p>Menu pages, tour packages, product showcases, trainer pages, gallery pages, or booking enquiry pages.</p></article>
+        <article class="service-card reveal"><h3>Conversion tools</h3><p>WhatsApp CTA, call button, Google Map, enquiry forms, package booking, testimonials, and trust sections.</p></article>
     </div>
 </section>
 {% endblock %}
