@@ -450,6 +450,12 @@ h3 {
     color: var(--gold);
 }
 
+.testimonial-card small {
+    display: block;
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.62);
+}
+
 .stars {
     display: inline-flex;
     margin-bottom: 14px;
@@ -479,6 +485,18 @@ h3 {
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+.about-photo-panel.is-logo {
+    aspect-ratio: 1 / 1;
+    padding: clamp(28px, 5vw, 64px);
+    background:
+        radial-gradient(circle at 20% 15%, rgba(104, 66, 216, 0.1), transparent 34%),
+        linear-gradient(145deg, #ffffff, #f6f4ff);
+}
+
+.about-photo-panel.is-logo img {
+    object-fit: contain;
 }
 
 .about-home-copy {

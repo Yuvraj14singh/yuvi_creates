@@ -5,10 +5,48 @@ from django import forms
 from .models import (
     Enquiry,
     PaymentBooking,
+    Review,
 )
 
 
 INPUT_CLASS = "form-control"
+
+
+class ReviewForm(forms.ModelForm):
+    rating = forms.TypedChoiceField(
+        label="Your rating",
+        choices=[(5, "5 — Excellent"), (4, "4 — Very good"), (3, "3 — Good"), (2, "2 — Fair"), (1, "1 — Poor")],
+        coerce=int,
+    )
+
+    class Meta:
+        model = Review
+        fields = ["client_name", "business_name", "email", "location", "service_received", "rating", "quote"]
+        labels = {"client_name": "Your name", "business_name": "Business / brand name", "service_received": "Service or project", "quote": "Your feedback"}
+        widgets = {"quote": forms.Textarea(attrs={"rows": 5})}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.setdefault("class", INPUT_CLASS)
+        self.fields["business_name"].required = False
+        self.fields["location"].required = False
+        placeholders = {
+            "client_name": "Your full name",
+            "business_name": "Business or brand (optional)",
+            "email": "you@example.com (kept private)",
+            "location": "City, state (optional)",
+            "service_received": "Restaurant website, landing page...",
+            "quote": "Tell others about the work, communication and final result",
+        }
+        for name, placeholder in placeholders.items():
+            self.fields[name].widget.attrs["placeholder"] = placeholder
+
+    def clean_rating(self):
+        rating = self.cleaned_data["rating"]
+        if rating not in range(1, 6):
+            raise forms.ValidationError("Choose a rating from 1 to 5.")
+        return rating
 
 
 class EnquiryForm(forms.ModelForm):

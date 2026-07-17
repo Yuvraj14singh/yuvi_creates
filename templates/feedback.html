@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Client Feedback | Yuvi Creates{% endblock %}
+{% block meta_description %}Share your experience working with Yuvi Creates.{% endblock %}
+{% block body_class %}page-feedback{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/feedback.css' %}">{% endblock %}
+{% block content %}
+<section class="feedback-hero section">
+    <div class="container feedback-layout">
+        <div class="feedback-copy">
+            <p class="eyebrow">Client feedback</p>
+            <h1>How was your experience working with Yuvi Creates?</h1>
+            <p class="lead">Your honest review helps improve the work and gives future clients a clearer picture of the process.</p>
+            <div class="feedback-points"><span>★ 1–5 star rating</span><span>✓ Saved securely</span><span>✓ Published after review</span></div>
+        </div>
+        <form class="feedback-form" method="post" novalidate>
+            {% csrf_token %}
+            {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
+            <div class="form-grid">
+                {% for field in form %}
+                    <label{% if field.name == 'quote' %} class="span-2"{% endif %}>
+                        <span>{{ field.label }}{% if field.field.required %} *{% endif %}</span>
+                        {{ field }}
+                        {% if field.errors %}<small class="field-error">{{ field.errors|striptags }}</small>{% endif %}
+                    </label>
+                {% endfor %}
+            </div>
+            <p class="privacy-note">Your email and IP address are used only for verification and are never shown publicly.</p>
+            <button class="btn btn-primary wide" type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

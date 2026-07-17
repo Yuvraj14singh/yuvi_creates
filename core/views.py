@@ -13,7 +13,7 @@ from django.utils.text import slugify
 from django.views.decorators.csrf import csrf_exempt
 
 from .data import PACKAGES, PORTFOLIO, SERVICES
-from .forms import EnquiryForm, PaymentBookingForm
+from .forms import EnquiryForm, PaymentBookingForm, ReviewForm
 from .models import (
     AboutProfile,
     Package,
@@ -416,7 +416,7 @@ def home(request):
             "packages": Package.objects.filter(is_featured=True)[:6],
             "projects": PortfolioProject.objects.all()[:3],
             "about_profile": AboutProfile.objects.filter(is_active=True).first(),
-            "reviews": Review.objects.filter(is_featured=True)[:3],
+            "reviews": Review.objects.filter(status=Review.Status.APPROVED, is_featured=True)[:6],
         },
     )
 
@@ -488,6 +488,23 @@ def packages(request):
 def portfolio(request):
     ensure_default_content()
     return render(request, "portfolio.html", {"projects": PortfolioProject.objects.all()})
+
+
+def feedback(request):
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.source = Review.Source.WEBSITE
+            review.status = Review.Status.PENDING
+            forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR", "")
+            review.submitted_ip = forwarded_for.split(",")[0].strip() or request.META.get("REMOTE_ADDR")
+            review.save()
+            messages.success(request, "Thank you! Your feedback was saved and will appear on the homepage after approval.")
+            return redirect("feedback")
+    else:
+        form = ReviewForm()
+    return render(request, "feedback.html", {"form": form})
 
 
 def portfolio_demo(request, project_id, slug):

@@ -121,7 +121,7 @@
 
 <section class="section surface">
     <div class="container about-home-grid">
-        <div class="about-photo-panel reveal">
+        <div class="about-photo-panel reveal{% if not about_profile or not about_profile.photo %} is-logo{% endif %}">
             {% if about_profile and about_profile.photo %}
                 <img src="{{ about_profile.photo.url }}" alt="{{ about_profile.name }}">
             {% else %}
@@ -167,16 +167,21 @@
         {% if reviews %}
             {% for review in reviews %}
                 <article class="testimonial-card reveal">
-                    <span class="stars" aria-label="{{ review.rating }} out of 5 stars">{{ review.stars }}</span>
+                    <span class="stars" aria-label="{{ review.rating }} out of 5 stars">{{ review.stars }}{{ review.empty_stars }}</span>
                     <p>“{{ review.quote }}”</p>
                     <strong>{{ review.client_name }}{% if review.business_name %}, {{ review.business_name }}{% endif %}</strong>
+                    {% if review.service_received or review.location %}<small>{% if review.service_received %}{{ review.service_received }}{% endif %}{% if review.service_received and review.location %} · {% endif %}{% if review.location %}{{ review.location }}{% endif %}</small>{% endif %}
                 </article>
             {% endfor %}
         {% else %}
-            <article class="testimonial-card reveal"><p>“The site looks professional on mobile and customers can message us directly from every important section.”</p><strong>Restaurant owner demo</strong></article>
-            <article class="testimonial-card reveal"><p>“Tour packages, itinerary details, and enquiry forms are now organized clearly for new leads.”</p><strong>Travel business demo</strong></article>
-            <article class="testimonial-card reveal"><p>“Our services, pricing, FAQs, and contact flow finally look clean and business-ready.”</p><strong>Service brand demo</strong></article>
+            <article class="testimonial-card reveal"><span class="stars">★★★★★</span><p>“The site looks professional on mobile and customers can message us directly from every important section.”</p><strong>Restaurant owner demo</strong></article>
+            <article class="testimonial-card reveal"><span class="stars">★★★★★</span><p>“Tour packages, itinerary details, and enquiry forms are now organized clearly for new leads.”</p><strong>Travel business demo</strong></article>
+            <article class="testimonial-card reveal"><span class="stars">★★★★★</span><p>“Our services, pricing, FAQs, and contact flow finally look clean and business-ready.”</p><strong>Service brand demo</strong></article>
         {% endif %}
+    </div>
+    <div class="container feedback-invite">
+        <div><strong>Worked with Yuvi Creates?</strong><span>Share your experience and help future clients choose with confidence.</span></div>
+        <a class="btn btn-primary" href="{% url 'feedback' %}">Leave Your Feedback</a>
     </div>
 </section>
 
@@ -188,7 +193,11 @@
     <div class="container card-grid three">
         {% for project in projects %}
             <article class="portfolio-card reveal">
-                <div class="project-thumb" role="img" aria-label="{{ project.title }} preview"></div>
+                <div class="project-thumb">
+                    {% if forloop.counter == 1 %}<img src="{% static 'images/portfolio/home-restaurant-demo.webp' %}" alt="Restaurant website demo preview" loading="lazy">
+                    {% elif forloop.counter == 2 %}<img src="{% static 'images/portfolio/home-cafe-demo.webp' %}" alt="Cafe landing page demo preview" loading="lazy">
+                    {% else %}<img src="{% static 'images/portfolio/home-gym-demo.webp' %}" alt="Gym website demo preview" loading="lazy">{% endif %}
+                </div>
                 <h3>{{ project.title }}</h3>
                 <p>{{ project.description }}</p>
                 <span>{{ project.tech_stack }}</span>

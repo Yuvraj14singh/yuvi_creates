@@ -74,10 +74,29 @@ class AboutProfile(models.Model):
 
 
 class Review(models.Model):
+    class Status(models.TextChoices):
+        PENDING = "Pending", "Pending approval"
+        APPROVED = "Approved", "Approved"
+        REJECTED = "Rejected", "Rejected"
+
+    class Source(models.TextChoices):
+        WEBSITE = "Website", "Website feedback form"
+        GOOGLE = "Google", "Google"
+        WHATSAPP = "WhatsApp", "WhatsApp"
+        INSTAGRAM = "Instagram", "Instagram"
+        LINKEDIN = "LinkedIn", "LinkedIn"
+        OTHER = "Other", "Other"
+
     client_name = models.CharField(max_length=120)
     business_name = models.CharField(max_length=160, blank=True)
+    email = models.EmailField(blank=True)
+    location = models.CharField(max_length=140, blank=True)
+    service_received = models.CharField(max_length=180, blank=True)
     rating = models.PositiveSmallIntegerField(default=5)
     quote = models.TextField()
+    source = models.CharField(max_length=30, choices=Source.choices, default=Source.WEBSITE)
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
+    submitted_ip = models.GenericIPAddressField(blank=True, null=True)
     is_featured = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -91,6 +110,10 @@ class Review(models.Model):
     @property
     def stars(self):
         return "★" * max(1, min(self.rating, 5))
+
+    @property
+    def empty_stars(self):
+        return "☆" * (5 - max(1, min(self.rating, 5)))
 
 
 class Enquiry(models.Model):

@@ -1,6 +1,6 @@
 .page-home .hero {
-    min-height: 760px;
-    padding: 104px 0 88px;
+    min-height: 680px;
+    padding: 82px 0 76px;
     color: var(--ink);
     background:
         radial-gradient(circle at 77% 38%, rgba(139,189,240,.25), transparent 30%),
@@ -9,10 +9,20 @@
     overflow: hidden;
 }
 
-.page-home .hero-grid { grid-template-columns: minmax(0,.9fr) minmax(430px,1.1fr); }
+.page-home .hero-grid {
+    grid-template-columns: minmax(0,1.08fr) minmax(390px,.92fr);
+    gap: clamp(48px,6vw,84px);
+}
 .page-home .hero-copy { position: relative; z-index: 2; }
-.page-home .hero h1 { color: #0c1c3c; font-size: clamp(2.7rem,5.7vw,5rem); letter-spacing: -.055em; }
-.page-home .hero .lead { color: #5d6980; }
+.page-home .hero h1 {
+    max-width: 720px;
+    color: #0c1c3c;
+    font-size: clamp(3rem,4.3vw,4.35rem);
+    line-height: 1.01;
+    letter-spacing: -.052em;
+    text-wrap: balance;
+}
+.page-home .hero .lead { max-width: 650px; color: #5d6980; }
 .page-home .hero .eyebrow { background: rgba(104,66,216,.09); border: 1px solid rgba(104,66,216,.14); padding: 7px 11px; border-radius: 999px; width: max-content; }
 .page-home .hero .btn-secondary { background: rgba(255,255,255,.75); border-color: rgba(104,66,216,.18); backdrop-filter: blur(12px); }
 .page-home .trust-row span { background: rgba(255,255,255,.72); color: #31415d; border: 1px solid rgba(104,66,216,.12); box-shadow: 0 10px 24px rgba(55,37,116,.06); }
@@ -27,6 +37,7 @@
     transform: perspective(1200px) rotateY(-5deg) rotateX(2deg);
     transition: transform .2s ease;
     backdrop-filter: blur(18px);
+    padding: 18px;
 }
 
 .page-home .hero-panel::before {
@@ -43,17 +54,42 @@
     z-index: 0;
 }
 
-.page-home .hero-panel img { position: relative; z-index: 1; width: 100%; min-height: 500px; object-fit: cover; object-position: center; }
+.page-home .hero-panel img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: clamp(400px,35vw,510px);
+    min-height: 0;
+    border-radius: 20px;
+    object-fit: cover;
+    object-position: center;
+}
 .page-home .metric-card { z-index: 2; backdrop-filter: blur(18px); background: rgba(255,255,255,.82); color: var(--ink); border: 1px solid rgba(104,66,216,.15); box-shadow: 0 20px 45px rgba(36,24,88,.13); }
 .page-home .metric-card span { color: var(--muted); }
 .page-home .industry-grid { perspective: 1200px; }
 .page-home .industry-card { background: linear-gradient(145deg,#fff,#f7f4ff); border-color: rgba(104,66,216,.15); }
-.page-home .project-thumb { background-image: url('../../images/yuvi-creates-3d-hero.png'); background-size: cover; background-position: center; }
+.page-home .project-thumb { height: 210px; overflow: hidden; background: #101936; border-radius: 10px; }
+.page-home .project-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+.page-home .portfolio-card:hover .project-thumb img { transform: scale(1.04); }
+.page-home .cta-box h2 { color: #0c1c3c; }
+.page-home .feedback-invite { margin-top: 28px; padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border: 1px solid rgba(104,66,216,.16); border-radius: 14px; background: linear-gradient(135deg,#fff,#f4f0ff); }
+.page-home .feedback-invite div { display: grid; }
+.page-home .feedback-invite strong { color: #0c1c3c; font-size: 1.12rem; }
+.page-home .feedback-invite span { color: #667789; }
 .page-home .cta-box { background: radial-gradient(circle at 85% 20%,rgba(139,189,240,.25),transparent 28%),linear-gradient(135deg,#f7f3ff,#eef7ff); color: var(--ink); border: 1px solid rgba(104,66,216,.17); box-shadow: 0 32px 80px rgba(48,30,111,.13); }
 
 @media (max-width: 900px) {
     .page-home .hero-grid { grid-template-columns: 1fr; }
     .page-home .hero-panel { transform: none; }
-    .page-home .hero-panel img { min-height: 300px; }
+    .page-home .hero-panel img { height: clamp(300px,66vw,500px); }
     .page-home .hero { min-height: auto; padding-top: 76px; }
+}
+
+@media (max-width: 560px) {
+    .page-home .hero { padding: 60px 0 54px; }
+    .page-home .hero h1 { font-size: clamp(2.55rem,12vw,3.25rem); }
+    .page-home .hero .eyebrow { width: auto; line-height: 1.35; }
+    .page-home .hero-panel { padding: 10px; border-radius: 20px; }
+    .page-home .hero-panel img { height: 300px; border-radius: 14px; }
+    .page-home .feedback-invite { align-items: stretch; flex-direction: column; padding: 22px 18px; }
 }

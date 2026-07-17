@@ -8,6 +8,7 @@ urlpatterns = [
     path("demo/<int:service_id>/<slug:slug>/", views.service_demo, name="service_demo"),
     path("packages/", views.packages, name="packages"),
     path("portfolio/", views.portfolio, name="portfolio"),
+    path("feedback/", views.feedback, name="feedback"),
     path("portfolio/demo/<int:project_id>/<slug:slug>/", views.portfolio_demo, name="portfolio_demo"),
     path("process/", views.process, name="process"),
     path("about/", views.about, name="about"),

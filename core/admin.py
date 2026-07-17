@@ -43,11 +43,21 @@ class AboutProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ("client_name", "business_name", "rating", "is_featured", "order", "created_at")
-    list_filter = ("rating", "is_featured", "created_at")
-    search_fields = ("client_name", "business_name", "quote")
-    list_editable = ("rating", "is_featured", "order")
-    readonly_fields = ("created_at",)
+    list_display = ("client_name", "business_name", "location", "service_received", "rating", "source", "status", "is_featured", "created_at")
+    list_filter = ("status", "rating", "source", "is_featured", "created_at")
+    search_fields = ("client_name", "business_name", "email", "location", "service_received", "quote")
+    list_editable = ("status", "is_featured")
+    readonly_fields = ("created_at", "submitted_ip")
+    date_hierarchy = "created_at"
+    actions = ("approve_reviews", "reject_reviews")
+
+    @admin.action(description="Approve selected reviews")
+    def approve_reviews(self, request, queryset):
+        queryset.update(status=Review.Status.APPROVED)
+
+    @admin.action(description="Reject selected reviews")
+    def reject_reviews(self, request, queryset):
+        queryset.update(status=Review.Status.REJECTED)
 
 
 @admin.register(Enquiry)

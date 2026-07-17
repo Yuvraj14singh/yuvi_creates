@@ -1,0 +1,12 @@
+.page-feedback .feedback-hero{background:radial-gradient(circle at 82% 20%,rgba(139,189,240,.27),transparent 27%),linear-gradient(135deg,#fff,#f7f4ff 58%,#eef7ff);min-height:calc(100vh - 76px)}
+.page-feedback .feedback-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(440px,1.1fr);gap:72px;align-items:center}
+.page-feedback .feedback-copy h1{margin:0;color:#0c1c3c;font-size:clamp(2.8rem,5vw,4.8rem);line-height:1;letter-spacing:-.05em}
+.page-feedback .lead{color:#5f6d84;font-size:1.08rem;max-width:620px}
+.feedback-points{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.feedback-points span{padding:8px 12px;border-radius:999px;background:#fff;border:1px solid rgba(104,66,216,.14);color:#6842d8;font-weight:800;font-size:.8rem}
+.feedback-form{padding:34px;border:1px solid rgba(104,66,216,.16);border-radius:20px;background:rgba(255,255,255,.88);box-shadow:0 30px 75px rgba(42,23,102,.14);backdrop-filter:blur(16px)}
+.feedback-form label{display:block}.feedback-form .form-control{width:100%;min-height:48px;padding:12px 14px;border:1px solid #d9dff0;border-radius:10px;background:#fff;color:#172330;font:inherit}
+.feedback-form textarea.form-control{resize:vertical}.feedback-form .form-control:focus{outline:3px solid rgba(104,66,216,.13);border-color:#6842d8}
+.field-error{display:block;margin-top:5px;color:#b42318;font-weight:700}.privacy-note{color:#667789;font-size:.78rem}.page-feedback .message-wrap{position:relative;z-index:2}
+@media(max-width:900px){.page-feedback .feedback-layout{grid-template-columns:1fr;gap:38px}.page-feedback .feedback-hero{min-height:auto}}
+@media(max-width:560px){.feedback-form{padding:24px 18px}.page-feedback .feedback-copy h1{font-size:2.7rem}}
