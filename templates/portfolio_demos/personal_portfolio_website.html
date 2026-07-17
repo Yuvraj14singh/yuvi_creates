@@ -1,65 +1,9 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}Personal Portfolio Website Demo | Yuvi Creates{% endblock %}
-{% block meta_description %}Personal portfolio website demo by Yuvi Creates for freelancers, creators, developers, coaches, consultants, and personal brands with services, work, testimonials, and contact CTA.{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
-{% block content %}
-<main class="pd pd-personal">
-    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
-    <section class="pd-hero">
-        <div class="container pd-grid">
-            <div>
-                <p class="pd-kicker">Personal brand demo</p>
-                <h1>Aarav Mehta</h1>
-                <p>Portfolio website for creators, developers, coaches, freelancers, and consultants.</p>
-                <div class="pd-actions">
-                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=portfolio">View Portfolio Packages</a>
-                    <a class="btn btn-secondary" href="#work">View Work</a>
-                </div>
-            </div>
-            <div class="pd-showcase">
-                <span>Featured work</span>
-                <strong>12 Projects · 6 Case Studies</strong>
-                <small>Services, testimonials, and enquiry flow</small>
-            </div>
-        </div>
-    </section>
-    <section class="pd-section" id="work">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Portfolio home</p>
-            <h2>A personal site that sells your work without feeling boring.</h2>
-        </div>
-        <div class="container pd-cards three">
-            <article><strong>Hero story</strong><p>Who you help, what you do, and the strongest proof above the fold.</p></article>
-            <article><strong>Case studies</strong><p>Project cards with goals, process, outcome, and clear contact CTA.</p></article>
-            <article><strong>Services</strong><p>Offer blocks for consulting, design, development, coaching, or content.</p></article>
-        </div>
-    </section>
-    <section class="pd-section pd-muted">
-        <div class="container pd-split">
-            <div><p class="pd-kicker">Trust section</p><h2>Testimonials, logos, stats, and a simple enquiry form.</h2><p>Great for freelancers, creators, job seekers, consultants, and personal brands.</p></div>
-            <div class="pd-offer-card"><strong>Available for projects</strong><span>2 slots this month</span><p>Clean CTA for leads, calls, or portfolio enquiries.</p></div>
-        </div>
-    </section>
-    <section class="pd-section">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Personal brand energy</p>
-            <h2>Make your work feel premium with proof, services, and strong positioning.</h2>
-        </div>
-        <div class="container pd-gallery">
-            <div><span>Case Studies</span></div>
-            <div><span>Services</span></div>
-            <div><span>Testimonials</span></div>
-            <div><span>Contact CTA</span></div>
-        </div>
-    </section>
-    <section class="pd-section pd-final">
-        <div class="container pd-final-box">
-            <p class="pd-kicker">Premium portfolio page</p>
-            <h2>Turn your skills into a polished brand site that people remember.</h2>
-            <a class="btn btn-primary" href="{% url 'packages' %}?focus=portfolio">View Portfolio Packages</a>
-        </div>
-    </section>
-</main>
-{% endblock %}
-{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}
+{% extends "base.html" %}{% load static %}{% block title %}Aanya Rao — Independent Brand Designer{% endblock %}{% block extra_head %}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="{% static demo_css %}">{% endblock %}{% block content %}
+<main class="aanya"><div class="demo-top"><a href="{% url 'portfolio' %}">← Yuvi Creates portfolio</a><span>Personal portfolio demo</span></div><nav><a class="wordmark" href="#top">AANYA®</a><div><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Let's talk ↗</a></div></nav>
+<section class="aa-hero" id="top"><div class="aa-copy"><p>Independent brand designer · Mumbai / Worldwide</p><h1>BRANDS WITH<br><i>CLARITY,</i> CHARACTER<br>& CULTURE.</h1><div><span>I help ambitious founders turn good ideas into distinct identities people remember.</span><a href="#work">Selected work ↓</a></div></div><div class="aa-photo"><img src="{% static 'images/portfolio_demos/personal/hero.jpg' %}" alt="Aanya Rao in her design studio" fetchpriority="high"><b>AVAILABLE FOR SELECT<br>PROJECTS · Q3 2026</b></div></section>
+<section class="ticker"><span>STRATEGY ✦ IDENTITY ✦ DIGITAL ✦ DIRECTION ✦ STRATEGY ✦ IDENTITY ✦ DIGITAL ✦ DIRECTION</span></section>
+<section class="work" id="work"><header><span>01 / SELECTED WORK</span><h2>MADE TO BE<br><i>REMEMBERED.</i></h2></header><div class="project-grid"><article class="blue reveal"><small>Brand strategy · Identity · Packaging</small><b>NEELA<br>BOTANICS</b><span>01</span></article><article class="sand reveal"><small>Strategy · Campaign · Digital</small><b>STILL<br>STUDIO</b><span>02</span></article><article class="ink reveal"><small>Naming · Identity · Art direction</small><b>COMMON<br>GROUND</b><span>03</span></article></div></section>
+<section class="about" id="about"><div><span>02 / ABOUT</span><h2>DESIGN SHOULD<br>FEEL <i>INEVITABLE.</i></h2></div><div><p>Not decorated. Not over-explained. Just deeply considered and unmistakably yours.</p><p>For the last seven years, I've partnered with founders across hospitality, beauty, culture and technology to build brands from the inside out.</p><dl><div><dt>07</dt><dd>Years independent</dd></div><div><dt>38</dt><dd>Brands launched</dd></div><div><dt>09</dt><dd>Countries reached</dd></div></dl></div></section>
+<section class="services"><span>03 / WHAT I DO</span><div><article><b>01</b><h3>BRAND STRATEGY</h3><p>Positioning, audience, narrative and a clear reason to choose you.</p></article><article><b>02</b><h3>VISUAL IDENTITY</h3><p>Distinctive systems spanning type, colour, image and motion.</p></article><article><b>03</b><h3>CREATIVE DIRECTION</h3><p>A coherent world for campaigns, content and digital experiences.</p></article></div></section>
+<section class="contact" id="contact"><p>HAVE A GOOD IDEA?</p><h2>LET'S MAKE IT<br><i>UNMISSABLE.</i></h2><a href="mailto:hello@example.com">hello@aanyarao.design ↗</a></section><footer><b>AANYA®</b><span>Mumbai · India</span><span>Instagram · Behance · LinkedIn</span><small>Fictional concept by Yuvi Creates</small></footer></main>
+{% endblock %}{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

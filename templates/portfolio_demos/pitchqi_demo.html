@@ -1,70 +1,25 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}Cricket Dashboard Demo | Yuvi Creates{% endblock %}
-{% block meta_description %}Cricket dashboard demo by Yuvi Creates inspired by PitchQI, showing match insights, player signals, scorecard-style sections, data cards, and cricket analysis UI.{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% extends "base.html" %}{% load static %}
+{% block title %}Cricket League Demo — Universal Single-Page Website Concept{% endblock %}
+{% block meta_description %}Fictional premium single-page cricket league website concept featuring teams, fixtures, standings, performers, registrations and sponsors.{% endblock %}
+{% block extra_head %}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
 {% block content %}
-<main class="pd pd-pitchqi">
-    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
-    <section class="pd-hero">
-        <div class="container pd-grid">
-            <div>
-                <p class="pd-kicker">Cricket intelligence</p>
-                <h1>Cricket Dashboard</h1>
-                <p>A cricket project interface for match insights, player signals, pitch context, and analysis cards.</p>
-                <div class="pd-actions">
-                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=business">View Custom Website Packages</a>
-                    <a class="btn btn-secondary" href="#signals">See Signals</a>
-                </div>
-            </div>
-            <div class="pd-showcase pd-dashboard-card">
-                <span>Match signal</span>
-                <strong>Spin impact: High</strong>
-                <small>Venue, weather, form, and matchup notes</small>
-                <div class="pd-mini-list">
-                    <p><b>Venue</b> Chennai</p>
-                    <p><b>Dew</b> Medium</p>
-                    <p><b>Risk</b> Toss dependent</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="pd-section" id="dashboard-preview">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Dashboard preview</p>
-            <h2>Data cards that make cricket decisions easier to scan.</h2>
-        </div>
-        <div class="container pd-cards three">
-            <article><strong>Pitch Read</strong><p>Surface pace, bounce, spin help, and dew expectation.</p></article>
-            <article><strong>Player Signals</strong><p>Recent form, role clarity, matchup value, and captaincy cues.</p></article>
-            <article><strong>Team Lens</strong><p>Probable XI notes, batting depth, bowling phases, and risk flags.</p></article>
-        </div>
-    </section>
-    <section class="pd-section pd-muted" id="signals">
-        <div class="container pd-split">
-            <div><p class="pd-kicker">Analysis flow</p><h2>Match page, player page, venue notes, and prediction cards.</h2><p>When you add your real cricket project URL in admin, the portfolio card can open the live project directly.</p></div>
-            <div class="pd-offer-card"><strong>Signal score</strong><span>82 / 100</span><p>Combines form, role, conditions, and matchup weight.</p></div>
-        </div>
-    </section>
-    <section class="pd-section">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Product interface</p>
-            <h2>A serious dashboard vibe with clean data, cards, and scan-friendly insights.</h2>
-        </div>
-        <div class="container pd-gallery">
-            <div><span>Match Center</span></div>
-            <div><span>Player Form</span></div>
-            <div><span>Venue Data</span></div>
-            <div><span>AI Notes</span></div>
-        </div>
-    </section>
-    <section class="pd-section pd-final">
-        <div class="container pd-final-box">
-            <p class="pd-kicker">Dashboard demo</p>
-            <h2>Designed like a real cricket intelligence product, ready to link with your live cricket project.</h2>
-            <a class="btn btn-primary" href="{% url 'packages' %}?focus=business">View Custom Website Packages</a>
-        </div>
-    </section>
+<main class="pscl" id="home">
+ <div class="pscl-demo"><span>UNIVERSAL FICTIONAL CRICKET WEBSITE DEMO</span><a href="{% url 'portfolio' %}">← Back to Yuvi Creates Portfolio</a></div>
+ <nav class="pscl-nav" aria-label="League demo navigation"><a class="pscl-logo" href="#home" aria-label="Cricket League Demo home"><b>CL</b><span>CRICKET<small>LEAGUE DEMO · CUSTOM WEBSITE CONCEPT</small></span></a><button class="pscl-menu" type="button" aria-expanded="false" aria-controls="pscl-links"><i></i><i></i><i></i><span class="sr-only">Open menu</span></button><div id="pscl-links"><a href="#home">Home</a><a href="#teams">Teams</a><a href="#fixtures">Fixtures</a><a href="#standings">Standings</a><a href="#players">Players</a><a href="#highlights">Highlights</a><a href="#register">Register</a><button type="button" class="pscl-open-register">Register Now</button></div></nav>
+ <section class="pscl-hero"><img src="{% static 'images/portfolio_demos/pitchqi/hero.jpg' %}" alt="Fictional cricket website demo visual with a batter under stadium lights" fetchpriority="high"><div class="pscl-hero-shade"></div><div class="pscl-hero-copy"><p>CRICKET WEBSITE DEMO</p><h1>Your League.<br><span>One Official Digital Home.</span></h1><p class="lead">Bring fixtures, teams, player highlights, standings, registrations, sponsors and tournament updates together in one premium website built for your cricket organization.</p><div><a href="#fixtures">Explore Demo</a><a class="hero-build-link" href="{% url 'contact' %}?service=Cricket%20League%20Website&source=Universal%20Cricket%20Demo">Build a Website Like This</a></div></div><div class="pscl-season"><b>YOUR<br>BRAND</b><span>FULLY<br>CUSTOMIZABLE</span></div></section>
+ <div class="pscl-info"><span><small>SEASON</small>2026</span><span><small>FORMAT</small>T20</span><span><small>TEAMS</small>6</span><span><small>MATCHES</small>24</span><span><small>VENUE</small>League Ground</span></div>
+ <section class="pscl-matches section-dark" aria-labelledby="featured-heading"><header class="pscl-head"><p>LIVE FROM THE LEAGUE</p><h2 id="featured-heading">Match centre</h2><span>Official fixtures & results</span></header><div class="match-layout"><article class="featured-match"><header><span class="status upcoming">UPCOMING</span><p>MATCH 08 · GROUP STAGE</p></header><div class="versus"><div><i>NS</i><h3>Northern<br>Strikers</h3></div><b>VS<small>26 JUL</small></b><div><i>MW</i><h3>Metro<br>Warriors</h3></div></div><footer><span><small>START</small>7:00 PM</span><span><small>VENUE</small>League Ground</span><button type="button" data-modal-title="Match 08 · Northern Strikers vs Metro Warriors" data-modal-copy="26 July 2026 · 7:00 PM · League Ground. This fictional group-stage fixture is presented for demonstration only.">View Match Details</button><a href="#fixtures">See Fixtures</a></footer></article><div class="compact-matches"><article><span class="status result">RESULT</span><small>MATCH 06 · 20 JUL</small><div><b>Capital Challengers</b><strong>168/6</strong></div><div><b>United Blasters</b><strong>154/8</strong></div><p>Capital Challengers won by 14 runs</p></article><article><span class="status upcoming">UPCOMING</span><small>MATCH 09 · 27 JUL · 4:00 PM</small><div><b>Royal Falcons</b><strong>—</strong></div><div><b>Rising Titans</b><strong>—</strong></div><p>League Ground</p></article></div></div></section>
+ <section class="pscl-teams" id="teams"><header class="pscl-head"><p>THE CONTENDERS</p><h2>Meet the Teams</h2><span>Six squads. One championship.</span></header><div class="team-grid"><article><i>NS</i><h3>Northern Strikers</h3><p>Captain <b>Arjun Malhotra</b></p><footer><span>P 5</span><b>RANK 01</b></footer></article><article><i>MW</i><h3>Metro Warriors</h3><p>Captain <b>Rohan Verma</b></p><footer><span>P 5</span><b>RANK 02</b></footer></article><article><i>RF</i><h3>Royal Falcons</h3><p>Captain <b>Kunal Mehta</b></p><footer><span>P 5</span><b>RANK 03</b></footer></article><article><i>RT</i><h3>Rising Titans</h3><p>Captain <b>Dev Sharma</b></p><footer><span>P 5</span><b>RANK 04</b></footer></article><article><i>CC</i><h3>Capital Challengers</h3><p>Captain <b>Aman Khanna</b></p><footer><span>P 5</span><b>RANK 05</b></footer></article><article><i>UB</i><h3>United Blasters</h3><p>Captain <b>Vihaan Rao</b></p><footer><span>P 5</span><b>RANK 06</b></footer></article></div></section>
+ <section class="pscl-fixtures section-dark" id="fixtures"><header class="pscl-head"><p>WHAT'S NEXT</p><h2>Upcoming Fixtures</h2><span>Times shown are fictional</span></header><div class="fixture-list"><article><span>08<small>26 JUL</small></span><div><b>Northern Strikers</b><i>VS</i><b>Metro Warriors</b></div><p>7:00 PM <small>League Ground</small></p><em>UPCOMING</em></article><article><span>09<small>27 JUL</small></span><div><b>Royal Falcons</b><i>VS</i><b>Rising Titans</b></div><p>4:00 PM <small>League Ground</small></p><em>UPCOMING</em></article><article><span>10<small>27 JUL</small></span><div><b>Capital Challengers</b><i>VS</i><b>United Blasters</b></div><p>7:30 PM <small>Championship Ground</small></p><em>UPCOMING</em></article><article><span>11<small>02 AUG</small></span><div><b>Metro Warriors</b><i>VS</i><b>Royal Falcons</b></div><p>6:00 PM <small>Championship Ground</small></p><em>UPCOMING</em></article><article class="fixture-more" hidden><span>12<small>03 AUG</small></span><div><b>United Blasters</b><i>VS</i><b>Northern Strikers</b></div><p>4:00 PM <small>League Ground</small></p><em>UPCOMING</em></article><article class="fixture-more" hidden><span>13<small>03 AUG</small></span><div><b>Rising Titans</b><i>VS</i><b>Capital Challengers</b></div><p>7:30 PM <small>League Ground</small></p><em>UPCOMING</em></article></div><button class="fixtures-toggle" type="button" aria-expanded="false">View Complete Schedule ↓</button></section>
+ <section class="pscl-standings" id="standings"><header class="pscl-head"><p>LEAGUE TABLE</p><h2>Road to the Playoffs</h2><span>Top four qualify</span></header><div class="table-scroll" tabindex="0"><table><thead><tr><th>POS</th><th>TEAM</th><th>P</th><th>W</th><th>L</th><th>NRR</th><th>PTS</th></tr></thead><tbody><tr><td>01 <i>Q</i></td><th>Northern Strikers</th><td>5</td><td>4</td><td>1</td><td>+1.42</td><td><b>8</b></td></tr><tr><td>02 <i>Q</i></td><th>Metro Warriors</th><td>5</td><td>4</td><td>1</td><td>+0.91</td><td><b>8</b></td></tr><tr><td>03 <i>Q</i></td><th>Royal Falcons</th><td>5</td><td>3</td><td>2</td><td>+0.48</td><td><b>6</b></td></tr><tr><td>04 <i>Q</i></td><th>Rising Titans</th><td>5</td><td>3</td><td>2</td><td>+0.12</td><td><b>6</b></td></tr><tr><td>05</td><th>Capital Challengers</th><td>5</td><td>2</td><td>3</td><td>-0.36</td><td><b>4</b></td></tr><tr><td>06</td><th>United Blasters</th><td>5</td><td>1</td><td>4</td><td>-1.08</td><td><b>2</b></td></tr></tbody></table></div></section>
+ <section class="pscl-players section-dark" id="players"><header class="pscl-head"><p>LEAGUE LEADERS</p><h2>Top Performers</h2><span>After Match 07</span></header><div class="player-grid"><article><div class="player-silhouette">AM</div><small>TOP RUN SCORER</small><h3>Arjun Malhotra</h3><p>Northern Strikers · 5 Matches</p><strong>328 <i>RUNS</i></strong></article><article><div class="player-silhouette">RV</div><small>TOP WICKET TAKER</small><h3>Rohan Verma</h3><p>Metro Warriors · 5 Matches</p><strong>12 <i>WICKETS</i></strong></article><article><div class="player-silhouette">KM</div><small>BEST STRIKE RATE</small><h3>Kunal Mehta</h3><p>Royal Falcons · 5 Matches</p><strong>176.4 <i>SR</i></strong></article><article><div class="player-silhouette">DS</div><small>BEST ECONOMY</small><h3>Dev Sharma</h3><p>Rising Titans · 5 Matches</p><strong>5.82 <i>ECON</i></strong></article></div></section>
+ <section class="pscl-highlights" id="highlights"><header class="pscl-head"><p>LATEST FROM THE DEMO</p><h2>Highlights & Updates</h2><span>Stories from the demo league</span></header><div class="news-grid"><article><div class="news-thumb one"></div><small>18 JUL 2026</small><h3>Registrations Open for Season 2026</h3><p>Team, player, trial and sponsor registrations are now open.</p><button data-modal-title="Registrations Open for Season 2026" data-modal-copy="The fictional demo registration window is open for teams, players, trials and sponsors. Use the registration form below to experience the demo flow.">Read More →</button></article><article><div class="news-thumb two"></div><small>16 JUL 2026</small><h3>Eight Teams Confirmed</h3><p>The 2026 field is set for 24 high-energy T20 matches.</p><button data-modal-title="Eight Teams Confirmed" data-modal-copy="Eight fictional teams will compete across 24 matches in this universal cricket website concept.">Read More →</button></article><article><div class="news-thumb three"></div><small>14 JUL 2026</small><h3>Players to Watch</h3><p>Four emerging performers ready to make this season their own.</p><button data-modal-title="Players to Watch" data-modal-copy="Arjun Malhotra, Rohan Verma, Kunal Mehta and Dev Sharma are fictional players highlighted in this league website demonstration.">Read More →</button></article></div></section>
+ <section class="pscl-register section-dark" id="register"><div><p>SEASON 2026</p><h2>Ready to Compete?</h2><p>Register your team, player profile, trial interest, or sponsor enquiry for the upcoming season.</p><div class="reg-types"><span>Team Registration</span><span>Player Registration</span><span>Trial Registration</span><span>Sponsor Enquiry</span></div><button class="pscl-open-register" type="button">Start Registration →</button></div></section>
+ <section class="pscl-partners"><p>OUR PARTNERS</p><div><button type="button" data-register-type="Sponsor Enquiry"><b>TITLE SPONSOR</b><small>BRAND PLACEHOLDER</small></button><button type="button" data-register-type="Sponsor Enquiry"><b>GOLD SPONSOR</b><small>BRAND PLACEHOLDER</small></button><button type="button" data-register-type="Sponsor Enquiry"><b>BROADCAST PARTNER</b><small>BRAND PLACEHOLDER</small></button><button type="button" data-register-type="Sponsor Enquiry"><b>EQUIPMENT PARTNER</b><small>BRAND PLACEHOLDER</small></button></div><button type="button" data-register-type="Sponsor Enquiry">Become a Sponsor →</button></section>
+ <section class="pscl-value"><div><p>BUILT FOR LEAGUE OWNERS</p><h2>Everything Your League Needs in One Place</h2></div><ul><li>Fixtures and results</li><li>Team profiles</li><li>Points table</li><li>Player statistics</li><li>Registrations</li><li>Sponsor visibility</li><li>News and updates</li><li>Mobile-friendly experience</li></ul></section>
+ <section class="pscl-final"><p>YOUR LEAGUE. ONE OFFICIAL HOME.</p><h2>Imagine Your League Here.</h2><p>Every colour, logo, team, fixture, registration form and section shown in this demo can be customized specifically for your cricket organization.</p><div><a href="{% url 'contact' %}?service=Cricket%20League%20Website&source=Universal%20Cricket%20Demo">Request a Similar Website</a><a href="{% url 'contact' %}?service=Cricket%20League%20Website&source=Universal%20Cricket%20Demo">Contact Yuvi Creates</a></div></section>
+ <footer class="pscl-footer"><a class="pscl-logo" href="#home"><b>CL</b><span>CRICKET<small>LEAGUE DEMO</small></span></a><p>Custom Website Concept</p><small>This is a fictional cricket website concept created by Yuvi Creates.<br>All teams, players, fixtures, standings, sponsors and statistics shown are demonstration content only and can be completely customized for any cricket league, tournament, academy or sports organization.</small></footer>
+ <div class="pscl-modal" id="info-modal" hidden role="dialog" aria-modal="true" aria-labelledby="info-title"><div class="modal-backdrop" data-close-modal></div><div class="modal-panel"><button class="modal-close" type="button" data-close-modal aria-label="Close modal">×</button><p>CRICKET DEMO · INFORMATION</p><h2 id="info-title"></h2><p id="info-copy"></p><button type="button" data-close-modal>Close</button></div></div>
+ <div class="pscl-modal" id="register-modal" hidden role="dialog" aria-modal="true" aria-labelledby="register-title"><div class="modal-backdrop" data-close-modal></div><div class="modal-panel registration-panel"><button class="modal-close" type="button" data-close-modal aria-label="Close registration form">×</button><p>CRICKET DEMO · REGISTRATION</p><h2 id="register-title">Start Registration</h2><form id="pscl-form"><label>Registration type<select name="type"><option>Team Registration</option><option>Player Registration</option><option>Trial Registration</option><option>Sponsor Enquiry</option></select></label><div><label>Name<input name="name" required></label><label>Team or academy name<input name="team"></label><label>Email<input type="email" name="email" required></label><label>Phone<input type="tel" name="phone" required></label><label>City<input name="city"></label><label>Playing role<select name="role"><option>Not applicable</option><option>Batter</option><option>Bowler</option><option>All-rounder</option><option>Wicketkeeper</option></select></label></div><label>Message<textarea name="message" rows="3"></textarea></label><p class="demo-notice">This is a demonstration form and does not submit to a real cricket organization.</p><button type="submit">Submit Demo Registration →</button><output id="pscl-form-status" aria-live="polite"></output></form></div></div>
 </main>
-{% endblock %}
-{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}
+{% endblock %}{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

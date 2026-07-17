@@ -1,65 +1,10 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}Local Service Business Demo | Yuvi Creates{% endblock %}
-{% block meta_description %}Local service business website demo by Yuvi Creates with services, pricing, FAQs, testimonials, Google Map, call button, WhatsApp CTA, and enquiry form.{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
-{% block content %}
-<main class="pd pd-service">
-    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
-    <section class="pd-hero">
-        <div class="container pd-grid">
-            <div>
-                <p class="pd-kicker">Service business demo</p>
-                <h1>PrimeFix Services</h1>
-                <p>Service-provider website with pricing, FAQs, testimonials, location, and lead enquiry flow.</p>
-                <div class="pd-actions">
-                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=small-business">View Service Packages</a>
-                    <a class="btn btn-secondary" href="#services">See Services</a>
-                </div>
-            </div>
-            <div class="pd-showcase">
-                <span>Popular service</span>
-                <strong>Same-day repair visit</strong>
-                <small>Call, WhatsApp, and enquiry form ready</small>
-            </div>
-        </div>
-    </section>
-    <section class="pd-section" id="services">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Service blocks</p>
-            <h2>Make the business look trustworthy before the client calls.</h2>
-        </div>
-        <div class="container pd-cards three">
-            <article><strong>Transparent pricing</strong><p>Starting prices, visit charges, and service inclusions shown clearly.</p></article>
-            <article><strong>FAQs</strong><p>Answer timing, warranty, payment, location coverage, and support questions.</p></article>
-            <article><strong>Local trust</strong><p>Testimonials, photos, service area, Google map, and quick enquiry.</p></article>
-        </div>
-    </section>
-    <section class="pd-section pd-muted">
-        <div class="container pd-split">
-            <div><p class="pd-kicker">Lead flow</p><h2>Clients can request a visit in under a minute.</h2><p>Best for repair, cleaning, salon, clinic, coaching, and home-service businesses.</p></div>
-            <div class="pd-offer-card"><strong>Request callback</strong><span>Name + phone + issue</span><p>Simple form that feels easy, not heavy.</p></div>
-        </div>
-    </section>
-    <section class="pd-section">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Local trust</p>
-            <h2>Show service quality, coverage area, pricing clarity, and real reviews.</h2>
-        </div>
-        <div class="container pd-gallery">
-            <div><span>Service Area</span></div>
-            <div><span>Before / After</span></div>
-            <div><span>Customer Reviews</span></div>
-            <div><span>Quick Callback</span></div>
-        </div>
-    </section>
-    <section class="pd-section pd-final">
-        <div class="container pd-final-box">
-            <p class="pd-kicker">Lead-focused service site</p>
-            <h2>Make the business look reliable and make enquiries easy from mobile.</h2>
-            <a class="btn btn-primary" href="{% url 'packages' %}?focus=small-business">View Service Packages</a>
-        </div>
-    </section>
-</main>
-{% endblock %}
-{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}
+{% extends "base.html" %}{% load static %}{% block title %}VoltCare — Premium Electrical Service Demo{% endblock %}{% block extra_head %}<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="{% static demo_css %}">{% endblock %}{% block content %}
+<main class="volt"><div class="volt-demo"><a href="{% url 'portfolio' %}">← YUVI CREATES</a><span>LOCAL SERVICE WEBSITE CONCEPT</span></div><nav><a class="volt-logo" href="#top"><i>V</i> VOLTCARE<small>HOME ELECTRICAL</small></a><div><a href="#services">Services</a><a href="#work">Our work</a><a href="#reviews">Reviews</a><a class="volt-call" href="#book">Book a technician</a></div></nav>
+<section class="volt-hero" id="top"><img src="{% static 'images/portfolio_demos/local-service/hero.png' %}" alt="VoltCare professional electrician"><div class="volt-copy"><p><span></span> VERIFIED LOCAL ELECTRICIANS</p><h1>Power fixed.<br><em>Peace restored.</em></h1><p class="lead">Safe, spotless electrical work for modern homes—on time, clearly priced and guaranteed.</p><div><a href="#book">BOOK A VISIT →</a><a href="tel:+911234567890">CALL NOW · +91 12345 67890</a></div><footer><b>4.9 ★</b><span>800+ verified visits</span><b>90 min</b><span>average arrival</span><b>12 mo</b><span>workmanship warranty</span></footer></div></section>
+<section class="volt-alert"><b>Electrical emergency?</b><span>Power failure, sparks or burning smell</span><a href="tel:+911234567890">GET PRIORITY HELP →</a></section>
+<section class="volt-services" id="services"><header><p>WHAT WE FIX</p><h2>One expert team.<br>Every electrical need.</h2><a href="#book">VIEW ALL SERVICES ↗</a></header><div><article><span>01</span><b>Faults & repairs</b><p>Tripping circuits, dead sockets, flickering lights and urgent diagnosis.</p><small>FROM ₹499</small></article><article><span>02</span><b>Lights & fixtures</b><p>Pendants, fans, chandeliers and smart lighting installed beautifully.</p><small>FROM ₹349</small></article><article><span>03</span><b>Safety upgrades</b><p>MCB panels, earthing, surge protection and complete home checks.</p><small>FROM ₹899</small></article><article><span>04</span><b>New installations</b><p>Wiring for kitchens, appliances, EV chargers and renovations.</p><small>CUSTOM QUOTE</small></article></div></section>
+<section class="volt-work" id="work"><div class="volt-work-photo"><img src="{% static 'images/portfolio_demos/local-service/detail.png' %}" alt="Electrician installing premium pendant lighting"><span>RECENT PROJECT · GURUGRAM</span></div><div><p>CRAFTED, NOT JUST CONNECTED</p><h2>Details your home deserves.</h2><p>Our technicians protect every surface, explain every choice and leave the space cleaner than they found it.</p><ul><li><b>01</b> Upfront digital estimate</li><li><b>02</b> Trained & background-checked team</li><li><b>03</b> Photo report after every visit</li></ul><a href="#book">SEE HOW WE WORK →</a></div></section>
+<section class="volt-how"><p>HOW IT WORKS</p><h2>Fixed in three simple steps.</h2><div><article><b>1</b><h3>Tell us the issue</h3><p>Choose a service and convenient time online.</p></article><article><b>2</b><h3>Meet your expert</h3><p>Track arrival and approve a clear quote first.</p></article><article><b>3</b><h3>Get it sorted</h3><p>Safe work, clean finish and warranty included.</p></article></div></section>
+<section class="volt-review" id="reviews"><div><span>★★★★★</span><blockquote>“Professional from the first call. The technician arrived exactly when promised, explained the fault and left our kitchen spotless.”</blockquote><p>— PRIYA M., DLF PHASE 2</p></div><aside><b>4.9/5</b><span>GOOGLE RATING</span><hr><b>96%</b><span>FIRST-VISIT FIX RATE</span></aside></section>
+<section class="volt-book" id="book"><div><p>READY WHEN YOU ARE</p><h2>Book a trusted<br>technician today.</h2><span>Same-day slots available across Delhi NCR.</span></div><form action="{% url 'contact' %}" method="get"><label>What do you need?<select name="service"><option>Electrical repair</option><option>Light or fan installation</option><option>Safety inspection</option><option>New wiring</option></select></label><div><label>Your name<input name="name" placeholder="Full name"></label><label>Phone number<input name="phone" placeholder="+91"></label></div><label>Tell us what’s happening<textarea name="message" rows="3" placeholder="Describe the issue..."></textarea></label><button>CHECK AVAILABLE SLOTS →</button></form></section><footer class="volt-footer"><a class="volt-logo" href="#top"><i>V</i> VOLTCARE</a><p>Safe homes. Honest work.</p><div><a href="#services">Services</a><a href="#book">Book</a><a href="{% url 'portfolio' %}">Portfolio</a></div></footer></main>
+{% endblock %}{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

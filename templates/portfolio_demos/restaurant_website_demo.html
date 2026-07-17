@@ -1,83 +1,19 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}Restaurant Website Demo | Yuvi Creates{% endblock %}
-{% block meta_description %}Restaurant website demo by Yuvi Creates with menu highlights, gallery, offers, location, Google Map, WhatsApp reservation flow, and mobile-friendly restaurant design.{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% extends "base.html" %}{% load static %}
+{% block title %}Saffron Table | Contemporary Indian Dining{% endblock %}
+{% block meta_description %}Saffron Table is a premium contemporary Indian restaurant experience with seasonal menus, chef-led tasting plates and elegant private dining.{% endblock %}
+{% block extra_head %}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&display=swap" rel="stylesheet"><link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
 {% block content %}
-<main class="pd pd-restaurant">
-    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
-    <section class="pd-hero">
-        <div class="container pd-grid">
-            <div>
-                <p class="pd-kicker">Fine dining demo</p>
-                <h1>Maison Spice</h1>
-                <p>Premium restaurant website with a polished first impression, menu highlights, gallery, location, offers, and WhatsApp reservation flow.</p>
-                <div class="pd-actions">
-                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=restaurant">View Restaurant Packages</a>
-                    <a class="btn btn-secondary" href="#menu">Explore Demo</a>
-                </div>
-            </div>
-            <div class="pd-showcase pd-menu-board">
-                <span>Chef special</span>
-                <strong>Paneer Steak · ₹420</strong>
-                <small>Fresh herbs, smoked sauce, seasonal sides</small>
-                <div class="pd-mini-list">
-                    <p><b>Open today</b> 12 PM - 11 PM</p>
-                    <p><b>Reservation</b> WhatsApp in one tap</p>
-                    <p><b>Rating</b> 4.8 from 320 guests</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="pd-strip">
-        <div class="container pd-stats">
-            <span>Signature menu</span><span>Table booking</span><span>Gallery</span><span>Google map</span>
-        </div>
-    </section>
-    <section class="pd-section" id="menu">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Website sections</p>
-            <h2>Everything a restaurant visitor checks before calling.</h2>
-        </div>
-        <div class="container pd-cards three">
-            <article><strong>Menu highlights</strong><p>Starters, mains, desserts, beverages, price blocks, and chef recommendations.</p></article>
-            <article><strong>Ambience gallery</strong><p>Interior, food, table setup, parties, and events displayed in a clean grid.</p></article>
-            <article><strong>Reservation flow</strong><p>WhatsApp table enquiry, map, opening hours, and quick call button.</p></article>
-        </div>
-    </section>
-    <section class="pd-section pd-muted">
-        <div class="container pd-split">
-            <div>
-                <p class="pd-kicker">Special offer</p>
-                <h2>Weekend tasting menu</h2>
-                <p>Use this area for offers, events, live music nights, buffet announcements, or chef specials.</p>
-            </div>
-            <div class="pd-offer-card">
-                <strong>Family dinner combo</strong>
-                <span>₹1,499 for two</span>
-                <p>Starter, main course, dessert, and drinks.</p>
-            </div>
-        </div>
-    </section>
-    <section class="pd-section">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Restaurant vibe</p>
-            <h2>Food, ambience, offers, and reservation trust on one premium homepage.</h2>
-        </div>
-        <div class="container pd-gallery">
-            <div><span>Signature Plates</span></div>
-            <div><span>Dining Space</span></div>
-            <div><span>Guest Reviews</span></div>
-            <div><span>Table Booking</span></div>
-        </div>
-    </section>
-    <section class="pd-section pd-final">
-        <div class="container pd-final-box">
-            <p class="pd-kicker">Premium restaurant flow</p>
-            <h2>Menu, gallery, location, offers, and WhatsApp reservation built to turn visitors into diners.</h2>
-            <a class="btn btn-primary" href="{% url 'packages' %}?focus=restaurant">View Restaurant Packages</a>
-        </div>
-    </section>
+<main class="saffron" id="top">
+  <div class="demo-bar"><span>Yuvi Creates portfolio demo</span><a href="{% url 'portfolio' %}">← Back to portfolio</a></div>
+  <nav class="saffron-nav"><a class="saffron-logo" href="#top"><i>S</i><span>SAFFRON<br>TABLE</span></a><button type="button" class="menu-toggle" aria-expanded="false">Menu</button><div class="nav-links"><a href="#story">Story</a><a href="#menu">Menus</a><a href="#experience">Experience</a><a href="#visit">Visit</a><a class="reserve-link" href="#reserve">Reserve a table</a></div></nav>
+  <section class="saffron-hero"><img src="{% static 'images/portfolio_demos/restaurant/restaurant-hero.jpg' %}" alt="Contemporary Indian dinner at Saffron Table" fetchpriority="high"><div class="hero-overlay"></div><div class="hero-copy"><p class="eyebrow">Modern Indian dining · Mumbai</p><h1>Tradition,<br><em>reimagined.</em></h1><p>Rooted in memory. Shaped by the season. Served with a point of view.</p><div><a class="gold-btn" href="#reserve">Reserve your table</a><a class="plain-link" href="#menu">Explore the menu →</a></div></div><div class="hero-hours"><small>DINNER</small><strong>Tuesday — Sunday</strong><span>6:30 PM — 11:30 PM</span></div></section>
+  <div class="restaurant-strip"><span>Season-led menus</span><b>✦</b><span>Open-fire kitchen</span><b>✦</b><span>Private dining</span><b>✦</b><span>Chef's tasting experience</span></div>
+  <section class="intro wrap" id="story"><span class="section-index">01 / OUR STORY</span><div class="reveal"><p class="eyebrow rust">A familiar flavour, seen anew</p><h2>Food that remembers<br>where it came from.</h2></div><div class="intro-note reveal"><p>Saffron Table explores the many kitchens of India through seasonal produce, open-fire cooking and a contemporary lens. Every plate begins with a memory and ends somewhere unexpected.</p><a href="#experience">Discover our philosophy →</a></div></section>
+  <section class="menu-feature" id="menu"><div class="menu-image reveal"><img src="{% static 'images/portfolio_demos/restaurant/restaurant-menu.jpg' %}" alt="Signature Indian dishes at Saffron Table" loading="lazy"><span>Chef's table · 8 courses</span></div><div class="menu-copy reveal"><p class="eyebrow rust">At the table</p><h2>A menu led by fire,<br>season and memory.</h2><div class="menu-tabs"><button class="active" data-tab="dinner">Dinner</button><button data-tab="tasting">Tasting</button><button data-tab="dessert">Dessert</button></div><div class="dish-list active" data-panel="dinner"><article><div><strong>Charred Malai Paneer</strong><small>smoked pepper · fenugreek · cultured cream</small></div><b>₹720</b></article><article><div><strong>Old Delhi Butter Chicken</strong><small>tomato · kasuri methi · charcoal naan</small></div><b>₹980</b></article><article><div><strong>Wild Mushroom Khichda</strong><small>black garlic · morel · parmesan</small></div><b>₹840</b></article><article><div><strong>Lamb Raan</strong><small>24-hour spice rub · saffron jus</small></div><b>₹1,280</b></article></div><div class="dish-list" data-panel="tasting"><article><div><strong>Journey Through India</strong><small>Eight courses · vegetarian available</small></div><b>₹3,800</b></article><article><div><strong>Sommelier Pairing</strong><small>Five curated pours</small></div><b>₹2,400</b></article><article><div><strong>Zero-proof Pairing</strong><small>House ferments · tea · botanicals</small></div><b>₹1,400</b></article></div><div class="dish-list" data-panel="dessert"><article><div><strong>Saffron Milk Cake</strong><small>pistachio · rose · cardamom</small></div><b>₹560</b></article><article><div><strong>Dark Chocolate Mishti</strong><small>jaggery caramel · sea salt</small></div><b>₹590</b></article><article><div><strong>Mango Kulfi</strong><small>raw mango · chilli · lime</small></div><b>₹520</b></article></div><a class="under-link" href="#reserve">View full menu →</a></div></section>
+  <section class="chef-section" id="experience"><div class="chef-quote reveal"><p class="eyebrow">From the chef</p><blockquote>“We don't modernise Indian food. We listen to it closely, then let it speak in the present.”</blockquote><span>— Chef Ayaan Mehra</span></div><div class="chef-cards"><article><span>01</span><h3>Produce first</h3><p>Our menus move with local farms, coastal catches and each new season.</p></article><article><span>02</span><h3>Fire & patience</h3><p>Slow braises, charcoal grills and ferments bring depth without excess.</p></article><article><span>03</span><h3>Warm service</h3><p>Fine dining that feels considered, generous and genuinely welcoming.</p></article></div></section>
+  <section class="occasion wrap"><div><p class="eyebrow rust">Gather beautifully</p><h2>Private dining,<br>made personal.</h2></div><p>From intimate celebrations to chef-led business dinners, our private room seats up to 18 guests with a menu designed around your occasion.</p><a class="dark-btn" href="#reserve">Plan an occasion</a></section>
+  <section class="reviews"><div class="wrap"><p class="eyebrow">At their table</p><h2>Words from our guests</h2><div class="review-grid"><blockquote class="reveal"><span>★★★★★</span><p>“One of Mumbai's most thoughtful dining rooms. Every course felt rooted, surprising and completely delicious.”</p><footer>Rhea Malhotra · Local Guide</footer></blockquote><blockquote class="reveal"><span>★★★★★</span><p>“The tasting menu tells a real story. Beautiful service, confident cooking and a room you never want to leave.”</p><footer>Karan Shah · Verified guest</footer></blockquote><blockquote class="reveal"><span>★★★★★</span><p>“Our anniversary dinner was handled with such warmth. The private table and personalised menu were exceptional.”</p><footer>Aditi & Nikhil · Guests</footer></blockquote></div></div></section>
+  <section class="visit" id="visit"><div class="visit-art"><span>SAFFRON<br>TABLE</span></div><div class="visit-copy" id="reserve"><p class="eyebrow rust">Reservations</p><h2>Your table<br>is waiting.</h2><div class="details"><p><small>Address</small><strong>18 Harbour Lane, Colaba<br>Mumbai, Maharashtra</strong></p><p><small>Hours</small><strong>Tue — Sun · 6:30 PM — 11:30 PM<br>Monday closed</strong></p></div><a class="dark-btn" href="https://wa.me/919876543210?text=Hi%20Saffron%20Table%2C%20I%27d%20like%20to%20reserve%20a%20table" target="_blank" rel="noopener">Reserve on WhatsApp</a><a class="under-link" href="tel:+919876543210">+91 98765 43210</a></div></section>
+  <footer class="saffron-footer"><a class="saffron-logo" href="#top"><i>S</i><span>SAFFRON<br>TABLE</span></a><p>Contemporary Indian dining in Mumbai.</p><div><a href="#menu">Menus</a><a href="#experience">Experience</a><a href="#visit">Visit</a><a href="#">Instagram ↗</a></div><small>© 2026 Saffron Table · Fictional concept by Yuvi Creates</small></footer><a class="mobile-reserve" href="#reserve">Reserve a table</a>
 </main>
-{% endblock %}
-{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}
+{% endblock %}{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

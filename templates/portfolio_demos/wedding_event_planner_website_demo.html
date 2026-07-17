@@ -1,128 +1,21 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}Wedding & Event Planner Website Demo | Yuvi Creates{% endblock %}
-{% block meta_description %}Wedding and event planner website demo by Yuvi Creates with services, event portfolio, decor themes, planning process, testimonials, packages, and enquiry CTA.{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% extends "base.html" %}{% load static %}
+{% block title %}Vow & Verse — Luxury Wedding Planner Demo{% endblock %}
+{% block meta_description %}A premium editorial wedding planner website demo with celebrations, services, planning process, testimonials and consultation enquiry.{% endblock %}
+{% block extra_head %}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
 {% block content %}
-<main class="pd pd-wedding">
-    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
-    <section class="pd-hero">
-        <div class="container pd-grid">
-            <div>
-                <p class="pd-kicker">Event Planner Demo</p>
-                <h1>Plan Your Perfect Wedding & Events With Elegance</h1>
-                <p>From weddings and birthdays to corporate events and private celebrations, we create memorable experiences with thoughtful planning, beautiful decor, and smooth execution.</p>
-                <div class="pd-actions">
-                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=wedding-event">View Wedding/Event Packages</a>
-                    <a class="btn btn-secondary" href="#consultation">Book Free Consultation</a>
-                </div>
-            </div>
-            <div class="pd-showcase">
-                <span>Elegant Events Studio</span>
-                <strong>Weddings, parties, decor and event coordination</strong>
-                <small>Portfolio showcase with enquiry CTA</small>
-            </div>
-        </div>
-    </section>
-
-    <section class="pd-strip">
-        <div class="container pd-stats">
-            <span>Wedding Planning</span><span>Birthday & Private Events</span><span>Corporate Events</span><span>Decor & Theme Setup</span>
-        </div>
-    </section>
-
-    <section class="pd-section pd-muted">
-        <div class="container pd-split">
-            <div>
-                <p class="pd-kicker">About Elegant Events Studio</p>
-                <h2>Creating Beautiful Events With Personal Touch</h2>
-                <p>We help clients plan weddings, parties, celebrations, and corporate events with design, coordination, vendor support, decor planning, and a smooth guest experience from first call to final execution.</p>
-            </div>
-            <div class="pd-offer-card">
-                <strong>Planning focus</strong>
-                <span>Design + coordination</span>
-                <p>Clear event flow, vendor support, theme direction, and polished client communication.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="pd-section" id="services">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Services</p>
-            <h2>Planning, styling, and coordination for meaningful events.</h2>
-        </div>
-        <div class="container pd-cards three">
-            <article><strong>Wedding Planning</strong><p>Full event planning, timeline coordination, vendor support, and guest experience flow.</p></article>
-            <article><strong>Engagement & Reception</strong><p>Elegant stage setup, entry moments, decor themes, and celebration coordination.</p></article>
-            <article><strong>Birthday Parties</strong><p>Theme planning, decor direction, venue coordination, and smooth party execution.</p></article>
-            <article><strong>Corporate Events</strong><p>Professional event flow, dinner setups, launch events, and guest management planning.</p></article>
-            <article><strong>Theme Decoration</strong><p>Color palettes, floral direction, stage styling, table decor, and venue mood setting.</p></article>
-            <article><strong>Destination/Event Coordination</strong><p>Travel-aware planning, vendor coordination, checklist flow, and on-ground execution support.</p></article>
-        </div>
-    </section>
-
-    <section class="pd-section pd-muted">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Portfolio</p>
-            <h2>Past event stories shown with a premium gallery feel.</h2>
-        </div>
-        <div class="container pd-gallery">
-            <div><span>Luxury Wedding Setup</span></div>
-            <div><span>Floral Engagement Decor</span></div>
-            <div><span>Birthday Celebration</span></div>
-            <div><span>Corporate Dinner Event</span></div>
-            <div><span>Outdoor Mehendi Setup</span></div>
-            <div><span>Reception Stage Design</span></div>
-        </div>
-    </section>
-
-    <section class="pd-section">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Demo packages</p>
-            <h2>Simple package cards help visitors understand the planning level.</h2>
-        </div>
-        <div class="container pd-cards three">
-            <article><strong>Essential Event Plan</strong><p>Starting from consultation-based scope for small celebrations.</p><small>Custom Quote</small></article>
-            <article><strong>Premium Wedding Plan</strong><p>Planning, decor guidance, vendor coordination, and guest-flow support.</p><small>Starting from project scope</small></article>
-            <article><strong>Luxury Celebration Plan</strong><p>High-end planning support for multi-event celebrations and premium decor.</p><small>Custom Quote</small></article>
-        </div>
-    </section>
-
-    <section class="pd-section pd-muted">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Process</p>
-            <h2>A calm process builds confidence before clients enquire.</h2>
-        </div>
-        <div class="container pd-process">
-            <article><span>01</span><strong>Consultation</strong><p>Understand event type, guest count, venue, preferences, and budget direction.</p></article>
-            <article><span>02</span><strong>Planning & Theme</strong><p>Shape event flow, moodboard, decor theme, and execution checklist.</p></article>
-            <article><span>03</span><strong>Vendor Coordination</strong><p>Coordinate vendor requirements, timelines, and service expectations.</p></article>
-            <article><span>04</span><strong>Event Execution</strong><p>Support the event-day flow so the celebration feels smooth and polished.</p></article>
-        </div>
-    </section>
-
-    <section class="pd-section">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Client words</p>
-            <h2>Social proof makes premium event services easier to trust.</h2>
-        </div>
-        <div class="container pd-cards three">
-            <article><p>"Elegant Events Studio made our wedding planning feel effortless and beautifully organized."</p><strong>Riya Malhotra</strong></article>
-            <article><p>"The decor theme, vendor coordination, and reception flow were handled with real care."</p><strong>Arjun Mehra</strong></article>
-            <article><p>"Our corporate dinner looked polished, warm, and perfectly managed from start to finish."</p><strong>Naina Kapoor</strong></article>
-        </div>
-    </section>
-
-    <section class="pd-section pd-final" id="consultation">
-        <div class="container pd-final-box">
-            <p class="pd-kicker">Ready to Plan Your Next Event?</p>
-            <h2>Let's create a beautiful, stress-free event experience for your special day.</h2>
-            <div class="pd-actions center">
-                <a class="btn btn-primary" href="{% url 'packages' %}?focus=wedding-event">View Wedding/Event Packages</a>
-                <a class="btn btn-secondary" href="{% url 'contact' %}">Call Now</a>
-            </div>
-        </div>
-    </section>
+<main class="vow">
+  <div class="vow-demo"><a href="{% url 'portfolio' %}">← Yuvi Creates portfolio</a><span>Concept website · Wedding planning studio</span></div>
+  <nav class="vow-nav"><a class="vow-brand" href="#top">Vow <i>&</i> Verse<small>WEDDINGS & CELEBRATIONS</small></a><div><a href="#stories">Stories</a><a href="#services">Services</a><a href="#process">Approach</a><a class="vow-nav-cta" href="#enquire">Check our date</a></div></nav>
+  <section class="vow-hero" id="top">
+    <img src="{% static 'images/portfolio_demos/wedding/hero.jpg' %}" alt="Luxury outdoor wedding ceremony designed by Vow and Verse">
+    <div class="vow-shade"></div><div class="vow-hero-copy"><p>INTENTIONAL CELEBRATIONS · INDIA & BEYOND</p><h1>Your love,<br><em>beautifully told.</em></h1><div class="vow-hero-foot"><span>We plan soulful weddings with an editorial eye and a calm, deeply personal process.</span><a href="#stories">Discover our stories ↓</a></div></div>
+  </section>
+  <section class="vow-intro"><p class="vow-label">OUR PHILOSOPHY</p><div><h2>Not just a beautiful day.<br>A celebration that feels <em>like you.</em></h2><p>From the first moodboard to the final dance, we bring the people, details and rhythm together—so you can be fully present for every moment.</p></div><span class="vow-seal">V&V<br><small>EST. 2018</small></span></section>
+  <section class="vow-story" id="stories"><div class="vow-story-image"><img src="{% static 'images/portfolio_demos/wedding/detail.jpg' %}" alt="Elegant candlelit wedding reception"><span>01 / 03</span></div><div class="vow-story-copy"><p class="vow-label">FEATURED CELEBRATION</p><h2>Aditi & Kabir</h2><p class="vow-place">THE ROSEATE · NEW DELHI</p><p>An intimate garden ceremony that unfolded into a candlelit dinner—layered with ivory florals, handwritten details and the warmest gathering of family.</p><dl><div><dt>Guests</dt><dd>180</dd></div><div><dt>Events</dt><dd>3 days</dd></div><div><dt>Planning</dt><dd>Full service</dd></div></dl><a href="#enquire">Plan a celebration like this →</a></div></section>
+  <section class="vow-services" id="services"><header><p class="vow-label">HOW WE CAN HELP</p><h2>Considered from<br>every angle.</h2></header><div class="vow-service-list"><article><span>01</span><div><h3>Full-service planning</h3><p>Creative direction, venues, vendors, guest logistics, budgets and every timeline in between.</p></div></article><article><span>02</span><div><h3>Design & styling</h3><p>A cohesive visual world—florals, stationery, lighting, tablescapes and meaningful personal details.</p></div></article><article><span>03</span><div><h3>Destination celebrations</h3><p>Multi-day guest experiences and trusted local teams, thoughtfully coordinated across locations.</p></div></article></div></section>
+  <section class="vow-process" id="process"><p class="vow-label">THE VOW & VERSE WAY</p><h2>Calm planning.<br><em>Unforgettable energy.</em></h2><div><article><b>01</b><h3>Listen</h3><p>Your story, priorities and the atmosphere you want guests to remember.</p></article><article><b>02</b><h3>Imagine</h3><p>A tailored concept, venue plan and handpicked creative team.</p></article><article><b>03</b><h3>Refine</h3><p>Every detail tracked, designed and communicated with clarity.</p></article><article><b>04</b><h3>Celebrate</h3><p>We quietly run the day while you live every beautiful minute.</p></article></div></section>
+  <section class="vow-quote"><span>“</span><blockquote>They understood us before we knew how to describe it. The weekend felt effortless, intimate and completely ours.</blockquote><p>— MEERA & RAGHAV, UDAIPUR</p></section>
+  <section class="vow-enquire" id="enquire"><div><p class="vow-label">BEGIN YOUR STORY</p><h2>Tell us what<br>you’re dreaming of.</h2><p>Share your date, city and a little about the two of you. Our studio replies within two working days.</p></div><form action="{% url 'contact' %}" method="get"><label>Your names<input name="names" placeholder="e.g. Anaya & Arjun"></label><div><label>Celebration date<input type="date" name="date"></label><label>City / destination<input name="city" placeholder="Where are we celebrating?"></label></div><label>Your vision<textarea name="message" rows="3" placeholder="Tell us about the celebration you imagine..."></textarea></label><button type="submit">Send our enquiry <span>→</span></button></form></section>
+  <footer class="vow-footer"><a class="vow-brand" href="#top">Vow <i>&</i> Verse<small>WEDDINGS & CELEBRATIONS</small></a><p>New Delhi · Mumbai · Worldwide</p><div><a href="#stories">Instagram</a><a href="#enquire">Enquire</a><a href="{% url 'portfolio' %}">Back to portfolio</a></div></footer>
 </main>
-{% endblock %}
-{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}
+{% endblock %}{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

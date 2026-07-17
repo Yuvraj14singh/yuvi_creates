@@ -1,1 +1,1 @@
-document.documentElement.dataset.portfolioDemo = "salon-makeup-artist";
+document.documentElement.dataset.portfolioDemo="salon";

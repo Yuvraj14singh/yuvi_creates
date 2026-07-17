@@ -720,6 +720,13 @@ def contact(request):
             return redirect("contact")
     else:
         initial = {"package_interested_in": selected_package.title} if selected_package else {}
+        requested_service = request.GET.get("service", "").strip()
+        enquiry_source = request.GET.get("source", "").strip()
+        if requested_service and not selected_package:
+            initial["package_interested_in"] = requested_service
+            initial["business_type"] = "Sports / Cricket Organisation"
+        if enquiry_source:
+            initial["message"] = f"Enquiry source: {enquiry_source}"
         if selected_market_price:
             initial["preferred_currency"] = selected_market_price.currency_code
         form = EnquiryForm(initial=initial)

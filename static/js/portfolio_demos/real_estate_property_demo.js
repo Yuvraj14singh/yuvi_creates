@@ -1,1 +1,1 @@
-document.documentElement.dataset.portfolioDemo = "real-estate-property";
+document.documentElement.dataset.portfolioDemo="real-estate";

@@ -1,7 +1,12 @@
-<div class="metric-grid">
-    <article><span>Total Leads</span><strong>{{ total_leads }}</strong></article><article><span>New Leads</span><strong>{{ new_leads }}</strong></article>
-    <article><span>Replies</span><strong>{{ replies_received }}</strong></article><article><span>Demo Requests</span><strong>{{ demo_requests }}</strong></article>
-    <article class="due"><span>Due Today</span><strong>{{ due_today_count }}</strong></article><article class="overdue"><span>Overdue</span><strong>{{ overdue_count }}</strong></article>
-    <article><span>Meetings</span><strong>{{ meetings_scheduled }}</strong></article><article><span>Proposals</span><strong>{{ proposals_sent }}</strong></article>
-    <article class="won"><span>Won Clients</span><strong>{{ won_clients }}</strong></article><article><span>Lost / Archived</span><strong>{{ lost_leads }}</strong></article>
-</div>
+<section class="metric-section" aria-label="Lead overview">
+    <div class="primary-metrics">
+        <article><span class="metric-icon leads">L</span><div><small>Total leads</small><strong>{{ total_leads }}</strong><em>All recorded opportunities</em></div></article>
+        <article><span class="metric-icon new">N</span><div><small>New leads</small><strong>{{ new_leads }}</strong><em>Waiting for first action</em></div></article>
+        <article class="due"><span class="metric-icon due">T</span><div><small>Due today</small><strong>{{ due_today_count }}</strong><em>Follow-ups to complete</em></div></article>
+        <article class="overdue"><span class="metric-icon overdue">!</span><div><small>Overdue</small><strong>{{ overdue_count }}</strong><em>Needs immediate attention</em></div></article>
+        <article class="won"><span class="metric-icon won">✓</span><div><small>Won clients</small><strong>{{ won_clients }}</strong><em>Converted opportunities</em></div></article>
+    </div>
+    <div class="pipeline-strip" aria-label="Pipeline signals">
+        <span><small>Replies</small><strong>{{ replies_received }}</strong></span><span><small>Demo requests</small><strong>{{ demo_requests }}</strong></span><span><small>Meetings</small><strong>{{ meetings_scheduled }}</strong></span><span><small>Proposals</small><strong>{{ proposals_sent }}</strong></span><span><small>Lost / archived</small><strong>{{ lost_leads }}</strong></span>
+    </div>
+</section>

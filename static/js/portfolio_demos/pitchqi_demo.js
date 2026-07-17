@@ -1,1 +1,21 @@
-document.documentElement.dataset.portfolioDemo = "pitchqi";
+document.documentElement.dataset.portfolioDemo="cricket-league-demo";
+(()=>{
+ const root=document.querySelector('.pscl'); if(!root)return;
+ const menu=root.querySelector('.pscl-menu'),links=root.querySelector('#pscl-links');
+ const setMenu=open=>{menu.setAttribute('aria-expanded',String(open));links.classList.toggle('open',open)};
+ menu.addEventListener('click',()=>setMenu(menu.getAttribute('aria-expanded')!=='true'));
+ links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+ const fixtureButton=root.querySelector('.fixtures-toggle');
+ fixtureButton.addEventListener('click',()=>{const open=fixtureButton.getAttribute('aria-expanded')!=='true';root.querySelectorAll('.fixture-more').forEach(row=>row.hidden=!open);fixtureButton.setAttribute('aria-expanded',String(open));fixtureButton.textContent=open?'Show Fewer Fixtures ↑':'View Complete Schedule ↓'});
+ const info=root.querySelector('#info-modal'),register=root.querySelector('#register-modal');let lastFocus=null;
+ const focusables=modal=>[...modal.querySelectorAll('button,input,select,textarea,a[href]')].filter(el=>!el.disabled);
+ const openModal=modal=>{lastFocus=document.activeElement;modal.hidden=false;document.body.classList.add('modal-open');focusables(modal)[0]?.focus()};
+ const closeModal=modal=>{modal.hidden=true;document.body.classList.remove('modal-open');lastFocus?.focus()};
+ root.querySelectorAll('[data-modal-title]').forEach(button=>button.addEventListener('click',()=>{info.querySelector('#info-title').textContent=button.dataset.modalTitle;info.querySelector('#info-copy').textContent=button.dataset.modalCopy;openModal(info)}));
+ const openRegister=type=>{register.querySelector('[name="type"]').value=type||'Team Registration';register.querySelector('#pscl-form-status').textContent='';openModal(register)};
+ root.querySelectorAll('.pscl-open-register').forEach(button=>button.addEventListener('click',()=>openRegister(button.textContent.includes('Team')?'Team Registration':null)));
+ root.querySelectorAll('[data-register-type]').forEach(button=>button.addEventListener('click',()=>openRegister(button.dataset.registerType)));
+ root.querySelectorAll('[data-close-modal]').forEach(button=>button.addEventListener('click',()=>closeModal(button.closest('.pscl-modal'))));
+ root.querySelectorAll('.pscl-modal').forEach(modal=>modal.addEventListener('keydown',event=>{if(event.key==='Escape')closeModal(modal);if(event.key==='Tab'){const items=focusables(modal),first=items[0],last=items.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}}));
+ root.querySelector('#pscl-form').addEventListener('submit',event=>{event.preventDefault();event.currentTarget.reset();root.querySelector('#pscl-form-status').textContent='Demo submitted successfully.'});
+})();

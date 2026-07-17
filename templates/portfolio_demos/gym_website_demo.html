@@ -1,71 +1,15 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}Gym Website Demo | Yuvi Creates{% endblock %}
-{% block meta_description %}Gym website demo by Yuvi Creates with membership plans, trainer sections, transformation proof, class schedule, trial booking CTA, and responsive design.{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
-{% block content %}
-<main class="pd pd-gym">
-    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
-    <section class="pd-hero">
-        <div class="container pd-grid">
-            <div>
-                <p class="pd-kicker">Fitness website demo</p>
-                <h1>ForgeFit Studio</h1>
-                <p>Gym website with memberships, trainers, transformation proof, class timetable, and trial session leads.</p>
-                <div class="pd-actions">
-                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=gym">View Gym Packages</a>
-                    <a class="btn btn-secondary" href="#plans">See Plans</a>
-                </div>
-            </div>
-            <div class="pd-showcase pd-gym-card">
-                <span>12 week plan</span>
-                <strong>Strength · HIIT · Mobility</strong>
-                <small>Trial session booking ready</small>
-                <div class="pd-workout-bars"><i></i><i></i><i></i></div>
-            </div>
-        </div>
-    </section>
-    <section class="pd-strip">
-        <div class="container pd-stats">
-            <span>40+ classes</span><span>6 trainers</span><span>Trial session</span><span>Transformation proof</span>
-        </div>
-    </section>
-    <section class="pd-section" id="plans">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Membership plans</p>
-            <h2>Clear plans, class schedule, trainer trust, and lead capture.</h2>
-        </div>
-        <div class="container pd-cards three">
-            <article><strong>Basic</strong><p>₹1,999/mo</p><small>Gym access + starter routine.</small></article>
-            <article><strong>Pro</strong><p>₹3,499/mo</p><small>Classes, nutrition notes, progress tracking.</small></article>
-            <article><strong>PT</strong><p>Custom plan</p><small>One-to-one coaching and transformation roadmap.</small></article>
-        </div>
-    </section>
-    <section class="pd-section pd-muted">
-        <div class="container pd-split">
-            <div><p class="pd-kicker">Trainer section</p><h2>Show trainers, timings, and real results.</h2><p>Perfect for gyms, fitness coaches, yoga studios, and transformation programs.</p></div>
-            <div class="pd-offer-card"><strong>Book free trial</strong><span>WhatsApp lead flow</span><p>Name, phone, goal, preferred time.</p></div>
-        </div>
-    </section>
-    <section class="pd-section">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Experience preview</p>
-            <h2>Energetic sections that make the gym feel active before anyone visits.</h2>
-        </div>
-        <div class="container pd-gallery">
-            <div><span>Strength Zone</span></div>
-            <div><span>Transformation Wall</span></div>
-            <div><span>Trainer Spotlight</span></div>
-            <div><span>Class Timetable</span></div>
-        </div>
-    </section>
-    <section class="pd-section pd-final">
-        <div class="container pd-final-box">
-            <p class="pd-kicker">Premium conversion flow</p>
-            <h2>Trial booking, membership enquiry, trainer trust, and proof in one strong homepage.</h2>
-            <a class="btn btn-primary" href="{% url 'packages' %}?focus=gym">View Gym Packages</a>
-        </div>
-    </section>
-</main>
-{% endblock %}
-{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}
+{% extends "base.html" %}{% load static %}
+{% block title %}FORGE Athletics | Strength & Conditioning{% endblock %}{% block meta_description %}FORGE Athletics is a performance-led strength and conditioning gym with expert coaching, small group training and measurable progress.{% endblock %}
+{% block extra_head %}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block content %}<main class="forge" id="top">
+<div class="demo-bar"><span>Yuvi Creates portfolio demo</span><a href="{% url 'portfolio' %}">← Portfolio</a></div>
+<nav class="forge-nav"><a class="forge-logo" href="#top"><b>F</b><span>FORGE<small>ATHLETICS</small></span></a><button class="forge-toggle" type="button" aria-expanded="false">MENU</button><div class="forge-links"><a href="#programs">Programs</a><a href="#coaches">Coaching</a><a href="#schedule">Schedule</a><a href="#plans">Membership</a><a class="trial" href="#trial">Start free trial ↗</a></div></nav>
+<section class="forge-hero"><img src="{% static 'images/portfolio_demos/gym/gym-hero.jpg' %}" alt="Athlete strength training at Forge Athletics" fetchpriority="high"><div class="hero-grid"></div><div class="forge-copy"><p class="tag">Mumbai's performance training studio</p><h1>BUILD<br><span>WHAT LASTS.</span></h1><p>Coached strength. Smarter conditioning. Real progress you can measure.</p><div><a class="red-btn" href="#trial">Book a free session</a><a class="video-link" href="#programs"><i>▶</i> See how we train</a></div></div><div class="hero-counter"><strong>01</strong><span>/03</span><small>Strength<br>Foundations</small></div></section>
+<section class="numbers"><article><strong>12+</strong><span>Expert coaches</span></article><article><strong>42</strong><span>Weekly sessions</span></article><article><strong>900+</strong><span>Members stronger</span></article><article><strong>4.9</strong><span>Average rating</span></article></section>
+<section class="programs" id="programs"><div class="section-top"><p>01 — TRAIN WITH PURPOSE</p><h2>ONE STANDARD.<br><span>THREE WAYS TO TRAIN.</span></h2></div><div class="program-grid"><article class="active"><i>01</i><b>STRENGTH</b><p>Progressive barbell training with expert coaching and clear milestones.</p><a href="#trial">Explore strength →</a></article><article><i>02</i><b>CONDITIONING</b><p>High-output sessions built around athletic movement, capacity and resilience.</p><a href="#trial">Explore conditioning →</a></article><article><i>03</i><b>PERSONAL</b><p>One-to-one programming shaped around your body, goals and schedule.</p><a href="#trial">Meet your coach →</a></article></div></section>
+<section class="training" id="coaches"><div class="training-photo reveal"><img src="{% static 'images/portfolio_demos/gym/gym-training.jpg' %}" alt="Group conditioning session at Forge Athletics" loading="lazy"><span>COACH-LED.<br>EVERY REP.</span></div><div class="training-copy reveal"><p>02 — THE FORGE METHOD</p><h2>NO RANDOM<br>WORKOUTS.</h2><p>Every session is programmed with intent. Our coaches track your movement, load and recovery so effort turns into progress—not burnout.</p><ul><li><b>01</b> Movement assessment</li><li><b>02</b> Personalised training path</li><li><b>03</b> Monthly progress review</li></ul><a class="outline-btn" href="#trial">Find your program</a></div></section>
+<section class="schedule" id="schedule"><div class="section-top light"><p>03 — THIS WEEK</p><h2>SHOW UP.<br><span>WE'LL HANDLE THE PLAN.</span></h2></div><div class="schedule-days"><button class="active" data-day="mon">MON</button><button data-day="tue">TUE</button><button data-day="wed">WED</button><button data-day="thu">THU</button><button data-day="fri">FRI</button><button data-day="sat">SAT</button></div><div class="classes active" data-classes="mon"><article><time>06:00</time><div><b>FORGE STRENGTH</b><span>60 min · Coach Arjun</span></div><em>4 SPOTS</em></article><article><time>07:30</time><div><b>ENGINE ROOM</b><span>45 min · Coach Mira</span></div><em>8 SPOTS</em></article><article><time>18:30</time><div><b>LOWER BODY LAB</b><span>60 min · Coach Kabir</span></div><em>WAITLIST</em></article></div><div class="classes" data-classes="other"><article><time>06:30</time><div><b>ATHLETIC CONDITIONING</b><span>50 min · Coach Mira</span></div><em>6 SPOTS</em></article><article><time>17:30</time><div><b>FOUNDATIONS</b><span>60 min · Coach Dev</span></div><em>10 SPOTS</em></article><article><time>19:00</time><div><b>UPPER BODY BUILD</b><span>60 min · Coach Arjun</span></div><em>3 SPOTS</em></article></div></section>
+<section class="plans" id="plans"><div><p>04 — MEMBERSHIP</p><h2>COMMIT TO<br>YOUR NEXT LEVEL.</h2></div><div class="plan-grid"><article><span>FOUNDATION</span><strong>₹2,999<small>/month</small></strong><ul><li>8 coached sessions</li><li>Movement assessment</li><li>Training app access</li></ul><a href="#trial">Choose foundation</a></article><article class="featured"><i>MOST POPULAR</i><span>UNLIMITED</span><strong>₹4,999<small>/month</small></strong><ul><li>Unlimited group sessions</li><li>Monthly progress review</li><li>Open gym access</li></ul><a href="#trial">Choose unlimited</a></article><article><span>PERSONAL</span><strong>Custom</strong><ul><li>1:1 expert coaching</li><li>Custom program</li><li>Nutrition guidance</li></ul><a href="#trial">Talk to a coach</a></article></div></section>
+<section class="trial-section" id="trial"><div><p>YOUR FIRST SESSION IS ON US</p><h2>READY TO<br><span>RAISE THE BAR?</span></h2></div><form class="trial-form" onsubmit="return false"><label>Name<input type="text" placeholder="Your name"></label><label>Phone<input type="tel" placeholder="+91"></label><label>Primary goal<select><option>Build strength</option><option>Improve fitness</option><option>Personal coaching</option></select></label><button type="submit">CLAIM FREE SESSION ↗</button><small>No pressure. Just one coached session and a clear plan.</small></form></section>
+<footer class="forge-footer"><a class="forge-logo" href="#top"><b>F</b><span>FORGE<small>ATHLETICS</small></span></a><p>Built for progress. Coached for life.</p><div><a href="#programs">Programs</a><a href="#schedule">Schedule</a><a href="#plans">Join</a><a href="#">Instagram ↗</a></div><small>© 2026 FORGE Athletics · Fictional concept by Yuvi Creates</small></footer><a class="mobile-trial" href="#trial">BOOK FREE TRIAL</a>
+</main>{% endblock %}{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

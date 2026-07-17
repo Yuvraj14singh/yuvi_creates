@@ -1,65 +1,19 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}Trips & Tours Website Demo | Yuvi Creates{% endblock %}
-{% block meta_description %}Travel agency website demo by Yuvi Creates with tour packages, itinerary sections, destination gallery, pricing, booking enquiry, and WhatsApp travel lead flow.{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% extends "base.html" %}{% load static %}
+{% block title %}Northbound — Premium Adventure Travel Demo{% endblock %}
+{% block meta_description %}A premium adventure travel website demo with destination discovery, featured journeys, itineraries, reviews and trip planning enquiry.{% endblock %}
+{% block extra_head %}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
 {% block content %}
-<main class="pd pd-travel">
-    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
-    <section class="pd-hero">
-        <div class="container pd-grid">
-            <div>
-                <p class="pd-kicker">Travel website demo</p>
-                <h1>Himalayan Trails</h1>
-                <p>Tour website with package cards, itinerary sections, destination gallery, pricing, and booking enquiry.</p>
-                <div class="pd-actions">
-                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=travel">View Travel Packages</a>
-                    <a class="btn btn-secondary" href="#tours">View Tours</a>
-                </div>
-            </div>
-            <div class="pd-showcase">
-                <span>4D / 3N</span>
-                <strong>Manali Adventure Tour</strong>
-                <small>Itinerary, inclusions, gallery, enquiry CTA</small>
-            </div>
-        </div>
-    </section>
-    <section class="pd-section" id="tours">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Tour packages</p>
-            <h2>A travel homepage that makes destinations easy to compare.</h2>
-        </div>
-        <div class="container pd-cards three">
-            <article><strong>Manali escape</strong><p>4D/3N itinerary, hotel, transfer, local sightseeing, and adventure add-ons.</p></article>
-            <article><strong>Goa weekend</strong><p>Beach stay, party night, cruise option, gallery, and starting price.</p></article>
-            <article><strong>Kashmir premium</strong><p>Custom itinerary, houseboat, cab, meals, and enquiry-first booking flow.</p></article>
-        </div>
-    </section>
-    <section class="pd-section pd-muted">
-        <div class="container pd-split">
-            <div><p class="pd-kicker">Booking flow</p><h2>Let travellers ask for exact dates, group size, and budget.</h2><p>Perfect for travel agencies, tour planners, homestays, and destination operators.</p></div>
-            <div class="pd-offer-card"><strong>Starting from</strong><span>₹8,999/person</span><p>Lead form can collect destination, date, people, and phone.</p></div>
-        </div>
-    </section>
-    <section class="pd-section">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Trip feeling</p>
-            <h2>Adventure, stays, memories, and clear itinerary sections to sell the experience.</h2>
-        </div>
-        <div class="container pd-gallery">
-            <div><span>Mountain Views</span></div>
-            <div><span>Group Trips</span></div>
-            <div><span>Hotel Gallery</span></div>
-            <div><span>Day Plans</span></div>
-        </div>
-    </section>
-    <section class="pd-section pd-final">
-        <div class="container pd-final-box">
-            <p class="pd-kicker">Travel conversion page</p>
-            <h2>Packages, itinerary, inclusions, photos, and WhatsApp booking flow built to get enquiries.</h2>
-            <a class="btn btn-primary" href="{% url 'packages' %}?focus=travel">View Travel Packages</a>
-        </div>
-    </section>
+<main class="roam">
+ <div class="roam-demo"><a href="{% url 'portfolio' %}">← BACK TO YUVI CREATES</a><span>TRAVEL CONCEPT / LIVE DEMO</span></div>
+ <nav class="roam-nav"><a class="roam-logo" href="#top"><b>N</b>NORTHBOUND</a><div><a href="#trips">Journeys</a><a href="#why">Why us</a><a href="#reviews">Field notes</a><a class="roam-plan" href="#plan">Plan my trip ↗</a></div></nav>
+ <section class="roam-hero" id="top"><img src="{% static 'images/portfolio_demos/travel/hero.jpg' %}" alt="Dramatic Himalayan valley for an adventure journey"><div class="roam-overlay"></div><div class="roam-hero-copy"><span class="roam-route">32.2432° N &nbsp; 77.1892° E</span><p>SMALL-GROUP ADVENTURES ACROSS INDIA</p><h1>GO<br>FURTHER<span>.</span></h1><div class="roam-hero-bottom"><p>Wild landscapes. Local stories.<br>Journeys worth coming back changed for.</p><a href="#trips">EXPLORE 2026 TRIPS <b>↓</b></a></div></div><div class="roam-weather"><b>12°C</b><span>MANALI<br>CLEAR SKIES</span></div></section>
+ <form class="roam-finder" action="#trips"><label>WHERE DO YOU WANT TO GO?<select name="destination"><option>Himalayas</option><option>Coast & islands</option><option>Desert & culture</option></select></label><label>WHEN?<select name="month"><option>Any month</option><option>October — December</option><option>January — March</option></select></label><label>TRAVEL STYLE<select name="style"><option>Adventure</option><option>Slow travel</option><option>Wildlife</option></select></label><button>FIND MY JOURNEY →</button></form>
+ <section class="roam-intro" id="trips"><header><p class="roam-eyebrow">CURATED JOURNEYS / 2026</p><h2>Pick a direction.<br>We’ll handle the rest.</h2></header><p>Expert-led departures with intimate groups, character-filled stays and enough room for the unexpected.</p></section>
+ <section class="roam-cards"><article class="roam-card featured"><div class="roam-card-photo himalaya"></div><div class="roam-card-content"><div><span>HIMACHAL PRADESH</span><span>8 DAYS · MODERATE</span></div><h3>Trails above<br>the clouds</h3><p>Village walks, hidden valleys and high-altitude camps beneath a sky full of stars.</p><footer><b>FROM ₹42,900</b><a href="#plan">VIEW TRIP →</a></footer></div></article><article class="roam-card"><div class="roam-card-photo island"><img src="{% static 'images/portfolio_demos/travel/detail.jpg' %}" alt="Turquoise Andaman island and tropical beach"></div><div class="roam-card-content"><div><span>ANDAMAN ISLANDS</span><span>6 DAYS · EASY</span></div><h3>Beyond the<br>blue</h3><p>Secret coves, reef dives and barefoot island days at an unhurried pace.</p><footer><b>FROM ₹36,500</b><a href="#plan">VIEW TRIP →</a></footer></div></article><article class="roam-card mini"><div class="roam-mini-top"><span>RAJASTHAN</span><b>5 DAYS</b></div><h3>Desert after dark</h3><p>Old cities, wild dunes and dinner beneath the Milky Way.</p><a href="#plan">SEE DEPARTURE →</a></article></section>
+ <section class="roam-feature"><div class="roam-feature-num">01</div><div><p class="roam-eyebrow">FEATURED DEPARTURE · SPITI</p><h2>The road to<br>the middle land.</h2><p>A high-altitude loop through moonlike valleys, ancient monasteries and villages that still move with the seasons.</p><a href="#plan">GET THE FULL ITINERARY →</a></div><ol><li><span>DAY 01—02</span><b>Shimla to Sangla</b><small>Forest roads & riverside camp</small></li><li><span>DAY 03—05</span><b>Nako to Kaza</b><small>Monasteries & village trails</small></li><li><span>DAY 06—08</span><b>Chandratal loop</b><small>High passes & lake camp</small></li></ol></section>
+ <section class="roam-why" id="why"><header><p class="roam-eyebrow">WHY NORTHBOUND</p><h2>Built for travellers,<br>not tourists.</h2></header><div><article><b>12</b><h3>people max</h3><p>Smaller groups mean richer conversations and lighter footprints.</p></article><article><b>100%</b><h3>local expertise</h3><p>Trip leaders who know the trails, seasons and stories firsthand.</p></article><article><b>4.9</b><h3>average rating</h3><p>From more than 800 travellers who chose the long way around.</p></article></div></section>
+ <section class="roam-notes" id="reviews"><p class="roam-eyebrow">FIELD NOTES / TRAVELLER 0842</p><blockquote>“It never felt like a checklist. We shared chai with families, walked trails I’d never find online and came home with a dozen new friends.”</blockquote><footer><span>NEHA S. · BENGALURU</span><span>SPITI OVERLAND · MAY 2026</span></footer></section>
+ <section class="roam-plan-trip" id="plan"><div><p class="roam-eyebrow">YOUR NEXT STORY STARTS HERE</p><h2>Where to<br>next?</h2><p>Tell our trip designers what you’re drawn to. We’ll send a personal route within 48 hours.</p></div><form action="{% url 'contact' %}" method="get"><div><label>DESTINATION<input name="destination" placeholder="Mountains, islands, anywhere..."></label><label>TRAVELLERS<select name="travellers"><option>2 people</option><option>Solo</option><option>3—5 people</option><option>6+ people</option></select></label></div><div><label>IDEAL MONTH<input name="month" placeholder="e.g. October 2026"></label><label>BUDGET PER PERSON<input name="budget" placeholder="₹40,000"></label></div><label>WHAT KIND OF TRIP?<textarea name="message" rows="3" placeholder="Tell us what makes a great trip for you..."></textarea></label><button>BUILD MY JOURNEY <span>↗</span></button></form></section>
+ <footer class="roam-footer"><a class="roam-logo" href="#top"><b>N</b>NORTHBOUND</a><p>RESPONSIBLE ADVENTURES<br>MADE IN INDIA.</p><div><a href="#trips">Journeys</a><a href="#plan">Plan a trip</a><a href="{% url 'portfolio' %}">Portfolio</a></div><small>© 2026 NORTHBOUND CONCEPT</small></footer>
 </main>
-{% endblock %}
-{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}
+{% endblock %}{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

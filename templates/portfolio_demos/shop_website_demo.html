@@ -1,65 +1,11 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}Shop Website Demo | Yuvi Creates{% endblock %}
-{% block meta_description %}Shop website demo by Yuvi Creates with product highlights, offers, store location, gallery, WhatsApp enquiry flow, and mobile-friendly local store design.{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
-{% block content %}
-<main class="pd pd-shop">
-    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
-    <section class="pd-hero">
-        <div class="container pd-grid">
-            <div>
-                <p class="pd-kicker">Local shop demo</p>
-                <h1>Urban Kart Store</h1>
-                <p>Shop website concept with product highlights, offers, store location, gallery, and WhatsApp lead flow.</p>
-                <div class="pd-actions">
-                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=shop">View Shop Packages</a>
-                    <a class="btn btn-secondary" href="#products">Browse Products</a>
-                </div>
-            </div>
-            <div class="pd-showcase">
-                <span>Weekend offer</span>
-                <strong>20% off selected products</strong>
-                <small>Product categories and enquiry CTA</small>
-            </div>
-        </div>
-    </section>
-    <section class="pd-section" id="products">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Storefront preview</p>
-            <h2>Products, offers, and store details in a clean mobile-friendly flow.</h2>
-        </div>
-        <div class="container pd-cards three">
-            <article><strong>New arrivals</strong><p>Product cards with price, category, photo space, and enquiry action.</p></article>
-            <article><strong>Offers</strong><p>Festival sale, combo packs, clearance items, and limited-time discounts.</p></article>
-            <article><strong>Store visit</strong><p>Map, store hours, WhatsApp order, call button, and Instagram link.</p></article>
-        </div>
-    </section>
-    <section class="pd-section pd-muted">
-        <div class="container pd-split">
-            <div><p class="pd-kicker">Sales CTA</p><h2>Turn product interest into WhatsApp enquiries.</h2><p>Useful for boutiques, electronics, grocery, gifts, local stores, and showrooms.</p></div>
-            <div class="pd-offer-card"><strong>Featured product</strong><span>₹899</span><p>One-tap enquiry with product name pre-filled.</p></div>
-        </div>
-    </section>
-    <section class="pd-section">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Store vibe</p>
-            <h2>A premium-looking storefront for products, offers, and local trust.</h2>
-        </div>
-        <div class="container pd-gallery">
-            <div><span>Best Sellers</span></div>
-            <div><span>New Arrivals</span></div>
-            <div><span>Festive Offers</span></div>
-            <div><span>Store Location</span></div>
-        </div>
-    </section>
-    <section class="pd-section pd-final">
-        <div class="container pd-final-box">
-            <p class="pd-kicker">Sales-ready shop page</p>
-            <h2>Show products beautifully and send buyers straight to WhatsApp enquiry.</h2>
-            <a class="btn btn-primary" href="{% url 'packages' %}?focus=shop">View Shop Packages</a>
-        </div>
-    </section>
-</main>
-{% endblock %}
-{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}
+{% extends "base.html" %}{% load static %}{% block title %}Morrow — Premium Fashion Shop Demo{% endblock %}{% block extra_head %}<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="{% static demo_css %}">{% endblock %}{% block content %}
+<main class="morrow"><div class="mor-demo"><a href="{% url 'portfolio' %}">← YUVI CREATES</a><span>FREE SHIPPING ABOVE ₹2,499</span><span>SHOP CONCEPT / 2026</span></div><nav><a class="mor-logo" href="#top">MORROW<span>®</span></a><div><a href="#new">New in</a><a href="#edit">The edit</a><a href="#story">Our story</a></div><aside><a href="#">Search</a><a href="#">Bag (0)</a></aside></nav>
+<section class="mor-hero" id="top"><img src="{% static 'images/portfolio_demos/shop/hero.png' %}" alt="Morrow contemporary fashion accessories collection"><div><p>DROP 04 / EVERYDAY ICONS</p><h1>GOOD<br>THINGS,<br><em>YOUR WAY.</em></h1><span>Objects for getting dressed, going out and doing life—with less fuss and more personality.</span><a href="#new">SHOP THE DROP →</a></div><b class="mor-sticker">NEW<br>SEASON<br>JUST IN</b></section>
+<section class="mor-marquee"><span>MADE TO MOVE ✦ DESIGNED TO LAST ✦ SMALL JOYS, BIG ENERGY ✦ MADE TO MOVE ✦ DESIGNED TO LAST ✦</span></section>
+<section class="mor-new" id="new"><header><div><p>01 / NEW ARRIVALS</p><h2>Freshly landed.</h2></div><a href="#edit">VIEW ALL 24 PIECES →</a></header><div class="mor-products"><article><div class="bag"></div><p><b>Arc Day Bag</b><span>₹4,290</span></p><small>TAN / ONE SIZE</small></article><article><div class="shoe"></div><p><b>Sunday Sneaker</b><span>₹3,490</span></p><small>CREAM / 5—10</small></article><article><div class="shade"></div><p><b>After Hours</b><span>₹1,890</span></p><small>INK / ONE SIZE</small></article><article><div class="watch"></div><p><b>Minute Watch</b><span>₹5,990</span></p><small>GOLD / ONE SIZE</small></article></div></section>
+<section class="mor-edit" id="edit"><img src="{% static 'images/portfolio_demos/shop/collection.png' %}" alt="Morrow seasonal fashion collection"><div><p>THE WEEKEND EDIT</p><h2>Pack light.<br>Show up bold.</h2><p>Six hardworking pieces. A hundred possible plans. Meet the edit built for wherever the weekend goes.</p><a href="#shop">SHOP THE COLLECTION →</a></div></section>
+<section class="mor-cats" id="shop"><a href="#"><span>01</span><b>BAGS</b><i>12 pieces ↗</i></a><a href="#"><span>02</span><b>FOOTWEAR</b><i>08 pieces ↗</i></a><a href="#"><span>03</span><b>ACCESSORIES</b><i>18 pieces ↗</i></a><a href="#"><span>04</span><b>LITTLE EXTRAS</b><i>11 pieces ↗</i></a></section>
+<section class="mor-story" id="story"><div><p>WHY MORROW?</p><h2>Buy less.<br>Love it longer.</h2></div><div><p>We make useful, joyful things without the seasonal noise. Thoughtful materials, small production runs and designs that earn their place in your everyday.</p><dl><div><dt>01</dt><dd>Considered materials</dd></div><div><dt>02</dt><dd>Small-batch production</dd></div><div><dt>03</dt><dd>30-day easy returns</dd></div></dl></div></section>
+<section class="mor-love"><header><p>WORN & LOVED</p><h2>From your camera roll.</h2><span>@morrowgoods</span></header><div><article>“The Arc bag fits everything and somehow makes every outfit look intentional.”<b>— RHEA, MUMBAI</b></article><article>“My Sunday sneakers survived three cities and still look fresh.”<b>— KABIR, DELHI</b></article><article>“Packaging, quality, delivery—everything felt considered.”<b>— TARA, PUNE</b></article></div></section>
+<section class="mor-news"><div><p>10% OFF YOUR FIRST ORDER</p><h2>Good mail only.</h2></div><form action="{% url 'contact' %}" method="get"><input type="email" name="email" placeholder="YOUR EMAIL ADDRESS"><button>JOIN THE LIST →</button></form></section><footer class="mor-footer"><a class="mor-logo" href="#top">MORROW<span>®</span></a><div><a href="#new">Shop</a><a href="#story">About</a><a href="#">Shipping</a><a href="{% url 'portfolio' %}">Portfolio</a></div><p>INDIA · INR ₹</p><small>© 2026 MORROW CONCEPT</small></footer></main>
+{% endblock %}{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

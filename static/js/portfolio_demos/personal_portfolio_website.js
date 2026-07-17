@@ -1,1 +1,1 @@
-document.documentElement.dataset.portfolioDemo = "personal";
+document.documentElement.dataset.portfolioDemo="personal";document.addEventListener("DOMContentLoaded",()=>{const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");o.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll(".reveal").forEach(e=>o.observe(e))});

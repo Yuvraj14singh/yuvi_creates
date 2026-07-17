@@ -16,27 +16,28 @@
     <aside class="staff-sidebar" id="staff-sidebar">
         <a class="staff-brand" href="{% url 'leads:dashboard' %}"><img src="{% static 'images/yuvi-creates-logo.png' %}" alt="Yuvi Creates"></a>
         <button class="sidebar-close" type="button" data-sidebar-close aria-label="Close navigation">×</button>
+        <div class="workspace-label"><span>YC</span><div><strong>Yuvi Creates</strong><small>Lead workspace</small></div></div>
         <p class="nav-label">Workspace</p>
         <nav class="staff-nav" aria-label="Staff navigation">
-            <a href="{% url 'leads:dashboard' %}">Dashboard</a>
-            <a href="{% url 'leads:lead_dashboard' %}">Lead Management</a>
-            <a href="{% url 'leads:list' %}">All Leads</a>
-            <a href="{% url 'leads:add' %}">Add Lead</a>
-            <a href="{% url 'leads:follow_ups' %}">Follow-ups</a>
-            <a href="{% url 'leads:archived' %}">Archived / Lost</a>
+            <a class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'leads:dashboard' %}"><span class="nav-icon">⌂</span><span>Overview</span></a>
+            <a class="{% if request.resolver_match.url_name == 'lead_dashboard' %}active{% endif %}" href="{% url 'leads:lead_dashboard' %}"><span class="nav-icon">◫</span><span>Pipeline</span></a>
+            <a class="{% if request.resolver_match.url_name == 'list' or request.resolver_match.url_name == 'detail' or request.resolver_match.url_name == 'edit' %}active{% endif %}" href="{% url 'leads:list' %}"><span class="nav-icon">☷</span><span>All Leads</span></a>
+            <a class="{% if request.resolver_match.url_name == 'add' %}active{% endif %}" href="{% url 'leads:add' %}"><span class="nav-icon">＋</span><span>Add New Lead</span></a>
+            <a class="{% if request.resolver_match.url_name == 'follow_ups' %}active{% endif %}" href="{% url 'leads:follow_ups' %}"><span class="nav-icon">◷</span><span>Follow-ups</span></a>
+            <a class="{% if request.resolver_match.url_name == 'archived' %}active{% endif %}" href="{% url 'leads:archived' %}"><span class="nav-icon">□</span><span>Archive</span></a>
         </nav>
         <p class="nav-label">Account</p>
         <nav class="staff-nav">
-            {% if request.user.is_staff %}<a href="{% url 'admin:index' %}">Django Admin</a>{% endif %}
-            <a href="{% url 'home' %}">Back to Website</a>
-            <form method="post" action="{% url 'leads:logout' %}">{% csrf_token %}<button type="submit">Logout</button></form>
+            {% if request.user.is_staff %}<a href="{% url 'admin:index' %}"><span class="nav-icon">⚙</span><span>Admin Settings</span></a>{% endif %}
+            <a href="{% url 'home' %}"><span class="nav-icon">↗</span><span>View Website</span></a>
+            <form method="post" action="{% url 'leads:logout' %}">{% csrf_token %}<button type="submit"><span class="nav-icon">↪</span><span>Sign Out</span></button></form>
         </nav>
     </aside>
     <div class="sidebar-backdrop" data-sidebar-close></div>
     <main class="staff-main">
         <header class="staff-topbar">
             <button class="sidebar-toggle" type="button" data-sidebar-open aria-label="Open navigation">☰</button>
-            <div><span class="staff-kicker">Staff workspace</span><strong>{{ request.user.get_full_name|default:request.user.username }}</strong></div>
+            <div><span class="staff-kicker">Workspace</span><strong>{{ request.user.get_full_name|default:request.user.username }}</strong></div>
             <span class="profile-chip">{{ request.user.username|slice:":1"|upper }}</span>
         </header>
         <div class="staff-content">

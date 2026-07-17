@@ -1,67 +1,108 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Cafe Landing Page Demo | Yuvi Creates{% endblock %}
-{% block meta_description %}Cafe website demo by Yuvi Creates with menu highlights, ambience sections, offers, Google Map, call button, WhatsApp CTA, and mobile-friendly design.{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
+{% block title %}Brew & Bloom Cafe | Premium Cafe Website Demo{% endblock %}
+{% block meta_description %}Explore Brew & Bloom, a premium cafe website demo featuring signature coffee, brunch favourites, ambience, reviews, opening hours and table reservations.{% endblock %}
+{% block extra_head %}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="{% static demo_css %}">{% endblock %}
 {% block content %}
-<main class="pd pd-cafe">
-    <a class="pd-back-link" href="{% url 'portfolio' %}">Back to Portfolio</a>
-    <section class="pd-hero">
-        <div class="container pd-grid">
-            <div>
-                <p class="pd-kicker">Cafe launch demo</p>
-                <h1>Brew & Bloom</h1>
-                <p>A warm one-page cafe website for coffee lovers, daily offers, ambience photos, menu highlights, and visit CTA.</p>
-                <div class="pd-actions">
-                    <a class="btn btn-primary" href="{% url 'packages' %}?focus=restaurant">View Cafe Packages</a>
-                    <a class="btn btn-secondary" href="#cafe-menu">See Menu</a>
+<main class="cafe-demo" id="cafe-home">
+    <div class="demo-ribbon"><span>Yuvi Creates portfolio demo</span><a href="{% url 'portfolio' %}">← Back to portfolio</a></div>
+    <nav class="cafe-nav" aria-label="Cafe navigation">
+        <a class="cafe-logo" href="#cafe-home"><span>B</span><strong>Brew <i>&</i> Bloom</strong></a>
+        <button class="cafe-menu-toggle" type="button" aria-label="Toggle cafe menu" aria-expanded="false">Menu</button>
+        <div class="cafe-links">
+            <a href="#story">Our story</a><a href="#menu">Menu</a><a href="#space">The space</a><a href="#visit">Visit</a>
+            <a class="cafe-book" href="#reserve">Book a table</a>
+        </div>
+    </nav>
+
+    <section class="cafe-hero">
+        <img src="{% static 'images/portfolio_demos/cafe/cafe-hero.jpg' %}" alt="Latte and fresh croissants at Brew and Bloom cafe" fetchpriority="high">
+        <div class="hero-shade"></div>
+        <div class="cafe-hero-copy">
+            <p class="eyebrow">Specialty coffee · All-day brunch</p>
+            <h1>Slow mornings.<br><em>Beautifully brewed.</em></h1>
+            <p class="hero-intro">Thoughtful coffee, honest food and a sunlit corner made for conversations. Your neighbourhood ritual starts here.</p>
+            <div class="hero-actions"><a class="cafe-btn light" href="#menu">Explore our menu</a><a class="text-link" href="#reserve">Reserve a table <span>↗</span></a></div>
+        </div>
+        <div class="open-card"><span class="pulse"></span><div><small>Open today</small><strong>8:00 AM — 10:00 PM</strong></div></div>
+        <a class="scroll-cue" href="#story"><span></span>Scroll to discover</a>
+    </section>
+
+    <section class="marquee" aria-label="Cafe highlights"><div><span>Single-origin coffee</span><b>✦</b><span>Freshly baked daily</span><b>✦</b><span>All-day breakfast</span><b>✦</b><span>Pet-friendly patio</span><b>✦</b><span>Single-origin coffee</span></div></section>
+
+    <section class="story-section cafe-wrap" id="story">
+        <div class="section-number">01</div>
+        <div class="story-copy reveal">
+            <p class="eyebrow dark">Our little ritual</p>
+            <h2>Coffee tastes better when you have time to stay.</h2>
+        </div>
+        <div class="story-note reveal"><p>We built Brew & Bloom around the moments between plans—the first sip, a shared plate, a quiet hour by the window. Our beans are roasted in small batches and every plate begins with ingredients we know by name.</p><a class="ink-link" href="#space">Meet the cafe <span>→</span></a></div>
+        <div class="story-stat reveal"><strong>4.9</strong><span>★★★★★</span><small>Loved by 800+ regulars</small></div>
+    </section>
+
+    <section class="signature-section" id="menu">
+        <div class="cafe-wrap signature-grid">
+            <div class="menu-photo reveal"><img src="{% static 'images/portfolio_demos/cafe/cafe-brunch.jpg' %}" alt="Coffee and brunch favourites at Brew and Bloom" loading="lazy"><span>Made fresh,<br>served all day.</span></div>
+            <div class="menu-panel reveal">
+                <p class="eyebrow dark">From our kitchen</p><h2>Current favourites</h2>
+                <div class="menu-tabs" role="tablist"><button class="active" data-menu-tab="coffee" type="button">Coffee</button><button data-menu-tab="brunch" type="button">Brunch</button><button data-menu-tab="bakes" type="button">Bakes</button></div>
+                <div class="menu-list active" data-menu-panel="coffee">
+                    <article><div><strong>Bloom Latte</strong><small>Espresso, rose, raw honey, oat milk</small></div><b>₹290</b></article>
+                    <article><div><strong>Sea Salt Caramel Cold Brew</strong><small>18-hour brew, caramel cloud, sea salt</small></div><b>₹320</b></article>
+                    <article><div><strong>Pour Over</strong><small>Seasonal single origin, brewed to order</small></div><b>₹260</b></article>
+                    <article><div><strong>Orange Espresso Tonic</strong><small>Citrus, tonic and double espresso</small></div><b>₹310</b></article>
                 </div>
-            </div>
-            <div class="pd-showcase">
-                <span>Today’s brew</span>
-                <strong>Caramel Cold Brew</strong>
-                <small>Buy 1 get 1 before 5 PM</small>
-                <div class="pd-cup">
-                    <div></div>
+                <div class="menu-list" data-menu-panel="brunch">
+                    <article><div><strong>Garden Avocado Toast</strong><small>Sourdough, feta, herbs, chilli crunch</small></div><b>₹390</b></article>
+                    <article><div><strong>Berry & Ricotta Waffles</strong><small>Seasonal berries, maple, whipped ricotta</small></div><b>₹410</b></article>
+                    <article><div><strong>Bloom Breakfast Plate</strong><small>Eggs, roast tomato, greens and sourdough</small></div><b>₹460</b></article>
+                    <article><div><strong>Pesto Melt</strong><small>Mozzarella, tomato, basil pesto</small></div><b>₹350</b></article>
                 </div>
+                <div class="menu-list" data-menu-panel="bakes">
+                    <article><div><strong>Almond Croissant</strong><small>Twice baked, almond cream</small></div><b>₹240</b></article>
+                    <article><div><strong>Basque Cheesecake</strong><small>Caramelised top, vanilla bean</small></div><b>₹280</b></article>
+                    <article><div><strong>Dark Chocolate Cookie</strong><small>70% chocolate, brown butter, sea salt</small></div><b>₹180</b></article>
+                    <article><div><strong>Lemon Olive Oil Cake</strong><small>Citrus glaze, whipped mascarpone</small></div><b>₹260</b></article>
+                </div>
+                <a class="ink-link" href="#reserve">View the full menu <span>→</span></a>
             </div>
         </div>
     </section>
-    <section class="pd-section" id="cafe-menu">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Menu preview</p>
-            <h2>Simple sections that make people want to visit.</h2>
-        </div>
-        <div class="container pd-menu">
-            <span>Espresso</span><span>Cold Coffee</span><span>Waffles</span><span>Sandwiches</span>
+
+    <section class="offer-banner">
+        <div class="offer-copy reveal"><p class="eyebrow">Weekday ritual</p><h2>Any coffee.<br>Any bake. <em>₹399.</em></h2><p>Monday to Friday · 8 AM to 11 AM</p><a class="cafe-btn light" href="#reserve">Plan your morning</a></div>
+        <div class="offer-art" aria-hidden="true"><span>GOOD<br>MORNING</span><i>☕</i></div>
+    </section>
+
+    <section class="space-section cafe-wrap" id="space">
+        <div class="section-heading reveal"><div><p class="eyebrow dark">Stay a while</p><h2>A space for every kind of day.</h2></div><p>Sunlit tables for slow brunches, power sockets for productive afternoons and a quiet garden patio after sunset.</p></div>
+        <div class="space-grid">
+            <article class="space-main reveal"><img src="{% static 'images/portfolio_demos/cafe/cafe-hero.jpg' %}" alt="Warm cafe corner" loading="lazy"><span>Sunlit interiors</span></article>
+            <article class="space-detail terracotta reveal"><span>40</span><p>Thoughtfully designed seats</p></article>
+            <article class="space-detail cream reveal"><span>∞</span><p>Wi-Fi, good coffee and no rush</p></article>
         </div>
     </section>
-    <section class="pd-section pd-muted">
-        <div class="container pd-cards three">
-            <article><strong>Cozy ambience</strong><p>Photo blocks for seating, counter, outdoor space, and cafe corners.</p></article>
-            <article><strong>Daily offers</strong><p>Highlight combos, festive drinks, student offers, and happy hours.</p></article>
-            <article><strong>Visit CTA</strong><p>Map, hours, WhatsApp, call button, and Instagram link in one flow.</p></article>
+
+    <section class="reviews-section">
+        <div class="cafe-wrap"><p class="eyebrow">Notes from the neighbourhood</p><div class="reviews-head"><h2>Come for coffee.<br>Return for the feeling.</h2><span>4.9 / 5 · Google reviews</span></div>
+            <div class="reviews-grid">
+                <blockquote class="reveal"><div>★★★★★</div><p>“The kind of cafe you accidentally spend three hours in. Beautiful coffee, warm people and the best croissant in town.”</p><footer><span>AS</span><div><strong>Ananya Sharma</strong><small>Local guide</small></div></footer></blockquote>
+                <blockquote class="reveal"><div>★★★★★</div><p>“Their cold brew is exceptional and the whole space feels considered without trying too hard. My new Sunday ritual.”</p><footer><span>RK</span><div><strong>Rohan Kapoor</strong><small>Regular guest</small></div></footer></blockquote>
+                <blockquote class="reveal"><div>★★★★★</div><p>“Great brunch, lovely natural light and genuinely thoughtful service. It is rare to find all three in one place.”</p><footer><span>MM</span><div><strong>Meera Mehta</strong><small>Verified guest</small></div></footer></blockquote>
+            </div>
         </div>
     </section>
-    <section class="pd-section">
-        <div class="container pd-section-head">
-            <p class="pd-kicker">Cafe mood</p>
-            <h2>Warm sections for menu cravings, photos, offers, and weekend visits.</h2>
-        </div>
-        <div class="container pd-gallery">
-            <div><span>Latte Bar</span></div>
-            <div><span>Brunch Table</span></div>
-            <div><span>Cozy Corners</span></div>
-            <div><span>Live Offers</span></div>
+
+    <section class="visit-section" id="visit">
+        <div class="visit-map"><div class="map-lines"></div><span class="map-pin">B</span><small>12 Garden Lane<br>Bandra West, Mumbai</small></div>
+        <div class="visit-copy" id="reserve"><p class="eyebrow dark">Find your table</p><h2>We saved you<br>a sunny spot.</h2>
+            <div class="visit-details"><div><small>Monday — Friday</small><strong>8:00 AM — 10:00 PM</strong></div><div><small>Saturday — Sunday</small><strong>8:00 AM — 11:00 PM</strong></div></div>
+            <div class="reserve-actions"><a class="cafe-btn dark" href="https://wa.me/919876543210?text=Hi%20Brew%20%26%20Bloom%2C%20I%27d%20like%20to%20reserve%20a%20table" target="_blank" rel="noopener">Reserve on WhatsApp</a><a class="ink-link" href="tel:+919876543210">Call +91 98765 43210</a></div>
         </div>
     </section>
-    <section class="pd-section pd-final">
-        <div class="container pd-final-box">
-            <p class="pd-kicker">Visitor-ready cafe page</p>
-            <h2>Make people feel the coffee, ambience, and offer before they even arrive.</h2>
-            <a class="btn btn-primary" href="{% url 'packages' %}?focus=restaurant">View Cafe Packages</a>
-        </div>
-    </section>
+
+    <footer class="cafe-footer"><a class="cafe-logo" href="#cafe-home"><span>B</span><strong>Brew <i>&</i> Bloom</strong></a><p>Made with warmth, served with care.</p><div><a href="#menu">Menu</a><a href="#visit">Visit</a><a href="#reserve">Reserve</a><a href="#">Instagram ↗</a></div><small>© 2026 Brew & Bloom · A fictional concept by Yuvi Creates</small></footer>
+    <a class="floating-reserve" href="#reserve">Book a table</a>
 </main>
 {% endblock %}
 {% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}
