@@ -34,10 +34,14 @@
                     {% else %}
                         {% if project.title == "Cricket Intelligence Dashboard Demo" %}
                             <a class="btn btn-small" href="{% url 'portfolio_demo' project.pk project.title|slugify %}">View Live Demo</a>
-                            <a class="btn btn-small btn-secondary" href="{% url 'contact' %}?service=Cricket%20League%20Website&source=Universal%20Cricket%20Demo">Request a Similar Website</a>
                         {% else %}
                             <a class="btn btn-small" href="{% url 'portfolio_demo' project.pk project.title|slugify %}">View Demo</a>
                         {% endif %}
+                    {% endif %}
+                    {% if project.title == "Cricket Intelligence Dashboard Demo" %}
+                        <a class="btn btn-small btn-secondary" href="{% url 'contact' %}?service=Cricket%20League%20Website&source=Universal%20Cricket%20Demo">Request a Similar Website</a>
+                    {% else %}
+                        <a class="btn btn-small btn-secondary" href="{% url 'contact' %}?service={{ project.title|urlencode }}&source=Portfolio%20Demo%20Card">Request a Similar Website</a>
                     {% endif %}
                 </div>
             </article>
