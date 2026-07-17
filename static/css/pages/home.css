@@ -1,0 +1,59 @@
+.page-home .hero {
+    min-height: 760px;
+    padding: 104px 0 88px;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 77% 38%, rgba(139,189,240,.25), transparent 30%),
+        radial-gradient(circle at 23% 18%, rgba(104,66,216,.12), transparent 27%),
+        linear-gradient(135deg, #ffffff 0%, #f9f7ff 52%, #edf7ff 100%);
+    overflow: hidden;
+}
+
+.page-home .hero-grid { grid-template-columns: minmax(0,.9fr) minmax(430px,1.1fr); }
+.page-home .hero-copy { position: relative; z-index: 2; }
+.page-home .hero h1 { color: #0c1c3c; font-size: clamp(2.7rem,5.7vw,5rem); letter-spacing: -.055em; }
+.page-home .hero .lead { color: #5d6980; }
+.page-home .hero .eyebrow { background: rgba(104,66,216,.09); border: 1px solid rgba(104,66,216,.14); padding: 7px 11px; border-radius: 999px; width: max-content; }
+.page-home .hero .btn-secondary { background: rgba(255,255,255,.75); border-color: rgba(104,66,216,.18); backdrop-filter: blur(12px); }
+.page-home .trust-row span { background: rgba(255,255,255,.72); color: #31415d; border: 1px solid rgba(104,66,216,.12); box-shadow: 0 10px 24px rgba(55,37,116,.06); }
+
+.page-home .hero-panel {
+    position: relative;
+    border: 1px solid rgba(104,66,216,.2);
+    border-radius: 30px;
+    background: linear-gradient(145deg, rgba(255,255,255,.7), rgba(236,243,255,.62));
+    box-shadow: 0 42px 90px rgba(45,31,105,.2), inset 0 1px 0 #fff;
+    overflow: hidden;
+    transform: perspective(1200px) rotateY(-5deg) rotateX(2deg);
+    transition: transform .2s ease;
+    backdrop-filter: blur(18px);
+}
+
+.page-home .hero-panel::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    left: -60px;
+    bottom: -70px;
+    border-radius: 50%;
+    background: linear-gradient(145deg,#8bbdf0,#6842d8);
+    filter: blur(2px);
+    opacity: .34;
+    z-index: 0;
+}
+
+.page-home .hero-panel img { position: relative; z-index: 1; width: 100%; min-height: 500px; object-fit: cover; object-position: center; }
+.page-home .metric-card { z-index: 2; backdrop-filter: blur(18px); background: rgba(255,255,255,.82); color: var(--ink); border: 1px solid rgba(104,66,216,.15); box-shadow: 0 20px 45px rgba(36,24,88,.13); }
+.page-home .metric-card span { color: var(--muted); }
+.page-home .industry-grid { perspective: 1200px; }
+.page-home .industry-card { background: linear-gradient(145deg,#fff,#f7f4ff); border-color: rgba(104,66,216,.15); }
+.page-home .project-thumb { background-image: url('../../images/yuvi-creates-3d-hero.png'); background-size: cover; background-position: center; }
+.page-home .cta-box { background: radial-gradient(circle at 85% 20%,rgba(139,189,240,.25),transparent 28%),linear-gradient(135deg,#f7f3ff,#eef7ff); color: var(--ink); border: 1px solid rgba(104,66,216,.17); box-shadow: 0 32px 80px rgba(48,30,111,.13); }
+
+@media (max-width: 900px) {
+    .page-home .hero-grid { grid-template-columns: 1fr; }
+    .page-home .hero-panel { transform: none; }
+    .page-home .hero-panel img { min-height: 300px; }
+    .page-home .hero { min-height: auto; padding-top: 76px; }
+}

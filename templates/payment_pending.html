@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+{% block body_class %}page-payment page-payment-pending{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/payment.css' %}">{% endblock %}
 {% block title %}Payment Pending | Yuvi Creates{% endblock %}
 {% block meta_description %}Booking request received and payment pending.{% endblock %}
 {% block content %}

@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+{% block body_class %}page-faq{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/faq.css' %}">{% endblock %}
 {% block title %}Website Development FAQs | Yuvi Creates{% endblock %}
 {% block meta_description %}Find answers about website pricing, timelines, packages, hosting, domain setup, revisions, admin panels, payment flow, and launch support at Yuvi Creates.{% endblock %}
 {% block content %}

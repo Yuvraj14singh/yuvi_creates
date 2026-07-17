@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+{% block body_class %}page-checkout{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/checkout.css' %}">{% endblock %}
 {% block title %}Checkout | Yuvi Creates{% endblock %}
 {% block meta_description %}Book a Yuvi Creates website package with secure Razorpay payment.{% endblock %}
 {% block content %}
@@ -83,7 +86,7 @@
             package: "{{ payment.booking.selected_package|escapejs }}"
         },
         theme: {
-            color: "#168766"
+            color: "#6138d4"
         },
         handler: function (response) {
             document.getElementById("razorpay_payment_id").value = response.razorpay_payment_id;

@@ -47,3 +47,37 @@ const revealObserver = new IntersectionObserver(
 );
 
 document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+
+const tiltCard = document.querySelector("[data-tilt]");
+if (tiltCard && window.matchMedia("(pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    tiltCard.addEventListener("pointermove", (event) => {
+        const rect = tiltCard.getBoundingClientRect();
+        const rotateY = ((event.clientX - rect.left) / rect.width - 0.5) * 8;
+        const rotateX = (0.5 - (event.clientY - rect.top) / rect.height) * 6;
+        tiltCard.style.transform = `perspective(1100px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+    tiltCard.addEventListener("pointerleave", () => {
+        tiltCard.style.transform = "perspective(1100px) rotateY(-4deg) rotateX(2deg)";
+    });
+}
+
+const canTilt = window.matchMedia("(pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (canTilt) {
+    document.querySelectorAll(".service-card, .price-card, .portfolio-card, .industry-card").forEach((card) => {
+        card.addEventListener("pointermove", (event) => {
+            const rect = card.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / rect.width;
+            const y = (event.clientY - rect.top) / rect.height;
+            card.style.setProperty("--ry", `${(x - 0.5) * 5}deg`);
+            card.style.setProperty("--rx", `${(0.5 - y) * 4}deg`);
+            card.style.setProperty("--mx", `${x * 100}%`);
+            card.style.setProperty("--my", `${y * 100}%`);
+        });
+        card.addEventListener("pointerleave", () => {
+            card.style.removeProperty("--ry");
+            card.style.removeProperty("--rx");
+            card.style.removeProperty("--mx");
+            card.style.removeProperty("--my");
+        });
+    });
+}

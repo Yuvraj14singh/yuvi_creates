@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+{% block body_class %}page-process{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/process.css' %}">{% endblock %}
 {% block title %}Website Design Process | Yuvi Creates{% endblock %}
 {% block meta_description %}Learn the Yuvi Creates website design process from requirements discussion and planning to development, review, revisions, launch support, domain, hosting, and handover.{% endblock %}
 {% block content %}

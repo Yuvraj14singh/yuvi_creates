@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+{% block body_class %}page-contact{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/contact.css' %}">{% endblock %}
 {% block title %}Contact Yuvi Creates | Website Developer in Delhi NCR{% endblock %}
 {% block meta_description %}Contact Yuvi Creates for business websites, restaurant websites, cafe websites, hotel websites, travel websites, portfolio websites, landing pages, and custom web development services.{% endblock %}
 {% block content %}
@@ -7,6 +10,7 @@
         <p class="eyebrow">Contact</p>
         <h1>Tell me what you want to build.</h1>
         <p class="lead">Share your business details, preferred package, and requirements. Your enquiry will be saved and reviewed from the Django admin.</p>
+        <div class="contact-hero-points" aria-label="Yuvi Creates service highlights"><span>Business websites</span><span>Responsive design</span><span>Django powered</span></div>
     </div>
 </section>
 <section class="section">

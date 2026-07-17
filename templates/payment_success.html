@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+{% block body_class %}page-payment page-payment-success{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/payment.css' %}">{% endblock %}
 {% block title %}Payment Success | Yuvi Creates{% endblock %}
 {% block meta_description %}Payment verified successfully for Yuvi Creates booking.{% endblock %}
 {% block content %}

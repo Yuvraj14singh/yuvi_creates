@@ -2,6 +2,8 @@
 {% load static %}
 {% block title %}Yuvi Creates | Website Developer for Businesses in Delhi{% endblock %}
 {% block meta_description %}Yuvi Creates builds clean, mobile-friendly websites for restaurants, cafes, hotels, salons, travel agencies, real estate, gyms, pet shops, shops, and small businesses.{% endblock %}
+{% block body_class %}page-home{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/home.css' %}">{% endblock %}
 {% block content %}
 <section class="hero section">
     <div class="container hero-grid">
@@ -20,8 +22,8 @@
                 <span>Business-ready pages</span>
             </div>
         </div>
-        <div class="hero-panel reveal">
-            <img src="{% static 'images/workspace-placeholder.svg' %}" alt="Modern website planning workspace illustration">
+        <div class="hero-panel reveal" data-tilt>
+            <img src="{% static 'images/yuvi-creates-3d-hero.png' %}" alt="3D responsive website design showcase by Yuvi Creates">
             <div class="metric-card">
                 <strong>Launch-ready</strong>
                 <span>Clear design, responsive build, admin-backed forms.</span>
@@ -56,7 +58,7 @@
     <div class="container card-grid three">
         {% for service in services %}
             <a class="service-card service-card-link reveal" href="{% url 'service_demo' service.pk service.title|slugify %}">
-                <span class="card-index">{{ service.icon }}</span>
+                <span class="card-index">{{ forloop.counter|stringformat:"02d" }}</span>
                 <h3>{{ service.title }}</h3>
                 <p>{{ service.description }}</p>
             </a>
@@ -123,7 +125,7 @@
             {% if about_profile and about_profile.photo %}
                 <img src="{{ about_profile.photo.url }}" alt="{{ about_profile.name }}">
             {% else %}
-                <img src="{% static 'images/profile-placeholder.svg' %}" alt="Yuvi Creates profile placeholder">
+                <img src="{% static 'images/yuvi-creates-logo.png' %}" alt="Yuvi Creates logo">
             {% endif %}
         </div>
         <div class="about-home-copy reveal">

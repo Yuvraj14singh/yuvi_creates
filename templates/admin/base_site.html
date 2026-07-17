@@ -1,0 +1,5 @@
+{% extends "admin/base.html" %}{% load static %}
+{% block title %}{{ title }} | Yuvi Creates Admin{% endblock %}
+{% block extrastyle %}{{ block.super }}<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="{% static 'admin/css/yuvi_admin.css' %}"><link rel="stylesheet" href="{% static 'admin/css/yuvi_brand.css' %}">{% endblock %}
+{% block branding %}<div id="site-name"><a href="{% url 'admin:index' %}"><img class="yc-admin-logo" src="{% static 'images/yuvi-creates-logo.png' %}" alt="Yuvi Creates"><span>Yuvi Creates <small>Administration</small></span></a></div>{% endblock %}
+{% block nav-global %}<a class="yc-staff-link" href="{% url 'leads:dashboard' %}">Staff CRM</a>{% endblock %}

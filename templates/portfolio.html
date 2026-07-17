@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+{% block body_class %}page-portfolio{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/portfolio.css' %}">{% endblock %}
 {% block title %}Website Portfolio & Demo Projects | Yuvi Creates{% endblock %}
 {% block meta_description %}View Yuvi Creates demo website projects for restaurants, cafes, hotels, travel agencies, real estate, salons, pet shops, gyms, shops, personal brands, and service businesses.{% endblock %}
 {% block content %}
@@ -13,7 +16,7 @@
     <div class="container card-grid three">
         {% for project in projects %}
             <article class="portfolio-card reveal">
-                <div class="project-thumb" role="img" aria-label="{{ project.title }} preview"></div>
+                <div class="project-thumb"><img src="{% static 'images/portfolio/' %}{{ project.pk }}.webp" alt="{{ project.title }} website preview" loading="lazy"></div>
                 <div class="portfolio-card-body">
                     <h3>{{ project.title }}</h3>
                     <p>{{ project.description }}</p>

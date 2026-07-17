@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+{% block body_class %}page-packages{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/packages.css' %}">{% endblock %}
 {% block title %}Website Packages & Pricing for Businesses | Yuvi Creates{% endblock %}
 {% block meta_description %}View website packages for business websites, restaurant websites, cafe websites, travel agency websites, hotel websites, salon websites, pet shop websites, wedding planner websites, and more.{% endblock %}
 {% block content %}

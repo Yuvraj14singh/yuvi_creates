@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% block body_class %}page-about{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/about.css' %}">{% endblock %}
 {% block title %}About Yuvraj Singh | Web Developer | Yuvi Creates{% endblock %}
 {% block meta_description %}Yuvi Creates is run by Yuvraj Singh, a web developer building responsive business websites, landing pages, portfolio websites, Django web apps, API integrations, and AI-style features.{% endblock %}
 {% block content %}
@@ -30,7 +32,7 @@
                 {% if about_profile and about_profile.photo %}
                     <img src="{{ about_profile.photo.url }}" alt="Yuvraj Singh web developer">
                 {% else %}
-                    <img src="{% static 'images/profile-placeholder.svg' %}" alt="Yuvraj Singh web developer profile placeholder">
+                    <img src="{% static 'images/yuvi-creates-logo.png' %}" alt="Yuvi Creates logo">
                 {% endif %}
             </div>
             <div>

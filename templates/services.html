@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+{% block body_class %}page-services{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/services.css' %}">{% endblock %}
 {% block title %}Website Design Services for Small Businesses | Yuvi Creates{% endblock %}
 {% block meta_description %}Explore website design services for restaurants, cafes, hotels, travel agencies, salons, makeup artists, real estate, gyms, pet shops, shops, and local businesses.{% endblock %}
 {% block content %}
@@ -38,7 +41,7 @@
     <div class="container card-grid three">
         {% for service in services %}
             <a class="service-card service-card-link reveal" href="{% url 'service_demo' service.pk service.title|slugify %}">
-                <span class="card-index">{{ service.icon }}</span>
+                <span class="card-index">{{ forloop.counter|stringformat:"02d" }}</span>
                 <h3>{{ service.title }}</h3>
                 <p>{{ service.description }}</p>
             </a>

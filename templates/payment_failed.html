@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+{% block body_class %}page-payment page-payment-failed{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/payment.css' %}">{% endblock %}
 {% block title %}Payment Failed | Yuvi Creates{% endblock %}
 {% block meta_description %}Payment failed or could not be verified for Yuvi Creates booking.{% endblock %}
 {% block content %}
