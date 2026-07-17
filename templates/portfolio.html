@@ -39,9 +39,9 @@
                         {% endif %}
                     {% endif %}
                     {% if project.title == "Cricket Intelligence Dashboard Demo" %}
-                        <a class="btn btn-small btn-secondary" href="{% url 'contact' %}?service=Cricket%20League%20Website&source=Universal%20Cricket%20Demo">Request a Similar Website</a>
+                        <a class="btn btn-small btn-secondary" aria-label="Request a similar cricket league website" href="{% url 'contact' %}?service=Cricket%20League%20Website&source=Universal%20Cricket%20Demo">Request Similar</a>
                     {% else %}
-                        <a class="btn btn-small btn-secondary" href="{% url 'contact' %}?service={{ project.title|urlencode }}&source=Portfolio%20Demo%20Card">Request a Similar Website</a>
+                        <a class="btn btn-small btn-secondary" aria-label="Request a similar website for {{ project.title }}" href="{% url 'contact' %}?service={{ project.title|urlencode }}&source=Portfolio%20Demo%20Card">Request Similar</a>
                     {% endif %}
                 </div>
             </article>
