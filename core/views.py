@@ -13,12 +13,14 @@ from django.utils.text import slugify
 from django.views.decorators.csrf import csrf_exempt
 
 from .data import PACKAGES, PORTFOLIO, SERVICES
+from .pricing import MARKETS, PRICE_BANDS, SPORTS_PACKAGE_SEEDS, price_band_key
 from .forms import EnquiryForm, PaymentBookingForm, ReviewForm
 from .models import (
     AboutProfile,
     Package,
     PaymentBooking,
     PortfolioProject,
+    PackageMarketPrice,
     Review,
     Service,
 )
@@ -306,6 +308,17 @@ PORTFOLIO_DEMO_DETAILS = {
 }
 
 
+def default_public_pricing_type(title):
+    name = title.lower()
+    if "system" in name:
+        return Package.PublicPricingType.SCOPE_BASED
+    if "premium" in name or "advanced" in name:
+        return Package.PublicPricingType.TAILORED
+    if "starter" in name or name.startswith("basic"):
+        return Package.PublicPricingType.STARTING_ON_REQUEST
+    return Package.PublicPricingType.CUSTOM_QUOTE
+
+
 def ensure_default_content():
     for index, (title, description, icon) in enumerate(SERVICES, start=1):
         Service.objects.get_or_create(
@@ -323,10 +336,43 @@ def ensure_default_content():
                 scope_limits="\n".join(item["scope_limits"]),
                 summary=item.get("summary", item["short_description"]),
                 is_featured=item.get("is_featured", False),
+                public_pricing_type=default_public_pricing_type(item["title"]),
                 order=index,
             )
             for index, item in enumerate(PACKAGES, start=1)
         )
+    next_order = Package.objects.order_by("-order").values_list("order", flat=True).first() or 0
+    for offset, item in enumerate(SPORTS_PACKAGE_SEEDS, start=1):
+        Package.objects.get_or_create(
+            title=item["title"],
+            defaults={
+                "category": "Sports & Community Websites",
+                "price": "Internal custom quote",
+                "short_description": item["description"],
+                "included_features": "\n".join(item["features"]),
+                "scope_limits": "\n".join(item["limits"]),
+                "summary": item["description"],
+                "is_featured": offset == 2,
+                "public_pricing_type": Package.PublicPricingType.SCOPE_BASED if offset == 3 else Package.PublicPricingType.CUSTOM_QUOTE,
+                "order": next_order + offset,
+            },
+        )
+    for package in Package.objects.all():
+        band = PRICE_BANDS[price_band_key(package)]
+        for market_code, (minimum, maximum) in band.items():
+            currency_code, currency_symbol, display_order = MARKETS[market_code]
+            PackageMarketPrice.objects.get_or_create(
+                package=package,
+                market_code=market_code,
+                defaults={
+                    "currency_code": currency_code,
+                    "currency_symbol": currency_symbol,
+                    "min_price": minimum,
+                    "max_price": maximum,
+                    "pricing_mode": PackageMarketPrice.PricingMode.STARTING_FROM if maximum is None else PackageMarketPrice.PricingMode.RANGE,
+                    "display_order": display_order,
+                },
+            )
     for index, (title, description, stack) in enumerate(PORTFOLIO, start=1):
         PortfolioProject.objects.get_or_create(
             title=title,
@@ -459,28 +505,138 @@ def service_demo(request, service_id, slug):
 def packages(request):
     ensure_default_content()
     focus = request.GET.get("focus", "")
-    focus_categories = PACKAGE_FOCUS_CATEGORIES.get(focus)
-    package_list = list(Package.objects.all())
-    grouped = {}
-    for package in package_list:
-        if focus_categories and package.category not in focus_categories:
-            continue
-        grouped.setdefault(package.category, []).append(
-            {
+    solution_definitions = [
+        {
+            "slug": "business-websites",
+            "eyebrow": "Business Websites",
+            "title": "Professional websites built to earn trust and enquiries.",
+            "description": "For service businesses, hotels, local stores, pet-care brands and growing teams that need a clear, credible online presence.",
+            "categories": {"Starter Business Website", "Professional Business Website", "Premium Business Website", "Hotel Websites", "Pet Shop Websites"},
+        },
+        {
+            "slug": "restaurant-cafe-websites",
+            "eyebrow": "Restaurant & Cafe Websites",
+            "title": "Turn menus, ambience and location into a stronger customer journey.",
+            "description": "From mobile-first digital menus to premium restaurant websites with reservations, offers and content management.",
+            "categories": {"Digital Menu / Single Page Website", "Basic Restaurant Website", "Professional Restaurant Website", "Premium Restaurant Website"},
+        },
+        {
+            "slug": "travel-tourism-websites",
+            "eyebrow": "Travel & Tourism Websites",
+            "title": "Present destinations and packages with clarity.",
+            "description": "Structured travel websites for tour operators and planners who need itineraries, package discovery and booking enquiries.",
+            "categories": {"Trips & Tours Website"},
+        },
+        {
+            "slug": "beauty-personal-brand-websites",
+            "eyebrow": "Beauty & Personal Brand Websites",
+            "title": "Showcase expertise, results and services beautifully.",
+            "description": "Portfolio-led websites for salons, makeup artists, wedding professionals and event brands with clear enquiry paths.",
+            "categories": {"Salon & Makeup Artist Websites", "Wedding & Event Planner Websites"},
+        },
+        {
+            "slug": "sports-community-websites",
+            "eyebrow": "Sports & Community Websites",
+            "title": "Bring teams, schedules and communities together online.",
+            "description": "Custom solutions for leagues, academies, clubs and communities. Scope is prepared around teams, fixtures, registrations and admin needs.",
+            "categories": {"Sports & Community Websites"},
+        },
+        {
+            "slug": "custom-business-systems",
+            "eyebrow": "Custom Business Systems",
+            "title": "Custom workflows for operations that go beyond a standard website.",
+            "description": "For bookings, payments, dashboards, admin controls, content management and tailored business workflows.",
+            "categories": {"Advanced Business System", "Advanced Restaurant System"},
+        },
+    ]
+    copy_replacements = {
+        "A clean 3-5 section website for any small business that needs a professional online presence.": "A focused website for businesses that need a credible online presence and a clear way for customers to get in touch.",
+        "A stronger multi-page website for service providers, shops, gyms, institutes, clinics, salons, and personal brands.": "A polished multi-page website designed to build trust and turn visitors into enquiries.",
+        "A premium business website for brands that want stronger design, more trust sections, and a polished enquiry journey.": "A high-end website experience for businesses that need stronger branding, richer content, and custom functionality.",
+        "A stronger digital menu with more items, photos, and section polish.": "A structured digital menu that presents more items, photography, and key customer information clearly.",
+        "A more polished restaurant website with better gallery, offers, and content arrangement.": "A refined restaurant website with an engaging gallery, timely offers, and clearly organised content.",
+        "A premium-looking restaurant website with stronger pages, enquiry flow, and mobile experience.": "A complete restaurant website designed to showcase the menu, build trust, and simplify customer enquiries across devices.",
+        "Basic clean layout": "Clean, conversion-focused layout",
+        "Slightly better mobile layout": "Enhanced mobile experience",
+        "Best for simple businesses": "Designed for businesses establishing their online presence",
+        "Extra charges apply": "Additional content can be quoted separately",
+        "Content and photos provided by client": "Client-provided assets are organised and optimised for the website",
+        "Photos and package details provided by client": "Final content requirements are confirmed before development",
+        "Product photos and content provided by client": "Final product content and assets are confirmed before development",
+    }
+
+    def polish_copy(value):
+        for weak, professional in copy_replacements.items():
+            value = value.replace(weak, professional)
+        return value
+
+    best_for_by_title = {
+        "Starter Business Website": "New businesses, solo professionals, and small local services.",
+        "Professional Business Website": "Growing service businesses, clinics, salons, agencies, and personal brands.",
+        "Premium Business Website": "Established businesses that need richer design, more pages, or custom functionality.",
+        "Premium Plus Business Website": "Established brands planning a larger, highly tailored website experience.",
+        "Custom Business System": "Teams that need admin controls, bookings, payments, or tailored workflows.",
+        "Tour & Travel Website": "Tour operators, travel planners, and destination-based businesses.",
+    }
+    best_for_by_category = {
+        "Digital Menu / Single Page Website": "Restaurants and cafes that need a fast, mobile-first menu experience.",
+        "Basic Restaurant Website": "Independent restaurants and cafes establishing a professional web presence.",
+        "Professional Restaurant Website": "Growing food businesses that need richer content and enquiry journeys.",
+        "Premium Restaurant Website": "Established hospitality brands seeking a distinctive digital experience.",
+        "Salon & Makeup Artist Websites": "Beauty professionals who need strong portfolio proof and booking enquiries.",
+        "Hotel Websites": "Hotels, guest houses, boutique stays, and hospitality businesses.",
+        "Pet Shop Websites": "Pet stores, grooming services, and local pet-care brands.",
+        "Wedding & Event Planner Websites": "Wedding professionals, event planners, and creative service brands.",
+    }
+
+    package_list = list(Package.objects.prefetch_related("market_prices").all())
+    solution_groups = []
+    focus_slug_map = {
+        "restaurant": "restaurant-cafe-websites", "digital-menu": "restaurant-cafe-websites",
+        "travel": "travel-tourism-websites", "salon": "beauty-personal-brand-websites",
+        "wedding-event": "beauty-personal-brand-websites", "business": "business-websites",
+        "shop": "business-websites", "pet-shop": "business-websites", "hotel": "business-websites",
+        "real-estate": "business-websites", "landing": "business-websites", "portfolio": "business-websites",
+        "small-business": "business-websites", "redesign": "business-websites", "responsive": "business-websites",
+        "seo": "business-websites", "launch": "business-websites", "gym": "sports-community-websites",
+    }
+    active_solution = focus_slug_map.get(focus, "")
+    for definition in solution_definitions:
+        matched = [package for package in package_list if package.category in definition["categories"]]
+        items = []
+        popular_index = 1 if len(matched) > 1 else 0
+        for index, package in enumerate(matched):
+            is_custom = package.public_pricing_type == Package.PublicPricingType.SCOPE_BASED
+            if index == popular_index and len(matched) > 1:
+                badge = "Most Popular"
+            elif is_custom:
+                badge = "Custom"
+            elif index == 0:
+                badge = "Starter"
+            else:
+                badge = "Premium"
+            items.append({
                 "package": package,
                 "timeline": package_timeline(package),
-                "best_for": package_best_for(package),
-                "features": package_features(package),
-                "limits": package_limits(package),
-            }
-        )
+                "best_for": package_best_for(package) or best_for_by_title.get(package.title) or best_for_by_category.get(package.category),
+                "features": [polish_copy(item) for item in package_features(package)],
+                "key_features": [polish_copy(item) for item in package_features(package)[:6]],
+                "limits": [polish_copy(item) for item in package_limits(package)],
+                "badge": badge,
+                "is_popular": index == popular_index and len(matched) > 1,
+                "is_custom": is_custom,
+                "description": polish_copy(package.short_description),
+                "market_prices": [price for price in package.market_prices.all() if price.is_active],
+            })
+        solution_groups.append({**definition, "items": items, "active": definition["slug"] == active_solution})
     return render(
         request,
         "packages.html",
         {
-            "grouped_packages": grouped,
-            "package_focus": focus if focus_categories else "",
+            "solution_groups": solution_groups,
+            "package_focus": focus if active_solution else "",
             "package_focus_label": PACKAGE_FOCUS_LABELS.get(focus, ""),
+            "active_solution": active_solution,
         },
     )
 
@@ -538,15 +694,36 @@ def faq(request):
 
 def contact(request):
     ensure_default_content()
+    selected_package = Package.objects.filter(pk=request.GET.get("package")).first() if request.GET.get("package") else None
+    valid_markets = {value for value, label in PackageMarketPrice.Market.choices}
+    selected_market = request.GET.get("market", PackageMarketPrice.Market.INDIA)
+    if selected_market not in valid_markets:
+        selected_market = PackageMarketPrice.Market.INDIA
+    selected_market_price = None
+    if selected_package:
+        selected_market_price = selected_package.market_prices.filter(market_code=selected_market, is_active=True).first()
+        if not selected_market_price:
+            selected_market = PackageMarketPrice.Market.INDIA
+            selected_market_price = selected_package.market_prices.filter(market_code=selected_market, is_active=True).first()
     if request.method == "POST":
         form = EnquiryForm(request.POST)
         if form.is_valid():
-            form.save()
+            enquiry = form.save(commit=False)
+            if selected_package:
+                enquiry.package_interested_in = selected_package.title
+                enquiry.selected_market = selected_market
+                enquiry.displayed_price_context = selected_market_price.public_label if selected_market_price else ""
+                if selected_market_price:
+                    enquiry.preferred_currency = selected_market_price.currency_code
+            enquiry.save()
             messages.success(request, "Your enquiry has been sent. I will reply shortly on WhatsApp/email.")
             return redirect("contact")
     else:
-        form = EnquiryForm()
-    return render(request, "contact.html", {"form": form})
+        initial = {"package_interested_in": selected_package.title} if selected_package else {}
+        if selected_market_price:
+            initial["preferred_currency"] = selected_market_price.currency_code
+        form = EnquiryForm(initial=initial)
+    return render(request, "contact.html", {"form": form, "selected_package": selected_package, "selected_market": selected_market, "selected_market_price": selected_market_price})
 
 
 def checkout(request):

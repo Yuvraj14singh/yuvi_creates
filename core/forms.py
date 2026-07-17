@@ -11,6 +11,15 @@ from .models import (
 
 INPUT_CLASS = "form-control"
 
+BUDGET_CHOICES_BY_CURRENCY = {
+    "INR": ["Under ₹25,000", "₹25,000 – ₹50,000", "₹50,000 – ₹1,00,000", "₹1,00,000 – ₹2,00,000", "₹2,00,000+", "Not sure yet"],
+    "USD": ["Under $750", "$750 – $1,500", "$1,500 – $3,000", "$3,000 – $5,000", "$5,000+", "Not sure yet"],
+    "GBP": ["Under £600", "£600 – £1,200", "£1,200 – £2,500", "£2,500 – £4,000", "£4,000+", "Not sure yet"],
+    "AUD": ["Under A$1,000", "A$1,000 – A$2,000", "A$2,000 – A$4,000", "A$4,000 – A$7,000", "A$7,000+", "Not sure yet"],
+    "CAD": ["Under C$900", "C$900 – C$1,800", "C$1,800 – C$3,500", "C$3,500 – C$6,000", "C$6,000+", "Not sure yet"],
+    "Other": ["Entry-level project", "Standard business project", "Premium business project", "Advanced/custom system", "Not sure yet"],
+}
+
 
 class ReviewForm(forms.ModelForm):
     rating = forms.TypedChoiceField(
@@ -50,6 +59,8 @@ class ReviewForm(forms.ModelForm):
 
 
 class EnquiryForm(forms.ModelForm):
+    budget_level = forms.ChoiceField(label="Approximate budget range", required=False)
+
     class Meta:
         model = Enquiry
         fields = [
@@ -57,28 +68,70 @@ class EnquiryForm(forms.ModelForm):
             "business_name",
             "email",
             "phone",
+            "country",
+            "preferred_currency",
             "business_type",
             "package_interested_in",
             "current_website_or_social_link",
+            "estimated_pages",
+            "required_features",
+            "preferred_timeline",
+            "budget_level",
             "message",
         ]
         widgets = {
+            "required_features": forms.Textarea(attrs={"rows": 4}),
             "message": forms.Textarea(attrs={"rows": 5}),
+        }
+        labels = {
+            "name": "Full name",
+            "business_name": "Business or organisation name",
+            "phone": "Phone or WhatsApp number",
+            "business_type": "Business industry",
+            "package_interested_in": "Required service / package",
+            "current_website_or_social_link": "Current website URL",
+            "estimated_pages": "Estimated number of pages",
+            "required_features": "Required features",
+            "preferred_timeline": "Preferred timeline",
+            "budget_level": "Approximate budget range",
+            "message": "Project description",
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.setdefault("class", INPUT_CLASS)
-        self.fields["current_website_or_social_link"].required = True
+        self.fields["country"].required = True
+        self.fields["preferred_currency"].required = True
+        self.fields["current_website_or_social_link"].required = False
+        all_budget_choices = []
+        for choices in BUDGET_CHOICES_BY_CURRENCY.values():
+            for choice in choices:
+                if choice not in all_budget_choices:
+                    all_budget_choices.append(choice)
+        self.fields["budget_level"].choices = [("", "Select an optional budget range")] + [(choice, choice) for choice in all_budget_choices]
+        self.fields["budget_level"].widget.attrs["data-budget-select"] = ""
+        self.fields["preferred_currency"].widget.attrs["data-currency-select"] = ""
         self.fields["name"].widget.attrs.setdefault("placeholder", "Your full name")
         self.fields["business_name"].widget.attrs.setdefault("placeholder", "Business or brand name")
         self.fields["email"].widget.attrs.setdefault("placeholder", "you@example.com")
         self.fields["phone"].widget.attrs.setdefault("placeholder", "WhatsApp / mobile number")
+        self.fields["country"].widget.attrs.setdefault("placeholder", "Country")
         self.fields["business_type"].widget.attrs.setdefault("placeholder", "Restaurant, cafe, tour agency, shop...")
         self.fields["package_interested_in"].widget.attrs.setdefault("placeholder", "Starter, premium, restaurant, travel...")
         self.fields["current_website_or_social_link"].widget.attrs.setdefault("placeholder", "https://instagram.com/yourbrand")
+        self.fields["estimated_pages"].widget.attrs.setdefault("placeholder", "For example: 5–7 pages or not sure yet")
+        self.fields["required_features"].widget.attrs.setdefault("placeholder", "Enquiry forms, bookings, payments, admin dashboard...")
+        self.fields["preferred_timeline"].widget.attrs.setdefault("placeholder", "For example: 4–6 weeks or flexible")
         self.fields["message"].widget.attrs.setdefault("placeholder", "Share your requirement, timeline, city, and any reference website")
+
+    def clean(self):
+        cleaned_data = super().clean()
+        currency = cleaned_data.get("preferred_currency")
+        budget = cleaned_data.get("budget_level")
+        if budget and budget not in BUDGET_CHOICES_BY_CURRENCY.get(currency, []):
+            self.add_error("budget_level", "Choose a budget option that matches your preferred currency.")
+        return cleaned_data
 
 
 class PaymentBookingForm(forms.ModelForm):

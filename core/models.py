@@ -20,6 +20,12 @@ class Service(models.Model):
 
 
 class Package(models.Model):
+    class PublicPricingType(models.TextChoices):
+        CUSTOM_QUOTE = "CUSTOM_QUOTE", "Custom Quote"
+        TAILORED = "TAILORED", "Tailored Pricing"
+        SCOPE_BASED = "SCOPE_BASED", "Scope-Based Pricing"
+        STARTING_ON_REQUEST = "STARTING_ON_REQUEST", "Starting price available on request"
+
     title = models.CharField(max_length=160)
     category = models.CharField(max_length=120, blank=True)
     price = models.CharField(max_length=80)
@@ -28,6 +34,12 @@ class Package(models.Model):
     scope_limits = models.TextField(blank=True, help_text="One scope limit per line.")
     summary = models.TextField(blank=True)
     is_featured = models.BooleanField(default=False)
+    public_pricing_type = models.CharField(
+        max_length=30,
+        choices=PublicPricingType.choices,
+        default=PublicPricingType.CUSTOM_QUOTE,
+        help_text="Public label only. Internal INR pricing remains in the Price field.",
+    )
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -38,6 +50,57 @@ class Package(models.Model):
 
     def get_absolute_url(self):
         return reverse("checkout") + f"?package={self.pk}"
+
+
+class PackageMarketPrice(models.Model):
+    class Market(models.TextChoices):
+        INDIA = "IN", "India — INR"
+        US_INTERNATIONAL = "US_INTL", "United States / International — USD"
+        UNITED_KINGDOM = "UK", "United Kingdom — GBP"
+        AUSTRALIA = "AU", "Australia — AUD"
+        CANADA = "CA", "Canada — CAD"
+
+    class PricingMode(models.TextChoices):
+        RANGE = "RANGE", "Price range"
+        STARTING_FROM = "STARTING_FROM", "Starting from"
+
+    package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name="market_prices")
+    market_code = models.CharField(max_length=12, choices=Market.choices)
+    currency_code = models.CharField(max_length=3)
+    currency_symbol = models.CharField(max_length=4)
+    min_price = models.DecimalField(max_digits=12, decimal_places=0)
+    max_price = models.DecimalField(max_digits=12, decimal_places=0, blank=True, null=True)
+    pricing_mode = models.CharField(max_length=20, choices=PricingMode.choices, default=PricingMode.RANGE)
+    is_active = models.BooleanField(default=True)
+    display_order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ["display_order", "market_code"]
+        constraints = [models.UniqueConstraint(fields=["package", "market_code"], name="unique_package_market_price")]
+
+    def __str__(self):
+        return f"{self.package.title} — {self.get_market_code_display()}"
+
+    def _format_amount(self, amount):
+        value = f"{amount:.0f}"
+        if self.currency_code != "INR" or len(value) <= 3:
+            return f"{int(value):,}"
+        tail = value[-3:]
+        head = value[:-3]
+        groups = []
+        while head:
+            groups.insert(0, head[-2:])
+            head = head[:-2]
+        return f"{','.join(groups)},{tail}"
+
+    @property
+    def public_label(self):
+        minimum = f"{self.currency_symbol}{self._format_amount(self.min_price)}"
+        suffix = f" {self.currency_code}" if self.currency_code != "INR" else ""
+        if self.pricing_mode == self.PricingMode.STARTING_FROM or not self.max_price:
+            return f"Starting from {minimum}{suffix}"
+        maximum = f"{self.currency_symbol}{self._format_amount(self.max_price)}"
+        return f"{minimum} – {maximum}{suffix}"
 
 
 class PortfolioProject(models.Model):
@@ -117,13 +180,38 @@ class Review(models.Model):
 
 
 class Enquiry(models.Model):
+    class PreferredCurrency(models.TextChoices):
+        INR = "INR", "INR — Indian Rupee"
+        USD = "USD", "USD — US Dollar"
+        GBP = "GBP", "GBP — British Pound"
+        AUD = "AUD", "AUD — Australian Dollar"
+        CAD = "CAD", "CAD — Canadian Dollar"
+        OTHER = "Other", "Other"
+
+    class BudgetLevel(models.TextChoices):
+        ENTRY = "Entry-level project", "Entry-level project"
+        STANDARD = "Standard business project", "Standard business project"
+        PREMIUM = "Premium business project", "Premium business project"
+        ADVANCED = "Advanced/custom system", "Advanced/custom system"
+        UNSURE = "Not sure yet", "Not sure yet"
+
     name = models.CharField(max_length=120)
     business_name = models.CharField(max_length=160, blank=True)
     email = models.EmailField()
     phone = models.CharField(max_length=40)
+    country = models.CharField(max_length=120, blank=True)
+    preferred_currency = models.CharField(max_length=10, choices=PreferredCurrency.choices, blank=True)
     business_type = models.CharField(max_length=120)
     package_interested_in = models.CharField(max_length=160, blank=True)
     current_website_or_social_link = models.URLField(blank=True)
+    estimated_pages = models.CharField(max_length=80, blank=True)
+    required_features = models.TextField(blank=True)
+    preferred_timeline = models.CharField(max_length=120, blank=True)
+    budget_level = models.CharField(max_length=80, blank=True)
+    selected_market = models.CharField(max_length=12, blank=True)
+    displayed_price_context = models.CharField(max_length=140, blank=True)
+    final_quote_amount = models.DecimalField(max_digits=12, decimal_places=2, blank=True, null=True)
+    final_quote_currency = models.CharField(max_length=3, blank=True)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 

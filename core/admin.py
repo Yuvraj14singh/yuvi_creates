@@ -5,10 +5,17 @@ from .models import (
     Enquiry,
     Package,
     PaymentBooking,
+    PackageMarketPrice,
     PortfolioProject,
     Review,
     Service,
 )
+
+
+class PackageMarketPriceInline(admin.TabularInline):
+    model = PackageMarketPrice
+    extra = 0
+    fields = ("market_code", "currency_code", "currency_symbol", "min_price", "max_price", "pricing_mode", "is_active", "display_order")
 
 
 @admin.register(Service)
@@ -20,10 +27,11 @@ class ServiceAdmin(admin.ModelAdmin):
 
 @admin.register(Package)
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ("title", "category", "price", "is_featured", "order")
-    list_filter = ("category", "is_featured")
+    list_display = ("title", "category", "price", "public_pricing_type", "is_featured", "order")
+    list_filter = ("category", "public_pricing_type", "is_featured")
     search_fields = ("title", "short_description", "included_features")
-    list_editable = ("is_featured", "order")
+    list_editable = ("public_pricing_type", "is_featured", "order")
+    inlines = (PackageMarketPriceInline,)
 
 
 @admin.register(PortfolioProject)
@@ -62,10 +70,13 @@ class ReviewAdmin(admin.ModelAdmin):
 
 @admin.register(Enquiry)
 class EnquiryAdmin(admin.ModelAdmin):
-    list_display = ("name", "business_name", "email", "phone", "business_type", "created_at")
-    list_filter = ("business_type", "created_at")
-    search_fields = ("name", "business_name", "email", "phone", "message")
+    list_display = ("name", "business_name", "country", "selected_market", "preferred_currency", "budget_level", "package_interested_in", "final_quote_amount", "final_quote_currency", "created_at")
+    list_filter = ("selected_market", "preferred_currency", "budget_level", "business_type", "created_at")
+    search_fields = ("name", "business_name", "email", "phone", "country", "package_interested_in", "required_features", "message")
     readonly_fields = ("created_at",)
+
+    def get_readonly_fields(self, request, obj=None):
+        return ("created_at", "displayed_price_context")
 
 
 @admin.register(PaymentBooking)

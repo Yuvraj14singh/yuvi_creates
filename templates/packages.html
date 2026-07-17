@@ -2,118 +2,126 @@
 {% load static %}
 {% block body_class %}page-packages{% endblock %}
 {% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/packages.css' %}">{% endblock %}
-{% block title %}Website Packages & Pricing for Businesses | Yuvi Creates{% endblock %}
-{% block meta_description %}View website packages for business websites, restaurant websites, cafe websites, travel agency websites, hotel websites, salon websites, pet shop websites, wedding planner websites, and more.{% endblock %}
+{% block title %}Website Packages & Custom Solutions | Yuvi Creates{% endblock %}
+{% block meta_description %}Explore custom website solutions for businesses, restaurants, travel brands, personal brands, sports communities and advanced business systems.{% endblock %}
 {% block content %}
-<section class="page-hero section">
-    <div class="container narrow">
-        <p class="eyebrow">Packages</p>
-        <h1>Business website packages with clear scope.</h1>
-        <p class="lead">Pick a package for a business site, restaurant/cafe site, trips and tours site, portfolio, or custom system. Final quote depends on pages, content, design level, and features.</p>
+<section class="packages-hero" id="top">
+    <div class="container packages-hero-inner">
+        <p class="eyebrow">Packages &amp; solutions</p>
+        <h1>Flexible Website Solutions Built Around Your Business</h1>
+        <p class="lead">Explore the type of website that fits your goals. Once we understand your requirements, you will receive a clear custom proposal with scope, timeline, and pricing in your preferred currency.</p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="{% url 'contact' %}">Get a Custom Quote</a>
+            <a class="btn btn-secondary" href="#solutions">Explore Solutions</a>
+        </div>
+        <ul class="packages-trust" aria-label="Service standards">
+            <li>100% Custom Design</li><li>Mobile Responsive</li><li>SEO-Friendly Structure</li>
+            <li>Fast Performance</li><li>Worldwide Service</li><li>Post-Launch Support</li>
+        </ul>
     </div>
 </section>
-<section class="section packages-section">
+
+<section class="quote-explanation" aria-labelledby="quote-explanation-title">
+    <div class="container quote-explanation-inner">
+        <div><p class="eyebrow">Clear proposals</p><h2 id="quote-explanation-title">Custom Quotes, Clear Scope</h2></div>
+        <p>Every project is priced individually based on your goals, required pages, functionality, design complexity, content, integrations, and timeline. Proposals can be prepared in INR, USD, GBP, AUD, CAD, or another mutually agreed currency.</p>
+    </div>
+</section>
+
+<section class="solutions-shell" id="solutions">
     <div class="container">
-        {% if package_focus_label %}
-            <div class="focused-package-heading">
-                <p class="eyebrow">Filtered packages</p>
-                <h2>{{ package_focus_label }}</h2>
-                <a class="text-link" href="{% url 'packages' %}">Show all packages</a>
-            </div>
-        {% endif %}
-        <nav class="package-mini-nav" aria-label="Package categories">
-            {% for category, items in grouped_packages.items %}
-                <a href="#{{ category|slugify }}">{{ category }}</a>
-            {% endfor %}
+        <div class="market-selector-wrap">
+            <div><span>View pricing for:</span><div class="market-selector" role="group" aria-label="Select pricing market">
+                <button type="button" class="market-option is-active" data-market="IN" data-currency="INR">India — INR</button>
+                <button type="button" class="market-option" data-market="US_INTL" data-currency="USD">United States / International — USD</button>
+                <button type="button" class="market-option" data-market="UK" data-currency="GBP">United Kingdom — GBP</button>
+                <button type="button" class="market-option" data-market="AU" data-currency="AUD">Australia — AUD</button>
+                <button type="button" class="market-option" data-market="CA" data-currency="CAD">Canada — CAD</button>
+            </div></div>
+            <label class="market-select-mobile"><span>View pricing for:</span><select class="form-control" data-market-select><option value="IN" data-currency="INR">India — INR</option><option value="US_INTL" data-currency="USD">United States / International — USD</option><option value="UK" data-currency="GBP">United Kingdom — GBP</option><option value="AU" data-currency="AUD">Australia — AUD</option><option value="CA" data-currency="CAD">Canada — CAD</option></select></label>
+            <p>Displayed prices are estimated starting ranges for the selected market. Final pricing depends on the confirmed scope, number of pages, design complexity, functionality, integrations, content readiness, delivery timeline, and support requirements.</p>
+        </div>
+        <div class="pricing-intro">
+            <div><p class="eyebrow">Flexible starting points</p><h2>Choose the outcome your business needs.</h2></div>
+            <p>Compare the solution types below, review what is included, and choose the closest starting point for your goals.</p>
+        </div>
+        {% if package_focus_label %}<div class="focus-notice"><span>Showing the most relevant starting point for: <strong>{{ package_focus_label }}</strong></span><a href="{% url 'packages' %}">View all solutions</a></div>{% endif %}
+        <nav class="solution-nav" aria-label="Solution categories">
+            <a class="solution-pill is-active" href="#solutions" data-solution-link="all">All Solutions</a>
+            {% for group in solution_groups %}<a class="solution-pill{% if group.active %} is-focused{% endif %}" href="#{{ group.slug }}" data-solution-link="{{ group.slug }}">{{ group.eyebrow }}</a>{% endfor %}
         </nav>
-        {% for category, items in grouped_packages.items %}
-            <div class="package-group" id="{{ category|slugify }}">
-                <div class="package-group-heading">
-                    <h2>{{ category }}</h2>
-                    {% if category == "Starter Business Website" %}
-                        <p>Best for new businesses that need a professional online presence quickly.</p>
-                    {% elif category == "Trips & Tours Website" %}
-                        <p>Built for travel agencies, trip planners, tour operators, and destination-based businesses.</p>
-                    {% elif category == "Professional Business Website" %}
-                        <p>Best for service providers, personal brands, shops, gyms, institutes, and local businesses.</p>
-                    {% elif category == "Premium Business Website" %}
-                        <p>For businesses that want a high-end website with stronger design, richer sections, trust-building content, and a premium enquiry flow.</p>
-                    {% elif category == "Digital Menu / Single Page Website" %}
-                        <p>Price range: ₹10,000 to ₹16,000. If menu has more than 100 items, extra charges apply.</p>
-                    {% elif category == "Basic Restaurant Website" %}
-                        <p>Price range: ₹18,000 to ₹25,000.</p>
-                    {% elif category == "Professional Restaurant Website" %}
-                        <p>Price range: ₹30,000 to ₹45,000.</p>
-                    {% elif category == "Premium Restaurant Website" %}
-                        <p>Price range: ₹50,000 to ₹75,000+.</p>
-                    {% elif category == "Salon & Makeup Artist Websites" %}
-                        <p>Professional websites for salons, beauty studios, bridal makeup artists, and personal beauty brands.</p>
-                    {% elif category == "Pet Shop Websites" %}
-                        <p>Professional websites for pet shops, pet supply stores, grooming services, and pet care brands.</p>
-                    {% elif category == "Hotel Websites" %}
-                        <p>Professional websites for hotels, guest houses, lodges, boutique stays, banquet hotels, and resorts.</p>
-                    {% elif category == "Wedding & Event Planner Websites" %}
-                        <p>Premium websites for wedding planners, event planners, decorators, party organizers, and event management brands.</p>
+
+        <div class="solution-groups">
+            {% for group in solution_groups %}
+                <section class="solution-group" id="{{ group.slug }}" data-solution-group>
+                    <header class="solution-heading">
+                        <p class="eyebrow">{{ group.eyebrow }}</p>
+                        <h2>{{ group.title }}</h2>
+                        <p>{{ group.description }}</p>
+                    </header>
+                    {% if group.items %}
+                        <div class="package-grid" data-package-grid>
+                            {% for item in group.items %}
+                                <article class="solution-card{% if item.is_popular %} is-popular{% endif %}{% if forloop.counter > 3 %} is-extra{% endif %}">
+                                    <div class="card-topline"><span class="package-badge{% if item.is_popular %} popular{% endif %}">{{ item.badge }}</span>{% if item.timeline %}<span class="timeline-note">{{ item.timeline }}</span>{% endif %}</div>
+                                    <h3>{{ item.package.title }}</h3>
+                                    <p class="value-copy">{{ item.description }}</p>
+                                    {% if item.best_for %}<p class="best-for"><strong>Best for:</strong> {{ item.best_for }}</p>{% endif %}
+                                    <div class="public-price"><span>Starting investment</span>{% for price in item.market_prices %}<strong data-market-price="{{ price.market_code }}"{% if price.market_code != 'IN' %} hidden{% endif %}>{{ price.public_label }}</strong>{% endfor %}<small>Final quote depends on confirmed scope and requirements.</small></div>
+                                    <p class="included-label">Included</p>
+                                    <ul class="key-features">{% for feature in item.key_features %}<li>{{ feature }}</li>{% endfor %}</ul>
+                                    <div class="card-actions">
+                                        <a class="btn btn-primary quote-link" data-quote-base="{% url 'contact' %}?package={{ item.package.pk }}" href="{% url 'contact' %}?package={{ item.package.pk }}&amp;market=IN">{% if item.is_custom %}Discuss Your Project{% else %}Get a Project Quote{% endif %}</a>
+                                        <button class="scope-toggle" type="button" aria-haspopup="dialog" data-scope-template="scope-{{ item.package.pk }}">View Full Scope <span aria-hidden="true">→</span></button>
+                                    </div>
+                                    <template id="scope-{{ item.package.pk }}"><div class="modal-package-content"><span class="package-badge{% if item.is_popular %} popular{% endif %}">{{ item.badge }}</span><h2>{{ item.package.title }}</h2><p class="modal-description">{{ item.description }}</p>{% if item.best_for %}<p class="best-for"><strong>Best for:</strong> {{ item.best_for }}</p>{% endif %}<div class="public-price">{% for price in item.market_prices %}<strong data-market-price="{{ price.market_code }}"{% if price.market_code != 'IN' %} hidden{% endif %}>{{ price.public_label }}</strong>{% endfor %}<small>Estimated starting range for the selected market.</small></div><div class="modal-scope-grid"><div><h3>Complete included features</h3><ul>{% for feature in item.features %}<li>{{ feature }}</li>{% endfor %}</ul></div><div><h3>Scope &amp; revision limits</h3>{% if item.limits %}<ul>{% for limit in item.limits %}<li>{{ limit }}</li>{% endfor %}</ul>{% else %}<p>Final page limits and revision rounds are confirmed in the proposal.</p>{% endif %}</div><div><h3>Client responsibilities</h3><p>Final content requirements, approvals and available brand assets are confirmed before development.</p></div><div><h3>Optional add-ons &amp; separately quoted items</h3><p>Additional content, integrations, paid tools or custom functionality can be quoted separately.</p></div>{% if item.timeline %}<div><h3>Expected timeline</h3><p>{{ item.timeline }}</p></div>{% endif %}</div><a class="btn btn-primary quote-link" data-quote-base="{% url 'contact' %}?package={{ item.package.pk }}" href="{% url 'contact' %}?package={{ item.package.pk }}&amp;market=IN">Get a Project Quote</a></div></template>
+                                </article>
+                            {% endfor %}
+                        </div>
+                        {% if group.items|length > 3 %}<button class="show-more-packages" type="button" aria-expanded="false">View all {{ group.items|length }} solutions</button>{% endif %}
                     {% else %}
-                        <p>Price: ₹80,000+ for advanced custom systems, admin panels, bookings, online ordering, or payment integration.</p>
+                        <div class="bespoke-solution">
+                            <div><span class="package-badge">Custom</span><h3>Tailored Sports &amp; Community Platform</h3><p>Tell us about your teams, audience, schedules, registrations and admin requirements. We will prepare a solution around the workflow you need.</p></div>
+                            <a class="btn btn-primary" href="{% url 'contact' %}">Get a Project Quote</a>
+                        </div>
                     {% endif %}
-                </div>
-                <div class="card-grid two">
-                    {% for item in items %}
-                        <article class="price-card full reveal {% if item.package.is_featured %}featured{% endif %}">
-                            <div class="price-top">
-                                <span class="tag package-tag">{{ item.package.category }}</span>
-                                {% if item.package.is_featured %}<span class="tag accent">Popular</span>{% endif %}
-                            </div>
-                            <h3>{{ item.package.title }}</h3>
-                            <p class="price">{{ item.package.price }}</p>
-                            {% if item.timeline or item.best_for %}
-                                <div class="package-meta">
-                                    {% if item.timeline %}
-                                        <p><strong>Timeline:</strong> {{ item.timeline }}</p>
-                                    {% endif %}
-                                    {% if item.best_for %}
-                                        <p><strong>Best for:</strong> {{ item.best_for }}</p>
-                                    {% endif %}
-                                </div>
-                            {% endif %}
-                            <p>{{ item.package.short_description }}</p>
-                            <h4>Included features</h4>
-                            <ul class="feature-list">
-                                {% for feature in item.features %}<li>{{ feature }}</li>{% endfor %}
-                            </ul>
-                            {% if item.limits %}
-                                <h4>Scope limits</h4>
-                                <ul class="limit-list">
-                                    {% for limit in item.limits %}<li>{{ limit }}</li>{% endfor %}
-                                </ul>
-                            {% endif %}
-                            <a class="btn btn-primary" href="{{ item.package.get_absolute_url }}">Book This Package</a>
-                        </article>
-                    {% endfor %}
-                </div>
-                {% if category == "Salon & Makeup Artist Websites" %}
-                    <div class="note-box package-scope-note">
-                        Final pricing depends on the number of pages, services, gallery images, booking flow, admin panel requirement, content availability, and final scope.
-                    </div>
-                {% elif category == "Pet Shop Websites" %}
-                    <div class="note-box package-scope-note">
-                        Final pricing depends on the number of pages, product categories, gallery images, admin panel needs, content availability, and final scope. Ecommerce, online payment, cart, and inventory systems are quoted separately.
-                    </div>
-                {% elif category == "Hotel Websites" %}
-                    <div class="note-box package-scope-note">
-                        Final pricing depends on the number of pages, room categories, gallery images, enquiry flow, admin panel needs, content availability, and final scope. Online booking engine, payment gateway, real-time room availability, and hotel management systems are quoted separately.
-                    </div>
-                {% elif category == "Wedding & Event Planner Websites" %}
-                    <div class="note-box package-scope-note">
-                        Final pricing depends on the number of pages, portfolio images, event categories, enquiry flow, admin panel needs, content availability, and final scope. Advanced booking systems, payment gateway, CRM, vendor management, guest management, and automation features are quoted separately.
-                    </div>
-                {% endif %}
-            </div>
-        {% endfor %}
-        <div class="note-box">
-            <strong>Important note:</strong> Domain and hosting charges are separate if required. Final quote depends on pages, menu/product/tour size, photos, design level, content, booking needs, and extra features.
+                </section>
+            {% endfor %}
         </div>
     </div>
 </section>
+
+<section class="packages-benefits">
+    <div class="container"><div class="section-intro"><p class="eyebrow">A reliable project experience</p><h2>Why Businesses Choose Yuvi Creates</h2></div>
+        <div class="benefit-grid">
+            <article><span>01</span><h3>Custom Design</h3><p>Every website is designed around the business, not copied from a generic template.</p></article>
+            <article><span>02</span><h3>Clear Project Scope</h3><p>Deliverables, revisions, and responsibilities are defined before development begins.</p></article>
+            <article><span>03</span><h3>Mobile-First Experience</h3><p>Websites are designed to work smoothly across phones, tablets, and desktops.</p></article>
+            <article><span>04</span><h3>Performance Focused</h3><p>Clean implementation, optimised assets, and practical performance improvements.</p></article>
+            <article><span>05</span><h3>Business-Friendly Support</h3><p>Clear communication during development and support around launch.</p></article>
+            <article><span>06</span><h3>Worldwide Collaboration</h3><p>Projects can be handled remotely for clients in India and internationally.</p></article>
+        </div>
+    </div>
+</section>
+
+<section class="packages-process"><div class="container"><div class="section-intro"><p class="eyebrow">How it works</p><h2>A clear path from idea to launch.</h2></div><ol><li><span>01</span>Share Your Requirements</li><li><span>02</span>Receive a Custom Proposal</li><li><span>03</span>Design &amp; Development</li><li><span>04</span>Review &amp; Revisions</li><li><span>05</span>Launch &amp; Support</li></ol></div></section>
+
+<section class="packages-faq"><div class="container faq-layout"><div class="section-intro"><p class="eyebrow">Common questions</p><h2>Before we start</h2><p>Clear answers about pricing, timelines and working together.</p></div><div class="faq-list">
+    <details><summary>How much will my website cost?</summary><p>Every project is quoted individually. Final pricing depends on the number of pages, design complexity, required functionality, integrations, content, timeline, and support requirements.</p></details>
+    <details><summary>Which currencies do you accept?</summary><p>Proposals can be prepared in INR, USD, GBP, AUD, CAD, or another mutually agreed currency.</p></details>
+    <details><summary>Do you charge the same amount in every country?</summary><p>Pricing is based on the project requirements and scope, not automatic currency conversion. The final proposal confirms the deliverables, timeline, currency, and payment schedule before work begins.</p></details>
+    <details><summary>Do you work with international clients?</summary><p>Yes. Projects can be handled remotely for clients in India and internationally through email, online meetings, milestone reviews, and digital delivery.</p></details>
+    <details><summary>Can I request features that are not included in a package?</summary><p>Yes. Additional features can be included in a custom proposal after the functionality and technical requirements are reviewed.</p></details>
+    <details><summary>Do you provide domain and hosting?</summary><p>Setup support is available. Domain, hosting, paid tools and third-party services are quoted separately unless explicitly included in the proposal.</p></details>
+    <details><summary>How long does a website project take?</summary><p>Timelines vary based on scope, content readiness and feedback speed. A practical delivery timeline is confirmed in the proposal.</p></details>
+    <details><summary>Can you redesign an existing website?</summary><p>Yes. The current website can be reviewed and a redesign scope prepared around usability, presentation, responsiveness and performance needs.</p></details>
+    <details><summary>Do you provide support after launch?</summary><p>Launch support is included as defined in the proposal. Ongoing updates or maintenance can be discussed separately.</p></details>
+    <details><summary>What do I need to provide before the project starts?</summary><p>Usually your business details, services, available brand assets, content, images and required functionality. Exact requirements are shared before development.</p></details>
+</div></div></section>
+
+<section class="packages-final"><div class="container final-panel"><p class="eyebrow">Custom recommendations available</p><h2>Not Sure Which Solution Fits?</h2><p>Tell us about your business, goals, and required features. We will recommend the right solution and prepare a clear proposal in your preferred currency.</p><div class="hero-actions"><a class="btn btn-primary" href="{% url 'contact' %}">Get a Project Quote</a><a class="btn btn-secondary" href="{% url 'contact' %}">Contact Us</a></div></div></section>
+
+<aside class="container pricing-disclaimer">All prices are starting estimates and do not represent a binding quotation. Domain registration, hosting, premium software, paid APIs, payment gateway charges, content production, and third-party subscriptions are quoted separately unless explicitly included in the final proposal.</aside>
+<div class="scope-modal" data-scope-modal hidden><div class="scope-modal-overlay" data-modal-close></div><section class="scope-modal-panel" role="dialog" aria-modal="true" aria-labelledby="scope-modal-title" tabindex="-1"><button class="scope-modal-close" type="button" aria-label="Close full package scope" data-modal-close>×</button><div class="scope-modal-body" data-modal-body></div></section></div>
 {% endblock %}
+{% block extra_scripts %}<script src="{% static 'js/pages/packages.js' %}"></script>{% endblock %}

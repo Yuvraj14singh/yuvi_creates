@@ -74,7 +74,11 @@
                 <a href="{% url 'about' %}">About</a>
                 <a href="{% url 'contact' %}">Contact</a>
                 <a href="{% url 'feedback' %}">Feedback</a>
-                <a class="btn btn-whatsapp" href="https://wa.me/916353346509" target="_blank" rel="noreferrer">WhatsApp</a>
+                {% if request.resolver_match.url_name == "packages" %}
+                    <a class="btn btn-whatsapp" href="{% url 'contact' %}">Get a Quote</a>
+                {% else %}
+                    <a class="btn btn-whatsapp" href="https://wa.me/916353346509" target="_blank" rel="noreferrer">WhatsApp</a>
+                {% endif %}
             </div>
         </nav>
     </header>

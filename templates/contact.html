@@ -17,6 +17,14 @@
     <div class="container contact-grid">
         <form class="form-card" method="post">
             {% csrf_token %}
+            {% if selected_package %}
+                <div class="selected-solution-summary">
+                    <span>Selected solution</span>
+                    <strong>{{ selected_package.title }}</strong>
+                    {% if selected_market_price %}<small>Estimated starting range: {{ selected_market_price.public_label }} · Preferred currency: {{ selected_market_price.currency_code }}</small>{% endif %}
+                    <small>This is an estimated starting range. Your final proposal will be based on the confirmed project scope.</small>
+                </div>
+            {% endif %}
             <div class="form-grid">
                 {% for field in form %}
                     <label {% if field.name == "message" %}class="span-2"{% endif %}>
@@ -29,6 +37,7 @@
                     </label>
                 {% endfor %}
             </div>
+            <p class="budget-disclaimer">Your selected budget helps us understand the project level. It is not a confirmed quote. Final pricing is shared after reviewing the complete scope.</p>
             <button class="btn btn-primary" type="submit">Send Enquiry</button>
         </form>
         <aside class="contact-panel">
@@ -47,3 +56,4 @@
     </div>
 </section>
 {% endblock %}
+{% block extra_scripts %}<script src="{% static 'js/pages/contact.js' %}"></script>{% endblock %}

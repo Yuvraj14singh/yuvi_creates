@@ -1,1 +1,15 @@
-.page-contact .page-hero{padding:92px 0 82px;background:radial-gradient(circle at 86% 24%,rgba(139,189,240,.24),transparent 24%),linear-gradient(135deg,#fff,#f7f4ff 62%,#eff7ff)}.page-contact .page-hero .narrow{max-width:900px;margin-left:max(16px,calc((100% - 1120px)/2));position:relative}.page-contact .page-hero h1{max-width:780px;font-size:clamp(3rem,6vw,5.6rem);line-height:1;letter-spacing:-.05em}.page-contact .page-hero .lead{max-width:760px}.page-contact .contact-hero-points{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.page-contact .contact-hero-points span{padding:9px 13px;border-radius:999px;background:#fff;border:1px solid rgba(104,66,216,.16);box-shadow:0 10px 25px rgba(52,34,120,.07);color:#6842d8;font-weight:800;font-size:.82rem}.page-contact .contact-grid{align-items:stretch}.page-contact .form-card{background:linear-gradient(145deg,#fff,#faf9ff)}.page-contact .contact-panel{background:linear-gradient(145deg,#102855,#4d31a3);color:#fff}.page-contact .contact-detail{border-color:rgba(255,255,255,.16)}
+.page-contact .page-hero{padding:92px 0 82px;background:radial-gradient(circle at 86% 24%,rgba(139,189,240,.24),transparent 24%),linear-gradient(135deg,#fff,#f7f4ff 62%,#eff7ff)}
+.page-contact .page-hero .narrow{max-width:900px;margin-left:max(16px,calc((100% - 1120px)/2));position:relative}
+.page-contact .page-hero h1{max-width:780px;font-size:clamp(3rem,6vw,5.6rem);line-height:1;letter-spacing:-.05em}
+.page-contact .page-hero .lead{max-width:760px}
+.page-contact .contact-hero-points{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.page-contact .contact-hero-points span{padding:9px 13px;border-radius:999px;background:#fff;border:1px solid rgba(104,66,216,.16);box-shadow:0 10px 25px rgba(52,34,120,.07);color:#6842d8;font-weight:800;font-size:.82rem}
+.page-contact .contact-grid{align-items:stretch}
+.page-contact .form-card{background:linear-gradient(145deg,#fff,#faf9ff)}
+.page-contact .contact-panel{background:linear-gradient(145deg,#102855,#4d31a3);color:#fff}
+.page-contact .contact-detail{border-color:rgba(255,255,255,.16)}
+.page-contact .selected-solution-summary{display:grid;gap:3px;margin-bottom:22px;padding:16px 18px;border:1px solid rgba(104,66,216,.16);border-radius:12px;background:#f6f3ff}
+.page-contact .selected-solution-summary span{color:#6842d8;font-size:.72rem;font-weight:850;text-transform:uppercase;letter-spacing:.07em}
+.page-contact .selected-solution-summary strong{color:#0c1c3c}
+.page-contact .selected-solution-summary small{color:#667789}
+.page-contact .budget-disclaimer{margin:18px 0;color:#667789;font-size:.76rem}
