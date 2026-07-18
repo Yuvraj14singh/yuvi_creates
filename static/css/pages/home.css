@@ -77,12 +77,34 @@
 .page-home .feedback-invite strong { color: #0c1c3c; font-size: 1.12rem; }
 .page-home .feedback-invite span { color: #667789; }
 .page-home .cta-box { background: radial-gradient(circle at 85% 20%,rgba(139,189,240,.25),transparent 28%),linear-gradient(135deg,#f7f3ff,#eef7ff); color: var(--ink); border: 1px solid rgba(104,66,216,.17); box-shadow: 0 32px 80px rgba(48,30,111,.13); }
+.page-home .home-packages { background: linear-gradient(180deg,#f8f7ff 0%,#f1f5ff 100%); }
+.page-home .home-packages-head { align-items: end; margin-bottom: 38px; }
+.page-home .home-packages-head > div { max-width: 780px; }
+.page-home .home-packages-head h2 { max-width: 700px; font-size: clamp(2rem,4vw,3.25rem); letter-spacing: -.035em; }
+.page-home .home-package-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
+.page-home .home-package-card { position: relative; display: flex; min-width: 0; min-height: 470px; flex-direction: column; padding: 28px; overflow: hidden; border: 1px solid rgba(104,66,216,.14); border-radius: 18px; background: rgba(255,255,255,.88); box-shadow: 0 22px 55px rgba(43,30,98,.08); transition: transform .25s ease,border-color .25s ease,box-shadow .25s ease; }
+.page-home .home-package-card::before { content:""; position:absolute; inset:0 0 auto; height:4px; background:linear-gradient(90deg,#6842d8,#8bbdf0); opacity:.72; }
+.page-home .home-package-card:hover { transform: translateY(-6px); border-color: rgba(104,66,216,.3); box-shadow: 0 28px 65px rgba(43,30,98,.14); }
+.page-home .home-package-card.is-featured { border-color: rgba(104,66,216,.34); background: linear-gradient(145deg,#fff,#f3efff); }
+.page-home .home-package-top { min-height: 42px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.page-home .home-package-index { color:#9a8fc1; font-size:.72rem; font-weight:800; letter-spacing:.12em; }
+.page-home .home-package-card .package-tag { justify-content:center; max-width:75%; min-height:28px; padding:6px 10px; text-align:right; background:#eef5ff; color:#516078; font-size:.7rem; }
+.page-home .home-package-main { display:flex; flex:1; flex-direction:column; }
+.page-home .home-package-card h3 { min-height:0; margin:24px 0 28px; max-width:290px; font-size:clamp(1.35rem,2vw,1.7rem); letter-spacing:-.025em; }
+.page-home .home-price-label { margin-bottom:7px; color:#7b879b; font-size:.66rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+.page-home .home-package-card .price { margin:0 0 20px; color:#6842d8; font-size:clamp(1.8rem,2.5vw,2.35rem); letter-spacing:-.035em; }
+.page-home .home-package-card .package-copy { flex:1; margin:0; color:#66748a; font-size:.95rem; line-height:1.7; }
+.page-home .home-package-action { display:flex; align-items:center; justify-content:space-between; min-height:50px; margin-top:28px; padding:0 17px; border-radius:10px; background:#0b1d42; color:#fff; font-size:.82rem; font-weight:800; }
+.page-home .home-package-action b { color:#b9a8ff; font-size:1.15rem; transition:transform .2s ease; }
+.page-home .home-package-action:hover { background:#6842d8; }
+.page-home .home-package-action:hover b { color:#fff; transform:translateX(4px); }
 
 @media (max-width: 900px) {
     .page-home .hero-grid { grid-template-columns: 1fr; }
     .page-home .hero-panel { transform: none; }
     .page-home .hero-panel img { height: clamp(300px,66vw,500px); }
     .page-home .hero { min-height: auto; padding-top: 76px; }
+    .page-home .home-package-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
 }
 
 @media (max-width: 560px) {
@@ -92,4 +114,9 @@
     .page-home .hero-panel { padding: 10px; border-radius: 20px; }
     .page-home .hero-panel img { height: 300px; border-radius: 14px; }
     .page-home .feedback-invite { align-items: stretch; flex-direction: column; padding: 22px 18px; }
+    .page-home .home-packages-head { align-items:stretch; }
+    .page-home .home-packages-head .btn { width:100%; }
+    .page-home .home-package-grid { grid-template-columns:1fr; }
+    .page-home .home-package-card { min-height:0; padding:24px 20px; }
+    .page-home .home-package-card h3 { margin-block:20px 24px; }
 }

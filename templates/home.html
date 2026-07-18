@@ -66,25 +66,29 @@
     </div>
 </section>
 
-<section class="section surface">
-    <div class="container split">
+<section class="section surface home-packages">
+    <div class="container split home-packages-head">
         <div>
-            <p class="eyebrow">Business website packages</p>
-            <h2>Clear packages for business sites, restaurant sites, and tour/travel websites.</h2>
-            <p>Choose a starting point, share your content, and get a professional website flow built around calls, WhatsApp, location, bookings, enquiries, and trust.</p>
+            <p class="eyebrow">Featured website solutions</p>
+            <h2>Choose a strong starting point for your website.</h2>
+            <p>Compare a few popular solutions here, then explore the complete package collection for your industry, scope, and market.</p>
         </div>
         <a class="btn btn-primary" href="{% url 'packages' %}">Explore all packages</a>
     </div>
-    <div class="container card-grid four">
+    <div class="container home-package-grid">
         {% for package in packages %}
-            <article class="price-card reveal">
-                <div class="price-card-main">
+            <article class="home-package-card reveal{% if package.is_featured %} is-featured{% endif %}">
+                <div class="home-package-top">
+                    <span class="home-package-index">{{ forloop.counter|stringformat:"02d" }}</span>
                     <span class="tag package-tag">{{ package.category }}</span>
+                </div>
+                <div class="home-package-main">
                     <h3>{{ package.title }}</h3>
+                    <span class="home-price-label">Starting investment</span>
                     <p class="price">{{ package.price }}</p>
                     <p class="package-copy">{{ package.short_description }}</p>
                 </div>
-                <a class="btn btn-small" href="{{ package.get_absolute_url }}">Choose Package</a>
+                <a class="home-package-action" href="{{ package.get_absolute_url }}"><span>View package</span><b aria-hidden="true">→</b></a>
             </article>
         {% endfor %}
     </div>
