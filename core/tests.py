@@ -1,7 +1,144 @@
 from django.test import TestCase
 from django.urls import reverse
+import json
 
-from .models import Enquiry, Package, PackageMarketPrice, Review
+from .models import AboutProfile, Enquiry, Industry, Package, PackageMarketPrice, PortfolioProject, Review, Service
+from .assistant import INTENT_NAMES, answer_message, match_intent
+
+
+class AssistantEndpointTests(TestCase):
+    def setUp(self):
+        self.package = Package.objects.create(title="Assistant Starter", price="internal", short_description="Starter", included_features="Homepage")
+        self.industry = Industry.objects.create(title="Assistant Clinic", slug="assistant-clinic", short_description="Clinic sites", eyebrow="Clinic", hero_heading="Clinic website", hero_text="Trust and appointments")
+        self.industry.packages.add(self.package)
+        PackageMarketPrice.objects.create(package=self.package, market_code="IN", currency_code="INR", currency_symbol="₹", min_price=20000, max_price=30000)
+
+    def post_lead(self, **updates):
+        payload = {"name":"Test Client","email":"assistant@example.com","phone":"12345","industry":self.industry.slug,"package_id":self.package.pk,"market":"IN","consent":True,"source_page":"/packages/"}
+        payload.update(updates)
+        return self.client.post(reverse("assistant_lead"), data=json.dumps(payload), content_type="application/json")
+
+    def test_context_returns_server_price(self):
+        response = self.client.get(reverse("assistant_context"), {"market":"IN"})
+        self.assertEqual(response.status_code, 200)
+        industry = next(item for item in response.json()["industries"] if item["slug"] == self.industry.slug)
+        self.assertEqual(industry["packages"][0]["price"], "₹20,000 – ₹30,000")
+
+    def test_consent_is_required(self):
+        response = self.post_lead(consent=False)
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(Enquiry.objects.exists())
+
+    def test_invalid_package_is_rejected(self):
+        response = self.post_lead(package_id=999999)
+        self.assertEqual(response.status_code, 400)
+
+    def test_saved_price_is_loaded_server_side(self):
+        response = self.post_lead(displayed_price_context="₹1")
+        self.assertEqual(response.status_code, 200)
+        enquiry = Enquiry.objects.get(email="assistant@example.com")
+        self.assertEqual(enquiry.displayed_price_context, "₹20,000 – ₹30,000")
+
+
+class AssistantHumanLikeUpgradeTests(TestCase):
+    def setUp(self):
+        self.package = Package.objects.create(
+            title="Premium Assistant Clinic Website", price="internal", short_description="Premium clinic scope",
+            included_features="Doctor profiles\nAppointment requests\nServices\nTestimonials\nEnquiry management",
+            scope_limits="Up to 8 pages\nOne clinic location",
+        )
+        self.industry, _ = Industry.objects.get_or_create(
+            slug="clinic-healthcare",
+            defaults={"title":"Clinics & Healthcare Practices", "short_description":"Clinic sites", "eyebrow":"Healthcare", "hero_heading":"Clinic website", "hero_text":"Build patient trust"},
+        )
+        self.industry.packages.clear()
+        self.industry.packages.add(self.package)
+        PackageMarketPrice.objects.create(
+            package=self.package, market_code="AU", currency_code="AUD", currency_symbol="A$",
+            min_price=1700, max_price=3000,
+        )
+        AboutProfile.objects.create(
+            name="Test Founder", role="Web Developer", headline="Builds practical websites.",
+            bio="Creates responsive business websites.", highlight_one="Django",
+        )
+
+    def post_message(self, message, **extra):
+        payload = {"message": message, "source_page": "/"}
+        payload.update(extra)
+        return self.client.post(reverse("assistant_message"), json.dumps(payload), content_type="application/json")
+
+    def test_registry_contains_exactly_150_intents(self):
+        self.assertEqual(len(INTENT_NAMES), 150)
+        self.assertEqual(len(set(INTENT_NAMES)), 150)
+
+    def test_bootstrap_contains_public_knowledge_without_private_fields(self):
+        data = self.client.get(reverse("assistant_bootstrap")).json()
+        self.assertEqual(data["intent_count"], 150)
+        self.assertEqual(data["founder"]["name"], "Test Founder")
+        self.assertNotIn("email", data["founder"])
+        self.assertNotIn("phone", data["founder"])
+
+    def test_hinglish_context_is_remembered_for_follow_up_price(self):
+        first = self.post_message("Mujhe clinic ki premium website chahiye")
+        self.assertEqual(first.status_code, 200)
+        second = self.post_message("Australia ka price kitna hai?")
+        self.assertIn("A$1,700 – A$3,000 AUD", second.json()["reply"])
+        self.assertEqual(second.json()["context"]["industry"], "clinic-healthcare")
+
+    def test_current_page_adds_industry_context(self):
+        response = self.post_message("premium price Australia", source_page="/packages/clinic-healthcare/")
+        self.assertIn("A$1,700 – A$3,000 AUD", response.json()["reply"])
+
+    def test_founder_answer_uses_database_profile(self):
+        response = self.post_message("Who is Yuvraj?")
+        self.assertContains(response, "Test Founder")
+        self.assertContains(response, "Builds practical websites")
+
+    def test_greeting_uses_multiple_variations(self):
+        replies = [self.post_message("hello").json()["reply"] for _ in range(3)]
+        self.assertEqual(len(set(replies)), 3)
+
+    def test_restart_clears_old_context(self):
+        self.post_message("clinic premium Australia")
+        response = self.post_message("hello", restart=True)
+        self.assertEqual(response.json()["context"].get("industry"), "")
+
+    def test_package_and_pricing_endpoints_are_grounded(self):
+        packages = self.client.get(reverse("assistant_packages"), {"industry": self.industry.slug})
+        self.assertContains(packages, "Doctor profiles")
+        pricing = self.client.get(reverse("assistant_pricing"), {"industry": self.industry.slug, "market": "AU"})
+        self.assertEqual(pricing.json()["prices"][0]["price"], "A$1,700 – A$3,000 AUD")
+
+    def test_all_registered_intents_can_generate_a_safe_response(self):
+        for intent in INTENT_NAMES:
+            payload = answer_message(intent.replace("_", " "), {})
+            self.assertTrue(payload["reply"], intent)
+            self.assertIn(payload["intent"], INTENT_NAMES)
+
+    def test_chat_template_has_accessibility_and_trust_controls(self):
+        response = self.client.get(reverse("home"))
+        self.assertContains(response, "data-chat-minimize")
+        self.assertContains(response, "data-chat-unread")
+        self.assertContains(response, "csrfmiddlewaretoken")
+        self.assertContains(response, "Replies are based on current Yuvi Creates website information")
+
+    def test_about_page_uses_public_founder_and_active_industries(self):
+        response = self.client.get(reverse("about"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Meet <em>Yuvraj.</em>", html=True)
+        self.assertContains(response, "WHY I STARTED YUVI CREATES")
+        self.assertContains(response, "Premium Assistant Clinic Website", count=0)
+        self.assertContains(response, "Clinics &amp; Healthcare Practices")
+        self.assertContains(response, self.industry.get_absolute_url())
+        self.assertContains(response, "ABOUT FAQ")
+        self.assertNotContains(response, "years of experience")
+        self.assertNotContains(response, "guaranteed leads")
+
+    def test_assistant_uses_shared_approved_about_story(self):
+        reason = self.post_message("Why was Yuvi Creates started?").json()["reply"]
+        self.assertIn("every business deserves a website", reason)
+        stack = self.post_message("Which technologies are used?").json()["reply"]
+        self.assertIn("Python, Django, HTML, CSS, JavaScript", stack)
 
 
 class FeedbackFlowTests(TestCase):
@@ -42,38 +179,92 @@ class FeedbackFlowTests(TestCase):
         self.assertContains(response, "Submit Feedback")
 
 
+class ServicesPageUpgradeTests(TestCase):
+    def test_every_service_has_enriched_business_content(self):
+        response = self.client.get(reverse("services"))
+        self.assertEqual(response.status_code, 200)
+        service_count = Service.objects.count()
+        self.assertContains(response, "BEST FOR", count=service_count)
+        self.assertContains(response, ">Explore Service <span>", count=service_count)
+        self.assertContains(response, ">Get a Quote →</a>", count=service_count)
+        self.assertContains(response, "Industry-relevant direction")
+        self.assertContains(response, "Final scope is confirmed before work begins")
+
+    def test_service_cards_keep_database_content_and_valid_demo_links(self):
+        from django.utils.html import conditional_escape
+        from django.utils.text import slugify
+        response = self.client.get(reverse("services"))
+        for service in Service.objects.all():
+            self.assertContains(response, conditional_escape(service.title))
+            self.assertContains(response, reverse("service_demo", args=[service.pk, slugify(service.title)]), status_code=200)
+
+    def test_every_service_demo_route_still_renders(self):
+        from django.utils.html import conditional_escape
+        self.client.get(reverse("services"))
+        from django.utils.text import slugify
+        for service in Service.objects.all():
+            response = self.client.get(reverse("service_demo", args=[service.pk, slugify(service.title)]))
+            self.assertEqual(response.status_code, 200, service.title)
+            self.assertContains(response, conditional_escape(service.title))
+            self.assertContains(response, "Recommended Page Flow")
+            self.assertContains(response, "Service Essentials")
+            self.assertContains(response, "Service FAQ")
+            self.assertContains(response, "View Matching Packages")
+
+    def test_each_service_quote_link_prefills_the_selected_service(self):
+        self.client.get(reverse("services"))
+        service = Service.objects.get(title="Hotel Websites")
+        response = self.client.get(reverse("contact"), {"service": service.title, "source": "Service Detail Page"})
+        self.assertContains(response, service.title)
+        self.assertContains(response, "Enquiry source: Service Detail Page")
+
+
 class PackagesPageTests(TestCase):
     def test_premium_solution_categories_render(self):
         response = self.client.get(reverse("packages"))
         self.assertEqual(response.status_code, 200)
         for category in (
-            "Business Websites",
-            "Restaurant &amp; Cafe Websites",
-            "Travel &amp; Tourism Websites",
-            "Beauty &amp; Personal Brand Websites",
-            "Sports &amp; Community Websites",
+            "General Business &amp; Services",
+            "Restaurant &amp; Cafe",
+            "Travel &amp; Tourism",
+            "Clinics &amp; Healthcare Practices",
+            "Sports, Cricket &amp; Community",
             "Custom Business Systems",
         ):
             self.assertContains(response, category)
-        self.assertContains(response, "Get a Project Quote")
-        self.assertContains(response, "Discuss Your Project")
-        self.assertContains(response, "View Full Scope")
-        self.assertContains(response, "Custom Quotes, Clear Scope")
-        self.assertNotContains(response, "Request Pricing")
-        self.assertNotContains(response, "Starting price available on request")
-        self.assertNotContains(response, "Tailored Pricing")
-        self.assertNotContains(response, "Scope-Based Pricing")
-        self.assertNotContains(response, 'class="investment"')
-        self.assertContains(response, "₹18,000 – ₹30,000")
-        self.assertContains(response, "$450 – $700 USD")
-        self.assertContains(response, 'role="dialog"')
-        self.assertContains(response, 'data-scope-template=')
-        self.assertNotContains(response, 'class="full-scope"')
+        self.assertContains(response, "Choose Your Industry")
+        self.assertContains(response, "View Packages", count=16)
+        self.assertNotContains(response, 'data-scope-template=')
 
     def test_focused_package_query_highlights_relevant_solution(self):
-        response = self.client.get(reverse("packages"), {"focus": "restaurant"})
-        self.assertContains(response, 'data-solution-link="restaurant-cafe-websites"')
-        self.assertContains(response, "Restaurant and cafe packages")
+        response = self.client.get(reverse("industry_packages", args=["restaurant-cafe"]))
+        self.assertContains(response, "FOOD BUSINESS WEBSITE SOLUTIONS")
+        self.assertContains(response, "View Full Scope")
+        self.assertNotContains(response, "Starter Clinic Website")
+
+    def test_every_active_industry_route_renders(self):
+        self.client.get(reverse("packages"))
+        for industry in Industry.objects.filter(is_active=True):
+            response = self.client.get(reverse("industry_packages", args=[industry.slug]))
+            self.assertEqual(response.status_code, 200, industry.slug)
+
+    def test_clinic_packages_prices_and_demo_are_connected(self):
+        self.client.get(reverse("packages"))
+        industry = Industry.objects.get(slug="clinic-healthcare")
+        self.assertEqual(industry.packages.count(), 4)
+        self.assertTrue(industry.demos.filter(title="Clinic Website Demo").exists())
+        starter = industry.packages.get(title="Starter Clinic Website")
+        self.assertEqual(starter.market_prices.count(), 5)
+        self.assertEqual(starter.market_prices.get(market_code="IN").public_label, "₹25,000 – ₹40,000")
+
+    def test_industry_quote_prefill_is_server_validated(self):
+        self.client.get(reverse("packages"))
+        industry = Industry.objects.get(slug="clinic-healthcare")
+        package = industry.packages.get(title="Professional Clinic Website")
+        response = self.client.get(reverse("contact"), {"industry": industry.slug, "package": package.pk, "market": "AU"})
+        self.assertContains(response, "Clinics &amp; Healthcare Practices")
+        self.assertContains(response, package.title)
+        self.assertContains(response, "A$1,700 – A$3,000 AUD")
 
     def test_proposal_link_prefills_existing_contact_form(self):
         self.client.get(reverse("packages"))

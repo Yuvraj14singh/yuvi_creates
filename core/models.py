@@ -117,6 +117,34 @@ class PortfolioProject(models.Model):
         return self.title
 
 
+class Industry(models.Model):
+    title = models.CharField(max_length=120)
+    slug = models.SlugField(max_length=120, unique=True)
+    icon = models.CharField(max_length=12, blank=True)
+    badge = models.CharField(max_length=40, blank=True)
+    short_description = models.CharField(max_length=220)
+    eyebrow = models.CharField(max_length=120)
+    hero_heading = models.CharField(max_length=220)
+    hero_text = models.TextField()
+    accent = models.CharField(max_length=20, default="#6842d8")
+    hero_image = models.ImageField(upload_to="industries/", blank=True)
+    packages = models.ManyToManyField(Package, blank=True, related_name="industries")
+    demos = models.ManyToManyField(PortfolioProject, blank=True, related_name="industries")
+    faq = models.TextField(blank=True, help_text="One question and answer per line, separated with |")
+    is_active = models.BooleanField(default=True)
+    order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", "title"]
+        verbose_name_plural = "Industries"
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("industry_packages", args=[self.slug])
+
+
 class AboutProfile(models.Model):
     name = models.CharField(max_length=120, default="Yuvraj Singh")
     role = models.CharField(max_length=160, default="Freelance Web Developer")

@@ -1,67 +1,43 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}{{ service.title }} Demo | Yuvi Creates{% endblock %}
-{% block meta_description %}Demo page for {{ service.title }} by Yuvi Creates.{% endblock %}
-{% block extra_head %}
-<link rel="stylesheet" href="{% static demo_css %}">
-{% endblock %}
+{% block body_class %}page-service-detail service-detail-{{ demo_slug }}{% endblock %}
+{% block title %}{{ service.title }} | Yuvi Creates{% endblock %}
+{% block meta_description %}{{ service.description }} Explore the ideal audience, page structure, practical features and matching website packages from Yuvi Creates.{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static demo_css %}"><link rel="stylesheet" href="{% static 'css/pages/service-detail.css' %}">{% endblock %}
 {% block content %}
-<section class="demo-hero demo-{{ demo_slug }}">
-    <div class="container demo-hero-grid">
-        <div>
-            <p class="demo-kicker">{{ service.icon }} · Demo page</p>
-            <h1>{{ service.title }}</h1>
-            <p>{{ service.description }}</p>
-            <div class="demo-actions">
-                <a class="btn btn-primary" href="{% url 'contact' %}">Start Similar Project</a>
-                <a class="btn btn-secondary" href="{{ package_url }}">View Packages</a>
-            </div>
-        </div>
-        <div class="demo-preview" aria-label="{{ service.title }} preview">
-            <div class="demo-window-bar"><span></span><span></span><span></span></div>
-            <div class="demo-window-body">
-                <strong>{{ service.title }}</strong>
-                <em>{{ details.vibe }}</em>
-                <p>{{ details.cta }}</p>
-                <div class="demo-vibe-grid">
-                    {% for item in details.visual_items %}
-                        <span>{{ item }}</span>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+<main class="sd-page">
+  <section class="sd-hero">
+    <div class="sd-orb"></div>
+    <div class="container sd-breadcrumb"><a href="{% url 'services' %}">Services</a><span>→</span><strong>{{ service.title }}</strong></div>
+    <div class="container sd-hero-grid">
+      <div class="sd-hero-copy reveal"><p class="sd-kicker">{{ presentation.group }} · Website Service</p><h1>{{ service.title }}</h1><p class="sd-lead">{{ service.description }}</p><div class="sd-best"><span>BEST FOR</span><strong>{{ presentation.best_for }}</strong></div><div class="sd-actions"><a class="btn btn-primary" href="{{ quote_url }}">Start a Similar Project <span>↗</span></a><a class="sd-text-link" href="{{ package_url }}">View Matching Packages <span>→</span></a></div></div>
+      <div class="sd-visual reveal" aria-label="{{ details.vibe }} concept preview"><div class="sd-browser"><header><i></i><i></i><i></i><span>{{ details.vibe }}</span></header><div class="sd-browser-body"><div class="sd-screen-head"><small>PREMIUM WEBSITE CONCEPT</small><strong>{{ details.cta }}</strong><span>Explore the experience ↓</span></div><div class="sd-ui-grid">{% for item in details.visual_items %}<div><i>{{ forloop.counter|stringformat:"02d" }}</i><b>{{ item }}</b><span></span></div>{% endfor %}</div></div></div><div class="sd-device"><span></span><strong>Responsive<br>by design.</strong><i>Mobile · Tablet · Desktop</i></div></div>
     </div>
-</section>
+  </section>
 
-<section class="demo-section">
-    <div class="container demo-grid">
-        <article class="demo-panel">
-            <p class="demo-kicker">Best for</p>
-            <h2>{{ details.audience|capfirst }}</h2>
-            <p>{{ details.cta }}</p>
-        </article>
-        <article class="demo-panel">
-            <p class="demo-kicker">Page flow</p>
-            <h2>Sections this demo would include</h2>
-            <ul class="demo-list">
-                {% for section in details.sections %}
-                    <li>{{ section }}</li>
-                {% endfor %}
-            </ul>
-        </article>
-    </div>
-</section>
+  <section class="sd-outcomes section">
+    <div class="container sd-section-heading reveal"><div><p class="sd-kicker">The Business Goal</p><h2>Designed to make the next step feel <em>obvious.</em></h2></div><p>{{ details.cta }} The interface, content hierarchy and calls to action are planned around that practical outcome.</p></div>
+    <div class="container sd-outcome-grid"><article class="reveal"><span>01</span><strong>Present Clearly</strong><p>Help visitors quickly understand the offer, business and important information.</p></article><article class="reveal"><span>02</span><strong>Build Confidence</strong><p>Use relevant content, proof and thoughtful presentation to support credibility.</p></article><article class="reveal"><span>03</span><strong>Guide Action</strong><p>Create a direct path toward the most useful enquiry, booking or contact action.</p></article></div>
+  </section>
 
-<section class="demo-section demo-band">
-    <div class="container demo-cta">
-        <div>
-            <p class="demo-kicker">Ready to build</p>
-            <h2>Use this as a starting point for your own website.</h2>
-        </div>
-        <a class="btn btn-primary" href="{{ package_url }}">View Packages</a>
-    </div>
-</section>
+  <section class="sd-structure section">
+    <div class="container sd-structure-grid"><div class="sd-sticky-copy reveal"><p class="sd-kicker">Recommended Page Flow</p><h2>A structure shaped for this service.</h2><p>These are practical starting sections. The final page count and content flow are adjusted after the real requirements are confirmed.</p><a class="sd-text-link" href="{% url 'process' %}">See How Projects Work <span>→</span></a></div><ol class="sd-flow-list">{% for section in details.sections %}<li class="reveal"><span>{{ forloop.counter|stringformat:"02d" }}</span><div><strong>{{ section }}</strong><p>Content, visuals and calls to action tailored to {{ details.audience }}.</p></div></li>{% endfor %}</ol></div>
+  </section>
+
+  <section class="sd-features section">
+    <div class="container sd-section-heading reveal"><div><p class="sd-kicker">Service Essentials</p><h2>What this direction is built around.</h2></div><p>Final inclusions depend on the selected package. These are the core experience priorities for this service category.</p></div>
+    <div class="container sd-feature-grid">{% for feature in presentation.features %}<article class="reveal"><span>0{{ forloop.counter }}</span><h3>{{ feature }}</h3><p>Planned around the approved content, brand direction and confirmed project scope.</p></article>{% endfor %}<article class="reveal sd-feature-accent"><span>+</span><h3>Custom functionality when required</h3><p>Admin panels, integrations and specialised workflows can be scoped separately.</p></article></div>
+  </section>
+
+  <section class="sd-scope section">
+    <div class="container sd-scope-shell reveal"><div><p class="sd-kicker">A Clear Starting Point</p><h2>Built for {{ details.audience }}.</h2><p>This page presents a recommended service direction, not a fixed one-size-fits-all template. Content, sections, visual language and functionality can be customised for the real business.</p></div><div class="sd-scope-checks"><span>✓ Industry-relevant visual direction</span><span>✓ Responsive layout planning</span><span>✓ Clear content hierarchy</span><span>✓ Purposeful calls to action</span><span>✓ Scope confirmed before development</span></div></div>
+  </section>
+
+  <section class="sd-faq section">
+    <div class="container sd-faq-grid"><div class="reveal"><p class="sd-kicker">Service FAQ</p><h2>Before choosing this direction.</h2></div><div><details><summary>Can the design be customised for my brand?</summary><p>Yes. Colours, typography, content, layout details and visual direction are adapted after reviewing the business and available brand assets.</p></details><details><summary>Is every item shown included in every package?</summary><p>No. This page explains the recommended direction. Exact pages, features, revisions and support depend on the selected package and confirmed proposal.</p></details><details><summary>Will the website work on mobile devices?</summary><p>Responsive behaviour is planned for modern mobile, tablet and desktop layouts. Any specialised device requirement should be mentioned before development.</p></details><details><summary>Can custom backend features be added?</summary><p>Yes, where technically suitable. Admin panels, booking logic, payments, APIs and custom workflows are reviewed and quoted according to requirements.</p></details><details><summary>How do I get an exact recommendation?</summary><p>Share your business type, content, required functionality and preferred timeline through the enquiry form. Yuvraj can then suggest the most suitable package.</p></details></div></div>
+  </section>
+
+  <section class="sd-final section"><div class="container sd-final-box reveal"><p class="sd-kicker">Ready to Explore the Next Step?</p><h2>Turn this direction into a website built for your business.</h2><p>Compare matching packages or share your requirements for a scope-based recommendation.</p><div class="sd-actions"><a class="btn btn-primary" href="{{ quote_url }}">Start Your Project <span>↗</span></a><a class="sd-text-link" href="{{ package_url }}">View Packages <span>→</span></a><a class="sd-text-link" href="{% url 'portfolio' %}">Explore Demos <span>→</span></a></div></div></section>
+</main>
 {% endblock %}
-{% block extra_scripts %}
-<script src="{% static demo_js %}"></script>
-{% endblock %}
+{% block extra_scripts %}<script src="{% static demo_js %}"></script>{% endblock %}

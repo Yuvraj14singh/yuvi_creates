@@ -1,23 +1,47 @@
 {% extends "base.html" %}
 {% load static %}
 {% block body_class %}page-portfolio{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/portfolio.css' %}">{% endblock %}
-{% block title %}Website Portfolio & Demo Projects | Yuvi Creates{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/portfolio.css' %}"><link rel="stylesheet" href="{% static 'css/components/discovery-search.css' %}"><link rel="stylesheet" href="{% static 'css/components/demo-actions.css' %}"><link rel="stylesheet" href="{% static 'css/components/demo-actions-fix.css' %}"><link rel="stylesheet" href="{% static 'css/components/demo-grid-wide.css' %}">{% endblock %}
+{% block title %}Website Demos for Different Industries | Yuvi Creates{% endblock %}
 {% block meta_description %}View Yuvi Creates demo website projects for restaurants, cafes, hotels, travel agencies, real estate, salons, pet shops, gyms, shops, personal brands, and service businesses.{% endblock %}
 {% block content %}
 <section class="page-hero section">
     <div class="container narrow">
-        <p class="eyebrow">Portfolio</p>
-        <h1>Work examples for practical, polished business websites.</h1>
-        <p class="lead">These demo projects show the kind of structure, flow, and presentation I create for different client types.</p>
+        <p class="eyebrow">Website demos</p>
+        <h1>Explore website concepts built for <em>different industries.</em></h1>
+        <p class="lead">Open any demo to experience a complete website direction. Every layout, colour, section, feature, and enquiry flow can be customized for your business.</p>
     </div>
 </section>
 <section class="section">
+    <div class="container demo-search-shell" data-demo-search>
+        <label for="demo-search-input">Find a Demo</label><div class="search-control"><input id="demo-search-input" type="search" placeholder="Search website demos…" autocomplete="off"><button type="button" data-demo-reset>Reset</button></div>
+        <div class="demo-filter-pills" role="group" aria-label="Filter demos by category"><button class="is-active" type="button" data-demo-filter="all" aria-pressed="true">All</button><button type="button" data-demo-filter="business">Business</button><button type="button" data-demo-filter="food">Food</button><button type="button" data-demo-filter="sports">Sports</button><button type="button" data-demo-filter="healthcare">Healthcare</button><button type="button" data-demo-filter="property">Property</button><button type="button" data-demo-filter="travel">Travel</button><button type="button" data-demo-filter="beauty">Beauty</button><button type="button" data-demo-filter="hospitality">Hospitality</button><button type="button" data-demo-filter="events">Events</button><button type="button" data-demo-filter="retail">Retail</button><button type="button" data-demo-filter="portfolio">Portfolio</button><button type="button" data-demo-filter="local-services">Local Services</button></div>
+        <p class="search-count" aria-live="polite" data-demo-count>{{ projects|length }} demos available</p>
+    </div>
     <div class="container card-grid three">
         {% for project in projects %}
-            <article class="portfolio-card reveal">
-                <div class="project-thumb"><img src="{% static 'images/portfolio/' %}{{ project.pk }}.webp" alt="{{ project.title }} website preview" loading="lazy"></div>
+            <article class="portfolio-card reveal" data-demo-card data-category="{{ project.filter_category }}" data-search="{{ project.search_terms|lower }}">
+                <div class="demo-card-visual">
+                <div class="project-thumb">
+                    {% if project.title == "Restaurant Website Demo" %}<img src="{% static 'images/portfolio/restaurant-demo-v2.png' %}" alt="Premium restaurant website displayed against a fine dining background" loading="lazy">
+                    {% elif project.title == "Cafe Landing Page Demo" %}<img src="{% static 'images/portfolio/cafe-demo-v2.png' %}" alt="Premium cafe website displayed in an artisan coffee shop" loading="lazy">
+                    {% elif project.title == "Gym Website Demo" %}<img src="{% static 'images/portfolio/gym-demo-v2.png' %}" alt="Premium fitness website displayed in a modern gym" loading="lazy">
+                    {% elif project.title == "Personal Portfolio Website" %}<img src="{% static 'images/portfolio/personal-demo-v2.png' %}" alt="Premium personal portfolio website displayed in a creative workspace" loading="lazy">
+                    {% elif project.title == "Cricket Intelligence Dashboard Demo" %}<img src="{% static 'images/portfolio/cricket-demo-v2.png' %}" alt="Premium cricket league website displayed in a stadium" loading="lazy">
+                    {% elif project.title == "Real Estate Property Demo" %}<img src="{% static 'images/portfolio/realestate-demo-v2.png' %}" alt="Premium property website displayed against a luxury villa" loading="lazy">
+                    {% elif project.title == "Salon Makeup Artist Demo" %}<img src="{% static 'images/portfolio/salon-demo-v2.png' %}" alt="Premium beauty website displayed in a salon studio" loading="lazy">
+                    {% elif project.title == "Clinic Website Demo" %}<img src="{% static 'images/portfolio/clinic-demo-v2.png' %}" alt="Premium clinic website displayed at a modern reception" loading="lazy">
+                    {% elif project.title == "Web Design Agency Demo" %}<img src="{% static 'images/portfolio/agency-demo-v2.png' %}" alt="Premium agency website displayed in a creative studio" loading="lazy">
+                    {% elif project.title == "Pet Shop Website Demo" %}<img src="{% static 'images/portfolio/pet-demo-v2.png' %}" alt="Premium pet shop website displayed in a pet boutique" loading="lazy">
+                    {% elif project.title == "Hotel Website Demo" %}<img src="{% static 'images/portfolio/hotel-demo-v2.png' %}" alt="Premium hotel website displayed in a luxury suite" loading="lazy">
+                    {% elif project.title == "Wedding & Event Planner Website Demo" %}<img src="{% static 'images/portfolio/wedding-demo-v2.png' %}" alt="Premium wedding website displayed at an elegant ceremony" loading="lazy">
+                    {% elif project.title == "Trips & Tours Website Demo" %}<img src="{% static 'images/portfolio/travel-demo-v2.png' %}" alt="Premium travel website displayed against a mountain destination" loading="lazy">
+                    {% elif project.title == "Local Service Business Demo" %}<img src="{% static 'images/portfolio/local-service-demo-v2.png' %}" alt="Premium local service website displayed in a professional workshop" loading="lazy">
+                    {% elif project.title == "Shop Website Demo" %}<img src="{% static 'images/portfolio/shop-demo-v2.png' %}" alt="Premium shop website displayed in a modern boutique" loading="lazy">
+                    {% endif %}
+                </div>
                 <div class="portfolio-card-body">
+                    {% with industry=project.industries.first %}{% if industry %}<span class="demo-industry-badge">{{ industry.title }}</span>{% endif %}{% endwith %}
                     {% if project.title == "Cricket Intelligence Dashboard Demo" %}
                         <h3>Cricket League Landing Page Demo</h3>
                         <p>A premium single-page website concept for cricket leagues featuring teams, fixtures, standings, player highlights, registrations, sponsors and tournament updates.</p>
@@ -28,24 +52,18 @@
                         <span>{{ project.tech_stack }}</span>
                     {% endif %}
                 </div>
+                </div>
                 <div class="portfolio-card-action">
                     {% if project.project_url %}
-                        <a class="btn btn-small" href="{{ project.project_url }}" target="_blank" rel="noreferrer">View Project</a>
+                        <a class="btn btn-small demo-view-button" href="{{ project.project_url }}" target="_blank" rel="noreferrer"><span>View Demo</span><span aria-hidden="true">↗</span></a>
                     {% else %}
-                        {% if project.title == "Cricket Intelligence Dashboard Demo" %}
-                            <a class="btn btn-small" href="{% url 'portfolio_demo' project.pk project.title|slugify %}">View Live Demo</a>
-                        {% else %}
-                            <a class="btn btn-small" href="{% url 'portfolio_demo' project.pk project.title|slugify %}">View Demo</a>
-                        {% endif %}
-                    {% endif %}
-                    {% if project.title == "Cricket Intelligence Dashboard Demo" %}
-                        <a class="btn btn-small btn-secondary" aria-label="Request a similar cricket league website" href="{% url 'contact' %}?service=Cricket%20League%20Website&source=Universal%20Cricket%20Demo">Request Similar</a>
-                    {% else %}
-                        <a class="btn btn-small btn-secondary" aria-label="Request a similar website for {{ project.title }}" href="{% url 'contact' %}?service={{ project.title|urlencode }}&source=Portfolio%20Demo%20Card">Request Similar</a>
+                        <a class="btn btn-small demo-view-button" href="{% url 'portfolio_demo' project.pk project.title|slugify %}"><span>View Demo</span><span aria-hidden="true">→</span></a>
                     {% endif %}
                 </div>
             </article>
         {% endfor %}
     </div>
+    <div class="container search-empty" data-demo-empty hidden><h3>No exact demo found.</h3><p>Tell us what you want to build and we will recommend the closest direction.</p><a class="btn btn-primary" href="{% url 'contact' %}?source=Demo%20Search">Get a Custom Recommendation</a></div>
 </section>
 {% endblock %}
+{% block extra_scripts %}<script src="{% static 'js/pages/portfolio.js' %}"></script>{% endblock %}

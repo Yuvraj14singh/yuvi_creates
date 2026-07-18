@@ -1,0 +1,24 @@
+{% extends "base.html" %}{% load static %}
+{% block body_class %}page-packages page-package-industries{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/packages.css' %}"><link rel="stylesheet" href="{% static 'css/components/discovery-search.css' %}">{% endblock %}
+{% block title %}Website Packages by Industry | Yuvi Creates{% endblock %}
+{% block content %}
+<section class="packages-hero" id="top"><div class="container packages-hero-inner">
+    <p class="eyebrow">Packages &amp; solutions</p><h1>Choose Your Industry.<br><em>Find the Right Website Solution.</em></h1>
+    <p class="lead">Select your business type to explore tailored website packages, matching demos, features and pricing for your market.</p>
+    <div class="hero-actions"><a class="btn btn-primary" href="#industries">Explore Industries</a><a class="btn btn-secondary" href="{% url 'contact' %}?source=Package%20Recommendation">Get a Custom Recommendation</a></div>
+</div></section>
+<section class="compact-market"><div class="container market-selector-wrap">
+    <div><span>View pricing for:</span><div class="market-selector" role="group" aria-label="Select pricing market">
+        <button type="button" class="market-option is-active" data-market="IN">India — INR</button><button type="button" class="market-option" data-market="US_INTL">United States / International — USD</button><button type="button" class="market-option" data-market="UK">United Kingdom — GBP</button><button type="button" class="market-option" data-market="AU">Australia — AUD</button><button type="button" class="market-option" data-market="CA">Canada — CAD</button>
+    </div></div><label class="market-select-mobile"><span>View pricing for:</span><select class="form-control" data-market-select><option value="IN">India — INR</option><option value="US_INTL">United States / International — USD</option><option value="UK">United Kingdom — GBP</option><option value="AU">Australia — AUD</option><option value="CA">Canada — CAD</option></select></label>
+    <p>Commercial prices are configured separately for each market—not converted using live exchange rates. Your selection stays active while you browse.</p>
+</div></section>
+<section class="industry-selector" id="industries"><div class="container"><div class="pricing-intro"><div><p class="eyebrow">Built around your business</p><h2>Start with the industry closest to yours.</h2></div><p>Each experience brings together relevant packages, features, demos and common questions.</p></div>
+<div class="industry-search" data-industry-search><label for="industry-search-input">Find Your Industry</label><div class="search-control"><input id="industry-search-input" type="search" placeholder="Search your industry or website type…" autocomplete="off"><button type="button" data-search-reset>Reset</button></div><p class="search-count" aria-live="polite" data-search-count>{{ industries|length }} industries available</p></div>
+<div class="industry-selector-grid" data-industry-grid>{% for industry in industries %}<article class="industry-selector-card" style="--industry-accent:{{ industry.accent }}" data-search-card data-search="{{ industry.search_terms|lower }}">
+    <div class="industry-icon" aria-hidden="true">{{ industry.icon }}</div>{% if industry.badge %}<span class="industry-position">{{ industry.badge }}</span>{% endif %}<h3>{{ industry.title }}</h3><p>{{ industry.short_description }}</p>
+    <div class="industry-card-actions"><a class="btn btn-primary industry-link" data-industry-base="{{ industry.get_absolute_url }}" href="{{ industry.get_absolute_url }}">View Packages</a></div>
+</article>{% endfor %}</div><div class="search-empty" data-search-empty hidden><h3>No exact match found.</h3><p>Tell us about your business and we will recommend the closest website solution.</p><a class="btn btn-primary" href="{% url 'contact' %}?source=Industry%20Search">Get a Custom Recommendation</a></div></div></section>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static 'js/pages/packages.js' %}"></script>{% endblock %}

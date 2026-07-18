@@ -11,6 +11,29 @@ document.addEventListener("DOMContentLoaded", function () {
     let activeCurrency = "INR";
     let modalTrigger = null;
 
+    function normalized(value) {
+        return (value || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim().replace(/\s+/g, " ");
+    }
+    const industrySearch = document.getElementById("industry-search-input");
+    const industryCards = Array.from(document.querySelectorAll("[data-search-card]"));
+    const industryCount = document.querySelector("[data-search-count]");
+    const industryEmpty = document.querySelector("[data-search-empty]");
+    const industryReset = document.querySelector("[data-search-reset]");
+    function filterIndustries() {
+        const terms = normalized(industrySearch && industrySearch.value).split(" ").filter(Boolean);
+        let visible = 0;
+        industryCards.forEach(function (card) {
+            const haystack = normalized(card.dataset.search + " " + card.textContent);
+            const match = terms.every(function (term) { return haystack.includes(term); });
+            card.hidden = !match;
+            if (match) visible += 1;
+        });
+        if (industryCount) industryCount.textContent = visible + (visible === 1 ? " industry found" : " industries found");
+        if (industryEmpty) industryEmpty.hidden = visible !== 0;
+    }
+    if (industrySearch) industrySearch.addEventListener("input", filterIndustries);
+    if (industryReset) industryReset.addEventListener("click", function () { industrySearch.value = ""; filterIndustries(); industrySearch.focus(); });
+
     try {
         const stored = window.localStorage.getItem("yuviPricingMarket");
         if (validMarkets.includes(stored)) activeMarket = stored;
@@ -34,6 +57,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         document.querySelectorAll(".quote-link").forEach(function (link) {
             link.href = link.dataset.quoteBase + "&market=" + encodeURIComponent(market) + "&currency=" + encodeURIComponent(activeCurrency);
+        });
+        document.querySelectorAll("[data-industry-base]").forEach(function (link) {
+            link.href = link.dataset.industryBase + "?market=" + encodeURIComponent(market);
         });
         try { window.localStorage.setItem("yuviPricingMarket", market); } catch (error) {}
     }

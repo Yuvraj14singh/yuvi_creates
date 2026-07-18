@@ -8,7 +8,7 @@
 <section class="page-hero section">
     <div class="container narrow">
         <p class="eyebrow">Contact</p>
-        <h1>Tell me what you want to build.</h1>
+        <h1>Tell me what you want <em>to build.</em></h1>
         <p class="lead">Share your business details, preferred package, and requirements. Your enquiry will be saved and reviewed from the Django admin.</p>
         <div class="contact-hero-points" aria-label="Yuvi Creates service highlights"><span>Business websites</span><span>Responsive design</span><span>Django powered</span></div>
     </div>
@@ -19,10 +19,11 @@
             {% csrf_token %}
             {% if selected_package %}
                 <div class="selected-solution-summary">
+                    {% if selected_industry %}<span>Selected industry</span><strong>{{ selected_industry.title }}</strong>{% endif %}
                     <span>Selected solution</span>
                     <strong>{{ selected_package.title }}</strong>
                     {% if selected_market_price %}<small>Estimated starting range: {{ selected_market_price.public_label }} · Preferred currency: {{ selected_market_price.currency_code }}</small>{% endif %}
-                    <small>This is an estimated starting range. Your final proposal will be based on the confirmed project scope.</small>
+                    <small>This is an estimated starting range, not a confirmed quotation. Final pricing is shared after reviewing the complete project scope.</small>
                 </div>
             {% endif %}
             <div class="form-grid">

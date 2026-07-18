@@ -13,3 +13,4 @@
 .page-contact .selected-solution-summary strong{color:#0c1c3c}
 .page-contact .selected-solution-summary small{color:#667789}
 .page-contact .budget-disclaimer{margin:18px 0;color:#667789;font-size:.76rem}
+.page-contact .form-grid>*{min-width:0}.page-contact .form-control{min-width:0;max-width:100%}.page-contact input::placeholder,.page-contact textarea::placeholder{font-size:.92rem;color:#8791a2;text-overflow:ellipsis}

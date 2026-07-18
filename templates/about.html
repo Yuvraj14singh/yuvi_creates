@@ -1,152 +1,121 @@
 {% extends "base.html" %}
 {% load static %}
 {% block body_class %}page-about{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/about.css' %}">{% endblock %}
-{% block title %}About Yuvraj Singh | Web Developer | Yuvi Creates{% endblock %}
-{% block meta_description %}Yuvi Creates is run by Yuvraj Singh, a web developer building responsive business websites, landing pages, portfolio websites, Django web apps, API integrations, and AI-style features.{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/about.css' %}"><link rel="stylesheet" href="{% static 'css/pages/about-sections.css' %}">{% endblock %}
+{% block title %}About Yuvraj Singh | Founder of Yuvi Creates{% endblock %}
+{% block meta_description %}Meet Yuvraj Singh, founder and web developer behind Yuvi Creates, building responsive business websites, Django applications and practical digital experiences.{% endblock %}
 {% block content %}
-<section class="about-hero section">
-    <div class="container about-hero-grid">
-        <div class="about-hero-copy reveal">
-            <p class="eyebrow">About Me</p>
-            <h1>Developer focused on practical, business-ready websites.</h1>
-            <p class="lead">Hi, I’m Yuvraj Singh — a BCA final year student and web developer focused on building clean, responsive, and practical websites.</p>
-            <p>I work with Python, Django, HTML, CSS, JavaScript, APIs, and AI-style integrations to create websites and web applications that are easy to use, mobile-friendly, and built around real business needs.</p>
-            <div class="hero-actions">
-                <a class="btn btn-primary" href="{% url 'portfolio' %}">View Demos</a>
-                <a class="btn btn-secondary" href="{% url 'contact' %}">Contact Me</a>
-            </div>
-            <div class="social-links" aria-label="Yuvraj Singh social profiles">
-                <a class="social-link" href="https://www.linkedin.com/in/yuvraj-singh-127b88280/" target="_blank" rel="noreferrer">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.4 8h4.2v15H.4V8Zm7.3 0h4v2.05h.06c.56-1.06 1.93-2.18 3.98-2.18 4.25 0 5.03 2.8 5.03 6.44V23h-4.18v-7.7c0-1.84-.03-4.2-2.56-4.2-2.56 0-2.95 2-2.95 4.06V23H7.7V8Z"/></svg>
-                    <span>LinkedIn</span>
-                </a>
-                <a class="social-link" href="https://github.com/Yuvraj14singh" target="_blank" rel="noreferrer">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56v-2.14c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18A11.1 11.1 0 0 1 12 6.05c.98 0 1.96.13 2.88.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.42.36.78 1.07.78 2.16v3.12c0 .31.21.67.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-                    <span>GitHub</span>
-                </a>
-            </div>
+<main class="founder-page">
+  <section class="founder-hero">
+    <div class="founder-orb founder-orb-one"></div><div class="founder-orb founder-orb-two"></div>
+    <div class="container founder-hero-grid">
+      <div class="founder-copy reveal">
+        <div class="founder-kicker"><span></span> Founder · Developer · Problem Solver</div>
+        <h1>Websites built around your business, <em>not just a template.</em></h1>
+        <p class="founder-lead">Yuvi Creates helps businesses, creators and organisations build clean, responsive and thoughtfully designed websites that reflect their identity and support their goals.</p>
+        <p class="founder-label">Founded by {% if about_profile %}{{ about_profile.name }}{% else %}Yuvraj Singh{% endif %}</p>
+        <div class="founder-actions">
+          <a class="btn btn-primary" href="{% url 'portfolio' %}">Explore Website Demos <span>↗</span></a>
+          <a class="founder-text-link" href="{% url 'packages' %}">View Packages <span>→</span></a>
+          <a class="founder-text-link" href="{% url 'contact' %}?source=About%20Founder">Start a Project <span>→</span></a>
         </div>
-        <aside class="developer-profile-card reveal" aria-label="Yuvraj Singh developer profile summary">
-            <div class="developer-photo">
-                {% if about_profile and about_profile.photo %}
-                    <img src="{{ about_profile.photo.url }}" alt="Yuvraj Singh web developer">
-                {% else %}
-                    <img src="{% static 'images/yuvi-creates-logo.png' %}" alt="Yuvi Creates logo">
-                {% endif %}
-            </div>
-            <div>
-                <p class="eyebrow">Yuvraj Singh</p>
-                <h2>BCA final year student and web developer</h2>
-                <div class="developer-stats">
-                    <span><strong>Python</strong>Django backend</span>
-                    <span><strong>Frontend</strong>HTML, CSS, JS</span>
-                    <span><strong>Focus</strong>Business websites</span>
-                </div>
-            </div>
-        </aside>
+        <div class="founder-proof" aria-label="Development focus">
+          <div><strong>Business-first</strong><span>Every page has a purpose</span></div>
+          <div><strong>Full-stack</strong><span>Design, frontend &amp; Django</span></div>
+          <div><strong>Responsive</strong><span>Built for every screen</span></div>
+        </div>
+      </div>
+      <aside class="founder-portrait reveal">
+        <div class="portrait-frame">
+          {% if about_profile and about_profile.photo %}<img src="{{ about_profile.photo.url }}" alt="{{ about_profile.name }}, founder of Yuvi Creates">
+          {% else %}<img class="founder-logo" src="{% static 'images/yuvi-creates-logo.png' %}" alt="Yuvi Creates by Yuvraj Singh">{% endif %}
+          <span class="portrait-label">Based in India · Working remotely</span>
+        </div>
+        <div class="portrait-card">
+          <span>Currently focused on</span>
+          <strong>Premium business websites &amp; practical web systems.</strong>
+        </div>
+      </aside>
     </div>
-</section>
+  </section>
 
-<section class="section">
-    <div class="container about-intro-grid">
-        <div class="about-copy-panel reveal">
-            <p class="eyebrow">What I do</p>
-            <h2>I build websites that present services clearly and make contact easier.</h2>
-            <p>I build clean, mobile-friendly websites, landing pages, portfolio websites, business websites, restaurant/cafe digital menu pages, and basic web applications for businesses, creators, and personal brands.</p>
-            <p>Through my freelance work, I help businesses and personal brands create websites that explain their services clearly, look credible, and guide visitors toward calls, WhatsApp messages, enquiries, or bookings.</p>
-            <p>My focus is simple: clean design, smooth user experience, mobile responsiveness, and practical features that support business goals.</p>
+  <section class="founder-statement section">
+    <div class="container statement-grid reveal">
+      <p class="founder-index">01 / MEET THE FOUNDER</p>
+      <div>
+        <h2>Meet <em>Yuvraj.</em></h2>
+        <div class="statement-copy">
+          <p>{% if about_profile %}{{ about_profile.bio }}{% else %}I’m a BCA final-year student and web developer focused on clean, responsive and practical websites.{% endif %}</p>
+          <div><p>As founder of Yuvi Creates, I design and develop business websites, landing pages and custom web solutions with a Python and Django-focused development approach.</p><p>My work starts by understanding the business before shaping the content, interface and functionality around trust, enquiries, bookings or sales.</p><div class="founder-inline-actions"><a href="{% url 'portfolio' %}">View Demos →</a><a href="{% url 'contact' %}?source=Meet%20Yuvraj">Contact Yuvraj →</a></div></div>
         </div>
-        <div class="skill-card-grid reveal">
-            <article><span>01</span><strong>Web Development</strong><p>Clean website structure, pages, sections, CTAs, and user-friendly flows.</p></article>
-            <article><span>02</span><strong>Django Backend</strong><p>Models, forms, admin, database handling, and practical backend logic.</p></article>
-            <article><span>03</span><strong>API Integration</strong><p>API-based data structure, external service planning, and response handling.</p></article>
-            <article><span>04</span><strong>Responsive Design</strong><p>Layouts that work smoothly on phones, tablets, and desktops.</p></article>
-            <article><span>05</span><strong>AI-style Features</strong><p>Assistant-style flows and AI-assisted features planned honestly around scope.</p></article>
-        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<section class="section surface">
-    <div class="container section-heading">
-        <p class="eyebrow">What I Build</p>
-        <h2>Website work shaped around real client needs.</h2>
-    </div>
-    <div class="container about-build-grid">
-        <article class="reveal"><strong>Business Websites</strong><p>Professional websites for local businesses, service providers, shops, institutes, and brands.</p></article>
-        <article class="reveal"><strong>Landing Pages</strong><p>Focused pages for offers, campaigns, launches, and lead generation.</p></article>
-        <article class="reveal"><strong>Portfolio Websites</strong><p>Personal brand websites for creators, freelancers, coaches, students, and professionals.</p></article>
-        <article class="reveal"><strong>Restaurant/Cafe QR Menu Pages</strong><p>Digital menu pages, food highlights, offers, map, and WhatsApp/call CTAs.</p></article>
-        <article class="reveal"><strong>Basic E-commerce/Catalogue Websites</strong><p>Product cards, category sections, offers, enquiry buttons, and store/contact flow.</p></article>
-        <article class="reveal"><strong>Django Web Applications</strong><p>Backend-driven apps with forms, database handling, admin control, and API-ready structure.</p></article>
-    </div>
-</section>
+  <section class="founder-origin section">
+    <div class="container origin-grid reveal"><div><p class="founder-index">02 / WHY I STARTED YUVI CREATES</p><h2>A more thoughtful way to build for the web.</h2></div><div><blockquote>“{{ about_story.why_started }}”</blockquote><p>{{ about_story.approach }}</p></div></div>
+  </section>
 
-<section class="section">
-    <div class="container yuvi-creates-panel reveal">
-        <div>
-            <p class="eyebrow">About Yuvi Creates</p>
-            <h2>A freelance web development brand for clean, business-ready websites.</h2>
-            <p>Yuvi Creates is my freelancing and web development brand where I build practical websites for businesses, creators, restaurants, cafes, travel agencies, gyms, shops, real estate advisors, and personal brands.</p>
-            <p>The goal of Yuvi Creates is simple: make a business look more professional online, explain services clearly, and give visitors an easy way to contact through WhatsApp, call buttons, forms, maps, and clear CTAs.</p>
-            <div class="hero-actions">
-                <a class="btn btn-primary" href="{% url 'packages' %}">View Packages</a>
-                <a class="btn btn-secondary" href="{% url 'portfolio' %}">View Demos</a>
-            </div>
-        </div>
-        <div class="yuvi-brand-grid" aria-label="Yuvi Creates website focus">
-            <article><strong>Business-first planning</strong><span>Pages planned around enquiries and trust.</span></article>
-            <article><strong>Mobile-friendly builds</strong><span>Layouts made for real phone users.</span></article>
-            <article><strong>Industry demos</strong><span>Restaurant, gym, travel, real estate, shop and more.</span></article>
-            <article><strong>Launch support</strong><span>Domain, hosting, forms, and basic SEO structure.</span></article>
-        </div>
-    </div>
-</section>
+  <section class="founder-values section">
+    <div class="container"><div class="founder-section-head reveal"><p class="founder-index">03 / WHAT I BELIEVE</p><h2>Principles behind<br>every build.</h2></div><div class="value-grid"><article class="reveal"><span>01</span><h3>Business Before Design</h3><p>The website should support a business goal, not only look attractive.</p></article><article class="reveal"><span>02</span><h3>Clear Communication</h3><p>Scope, pricing and expectations should be discussed honestly.</p></article><article class="reveal"><span>03</span><h3>Thoughtful Customisation</h3><p>Every industry deserves its own visual personality and content flow.</p></article><article class="reveal"><span>04</span><h3>Long-Term Reliability</h3><p>The finished work should remain maintainable and useful after launch.</p></article></div></div>
+  </section>
 
-<section class="section">
-    <div class="container pitchqi-feature reveal">
-        <div>
-            <p class="eyebrow">Featured Project</p>
-            <h2>Cricket Intelligence Web App</h2>
-            <p>I’m currently building a Django-based cricket intelligence and live score web application with teams, players, scoreboards, API-based cricket data structure, and an AI-style cricket assistant.</p>
-            <p>This project helped me understand real backend logic, API integration, database handling, responsive UI, and deployment.</p>
-            <div class="hero-actions">
-                <a class="btn btn-primary" href="https://pitchqi-production.up.railway.app/cricketAI/" target="_blank" rel="noreferrer">View Live Demo</a>
-                <a class="btn btn-secondary" href="https://github.com/Yuvraj14singh/PitchQI" target="_blank" rel="noreferrer">View GitHub</a>
-            </div>
-        </div>
-        <div class="pitchqi-dashboard" aria-label="Cricket app feature preview">
-            <span>Live score structure</span>
-            <span>Teams and players</span>
-            <span>Scoreboards</span>
-            <span>API integration structure</span>
-            <span>AI-style cricket assistant</span>
-        </div>
+  <section class="founder-capabilities section">
+    <div class="container">
+      <div class="founder-section-head reveal"><p class="founder-index">04 / CAPABILITIES</p><h2>Strategy to screen,<br>handled with care.</h2></div>
+      <div class="capability-list">
+        <article class="reveal"><span>01</span><div><h3>Website Strategy</h3><p>Clear hierarchy, purposeful sections and conversion paths shaped around real business goals.</p></div><b>Plan</b></article>
+        <article class="reveal"><span>02</span><div><h3>Interface Development</h3><p>Premium, responsive interfaces built with clean HTML, CSS and JavaScript.</p></div><b>Design</b></article>
+        <article class="reveal"><span>03</span><div><h3>Django Systems</h3><p>Forms, databases, admin workflows and backend logic for websites that need more than static pages.</p></div><b>Build</b></article>
+        <article class="reveal"><span>04</span><div><h3>APIs &amp; Smart Features</h3><p>Thoughtful integrations and assistant-style experiences planned honestly around the project scope.</p></div><b>Connect</b></article>
+      </div>
     </div>
-</section>
+  </section>
 
-<section class="section surface">
-    <div class="container section-heading">
-        <p class="eyebrow">Why Work With Me</p>
-        <h2>A practical developer mindset for business websites.</h2>
+  <section class="founder-method section">
+    <div class="container method-grid">
+      <div class="method-copy reveal"><p class="founder-index">05 / HOW I WORK</p><h2>Clear thinking.<br>Careful execution.</h2><p>I keep the process direct and collaborative. You understand what is being built, why it matters and what happens next.</p><a href="{% url 'process' %}">View Complete Process <span>→</span></a></div>
+      <div class="method-steps">
+        <article class="reveal"><span>01</span><div><strong>Understand</strong><p>Clarify the business, audience, goals and required outcomes.</p></div></article>
+        <article class="reveal"><span>02</span><div><strong>Plan</strong><p>Define scope, pages, content flow and functionality.</p></div></article>
+        <article class="reveal"><span>03</span><div><strong>Design</strong><p>Shape an industry-relevant visual direction and responsive interface.</p></div></article>
+        <article class="reveal"><span>04</span><div><strong>Develop</strong><p>Build the approved experience and required backend logic.</p></div></article>
+        <article class="reveal"><span>05</span><div><strong>Test</strong><p>Review screens, interactions, forms and practical edge cases.</p></div></article>
+        <article class="reveal"><span>06</span><div><strong>Launch</strong><p>Complete final checks and deployment or handover steps.</p></div></article>
+        <article class="reveal"><span>07</span><div><strong>Support</strong><p>Provide post-launch support according to the agreed package.</p></div></article>
+      </div>
     </div>
-    <div class="container why-work-grid">
-        <article class="reveal"><strong>Clean mobile-friendly design</strong><p>Your website should feel easy to read, tap, and understand on every screen.</p></article>
-        <article class="reveal"><strong>Clear communication</strong><p>I keep the scope, content needs, and next steps understandable from the beginning.</p></article>
-        <article class="reveal"><strong>Business-focused websites</strong><p>Pages are planned around enquiries, WhatsApp, calls, trust, and client goals.</p></article>
-        <article class="reveal"><strong>Honest feature planning</strong><p>I avoid fake promises and plan features according to the real project scope.</p></article>
-        <article class="reveal"><strong>Basic SEO-friendly structure</strong><p>Clean headings, titles, descriptions, readable sections, and launch basics.</p></article>
-    </div>
-</section>
+  </section>
 
-<section class="section final-cta">
-    <div class="container cta-box">
-        <h2>Want a clean website for your business or personal brand?</h2>
-        <p>Share your business type, required pages, and rough idea. I’ll help you plan a practical website scope.</p>
-        <div>
-            <a class="btn btn-primary" href="{% url 'portfolio' %}">View Demos</a>
-            <a class="btn btn-secondary" href="{% url 'contact' %}">Contact Me</a>
-        </div>
+  <section class="founder-builds section">
+    <div class="container"><div class="builds-heading reveal"><div><p class="founder-index">06 / WHAT YUVI CREATES BUILDS</p><h2>Industry-aware websites<br>and practical systems.</h2></div><p>Explore a focused selection of active website solutions. Each can be adapted to the business, content and required workflow.</p></div><div class="industry-link-grid">{% for industry in about_industries %}<a class="reveal" href="{{ industry.get_absolute_url }}"><span>{% if industry.icon %}{{ industry.icon }}{% else %}↗{% endif %}</span><div><strong>{{ industry.title }}</strong><small>{{ industry.short_description|truncatewords:12 }}</small></div><b>→</b></a>{% endfor %}</div><div class="builds-action reveal"><a class="btn btn-primary" href="{% url 'portfolio' %}">Explore Demos</a><a class="founder-text-link" href="{% url 'packages' %}">Compare Packages →</a></div></div>
+  </section>
+
+  <section class="founder-stack section">
+    <div class="container stack-grid"><div class="reveal"><p class="founder-index">07 / SKILLS &amp; TECHNOLOGIES</p><h2>Technology with a purpose.</h2><p>Technology is the tool. The main focus is building a website that is useful, clear and suited to the business.</p></div><div class="stack-badges reveal"><span>Python</span><span>Django</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>SQLite</span><span>PostgreSQL</span><span>API Integration</span><span>GitHub</span><span>Deployment</span><span>Responsive Web Design</span></div></div>
+  </section>
+
+  <section class="founder-trust section">
+    <div class="container"><div class="founder-section-head reveal"><p class="founder-index">08 / WHY WORK WITH YUVI CREATES</p><h2>A reliable partner,<br>without inflated promises.</h2></div><div class="trust-grid"><article class="reveal"><strong>Business-focused design</strong><p>Structure and calls to action planned around the real objective.</p></article><article class="reveal"><strong>Responsive across devices</strong><p>Layouts designed to remain clear and usable across screen sizes.</p></article><article class="reveal"><strong>Industry-relevant direction</strong><p>Visual choices and content flow shaped for the business category.</p></article><article class="reveal"><strong>Clear project scope</strong><p>Requirements and expectations discussed before the build progresses.</p></article><article class="reveal"><strong>Direct communication</strong><p>You work directly with the founder building the project.</p></article><article class="reveal"><strong>Custom functionality</strong><p>Backend features and integrations can be planned when required.</p></article><article class="reveal"><strong>SEO-friendly structure</strong><p>Clean headings, metadata and technical foundations without ranking guarantees.</p></article><article class="reveal"><strong>Agreed launch support</strong><p>Support remains aligned with the selected package and confirmed scope.</p></article></div></div>
+  </section>
+
+  <section class="founder-snapshot section">
+    <div class="container snapshot-shell reveal"><div><p class="founder-index">09 / FOUNDER SNAPSHOT</p><h2>{% if about_profile %}{{ about_profile.name }}{% else %}Yuvraj Singh{% endif %}</h2><p>Founder of Yuvi Creates and a website designer and developer focused on practical digital experiences.</p></div><dl><div><dt>Focus</dt><dd>Website Design &amp; Development</dd></div><div><dt>Core Stack</dt><dd>Python, Django, HTML, CSS &amp; JavaScript</dd></div><div><dt>Works With</dt><dd>Businesses, creators, sports organisations &amp; service providers</dd></div><div><dt>Project Types</dt><dd>Websites, landing pages &amp; custom systems</dd></div></dl></div>
+  </section>
+
+  <section class="founder-project section">
+    <div class="container project-shell reveal">
+      <div class="project-copy"><p class="founder-index">04 / FEATURED BUILD</p><span class="project-chip">Django · APIs · Responsive UI</span><h2>PitchQI</h2><p>A cricket intelligence web application exploring live-score structures, player and team data, backend logic and an assistant-style interface.</p><div class="founder-actions"><a class="btn btn-primary" href="https://pitchqi-production.up.railway.app/cricketAI/" target="_blank" rel="noreferrer">View Live Project ↗</a><a class="founder-text-link" href="https://github.com/Yuvraj14singh/PitchQI" target="_blank" rel="noreferrer">View Code →</a></div></div>
+      <div class="project-visual" aria-label="PitchQI capabilities"><div class="project-window"><header><i></i><i></i><i></i><span>PitchQI / Intelligence workspace</span></header><main><div><small>LIVE DATA STRUCTURE</small><strong>Match intelligence,<br>organized clearly.</strong></div><ul><li>Teams &amp; players</li><li>Scoreboards</li><li>API-ready data</li><li>Assistant flow</li></ul></main></div></div>
     </div>
-</section>
+  </section>
+
+  <section class="founder-faq section">
+    <div class="container faq-about-grid"><div class="reveal"><p class="founder-index">10 / ABOUT FAQ</p><h2>Useful answers<br>before you begin.</h2></div><div class="about-faq-list"><details><summary>Who is Yuvraj?</summary><p>{% if about_profile %}{{ about_profile.name }} is {{ about_profile.role }} and the founder behind Yuvi Creates.{% else %}Yuvraj Singh is the founder and web developer behind Yuvi Creates.{% endif %}</p></details><details><summary>What is Yuvi Creates?</summary><p>Yuvi Creates is a founder-led website design and development brand focused on clean, responsive and business-ready digital experiences.</p></details><details><summary>What type of websites do you build?</summary><p>{{ about_story.project_types }} Active industry options are available through Demos and Packages.</p></details><details><summary>Do you work with businesses outside India?</summary><p>Yuvi Creates supports enquiries and public pricing markets for India, USA/International, UK, Australia and Canada. Availability and scope are confirmed during the enquiry.</p></details><details><summary>Which technologies do you use?</summary><p>{{ about_story.core_stack }}</p></details><details><summary>Can you build a custom web system?</summary><p>Yes. Custom dashboards, backend workflows, APIs and admin functionality can be planned after reviewing the complete requirements.</p></details><details><summary>Can I view examples before choosing a package?</summary><p>Yes. The Demos page contains industry-focused concepts that show the type of experience Yuvi Creates can build.</p></details><details><summary>How do I start a project?</summary><p>Use the contact form to share your business type, required features, preferred timeline and project goals. Yuvraj can then recommend a suitable next step.</p></details></div></div>
+  </section>
+
+  <section class="founder-cta section">
+    <div class="container founder-cta-box reveal"><p class="founder-index">LET’S BUILD SOMETHING USEFUL</p><h2>Have a Website Idea? Let’s Turn It Into Something Real.</h2><p>Explore demos, compare packages or share your requirements for a custom recommendation.</p><div class="founder-actions"><a class="btn btn-primary" href="{% url 'portfolio' %}">Explore Demos</a><a class="founder-text-link" href="{% url 'packages' %}">View Packages <span>→</span></a><a class="founder-text-link" href="{% url 'contact' %}?source=About%20Page">Get a Quote <span>↗</span></a></div></div>
+  </section>
+</main>
 {% endblock %}

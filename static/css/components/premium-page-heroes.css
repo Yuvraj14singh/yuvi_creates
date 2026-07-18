@@ -1,0 +1,98 @@
+/* Shared editorial hero language used across Yuvi Creates' primary pages. */
+:is(.page-home .hero, .page-portfolio .page-hero, .page-packages .packages-hero,
+    .page-process .page-hero, .page-contact .page-hero,
+    .page-feedback .feedback-hero, .page-faq .page-hero) {
+    position: relative;
+    overflow: hidden;
+}
+
+:is(.page-portfolio .page-hero, .page-process .page-hero, .page-faq .page-hero) {
+    padding-block: clamp(4.5rem, 9vw, 8rem);
+    background:
+        radial-gradient(circle at 82% 24%, rgba(118, 77, 232, 0.13), transparent 29%),
+        linear-gradient(135deg, #fbfaff 0%, #f3f6ff 58%, #edf7ff 100%);
+}
+
+:is(.page-home .hero, .page-portfolio .page-hero, .page-packages .packages-hero,
+    .page-process .page-hero, .page-contact .page-hero,
+    .page-feedback .feedback-hero, .page-faq .page-hero) .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: fit-content;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #6842df;
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+:is(.page-home .hero, .page-portfolio .page-hero, .page-packages .packages-hero,
+    .page-process .page-hero, .page-contact .page-hero,
+    .page-feedback .feedback-hero, .page-faq .page-hero) .eyebrow::before {
+    content: "";
+    width: 2.15rem;
+    height: 2px;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: currentColor;
+}
+
+:is(.page-home .hero, .page-portfolio .page-hero, .page-packages .packages-hero,
+    .page-process .page-hero, .page-contact .page-hero,
+    .page-feedback .feedback-hero, .page-faq .page-hero) h1 {
+    max-width: 980px;
+    margin-bottom: 1.6rem;
+    font-size: clamp(3.35rem, 6.2vw, 6.75rem);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.066em;
+    text-wrap: balance;
+}
+
+:is(.page-home .hero, .page-portfolio .page-hero, .page-packages .packages-hero,
+    .page-process .page-hero, .page-contact .page-hero,
+    .page-feedback .feedback-hero, .page-faq .page-hero) h1 em {
+    color: #6842df;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: -0.055em;
+}
+
+:is(.page-home .hero, .page-portfolio .page-hero, .page-packages .packages-hero,
+    .page-process .page-hero, .page-contact .page-hero,
+    .page-feedback .feedback-hero, .page-faq .page-hero) .lead {
+    max-width: 760px;
+    color: #5f6d82;
+    font-size: clamp(1rem, 1.35vw, 1.15rem);
+    line-height: 1.75;
+}
+
+@media (max-width: 760px) {
+    :is(.page-portfolio .page-hero, .page-process .page-hero, .page-faq .page-hero) {
+        padding-block: 4.25rem;
+    }
+
+    :is(.page-home .hero, .page-portfolio .page-hero, .page-packages .packages-hero,
+        .page-process .page-hero, .page-contact .page-hero,
+        .page-feedback .feedback-hero, .page-faq .page-hero) h1 {
+        margin-bottom: 1.25rem;
+        font-size: clamp(3rem, 14vw, 4.35rem);
+        line-height: 0.94;
+        letter-spacing: -0.06em;
+    }
+
+    :is(.page-home .hero, .page-portfolio .page-hero, .page-packages .packages-hero,
+        .page-process .page-hero, .page-contact .page-hero,
+        .page-feedback .feedback-hero, .page-faq .page-hero) .eyebrow {
+        margin-bottom: 1.2rem;
+        font-size: 0.68rem;
+    }
+}

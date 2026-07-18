@@ -7,6 +7,7 @@
 .feedback-form{padding:34px;border:1px solid rgba(104,66,216,.16);border-radius:20px;background:rgba(255,255,255,.88);box-shadow:0 30px 75px rgba(42,23,102,.14);backdrop-filter:blur(16px)}
 .feedback-form label{display:block}.feedback-form .form-control{width:100%;min-height:48px;padding:12px 14px;border:1px solid #d9dff0;border-radius:10px;background:#fff;color:#172330;font:inherit}
 .feedback-form textarea.form-control{resize:vertical}.feedback-form .form-control:focus{outline:3px solid rgba(104,66,216,.13);border-color:#6842d8}
+.feedback-form .form-grid>*{min-width:0}.feedback-form input::placeholder,.feedback-form textarea::placeholder{font-size:.9rem;color:#8791a2;text-overflow:ellipsis}
 .field-error{display:block;margin-top:5px;color:#b42318;font-weight:700}.privacy-note{color:#667789;font-size:.78rem}.page-feedback .message-wrap{position:relative;z-index:2}
 @media(max-width:900px){.page-feedback .feedback-layout{grid-template-columns:1fr;gap:38px}.page-feedback .feedback-hero{min-height:auto}}
 @media(max-width:560px){.feedback-form{padding:24px 18px}.page-feedback .feedback-copy h1{font-size:2.7rem}}

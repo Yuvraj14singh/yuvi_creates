@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import (
     AboutProfile,
     Enquiry,
+    Industry,
     Package,
     PaymentBooking,
     PackageMarketPrice,
@@ -10,6 +11,15 @@ from .models import (
     Review,
     Service,
 )
+
+
+@admin.register(Industry)
+class IndustryAdmin(admin.ModelAdmin):
+    list_display = ("title", "slug", "badge", "is_active", "order")
+    list_filter = ("is_active",)
+    search_fields = ("title", "short_description", "hero_heading")
+    list_editable = ("is_active", "order")
+    filter_horizontal = ("packages", "demos")
 
 
 class PackageMarketPriceInline(admin.TabularInline):

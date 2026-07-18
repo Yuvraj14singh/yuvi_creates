@@ -1,0 +1,11 @@
+<div class="yc-assistant" data-assistant>
+  <button class="yc-assistant-launcher" type="button" aria-expanded="false" aria-controls="yc-assistant-panel"><span aria-hidden="true">✦</span><span class="launcher-label">Need Help?</span><span class="yc-chat-unread" data-chat-unread hidden>0</span></button>
+  <section id="yc-assistant-panel" class="yc-assistant-panel" role="dialog" aria-label="Yuvi Creates Assistant" hidden>
+    <header><div><strong>Yuvi Creates Assistant</strong><small>Automated website assistant</small></div><div><button type="button" data-chat-restart title="Restart">↻</button><button type="button" data-chat-minimize aria-label="Minimize assistant">−</button><button type="button" data-chat-close aria-label="Close assistant">×</button></div></header>
+    <div class="yc-chat-messages" data-chat-messages aria-live="polite"></div>
+    <button class="yc-scroll-latest" type="button" data-scroll-latest hidden>Latest ↓</button>
+    <div class="yc-chat-replies" data-chat-replies></div>
+    <form class="yc-chat-form" data-chat-form>{% csrf_token %}<label class="sr-only" for="yc-chat-input">Your message</label><textarea id="yc-chat-input" data-chat-input rows="1" maxlength="1000" autocomplete="off" placeholder="Type your message…"></textarea><input type="text" name="website" tabindex="-1" autocomplete="off" class="yc-honeypot"><button type="submit" aria-label="Send message">Send</button></form>
+    <footer><div><a href="{% url 'contact' %}?source=Website%20Assistant">Talk to a person</a><span>•</span><a href="https://wa.me/916353346509" target="_blank" rel="noreferrer">WhatsApp</a></div><small>Replies are based on current Yuvi Creates website information.</small></footer>
+  </section>
+</div>

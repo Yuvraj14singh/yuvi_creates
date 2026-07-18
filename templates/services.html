@@ -2,61 +2,41 @@
 {% load static %}
 {% block body_class %}page-services{% endblock %}
 {% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/services.css' %}">{% endblock %}
-{% block title %}Website Design Services for Small Businesses | Yuvi Creates{% endblock %}
-{% block meta_description %}Explore website design services for restaurants, cafes, hotels, travel agencies, salons, makeup artists, real estate, gyms, pet shops, shops, and local businesses.{% endblock %}
+{% block title %}Website Design & Development Services | Yuvi Creates{% endblock %}
+{% block meta_description %}Explore business-focused website design and development services for restaurants, travel, property, beauty, hospitality, creators and local businesses.{% endblock %}
 {% block content %}
-<section class="page-hero section">
-    <div class="container narrow">
-        <p class="eyebrow">Services</p>
-        <h1>Clean website services for any business that needs a professional online presence.</h1>
-        <p class="lead">From restaurant menus and tour packages to service pages and personal portfolios, every website is built around clarity, mobile usability, and enquiry flow.</p>
+<main class="services-page">
+  <section class="services-hero">
+    <div class="services-glow"></div>
+    <div class="container services-hero-grid">
+      <div class="services-hero-copy reveal"><p class="services-kicker"><span></span> Website Design &amp; Development</p><h1>The right website service for where your business is <em>going.</em></h1><p>From focused landing pages to industry websites and custom Django systems, every service is shaped around clarity, credibility and the action your visitors should take.</p><div class="services-actions"><a class="btn btn-primary" href="#services-list">Explore Services <span>↓</span></a><a class="services-text-link" href="{% url 'contact' %}?source=Services%20Hero">Discuss Your Requirements <span>→</span></a></div></div>
+      <aside class="services-hero-panel reveal"><p>Built around your business</p><div class="service-signal"><span>01</span><strong>Industry-relevant direction</strong></div><div class="service-signal"><span>02</span><strong>Responsive user experience</strong></div><div class="service-signal"><span>03</span><strong>Clear enquiry or booking flow</strong></div><div class="service-signal"><span>04</span><strong>Practical backend when required</strong></div><a href="{% url 'portfolio' %}">See industry demos <span>↗</span></a></aside>
     </div>
-</section>
-<section class="section surface">
-    <div class="container section-heading">
-        <p class="eyebrow">Business types</p>
-        <h2>I can build a website for almost any client category.</h2>
+  </section>
+
+  <section class="services-industries">
+    <div class="container industry-marquee" aria-label="Industries served"><span>Business</span><i>•</i><span>Restaurants &amp; Cafes</span><i>•</i><span>Travel</span><i>•</i><span>Property</span><i>•</i><span>Beauty</span><i>•</i><span>Sports</span><i>•</i><span>Healthcare</span><i>•</i><span>Hospitality</span><i>•</i><span>Creators</span><i>•</i><span>Local Services</span></div>
+  </section>
+
+  <section class="services-list section" id="services-list">
+    <div class="container services-heading reveal"><div><p class="services-kicker">Service Directory</p><h2>Choose by business need,<br>not technical jargon.</h2></div><p>Each option below explains who it suits, what the website should help with and the practical elements normally involved. Final scope is confirmed before work begins.</p></div>
+    <div class="container services-grid">
+      {% for item in service_cards %}
+      <article class="premium-service-card reveal">
+        <header><span class="service-number">{{ forloop.counter|stringformat:"02d" }}</span><span class="service-group">{{ item.group }}</span></header>
+        <div class="service-card-copy"><h3>{{ item.service.title }}</h3><p>{{ item.service.description }}</p><div class="service-best"><small>BEST FOR</small><strong>{{ item.best_for }}</strong></div><ul>{% for feature in item.features %}<li><span>✓</span>{{ feature }}</li>{% endfor %}</ul></div>
+        <footer><a class="service-demo-button" href="{% url 'service_demo' item.service.pk item.service.title|slugify %}">Explore Service <span>↗</span></a><a class="service-quote-link" href="{% url 'contact' %}?service={{ item.service.title|urlencode }}&source=Services%20Card">Get a Quote →</a></footer>
+      </article>
+      {% endfor %}
     </div>
-    <div class="container industry-strip">
-        <span>Restaurants</span>
-        <span>Cafes</span>
-        <span>Trips & tours</span>
-        <span>Travel agencies</span>
-        <span>Gyms</span>
-        <span>Real estate</span>
-        <span>Hotels</span>
-        <span>Wedding planners</span>
-        <span>Event planners</span>
-        <span>Shops</span>
-        <span>Pet shops</span>
-        <span>Salons</span>
-        <span>Clinics</span>
-        <span>Coaches</span>
-        <span>Institutes</span>
-        <span>Personal brands</span>
-        <span>Service providers</span>
-    </div>
-</section>
-<section class="section">
-    <div class="container card-grid three">
-        {% for service in services %}
-            <a class="service-card service-card-link reveal" href="{% url 'service_demo' service.pk service.title|slugify %}">
-                <span class="card-index">{{ forloop.counter|stringformat:"02d" }}</span>
-                <h3>{{ service.title }}</h3>
-                <p>{{ service.description }}</p>
-            </a>
-        {% endfor %}
-    </div>
-</section>
-<section class="section surface">
-    <div class="container section-heading">
-        <p class="eyebrow">Common deliverables</p>
-        <h2>Useful pages and features that make the website business-ready.</h2>
-    </div>
-    <div class="container card-grid three">
-        <article class="service-card reveal"><h3>Core pages</h3><p>Home, About, Services, Portfolio/Work, Pricing, FAQ, Contact, and policy pages if needed.</p></article>
-        <article class="service-card reveal"><h3>Industry pages</h3><p>Menu pages, tour packages, product showcases, trainer pages, gallery pages, or booking enquiry pages.</p></article>
-        <article class="service-card reveal"><h3>Conversion tools</h3><p>WhatsApp CTA, call button, Google Map, enquiry forms, package booking, testimonials, and trust sections.</p></article>
-    </div>
-</section>
+  </section>
+
+  <section class="service-foundation section">
+    <div class="container foundation-grid"><div class="foundation-copy reveal"><p class="services-kicker">Included Thinking</p><h2>A website is more than its list of pages.</h2><p>The exact deliverables vary by package, but every project is considered through four practical lenses.</p><a class="services-text-link" href="{% url 'process' %}">View the complete process <span>→</span></a></div><div class="foundation-cards"><article class="reveal"><span>01</span><strong>Clear Structure</strong><p>Pages and sections organised so visitors understand the business quickly.</p></article><article class="reveal"><span>02</span><strong>Responsive Experience</strong><p>Layouts that remain readable, usable and polished across devices.</p></article><article class="reveal"><span>03</span><strong>Trust &amp; Conversion</strong><p>Proof, useful information and calls to action placed with purpose.</p></article><article class="reveal"><span>04</span><strong>Launch Readiness</strong><p>Forms, links, essential metadata and final checks aligned with scope.</p></article></div></div>
+  </section>
+
+  <section class="service-choice section">
+    <div class="container choice-shell reveal"><div><p class="services-kicker">Not Sure What Fits?</p><h2>Start with the business goal.</h2><p>Share your industry, required pages and the main result you want from the website. You’ll receive a practical recommendation instead of an oversized feature list.</p></div><div class="choice-options"><a href="{% url 'portfolio' %}"><span>01</span><strong>Explore Demos</strong><small>See what an industry-specific experience could look like.</small><b>↗</b></a><a href="{% url 'packages' %}"><span>02</span><strong>Compare Packages</strong><small>Review scope and public pricing for active categories.</small><b>↗</b></a><a href="{% url 'contact' %}?source=Services%20Recommendation"><span>03</span><strong>Get a Recommendation</strong><small>Share the requirements and ask Yuvraj for a suitable direction.</small><b>↗</b></a></div></div>
+  </section>
+</main>
 {% endblock %}

@@ -42,11 +42,11 @@ class ReviewForm(forms.ModelForm):
         self.fields["location"].required = False
         placeholders = {
             "client_name": "Your full name",
-            "business_name": "Business or brand (optional)",
-            "email": "you@example.com (kept private)",
-            "location": "City, state (optional)",
-            "service_received": "Restaurant website, landing page...",
-            "quote": "Tell others about the work, communication and final result",
+            "business_name": "Business / brand",
+            "email": "Private email",
+            "location": "City / country",
+            "service_received": "Website or service",
+            "quote": "Share your experience",
         }
         for name, placeholder in placeholders.items():
             self.fields[name].widget.attrs["placeholder"] = placeholder
@@ -115,15 +115,15 @@ class EnquiryForm(forms.ModelForm):
         self.fields["name"].widget.attrs.setdefault("placeholder", "Your full name")
         self.fields["business_name"].widget.attrs.setdefault("placeholder", "Business or brand name")
         self.fields["email"].widget.attrs.setdefault("placeholder", "you@example.com")
-        self.fields["phone"].widget.attrs.setdefault("placeholder", "WhatsApp / mobile number")
+        self.fields["phone"].widget.attrs.setdefault("placeholder", "Phone / WhatsApp")
         self.fields["country"].widget.attrs.setdefault("placeholder", "Country")
-        self.fields["business_type"].widget.attrs.setdefault("placeholder", "Restaurant, cafe, tour agency, shop...")
-        self.fields["package_interested_in"].widget.attrs.setdefault("placeholder", "Starter, premium, restaurant, travel...")
-        self.fields["current_website_or_social_link"].widget.attrs.setdefault("placeholder", "https://instagram.com/yourbrand")
-        self.fields["estimated_pages"].widget.attrs.setdefault("placeholder", "For example: 5–7 pages or not sure yet")
-        self.fields["required_features"].widget.attrs.setdefault("placeholder", "Enquiry forms, bookings, payments, admin dashboard...")
-        self.fields["preferred_timeline"].widget.attrs.setdefault("placeholder", "For example: 4–6 weeks or flexible")
-        self.fields["message"].widget.attrs.setdefault("placeholder", "Share your requirement, timeline, city, and any reference website")
+        self.fields["business_type"].widget.attrs.setdefault("placeholder", "Your industry")
+        self.fields["package_interested_in"].widget.attrs.setdefault("placeholder", "Service / package")
+        self.fields["current_website_or_social_link"].widget.attrs.setdefault("placeholder", "Website or social URL")
+        self.fields["estimated_pages"].widget.attrs.setdefault("placeholder", "Page count / not sure")
+        self.fields["required_features"].widget.attrs.setdefault("placeholder", "Features you need")
+        self.fields["preferred_timeline"].widget.attrs.setdefault("placeholder", "Preferred timeline")
+        self.fields["message"].widget.attrs.setdefault("placeholder", "Tell me about your project")
 
     def clean(self):
         cleaned_data = super().clean()
@@ -173,9 +173,9 @@ class PaymentBookingForm(forms.ModelForm):
         self.fields["client_name"].widget.attrs.setdefault("placeholder", "Your full name")
         self.fields["business_name"].widget.attrs.setdefault("placeholder", "Business or brand name")
         self.fields["email"].widget.attrs.setdefault("placeholder", "you@example.com")
-        self.fields["phone"].widget.attrs.setdefault("placeholder", "WhatsApp / mobile number")
-        self.fields["business_type"].widget.attrs.setdefault("placeholder", "Restaurant, cafe, tour agency, shop...")
-        self.fields["current_website_or_social_link"].widget.attrs.setdefault("placeholder", "https://instagram.com/yourbrand")
+        self.fields["phone"].widget.attrs.setdefault("placeholder", "Phone / WhatsApp")
+        self.fields["business_type"].widget.attrs.setdefault("placeholder", "Your industry")
+        self.fields["current_website_or_social_link"].widget.attrs.setdefault("placeholder", "Website or social URL")
 
         amount_field = self.fields["payable_amount"]
         amount_field.widget.attrs.setdefault("placeholder", "Enter amount to pay")

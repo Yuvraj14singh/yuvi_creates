@@ -4,19 +4,25 @@ import hmac
 import json
 import urllib.error
 import urllib.request
+from urllib.parse import urlencode
 from django.contrib import messages
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.text import slugify
+from django.utils import timezone
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 from django.views.decorators.csrf import csrf_exempt
 
-from .data import PACKAGES, PORTFOLIO, SERVICES
+from .data import PACKAGES, PORTFOLIO, SERVICES, SERVICE_CARD_CONTENT
 from .pricing import MARKETS, PRICE_BANDS, SPORTS_PACKAGE_SEEDS, price_band_key
 from .forms import EnquiryForm, PaymentBookingForm, ReviewForm
 from .models import (
     AboutProfile,
+    Industry,
+    Enquiry,
     Package,
     PaymentBooking,
     PortfolioProject,
@@ -24,6 +30,122 @@ from .models import (
     Review,
     Service,
 )
+from .assistant import MARKETS as ASSISTANT_MARKETS, PUBLIC_ABOUT, INTENT_NAMES, answer_message, detect_industry, public_founder
+
+
+def assistant_bootstrap(request):
+    founder = public_founder()
+    return JsonResponse({
+        "name": "Yuvi Creates Assistant", "automated": True,
+        "markets": [{"code": code, "label": values[0], "currency": values[1]} for code, values in ASSISTANT_MARKETS.items()],
+        "founder": founder,
+        "quick_replies": ["Find a package", "View demos", "Check pricing", "Ask about Yuvi Creates", "Talk to Yuvraj"],
+        "intent_count": len(INTENT_NAMES),
+    })
+
+
+def assistant_message(request):
+    if request.method != "POST": return JsonResponse({"error": "POST required"}, status=405)
+    try: data = json.loads(request.body or "{}")
+    except json.JSONDecodeError: return JsonResponse({"error": "Invalid request"}, status=400)
+    text = (data.get("message") or "").strip()
+    if not text or len(text) > 1000: return JsonResponse({"error": "Enter a message between 1 and 1000 characters."}, status=400)
+    if data.get("website"): return JsonResponse({"reply": "Thanks."})
+    now = int(timezone.now().timestamp())
+    events = [value for value in request.session.get("assistant_messages", []) if now - value < 60]
+    if len(events) >= 20: return JsonResponse({"error": "Too many messages. Please wait a moment."}, status=429)
+    events.append(now); request.session["assistant_messages"] = events
+    if data.get("restart"):
+        request.session.pop("assistant_context", None); request.session.pop("assistant_variants", None)
+    source_page = (data.get("source_page") or "")[:300]
+    page_industry = detect_industry(source_page)
+    if page_industry:
+        context = request.session.get("assistant_context", {})
+        context.setdefault("industry", page_industry)
+        request.session["assistant_context"] = context
+    payload = answer_message(text, request.session)
+    payload["source_page"] = source_page
+    return JsonResponse(payload)
+
+
+def assistant_packages(request):
+    slug = request.GET.get("industry", "")
+    industry = get_object_or_404(Industry.objects.prefetch_related("packages"), slug=slug, is_active=True)
+    return JsonResponse({"industry": industry.title, "packages": [{"id": p.pk, "title": p.title, "description": p.short_description, "features": p.included_features.splitlines()[:6]} for p in industry.packages.all()[:6]]})
+
+
+def assistant_pricing(request):
+    slug, market, tier = request.GET.get("industry", ""), request.GET.get("market", "IN"), request.GET.get("tier", "")
+    if market not in ASSISTANT_MARKETS: return JsonResponse({"error": "Invalid market"}, status=400)
+    industry = get_object_or_404(Industry.objects.prefetch_related("packages__market_prices"), slug=slug, is_active=True)
+    packages = [p for p in industry.packages.all() if not tier or tier.lower() in p.title.lower()]
+    return JsonResponse({"industry": industry.title, "market": market, "prices": [{"package_id": p.pk, "title": p.title, "price": (price.public_label if (price := p.market_prices.filter(market_code=market, is_active=True).first()) else None)} for p in packages[:6]]})
+
+
+def assistant_demos(request):
+    slug = request.GET.get("industry", "")
+    industry = get_object_or_404(Industry.objects.prefetch_related("demos"), slug=slug, is_active=True)
+    return JsonResponse({"industry": industry.title, "demos": [{"id": d.pk, "title": d.title, "description": d.description, "url": reverse("portfolio_demo", args=[d.pk, slugify(d.title)])} for d in industry.demos.all()[:4]]})
+
+
+def assistant_context(request):
+    market = request.GET.get("market", "IN")
+    valid_markets = {choice[0] for choice in PackageMarketPrice.Market.choices}
+    if market not in valid_markets:
+        market = "IN"
+    industries = Industry.objects.filter(is_active=True).prefetch_related("packages", "demos")
+    payload = []
+    for industry in industries:
+        packages = []
+        for package in industry.packages.all():
+            price = package.market_prices.filter(market_code=market, is_active=True).first()
+            packages.append({"id": package.pk, "title": package.title, "price": price.public_label if price else "Quote after scope review"})
+        payload.append({"slug": industry.slug, "title": industry.title, "description": industry.short_description, "packages": packages, "demos": [{"id": demo.pk, "title": demo.title} for demo in industry.demos.all()]})
+    return JsonResponse({"market": market, "industries": payload})
+
+
+def assistant_lead(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST required"}, status=405)
+    try:
+        data = json.loads(request.body or "{}")
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid request"}, status=400)
+    if data.get("website"):
+        return JsonResponse({"ok": True})
+    if data.get("consent") is not True:
+        return JsonResponse({"error": "Please confirm consent before submitting."}, status=400)
+    email = (data.get("email") or "").strip()
+    try:
+        validate_email(email)
+    except ValidationError:
+        return JsonResponse({"error": "Please enter a valid email address."}, status=400)
+    now = int(timezone.now().timestamp())
+    attempts = [value for value in request.session.get("assistant_leads", []) if now - value < 600]
+    if len(attempts) >= 3:
+        return JsonResponse({"error": "Too many submissions. Please try again shortly."}, status=429)
+    industry = get_object_or_404(Industry, slug=data.get("industry"), is_active=True)
+    package = None
+    if data.get("package_id"):
+        package = industry.packages.filter(pk=data.get("package_id")).first()
+        if not package:
+            return JsonResponse({"error": "That package is not available for this industry."}, status=400)
+    market = data.get("market", "IN")
+    valid_markets = {choice[0] for choice in PackageMarketPrice.Market.choices}
+    if market not in valid_markets:
+        return JsonResponse({"error": "Invalid pricing market."}, status=400)
+    price = package and package.market_prices.filter(market_code=market, is_active=True).first()
+    currency = price.currency_code if price else {"IN": "INR", "US_INTL": "USD", "UK": "GBP", "AU": "AUD", "CA": "CAD"}[market]
+    enquiry = Enquiry.objects.create(
+        name=(data.get("name") or "Website visitor").strip()[:120], business_name=(data.get("business_name") or "").strip()[:160],
+        email=email, phone=(data.get("phone") or "").strip()[:40], country=(data.get("country") or "").strip()[:120],
+        preferred_currency=currency, business_type=industry.title, package_interested_in=package.title if package else "Recommendation requested",
+        required_features=(data.get("requirements") or "").strip(), preferred_timeline=(data.get("timeline") or "").strip()[:120],
+        selected_market=market, displayed_price_context=price.public_label if price else "Quote after scope review",
+        message="Enquiry source: Website Assistant\nSource page: {}\n{}".format((data.get("source_page") or "")[:300], (data.get("message") or "")[:3000]),
+    )
+    attempts.append(now); request.session["assistant_leads"] = attempts
+    return JsonResponse({"ok": True, "reference": enquiry.pk})
 
 
 DEMO_DETAILS = {
@@ -305,6 +427,11 @@ PORTFOLIO_DEMO_DETAILS = {
         "css": "css/portfolio_demos/web_design_agency_demo.css",
         "js": "js/portfolio_demos/web_design_agency_demo.js",
     },
+    "clinic-website-demo": {
+        "template": "portfolio_demos/clinic_website_demo.html",
+        "css": "css/portfolio_demos/clinic_website_demo.css",
+        "js": "js/portfolio_demos/clinic_website_demo.js",
+    },
 }
 
 
@@ -454,13 +581,72 @@ def verify_razorpay_signature(order_id, payment_id, signature):
 
 def home(request):
     ensure_default_content()
+    featured_demo_specs = [
+        (
+            "Cricket Intelligence Dashboard Demo",
+            "Sports",
+            "Cricket League Website",
+            "Modern website for leagues, tournaments and sports organizations.",
+        ),
+        (
+            "Local Service Business Demo",
+            "Business",
+            "Business Website",
+            "Professional website for businesses and service providers.",
+        ),
+        (
+            "Cafe Landing Page Demo",
+            "Food & Hospitality",
+            "Cafe / Restaurant Website",
+            "Modern restaurant experience with menus and reservations.",
+        ),
+        (
+            "Clinic Website Demo",
+            "Healthcare",
+            "Clinic Website",
+            "A calm healthcare experience with services and appointment enquiries.",
+        ),
+        (
+            "Trips & Tours Website Demo",
+            "Travel",
+            "Travel Website",
+            "Travel booking and destination showcase.",
+        ),
+        (
+            "Real Estate Property Demo",
+            "Real Estate",
+            "Real Estate Website",
+            "Property listings and lead generation.",
+        ),
+        (
+            "Personal Portfolio Website",
+            "Portfolio",
+            "Portfolio Website",
+            "Modern personal portfolio for creators and professionals.",
+        ),
+    ]
+    demo_projects = {
+        project.title: project
+        for project in PortfolioProject.objects.filter(
+            title__in=[spec[0] for spec in featured_demo_specs]
+        )
+    }
+    featured_demos = [
+        {
+            "project": demo_projects[project_title],
+            "badge": badge,
+            "title": title,
+            "description": description,
+        }
+        for project_title, badge, title, description in featured_demo_specs
+        if project_title in demo_projects
+    ][:4]
     return render(
         request,
         "home.html",
         {
             "services": Service.objects.all(),
-            "packages": Package.objects.filter(is_featured=True)[:6],
-            "projects": PortfolioProject.objects.all()[:3],
+            "featured_demos": featured_demos,
             "about_profile": AboutProfile.objects.filter(is_active=True).first(),
             "reviews": Review.objects.filter(status=Review.Status.APPROVED, is_featured=True)[:6],
         },
@@ -469,7 +655,16 @@ def home(request):
 
 def services(request):
     ensure_default_content()
-    return render(request, "services.html", {"services": Service.objects.all()})
+    service_cards = []
+    for service in Service.objects.all():
+        presentation = SERVICE_CARD_CONTENT.get(service.title, {})
+        service_cards.append({
+            "service": service,
+            "group": presentation.get("group", "Website Service"),
+            "best_for": presentation.get("best_for", "Businesses that need a clearer and more useful website"),
+            "features": presentation.get("features", ["Clear website structure", "Responsive interface", "Practical enquiry flow"]),
+        })
+    return render(request, "services.html", {"services": Service.objects.all(), "service_cards": service_cards})
 
 
 def service_demo(request, service_id, slug):
@@ -488,6 +683,11 @@ def service_demo(request, service_id, slug):
         },
     )
     package_focus = details.get("package_focus", "business")
+    presentation = SERVICE_CARD_CONTENT.get(service.title, {
+        "group": "Website Service",
+        "best_for": details["audience"],
+        "features": details["sections"][:3],
+    })
     return render(
         request,
         "demos/service_demo.html",
@@ -495,7 +695,9 @@ def service_demo(request, service_id, slug):
             "service": service,
             "demo_slug": demo_slug,
             "details": details,
+            "presentation": presentation,
             "package_url": f"{reverse('packages')}?focus={package_focus}",
+            "quote_url": f"{reverse('contact')}?{urlencode({'service': service.title, 'source': 'Service Detail Page'})}",
             "demo_css": f"css/demos/{demo_slug}.css",
             "demo_js": f"js/demos/{demo_slug}.js",
         },
@@ -504,6 +706,91 @@ def service_demo(request, service_id, slug):
 
 def packages(request):
     ensure_default_content()
+    aliases = {
+        "clinic-healthcare": "doctor dentist physiotherapy diagnostic healthcare clinic hospital skin clinic eye clinic dental wellness",
+        "restaurant-cafe": "bakery cake shop dessert cafe restaurant food cloud kitchen bakery occasion orders",
+        "real-estate": "property broker realtor builder realty apartment flat plot agent listings",
+        "cricket-sports": "cricket academy tournament league sports team club scorecard fixtures standings",
+        "beauty-salon": "salon makeup bridal beauty spa nail studio hairstylist hair artist",
+        "gym-fitness": "gym trainer fitness yoga zumba crossfit classes membership",
+        "hotels-hospitality": "hotel resort homestay accommodation guest house rooms stay",
+        "shops-products": "shop store products retail boutique showroom catalogue ecommerce",
+        "travel-tourism": "travel tours tourism trip package agency destination itinerary",
+        "wedding-events": "wedding event planner decoration photographer celebration decor",
+        "personal-portfolios": "portfolio resume personal brand creator influencer student freelancer",
+        "creative-agencies": "agency marketing design studio creative agency web design",
+        "pet-services": "pet dog cat grooming veterinary vet pet shop",
+        "local-services": "plumber electrician repair cleaning local service emergency service",
+        "custom-systems": "admin panel dashboard inventory custom software crm automation api user accounts",
+        "business-services": "business services company consultant professional website startup",
+    }
+    industries = list(Industry.objects.filter(is_active=True).prefetch_related("demos"))
+    for industry in industries:
+        industry.search_terms = f"{industry.title} {industry.short_description} {aliases.get(industry.slug, '')}"
+    return render(request, "packages_landing.html", {"industries": industries})
+
+
+def _industry_package_item(package, index, total, matching_demo):
+    features = package_features(package)
+    is_custom = package.public_pricing_type == Package.PublicPricingType.SCOPE_BASED or "custom" in package.title.lower()
+    return {
+        "package": package,
+        "timeline": package_timeline(package),
+        "best_for": package_best_for(package),
+        "features": features,
+        "key_features": features[:7],
+        "limits": package_limits(package),
+        "badge": "Custom System" if is_custom else ("Most Popular" if index == 1 and total > 2 else ("Starter" if index == 0 else "Premium")),
+        "is_popular": index == 1 and total > 2,
+        "is_custom": is_custom,
+        "description": package.short_description,
+        "market_prices": [price for price in package.market_prices.all() if price.is_active],
+        "matching_demo": matching_demo,
+    }
+
+
+def industry_packages(request, industry_slug):
+    ensure_default_content()
+    industry = get_object_or_404(
+        Industry.objects.prefetch_related("packages__market_prices", "demos"),
+        slug=industry_slug,
+        is_active=True,
+    )
+    packages_for_industry = list(industry.packages.all())
+    matching_demo = industry.demos.first()
+    items = [
+        _industry_package_item(package, index, len(packages_for_industry), matching_demo)
+        for index, package in enumerate(packages_for_industry)
+    ]
+    faqs = []
+    for line in industry.faq.splitlines():
+        if "|" in line:
+            question, answer = line.split("|", 1)
+            faqs.append((question.strip(), answer.strip()))
+    niche_visuals = {
+        "business-services": ("images/portfolio_demos/local-service/hero.png", "images/portfolio_demos/local-service/detail.png"),
+        "restaurant-cafe": ("images/portfolio_demos/restaurant/restaurant-hero.jpg", "images/portfolio_demos/restaurant/restaurant-menu.jpg"),
+        "travel-tourism": ("images/portfolio_demos/travel/hero.jpg", "images/portfolio_demos/travel/detail.jpg"),
+        "beauty-salon": ("images/portfolio_demos/salon/hero.jpg", "images/portfolio_demos/salon/detail.jpg"),
+        "cricket-sports": ("images/portfolio_demos/pitchqi/hero.jpg", "images/portfolio_demos/pitchqi/detail.jpg"),
+        "real-estate": ("images/portfolio_demos/realestate/hero.jpg", "images/portfolio_demos/realestate/detail.jpg"),
+        "gym-fitness": ("images/portfolio_demos/gym/gym-hero.jpg", "images/portfolio_demos/gym/gym-training.jpg"),
+        "hotels-hospitality": ("images/portfolio_demos/hotel/hero.jpg", "images/portfolio_demos/hotel/detail.jpg"),
+        "wedding-events": ("images/portfolio_demos/wedding/hero.jpg", "images/portfolio_demos/wedding/detail.jpg"),
+        "shops-products": ("images/portfolio_demos/shop/hero.png", "images/portfolio_demos/shop/collection.png"),
+        "personal-portfolios": ("images/portfolio_demos/personal/hero.jpg", "images/portfolio_demos/personal/detail.jpg"),
+        "creative-agencies": ("images/portfolio_demos/agency/hero.jpg", "images/portfolio_demos/agency/work.jpg"),
+        "pet-services": ("images/portfolio_demos/pet/hero.jpg", "images/portfolio_demos/pet/grooming.jpg"),
+        "local-services": ("images/portfolio_demos/local-service/hero.png", "images/portfolio_demos/local-service/detail.png"),
+        "clinic-healthcare": ("images/portfolio_demos/clinic/clinic-reception-v2.jpg", "images/portfolio_demos/clinic/clinic-consultation-v2.jpg"),
+        "custom-systems": ("images/portfolio_demos/agency/work.jpg", "images/portfolio_demos/pitchqi/detail.jpg"),
+    }
+    hero_visual, detail_visual = niche_visuals[industry.slug]
+    return render(request, "industry_packages.html", {"industry": industry, "items": items, "matching_demo": matching_demo, "faqs": faqs, "hero_visual": hero_visual, "detail_visual": detail_visual})
+
+
+def legacy_packages(request):
+    """Legacy grouped package builder retained for reference during the niche rollout."""
     focus = request.GET.get("focus", "")
     solution_definitions = [
         {
@@ -643,7 +930,19 @@ def packages(request):
 
 def portfolio(request):
     ensure_default_content()
-    return render(request, "portfolio.html", {"projects": PortfolioProject.objects.all()})
+    projects = list(PortfolioProject.objects.prefetch_related("industries").all())
+    category_map = {
+        "business-services": "business", "restaurant-cafe": "food", "cricket-sports": "sports",
+        "clinic-healthcare": "healthcare", "real-estate": "property", "travel-tourism": "travel",
+        "beauty-salon": "beauty", "gym-fitness": "sports", "hotels-hospitality": "hospitality",
+        "wedding-events": "events", "shops-products": "retail", "pet-services": "retail",
+        "personal-portfolios": "portfolio", "creative-agencies": "business", "local-services": "local-services",
+    }
+    for project in projects:
+        industry = project.industries.first()
+        project.filter_category = category_map.get(industry.slug if industry else "", "business")
+        project.search_terms = f"{project.title} {project.description} {project.tech_stack} {industry.title if industry else ''}"
+    return render(request, "portfolio.html", {"projects": projects})
 
 
 def feedback(request):
@@ -668,6 +967,7 @@ def portfolio_demo(request, project_id, slug):
     project = get_object_or_404(PortfolioProject, pk=project_id)
     project_slug = slugify(project.title)
     demo = PORTFOLIO_DEMO_DETAILS.get(project_slug, PORTFOLIO_DEMO_DETAILS["restaurant-website-demo"])
+    matching_industry = project.industries.filter(is_active=True).first()
     return render(
         request,
         demo["template"],
@@ -676,6 +976,7 @@ def portfolio_demo(request, project_id, slug):
             "project_slug": project_slug,
             "demo_css": demo["css"],
             "demo_js": demo["js"],
+            "matching_industry": matching_industry,
         },
     )
 
@@ -685,7 +986,11 @@ def process(request):
 
 
 def about(request):
-    return render(request, "about.html", {"about_profile": AboutProfile.objects.filter(is_active=True).first()})
+    return render(request, "about.html", {
+        "about_profile": AboutProfile.objects.filter(is_active=True).first(),
+        "about_story": PUBLIC_ABOUT,
+        "about_industries": Industry.objects.filter(is_active=True).order_by("order", "title")[:15],
+    })
 
 
 def faq(request):
@@ -695,6 +1000,9 @@ def faq(request):
 def contact(request):
     ensure_default_content()
     selected_package = Package.objects.filter(pk=request.GET.get("package")).first() if request.GET.get("package") else None
+    selected_industry = Industry.objects.filter(slug=request.GET.get("industry", ""), is_active=True).first()
+    if selected_package and selected_industry and not selected_industry.packages.filter(pk=selected_package.pk).exists():
+        selected_industry = None
     valid_markets = {value for value, label in PackageMarketPrice.Market.choices}
     selected_market = request.GET.get("market", PackageMarketPrice.Market.INDIA)
     if selected_market not in valid_markets:
@@ -720,17 +1028,19 @@ def contact(request):
             return redirect("contact")
     else:
         initial = {"package_interested_in": selected_package.title} if selected_package else {}
+        if selected_industry:
+            initial["business_type"] = selected_industry.title
         requested_service = request.GET.get("service", "").strip()
         enquiry_source = request.GET.get("source", "").strip()
         if requested_service and not selected_package:
             initial["package_interested_in"] = requested_service
-            initial["business_type"] = "Sports / Cricket Organisation"
+            initial["business_type"] = requested_service
         if enquiry_source:
             initial["message"] = f"Enquiry source: {enquiry_source}"
         if selected_market_price:
             initial["preferred_currency"] = selected_market_price.currency_code
         form = EnquiryForm(initial=initial)
-    return render(request, "contact.html", {"form": form, "selected_package": selected_package, "selected_market": selected_market, "selected_market_price": selected_market_price})
+    return render(request, "contact.html", {"form": form, "selected_package": selected_package, "selected_industry": selected_industry, "selected_market": selected_market, "selected_market_price": selected_market_price})
 
 
 def checkout(request):

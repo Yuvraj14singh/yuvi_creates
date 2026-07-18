@@ -18,6 +18,28 @@ SERVICES = [
     ("Domain/Hosting Setup Support", "Guidance for connecting domain, hosting, SSL, and launch setup.", "17"),
 ]
 
+SERVICE_CARD_CONTENT = {
+    "Business Websites": {"group":"Business", "best_for":"Service providers, institutes, consultants and growing brands", "features":["Clear service-led page structure", "Trust, enquiry and WhatsApp flow", "Responsive business-ready interface"]},
+    "Trips & Tours Websites": {"group":"Travel", "best_for":"Tour operators, travel agencies and destination businesses", "features":["Tour and destination showcases", "Itinerary and package presentation", "Booking enquiry and WhatsApp flow"]},
+    "Restaurant/Cafe Websites": {"group":"Food & Hospitality", "best_for":"Restaurants, cafes, bakeries and cloud kitchens", "features":["Menu and signature-item presentation", "Gallery, location and opening hours", "Reservation or WhatsApp enquiry flow"]},
+    "Shop / Local Store Websites": {"group":"Retail", "best_for":"Local shops, boutiques, showrooms and product businesses", "features":["Product and category presentation", "Offers, location and store information", "Product enquiry and WhatsApp flow"]},
+    "Digital Menu / QR Menu Websites": {"group":"Food & Hospitality", "best_for":"Food businesses that need a fast mobile-first menu", "features":["QR-ready mobile menu", "Categories, items and pricing", "Offers, map, call and WhatsApp CTA"]},
+    "Real Estate / Property Websites": {"group":"Property", "best_for":"Property advisors, agents, builders and brokers", "features":["Structured property listings", "Location, amenities and trust content", "Qualified enquiry and consultation flow"]},
+    "Gym / Fitness Websites": {"group":"Fitness", "best_for":"Gyms, fitness studios, trainers and class-based businesses", "features":["Programs, facilities and trainer profiles", "Membership plans and class schedules", "Trial session or membership enquiry flow"]},
+    "Salon & Makeup Artist Websites": {"group":"Beauty", "best_for":"Salons, makeup artists, spas and beauty studios", "features":["Services and package presentation", "Portfolio, transformations and gallery", "Appointment enquiry and WhatsApp CTA"]},
+    "Pet Shop Websites": {"group":"Pet Services", "best_for":"Pet shops, groomers and pet-care brands", "features":["Products or service categories", "Grooming and care enquiries", "Offers, reviews and contact flow"]},
+    "Hotel Websites": {"group":"Hospitality", "best_for":"Hotels, resorts, homestays and guest houses", "features":["Room and amenity showcases", "Gallery, location and nearby highlights", "Stay enquiry or booking-request flow"]},
+    "Wedding & Event Planner Websites": {"group":"Events", "best_for":"Wedding planners, decorators and event companies", "features":["Celebration and service showcases", "Portfolio and package presentation", "Date and event enquiry flow"]},
+    "Web Design / Agency Websites": {"group":"Creative Business", "best_for":"Studios, agencies and professional service teams", "features":["Authority-led service presentation", "Process and selected-work sections", "Project brief and quotation CTA"]},
+    "Landing Pages": {"group":"Conversion", "best_for":"Offers, launches, campaigns and focused services", "features":["One clear message and objective", "Focused proof and benefit sections", "Strong enquiry or conversion CTA"]},
+    "Portfolio Websites": {"group":"Personal Brand", "best_for":"Creators, professionals, coaches and freelancers", "features":["Personal positioning and introduction", "Selected work or case-study presentation", "Services and contact journey"]},
+    "Small Business Websites": {"group":"Local Business", "best_for":"Clinics, tutors, repair services and local professionals", "features":["Services and local trust content", "Location, hours and contact details", "Call, map, form and WhatsApp flow"]},
+    "Website Redesign / Improvement": {"group":"Improvement", "best_for":"Existing websites that feel dated, unclear or difficult to use", "features":["Layout and content-flow review", "Responsive interface improvements", "Clarity, speed and CTA refinement"]},
+    "Responsive Website Development": {"group":"Development", "best_for":"Websites that must work cleanly across modern screen sizes", "features":["Mobile, tablet and desktop layouts", "Touch-friendly navigation and CTAs", "Responsive media and content structure"]},
+    "Basic SEO-Friendly Website Setup": {"group":"Website Foundation", "best_for":"Businesses that need a clean search-friendly technical base", "features":["Logical heading and page structure", "Titles, descriptions and image alt text", "Readable URLs and crawl-friendly basics"]},
+    "Domain/Hosting Setup Support": {"group":"Launch Support", "best_for":"Clients who need guidance taking an approved website live", "features":["Domain and hosting connection guidance", "SSL and deployment setup support", "Final launch and form checks"]},
+}
+
 PACKAGES = [
     {
         "category": "Starter Business Website",
