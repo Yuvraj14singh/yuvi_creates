@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const industryCards = Array.from(document.querySelectorAll("[data-search-card]"));
     const industryCount = document.querySelector("[data-search-count]");
     const industryEmpty = document.querySelector("[data-search-empty]");
+    const industrySubmit = document.querySelector("[data-search-submit]");
     const industryReset = document.querySelector("[data-search-reset]");
     function filterIndustries() {
         const terms = normalized(industrySearch && industrySearch.value).split(" ").filter(Boolean);
@@ -31,7 +32,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (industryCount) industryCount.textContent = visible + (visible === 1 ? " industry found" : " industries found");
         if (industryEmpty) industryEmpty.hidden = visible !== 0;
     }
-    if (industrySearch) industrySearch.addEventListener("input", filterIndustries);
+    if (industrySubmit) industrySubmit.addEventListener("click", filterIndustries);
+    if (industrySearch) industrySearch.addEventListener("keydown", function (event) {
+        if (event.key !== "Enter") return;
+        event.preventDefault();
+        filterIndustries();
+    });
     if (industryReset) industryReset.addEventListener("click", function () { industrySearch.value = ""; filterIndustries(); industrySearch.focus(); });
 
     try {

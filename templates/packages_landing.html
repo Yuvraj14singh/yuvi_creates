@@ -1,6 +1,6 @@
 {% extends "base.html" %}{% load static %}
 {% block body_class %}page-packages page-package-industries{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/packages.css' %}"><link rel="stylesheet" href="{% static 'css/components/discovery-search.css' %}">{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/packages.css' %}?v=20260719-3"><link rel="stylesheet" href="{% static 'css/components/discovery-search.css' %}?v=20260719-1">{% endblock %}
 {% block title %}Website Packages by Industry | Yuvi Creates{% endblock %}
 {% block content %}
 <section class="packages-hero" id="top"><div class="container packages-hero-inner">
@@ -15,10 +15,10 @@
     <p>Commercial prices are configured separately for each market—not converted using live exchange rates. Your selection stays active while you browse.</p>
 </div></section>
 <section class="industry-selector" id="industries"><div class="container"><div class="pricing-intro"><div><p class="eyebrow">Built around your business</p><h2>Start with the industry closest to yours.</h2></div><p>Each experience brings together relevant packages, features, demos and common questions.</p></div>
-<div class="industry-search" data-industry-search><label for="industry-search-input">Find Your Industry</label><div class="search-control"><input id="industry-search-input" type="search" placeholder="Search your industry or website type…" autocomplete="off"><button type="button" data-search-reset>Reset</button></div><p class="search-count" aria-live="polite" data-search-count>{{ industries|length }} industries available</p></div>
+<div class="industry-search" data-industry-search><label for="industry-search-input">Find Your Industry</label><div class="search-control"><input id="industry-search-input" type="search" placeholder="Cafe, clinic, travel…" autocomplete="off"><button class="search-submit" type="button" data-search-submit>Search</button><button class="search-reset" type="button" data-search-reset>Reset</button></div><p class="search-count" aria-live="polite" data-search-count>{{ industries|length }} industries available</p></div>
 <div class="industry-selector-grid" data-industry-grid>{% for industry in industries %}<article class="industry-selector-card" style="--industry-accent:{{ industry.accent }}" data-search-card data-search="{{ industry.search_terms|lower }}">
     <div class="industry-icon" aria-hidden="true">{{ industry.icon }}</div>{% if industry.badge %}<span class="industry-position">{{ industry.badge }}</span>{% endif %}<h3>{{ industry.title }}</h3><p>{{ industry.short_description }}</p>
     <div class="industry-card-actions"><a class="btn btn-primary industry-link" data-industry-base="{{ industry.get_absolute_url }}" href="{{ industry.get_absolute_url }}">View Packages</a></div>
 </article>{% endfor %}</div><div class="search-empty" data-search-empty hidden><h3>No exact match found.</h3><p>Tell us about your business and we will recommend the closest website solution.</p><a class="btn btn-primary" href="{% url 'contact' %}?source=Industry%20Search">Get a Custom Recommendation</a></div></div></section>
 {% endblock %}
-{% block extra_scripts %}<script src="{% static 'js/pages/packages.js' %}"></script>{% endblock %}
+{% block extra_scripts %}<script src="{% static 'js/pages/packages.js' %}?v=20260719-1"></script>{% endblock %}
