@@ -7,6 +7,7 @@
         link.href = link.dataset.packageBase + "?market=" + encodeURIComponent(market);
     });
     const input = document.getElementById("demo-search-input");
+    const searchForm = document.querySelector("[data-demo-search-form]");
     const cards = Array.from(document.querySelectorAll("[data-demo-card]"));
     const filters = Array.from(document.querySelectorAll("[data-demo-filter]"));
     const count = document.querySelector("[data-demo-count]");
@@ -33,7 +34,7 @@
         filters.forEach(function (item) { const active = item === button; item.classList.toggle("is-active", active); item.setAttribute("aria-pressed", String(active)); });
         apply();
     }); });
-    if (input) input.addEventListener("input", apply);
+    if (searchForm) searchForm.addEventListener("submit", function (event) { event.preventDefault(); apply(); });
     if (reset) reset.addEventListener("click", function () { input.value = ""; category = "all"; filters.forEach(function (item) { const active = item.dataset.demoFilter === "all"; item.classList.toggle("is-active", active); item.setAttribute("aria-pressed", String(active)); }); apply(); input.focus(); });
     apply();
 })();

@@ -14,7 +14,14 @@
 </section>
 <section class="section">
     <div class="container demo-search-shell" data-demo-search>
-        <label for="demo-search-input">Find a Demo</label><div class="search-control"><input id="demo-search-input" type="search" placeholder="Search website demos…" autocomplete="off"><button type="button" data-demo-reset>Reset</button></div>
+        <form class="demo-search-form" data-demo-search-form role="search">
+            <label for="demo-search-input">Find a Demo</label>
+            <div class="search-control">
+                <input id="demo-search-input" type="search" placeholder="Try “cafe”, “clinic” or “travel”" autocomplete="off">
+                <button class="search-submit" type="submit">Search</button>
+                <button class="search-reset" type="button" data-demo-reset>Reset Search</button>
+            </div>
+        </form>
         <div class="demo-filter-pills" role="group" aria-label="Filter demos by category"><button class="is-active" type="button" data-demo-filter="all" aria-pressed="true">All</button><button type="button" data-demo-filter="business">Business</button><button type="button" data-demo-filter="food">Food</button><button type="button" data-demo-filter="sports">Sports</button><button type="button" data-demo-filter="healthcare">Healthcare</button><button type="button" data-demo-filter="property">Property</button><button type="button" data-demo-filter="travel">Travel</button><button type="button" data-demo-filter="beauty">Beauty</button><button type="button" data-demo-filter="hospitality">Hospitality</button><button type="button" data-demo-filter="events">Events</button><button type="button" data-demo-filter="retail">Retail</button><button type="button" data-demo-filter="portfolio">Portfolio</button><button type="button" data-demo-filter="local-services">Local Services</button></div>
         <p class="search-count" aria-live="polite" data-demo-count>{{ projects|length }} demos available</p>
     </div>
