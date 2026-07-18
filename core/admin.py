@@ -11,10 +11,11 @@ from .models import (
     Review,
     Service,
 )
+from .admin_utils import PremiumAdminFormMixin
 
 
 @admin.register(Industry)
-class IndustryAdmin(admin.ModelAdmin):
+class IndustryAdmin(PremiumAdminFormMixin, admin.ModelAdmin):
     list_display = ("title", "slug", "badge", "is_active", "order")
     list_filter = ("is_active",)
     search_fields = ("title", "short_description", "hero_heading")
@@ -29,14 +30,14 @@ class PackageMarketPriceInline(admin.TabularInline):
 
 
 @admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
+class ServiceAdmin(PremiumAdminFormMixin, admin.ModelAdmin):
     list_display = ("title", "order")
     search_fields = ("title", "description")
     list_editable = ("order",)
 
 
 @admin.register(Package)
-class PackageAdmin(admin.ModelAdmin):
+class PackageAdmin(PremiumAdminFormMixin, admin.ModelAdmin):
     list_display = ("title", "category", "price", "public_pricing_type", "is_featured", "order")
     list_filter = ("category", "public_pricing_type", "is_featured")
     search_fields = ("title", "short_description", "included_features")
@@ -45,14 +46,15 @@ class PackageAdmin(admin.ModelAdmin):
 
 
 @admin.register(PortfolioProject)
-class PortfolioProjectAdmin(admin.ModelAdmin):
-    list_display = ("title", "tech_stack", "order")
+class PortfolioProjectAdmin(PremiumAdminFormMixin, admin.ModelAdmin):
+    list_display = ("title", "experience_level", "is_featured", "is_new", "is_popular", "is_luxury", "is_fast_launch", "is_mobile_first", "is_active", "order")
+    list_filter = ("industries", "experience_level", "is_featured", "is_new", "is_popular", "is_luxury", "is_fast_launch", "is_mobile_first", "is_active")
     search_fields = ("title", "description", "tech_stack")
-    list_editable = ("order",)
+    list_editable = ("experience_level", "is_featured", "is_new", "is_popular", "is_luxury", "is_fast_launch", "is_mobile_first", "is_active", "order")
 
 
 @admin.register(AboutProfile)
-class AboutProfileAdmin(admin.ModelAdmin):
+class AboutProfileAdmin(PremiumAdminFormMixin, admin.ModelAdmin):
     list_display = ("name", "role", "is_active", "updated_at")
     list_filter = ("is_active",)
     search_fields = ("name", "role", "headline", "bio")
@@ -60,7 +62,7 @@ class AboutProfileAdmin(admin.ModelAdmin):
 
 
 @admin.register(Review)
-class ReviewAdmin(admin.ModelAdmin):
+class ReviewAdmin(PremiumAdminFormMixin, admin.ModelAdmin):
     list_display = ("client_name", "business_name", "location", "service_received", "rating", "source", "status", "is_featured", "created_at")
     list_filter = ("status", "rating", "source", "is_featured", "created_at")
     search_fields = ("client_name", "business_name", "email", "location", "service_received", "quote")
@@ -79,7 +81,7 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 @admin.register(Enquiry)
-class EnquiryAdmin(admin.ModelAdmin):
+class EnquiryAdmin(PremiumAdminFormMixin, admin.ModelAdmin):
     list_display = ("name", "business_name", "country", "selected_market", "preferred_currency", "budget_level", "package_interested_in", "final_quote_amount", "final_quote_currency", "created_at")
     list_filter = ("selected_market", "preferred_currency", "budget_level", "business_type", "created_at")
     search_fields = ("name", "business_name", "email", "phone", "country", "package_interested_in", "required_features", "message")
@@ -90,7 +92,7 @@ class EnquiryAdmin(admin.ModelAdmin):
 
 
 @admin.register(PaymentBooking)
-class PaymentBookingAdmin(admin.ModelAdmin):
+class PaymentBookingAdmin(PremiumAdminFormMixin, admin.ModelAdmin):
     list_display = (
         "client_name",
         "business_name",

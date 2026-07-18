@@ -141,6 +141,68 @@ class AssistantHumanLikeUpgradeTests(TestCase):
         self.assertIn("Python, Django, HTML, CSS, JavaScript", stack)
 
 
+class DemoBadgeAndHomeTrustTests(TestCase):
+    def setUp(self):
+        self.featured = PortfolioProject.objects.create(
+            title="Badge Premium Demo", description="A premium example", tech_stack="Django",
+            experience_level=PortfolioProject.ExperienceLevel.PREMIUM,
+            is_featured=True, is_new=True, is_popular=True,
+        )
+        self.inactive = PortfolioProject.objects.create(
+            title="Private Draft Demo", description="Not public", tech_stack="Django", is_active=False,
+        )
+
+    def test_status_badges_follow_priority_and_stop_at_two(self):
+        self.assertEqual(
+            [item["label"] for item in self.featured.visible_status_badges],
+            ["Featured", "New"],
+        )
+
+    def test_demo_collection_renders_level_status_and_combined_filter(self):
+        response = self.client.get(reverse("portfolio"))
+        self.assertContains(response, "Badge Premium Demo")
+        self.assertContains(response, "Premium")
+        self.assertContains(response, "Featured")
+        self.assertContains(response, 'data-level="premium"')
+        self.assertContains(response, "Project Level")
+        self.assertNotContains(response, "Private Draft Demo")
+        self.assertNotContains(response, "Request Similar</a>")
+
+    def test_inactive_demo_cannot_be_opened_directly(self):
+        response = self.client.get(reverse("portfolio_demo", args=[self.inactive.pk, "private-draft-demo"]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_home_uses_new_conversion_trust_copy(self):
+        response = self.client.get(reverse("home"))
+        self.assertContains(response, "Built to Look Professional—and Help Visitors Take Action.")
+        self.assertContains(response, "Professional Business Presence")
+        self.assertContains(response, "A Website Partner Who Understands the Business Behind the Design.")
+        self.assertContains(response, "You work directly with Yuvraj")
+        self.assertNotContains(response, "The important things clients expect are already planned")
+        self.assertContains(response, "Real experiences.")
+        self.assertContains(response, "Share an honest review")
+
+    def test_process_page_uses_clear_premium_project_journey(self):
+        response = self.client.get(reverse("process"))
+        self.assertContains(response, "From first idea to a website")
+        self.assertContains(response, "Six practical phases")
+        self.assertContains(response, "One clear point of communication")
+        self.assertContains(response, "Discuss Your Website")
+
+    def test_assistant_lists_only_active_badged_demos(self):
+        premium = answer_message("Show premium demos", {})
+        self.assertIn("Badge Premium Demo", premium["reply"])
+        self.assertNotIn("Private Draft Demo", premium["reply"])
+        featured = answer_message("Which demos are featured?", {})
+        self.assertIn("Badge Premium Demo", featured["reply"])
+        comparison = answer_message("What is the difference between starter and premium demos?", {})
+        self.assertIn("Starter is a focused first presence", comparison["reply"])
+        self.assertNotIn("₹", comparison["reply"])
+        budget = answer_message("Which demo is suitable for a small budget?", {})
+        self.assertIn("Starter demos", budget["reply"])
+        self.assertIn("final price still depends", budget["reply"])
+
+
 class FeedbackFlowTests(TestCase):
     def test_public_feedback_is_saved_pending(self):
         response = self.client.post(
@@ -233,7 +295,7 @@ class PackagesPageTests(TestCase):
         ):
             self.assertContains(response, category)
         self.assertContains(response, "Choose Your Industry")
-        self.assertContains(response, "View Packages", count=16)
+        self.assertContains(response, "View Packages", count=21)
         self.assertNotContains(response, 'data-scope-template=')
 
     def test_focused_package_query_highlights_relevant_solution(self):

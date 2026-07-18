@@ -14,15 +14,18 @@
     const empty = document.querySelector("[data-demo-empty]");
     const reset = document.querySelector("[data-demo-reset]");
     let category = "all";
+    let level = "all";
+    const levelFilters = Array.from(document.querySelectorAll("[data-level-filter]"));
     function normalize(value) { return (value || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim().replace(/\s+/g, " "); }
     function apply() {
         const words = normalize(input && input.value).split(" ").filter(Boolean);
         let visible = 0;
         cards.forEach(function (card) {
             const categoryMatch = category === "all" || card.dataset.category === category;
+            const levelMatch = level === "all" || card.dataset.level === level;
             const haystack = normalize(card.dataset.search + " " + card.textContent);
             const textMatch = words.every(function (word) { return haystack.includes(word); });
-            card.hidden = !(categoryMatch && textMatch);
+            card.hidden = !(categoryMatch && levelMatch && textMatch);
             if (!card.hidden) visible += 1;
         });
         if (count) count.textContent = visible + (visible === 1 ? " demo found" : " demos found");
@@ -34,7 +37,12 @@
         filters.forEach(function (item) { const active = item === button; item.classList.toggle("is-active", active); item.setAttribute("aria-pressed", String(active)); });
         apply();
     }); });
+    levelFilters.forEach(function (button) { button.addEventListener("click", function () {
+        level = button.dataset.levelFilter;
+        levelFilters.forEach(function (item) { const active = item === button; item.classList.toggle("is-active", active); item.setAttribute("aria-pressed", String(active)); });
+        apply();
+    }); });
     if (searchForm) searchForm.addEventListener("submit", function (event) { event.preventDefault(); apply(); });
-    if (reset) reset.addEventListener("click", function () { input.value = ""; category = "all"; filters.forEach(function (item) { const active = item.dataset.demoFilter === "all"; item.classList.toggle("is-active", active); item.setAttribute("aria-pressed", String(active)); }); apply(); input.focus(); });
+    if (reset) reset.addEventListener("click", function () { input.value = ""; category = "all"; level = "all"; filters.forEach(function (item) { const active = item.dataset.demoFilter === "all"; item.classList.toggle("is-active", active); item.setAttribute("aria-pressed", String(active)); }); levelFilters.forEach(function(item){const active=item.dataset.levelFilter==="all";item.classList.toggle("is-active",active);item.setAttribute("aria-pressed",String(active));}); apply(); input.focus(); });
     apply();
 })();

@@ -5,21 +5,22 @@
 {% block title %}Website Design Process | Yuvi Creates{% endblock %}
 {% block meta_description %}Learn the Yuvi Creates website design process from requirements discussion and planning to development, review, revisions, launch support, domain, hosting, and handover.{% endblock %}
 {% block content %}
-<section class="page-hero section">
-    <div class="container narrow">
-        <p class="eyebrow">Process</p>
-        <h1>A clear website process from first discussion <em>to launch.</em></h1>
-        <p class="lead">Every project moves through a simple workflow so scope, content, design, and launch details stay organized.</p>
+<section class="process-hero">
+    <div class="container process-hero-grid">
+        <div class="process-hero-copy reveal"><p class="eyebrow">A clear, founder-led process</p><h1>From first idea to a website <em>ready to launch.</em></h1><p class="lead">You always know what is being planned, what is needed from you and what happens next. Every phase keeps the business goal, scope and visitor journey clear.</p><div class="hero-actions"><a class="btn btn-primary" href="{% url 'contact' %}?source=Process%20Page">Start a Project</a><a class="btn btn-secondary" href="#process-steps">See the Steps</a></div></div>
+        <div class="process-map reveal" aria-label="Project journey overview"><div><span>01</span><strong>Discover</strong><small>Goals &amp; scope</small></div><i aria-hidden="true">→</i><div><span>02</span><strong>Shape</strong><small>Structure &amp; design</small></div><i aria-hidden="true">→</i><div><span>03</span><strong>Build</strong><small>Develop &amp; review</small></div><i aria-hidden="true">→</i><div><span>04</span><strong>Launch</strong><small>Test &amp; handover</small></div></div>
     </div>
 </section>
-<section class="section">
+<section class="process-steps section" id="process-steps" aria-labelledby="process-steps-title"><div class="container process-section-head reveal"><div><p class="eyebrow">Six practical phases</p><h2 id="process-steps-title">A structured journey without unnecessary confusion.</h2></div><p>The exact deliverables depend on your selected package, but the project always follows a clear decision and approval flow.</p></div>
     <div class="container timeline">
-        <article><span>01</span><h2>Requirement discussion</h2><p>We discuss business goals, pages, content, examples, timeline, and package fit.</p></article>
-        <article><span>02</span><h2>Website planning</h2><p>I map the structure, sections, call-to-action flow, and content priorities.</p></article>
-        <article><span>03</span><h2>Design and layout</h2><p>The visual direction is shaped around your audience, brand tone, and mobile experience.</p></article>
-        <article><span>04</span><h2>Development</h2><p>I build the website with responsive HTML, CSS, JavaScript, Django forms, and admin records where needed.</p></article>
-        <article><span>05</span><h2>Review and revisions</h2><p>You review the site and we complete the included revision rounds based on package scope.</p></article>
-        <article><span>06</span><h2>Launch/setup support</h2><p>I help with domain, hosting, setup checks, and final handover guidance.</p></article>
+        <article class="reveal"><span>01</span><small>DISCOVER</small><h3>Requirement discussion</h3><p>We clarify your business, audience, goals, pages, features, content readiness, references and suitable package.</p><ul><li>Business goals</li><li>Scope alignment</li></ul></article>
+        <article class="reveal"><span>02</span><small>PLAN</small><h3>Website planning</h3><p>I map the page structure, content priorities and calls to action so every section has a clear purpose.</p><ul><li>Page architecture</li><li>Visitor journey</li></ul></article>
+        <article class="reveal"><span>03</span><small>DESIGN</small><h3>Visual direction</h3><p>The interface is shaped around your industry, brand personality, audience and responsive mobile experience.</p><ul><li>Layout direction</li><li>Responsive thinking</li></ul></article>
+        <article class="reveal"><span>04</span><small>BUILD</small><h3>Development</h3><p>The approved direction becomes a working website with frontend, Django forms and admin features where required.</p><ul><li>Clean development</li><li>Functional flows</li></ul></article>
+        <article class="reveal"><span>05</span><small>REFINE</small><h3>Review and revisions</h3><p>You review the complete experience and included revisions are handled against the agreed package scope.</p><ul><li>Focused feedback</li><li>Quality checks</li></ul></article>
+        <article class="reveal"><span>06</span><small>DELIVER</small><h3>Launch and handover</h3><p>I support deployment, responsive checks, domain or hosting setup and a clear final handover.</p><ul><li>Launch support</li><li>Handover guidance</li></ul></article>
     </div>
 </section>
+<section class="process-principles section"><div class="container process-principles-grid"><div class="reveal"><p class="eyebrow">What keeps projects smooth</p><h2>Clear inputs.<br><em>Clear decisions.</em></h2><p>Good websites move faster when content, approvals and expectations stay organized from the beginning.</p></div><div class="principle-list reveal"><article><span>01</span><div><strong>One clear point of communication</strong><p>You work directly with Yuvraj throughout the project.</p></div></article><article><span>02</span><div><strong>Scope before assumptions</strong><p>Features, revisions and responsibilities are confirmed before development.</p></div></article><article><span>03</span><div><strong>Feedback in focused rounds</strong><p>Consolidated feedback keeps revisions accurate and efficient.</p></div></article><article><span>04</span><div><strong>Launch with clarity</strong><p>Final setup and handover steps are explained without unnecessary jargon.</p></div></article></div></div></section>
+<section class="section process-final"><div class="container cta-box"><p class="eyebrow">Ready when you are</p><h2>Have a website idea in mind?</h2><p>Share the business type, required pages and important features. I’ll help you identify the right starting scope.</p><div><a class="btn btn-primary" href="{% url 'contact' %}?source=Process%20Final%20CTA">Discuss Your Website</a><a class="btn btn-secondary" href="{% url 'packages' %}">Explore Packages</a></div></div></section>
 {% endblock %}

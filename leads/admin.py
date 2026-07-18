@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from .models import Lead, LeadActivity, LeadAttachment
+from core.admin_utils import PremiumAdminFormMixin
 
 
 class LeadActivityInline(admin.TabularInline):
@@ -20,7 +21,7 @@ class LeadAttachmentInline(admin.TabularInline):
 
 
 @admin.register(Lead)
-class LeadAdmin(admin.ModelAdmin):
+class LeadAdmin(PremiumAdminFormMixin, admin.ModelAdmin):
     list_display = ("business_name", "contact_person", "category", "source", "priority", "status", "next_follow_up_date", "reply_received", "demo_sent", "proposal_sent", "is_archived")
     search_fields = ("business_name", "contact_person", "email", "phone_number", "instagram_handle", "city")
     list_filter = ("category", "source", "priority", "status", "reply_received", "demo_sent", "proposal_sent", "is_archived", "created_at", "next_follow_up_date")
@@ -40,7 +41,7 @@ class LeadAdmin(admin.ModelAdmin):
 
 
 @admin.register(LeadActivity)
-class LeadActivityAdmin(admin.ModelAdmin):
+class LeadActivityAdmin(PremiumAdminFormMixin, admin.ModelAdmin):
     list_display = ("lead", "activity_type", "activity_date", "next_follow_up_date", "created_by", "created_at")
     search_fields = ("lead__business_name", "lead__contact_person", "message")
     list_filter = ("activity_type", "activity_date", "created_at")
@@ -51,7 +52,7 @@ class LeadActivityAdmin(admin.ModelAdmin):
 
 
 @admin.register(LeadAttachment)
-class LeadAttachmentAdmin(admin.ModelAdmin):
+class LeadAttachmentAdmin(PremiumAdminFormMixin, admin.ModelAdmin):
     list_display = ("title", "lead", "uploaded_by", "uploaded_at")
     search_fields = ("title", "lead__business_name")
     autocomplete_fields = ("lead", "uploaded_by")

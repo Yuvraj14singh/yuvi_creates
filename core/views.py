@@ -301,6 +301,46 @@ DEMO_DETAILS = {
         "visual_items": ["Domain DNS", "Hosting", "SSL lock", "Launch checklist"],
         "package_focus": "launch",
     },
+    "coaching-institute-websites": {
+        "audience": "coaching centres, academies, tutors, training institutes, and education businesses",
+        "sections": ["Admission-focused hero", "Courses and batches", "Faculty and results", "Student testimonials", "Counselling enquiry"],
+        "cta": "Turn student and parent interest into qualified admission enquiries.",
+        "vibe": "Modern institute admissions and course experience",
+        "visual_items": ["Course cards", "Faculty profiles", "Result highlights", "Admission form"],
+        "package_focus": "coaching-institute",
+    },
+    "car-dealer-auto-showroom-websites": {
+        "audience": "vehicle dealers, premium auto showrooms, used-car businesses, and automotive brands",
+        "sections": ["Showroom hero", "Vehicle inventory", "Finance and exchange", "Why choose us", "Test-drive enquiry"],
+        "cta": "Help buyers discover the right vehicle and book the next showroom step.",
+        "vibe": "Premium showroom inventory and test-drive journey",
+        "visual_items": ["Vehicle inventory", "Model comparison", "Finance options", "Test-drive form"],
+        "package_focus": "car-dealer",
+    },
+    "construction-interior-design-websites": {
+        "audience": "builders, contractors, architects, interior designers, and turnkey project studios",
+        "sections": ["Project-led hero", "Services and capabilities", "Completed projects", "Design process", "Consultation enquiry"],
+        "cta": "Present expertise visually and convert project interest into serious consultations.",
+        "vibe": "Construction portfolio and interior consultation experience",
+        "visual_items": ["Project gallery", "Service capabilities", "Process timeline", "Site-visit CTA"],
+        "package_focus": "construction-interior",
+    },
+    "jewellery-store-websites": {
+        "audience": "jewellery stores, luxury boutiques, custom jewellers, and occasion-led jewellery brands",
+        "sections": ["Luxury collection hero", "Collection categories", "Craftsmanship story", "Occasion edit", "Private appointment"],
+        "cta": "Build desire and trust before guiding customers to an appointment or product enquiry.",
+        "vibe": "Luxury jewellery collection and private appointment flow",
+        "visual_items": ["Collection edit", "Craftsmanship", "Occasion categories", "Appointment CTA"],
+        "package_focus": "jewellery-store",
+    },
+    "corporate-business-websites": {
+        "audience": "companies, B2B teams, consultancies, professional firms, and growing organisations",
+        "sections": ["Authority-led hero", "Capabilities", "Industries served", "Case studies and proof", "Business enquiry"],
+        "cta": "Communicate credibility clearly and create a professional path to partnership enquiries.",
+        "vibe": "Corporate authority and business partnership experience",
+        "visual_items": ["Capabilities", "Sector expertise", "Case studies", "Contact brief"],
+        "package_focus": "corporate-business",
+    },
 }
 
 
@@ -329,6 +369,9 @@ PACKAGE_FOCUS_CATEGORIES = {
 for focus_key in ("shop", "gym", "real-estate", "landing", "portfolio", "small-business", "redesign", "responsive", "seo", "launch"):
     PACKAGE_FOCUS_CATEGORIES[focus_key] = PACKAGE_FOCUS_CATEGORIES["business"]
 
+for focus_key in ("coaching-institute", "car-dealer", "construction-interior", "jewellery-store", "corporate-business"):
+    PACKAGE_FOCUS_CATEGORIES[focus_key] = PACKAGE_FOCUS_CATEGORIES["business"]
+
 PACKAGE_FOCUS_LABELS = {
     "business": "Business website packages",
     "shop": "Shop and local store website packages",
@@ -348,6 +391,11 @@ PACKAGE_FOCUS_LABELS = {
     "travel": "Trips & tours packages",
     "restaurant": "Restaurant and cafe packages",
     "digital-menu": "Digital menu packages",
+    "coaching-institute": "Coaching and institute website packages",
+    "car-dealer": "Car dealer and auto showroom website packages",
+    "construction-interior": "Construction and interior design website packages",
+    "jewellery-store": "Jewellery store website packages",
+    "corporate-business": "Corporate business website packages",
 }
 
 
@@ -432,6 +480,11 @@ PORTFOLIO_DEMO_DETAILS = {
         "css": "css/portfolio_demos/clinic_website_demo.css",
         "js": "js/portfolio_demos/clinic_website_demo.js",
     },
+    "coaching-website-demo": {"template": "portfolio_demos/coaching_website_demo.html", "css": "css/portfolio_demos/new_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
+    "car-dealer-website-demo": {"template": "portfolio_demos/car_dealer_website_demo.html", "css": "css/portfolio_demos/new_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
+    "construction-interior-design-demo": {"template": "portfolio_demos/construction_interior_demo.html", "css": "css/portfolio_demos/new_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
+    "luxury-jewellery-website-demo": {"template": "portfolio_demos/jewellery_website_demo.html", "css": "css/portfolio_demos/new_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
+    "corporate-business-website-demo": {"template": "portfolio_demos/corporate_business_demo.html", "css": "css/portfolio_demos/new_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
 }
 
 
@@ -628,7 +681,7 @@ def home(request):
     demo_projects = {
         project.title: project
         for project in PortfolioProject.objects.filter(
-            title__in=[spec[0] for spec in featured_demo_specs]
+            title__in=[spec[0] for spec in featured_demo_specs], is_active=True
         )
     }
     featured_demos = [
@@ -723,6 +776,11 @@ def packages(request):
         "local-services": "plumber electrician repair cleaning local service emergency service",
         "custom-systems": "admin panel dashboard inventory custom software crm automation api user accounts",
         "business-services": "business services company consultant professional website startup",
+        "coaching-institute": "coach academy institute education classes admissions courses faculty training",
+        "car-dealer": "cars automobile showroom dealer vehicle auto inventory finance test drive",
+        "construction-interior": "construction builder interior architect architecture projects renovation design",
+        "jewellery-store": "gold diamond ring necklace jewellery jewelry bridal wedding luxury collection",
+        "corporate-business": "company business corporate enterprise consulting consultancy services team case studies",
     }
     industries = list(Industry.objects.filter(is_active=True).prefetch_related("demos"))
     for industry in industries:
@@ -784,6 +842,11 @@ def industry_packages(request, industry_slug):
         "local-services": ("images/portfolio_demos/local-service/hero.png", "images/portfolio_demos/local-service/detail.png"),
         "clinic-healthcare": ("images/portfolio_demos/clinic/clinic-reception-v2.jpg", "images/portfolio_demos/clinic/clinic-consultation-v2.jpg"),
         "custom-systems": ("images/portfolio_demos/agency/work.jpg", "images/portfolio_demos/pitchqi/detail.jpg"),
+        "coaching-institute": ("images/portfolio_demos/coaching/hero.png", "images/portfolio_demos/coaching/detail.png"),
+        "car-dealer": ("images/portfolio_demos/auto/hero.png", "images/portfolio_demos/auto/detail.png"),
+        "construction-interior": ("images/portfolio_demos/construction/hero.png", "images/portfolio_demos/construction/detail.png"),
+        "jewellery-store": ("images/portfolio_demos/jewellery/hero.png", "images/portfolio_demos/jewellery/detail.png"),
+        "corporate-business": ("images/portfolio_demos/corporate/hero.png", "images/portfolio_demos/corporate/detail.png"),
     }
     hero_visual, detail_visual = niche_visuals[industry.slug]
     return render(request, "industry_packages.html", {"industry": industry, "items": items, "matching_demo": matching_demo, "faqs": faqs, "hero_visual": hero_visual, "detail_visual": detail_visual})
@@ -930,18 +993,21 @@ def legacy_packages(request):
 
 def portfolio(request):
     ensure_default_content()
-    projects = list(PortfolioProject.objects.prefetch_related("industries").all())
+    projects = list(PortfolioProject.objects.filter(is_active=True).prefetch_related("industries"))
     category_map = {
         "business-services": "business", "restaurant-cafe": "food", "cricket-sports": "sports",
         "clinic-healthcare": "healthcare", "real-estate": "property", "travel-tourism": "travel",
         "beauty-salon": "beauty", "gym-fitness": "sports", "hotels-hospitality": "hospitality",
         "wedding-events": "events", "shops-products": "retail", "pet-services": "retail",
         "personal-portfolios": "portfolio", "creative-agencies": "business", "local-services": "local-services",
+        "coaching-institute": "education", "car-dealer": "automotive", "construction-interior": "construction",
+        "jewellery-store": "retail", "corporate-business": "business",
     }
     for project in projects:
         industry = project.industries.first()
         project.filter_category = category_map.get(industry.slug if industry else "", "business")
-        project.search_terms = f"{project.title} {project.description} {project.tech_stack} {industry.title if industry else ''}"
+        statuses = " ".join(item["label"] for item in project.visible_status_badges)
+        project.search_terms = f"{project.title} {project.description} {project.tech_stack} {industry.title if industry else ''} {project.get_experience_level_display()} {statuses}"
     return render(request, "portfolio.html", {"projects": projects})
 
 
@@ -964,7 +1030,7 @@ def feedback(request):
 
 def portfolio_demo(request, project_id, slug):
     ensure_default_content()
-    project = get_object_or_404(PortfolioProject, pk=project_id)
+    project = get_object_or_404(PortfolioProject, pk=project_id, is_active=True)
     project_slug = slugify(project.title)
     demo = PORTFOLIO_DEMO_DETAILS.get(project_slug, PORTFOLIO_DEMO_DETAILS["restaurant-website-demo"])
     matching_industry = project.industries.filter(is_active=True).first()
@@ -976,6 +1042,7 @@ def portfolio_demo(request, project_id, slug):
             "project_slug": project_slug,
             "demo_css": demo["css"],
             "demo_js": demo["js"],
+            "auto_demo_css": demo.get("auto_css", False),
             "matching_industry": matching_industry,
         },
     )

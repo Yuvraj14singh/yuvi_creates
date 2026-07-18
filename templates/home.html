@@ -3,7 +3,7 @@
 {% block title %}Yuvi Creates | Website Developer for Businesses in Delhi{% endblock %}
 {% block meta_description %}Yuvi Creates builds clean, mobile-friendly websites for restaurants, cafes, hotels, salons, travel agencies, real estate, gyms, pet shops, shops, and small businesses.{% endblock %}
 {% block body_class %}page-home{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/home.css' %}">{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/home.css' %}"><link rel="stylesheet" href="{% static 'css/components/mobile-card-grids.css' %}"><link rel="stylesheet" href="{% static 'css/components/home-trust.css' %}"><link rel="stylesheet" href="{% static 'css/components/demo-badges.css' %}">{% endblock %}
 {% block content %}
 <section class="hero section">
     <div class="container hero-grid">
@@ -60,6 +60,10 @@
     <div class="container home-demo-grid">
         {% for demo in featured_demos %}
             <article class="home-demo-card reveal">
+                <div class="home-demo-badge-stack" aria-label="Demo classification">
+                    <span class="demo-level-badge level-{{ demo.project.experience_level }}"><i aria-hidden="true">{% if demo.project.experience_level == 'starter' %}●{% elif demo.project.experience_level == 'professional' %}◆{% elif demo.project.experience_level == 'premium' %}✦{% else %}⬡{% endif %}</i>{{ demo.project.get_experience_level_display }}</span>
+                    {% for badge in demo.project.visible_status_badges %}<span class="home-demo-status"><i aria-hidden="true">{{ badge.icon }}</i>{{ badge.label }}</span>{% endfor %}
+                </div>
                 <a class="home-demo-image" href="{% url 'portfolio_demo' demo.project.pk demo.project.title|slugify %}" aria-label="View {{ demo.title }} demo">
                     {% if demo.project.title == "Cricket Intelligence Dashboard Demo" %}<img src="{% static 'images/portfolio/home-cricket-v3.png' %}" alt="{{ demo.title }} preview" loading="lazy">
                     {% elif demo.project.title == "Local Service Business Demo" %}<img src="{% static 'images/portfolio/home-business-v3.png' %}" alt="{{ demo.title }} preview" loading="lazy">
@@ -82,34 +86,23 @@
     </div>
 </section>
 
-<section class="section">
-    <div class="container section-heading">
-        <p class="eyebrow">What every business site gets</p>
-        <h2>The important things clients expect are already planned.</h2>
-    </div>
-    <div class="container card-grid three">
-        <article class="service-card reveal"><span class="card-index">A</span><h3>Professional homepage</h3><p>Clear headline, service proof, CTA buttons, trust sections, and clean mobile layout.</p></article>
-        <article class="service-card reveal"><span class="card-index">B</span><h3>Lead enquiry flow</h3><p>Contact forms, WhatsApp links, call buttons, package interest, and admin-saved enquiries.</p></article>
-        <article class="service-card reveal"><span class="card-index">C</span><h3>Launch support</h3><p>Domain, hosting, basic SEO setup, responsive checks, and final handover guidance.</p></article>
+<section class="home-trust" aria-labelledby="business-foundations-title">
+    <div class="container home-trust-head reveal"><p class="eyebrow">What every business website needs</p><h2 id="business-foundations-title">Built to Look Professional—and Help Visitors Take Action.</h2><p>Every Yuvi Creates website includes the essential foundations needed to present your business clearly, guide visitors naturally and support meaningful enquiries.</p></div>
+    <div class="container trust-card-grid">
+        <article class="trust-card reveal"><div class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8h18M7 6h.01M10 6h.01"/></svg></div><span class="trust-badge">Foundation</span><h3>Professional Business Presence</h3><p>A clear homepage, strong service presentation, trust-building sections, focused calls to action and a responsive layout that looks professional on every device.</p><div class="trust-mini"><span>Clear Structure</span><span>Mobile Responsive</span><span>Trust Focused</span></div></article>
+        <article class="trust-card reveal"><div class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16v11H8l-4 3V5Z"/><path d="m9 10 2 2 4-4"/></svg></div><span class="trust-badge">Conversion</span><h3>Enquiry &amp; Conversion Flow</h3><p>Contact forms, WhatsApp actions, call buttons, package interest, booking requests and admin-saved enquiries designed to make it easier for visitors to take the next step.</p><div class="trust-mini"><span>Enquiry Ready</span><span>WhatsApp Actions</span><span>Clear CTA Flow</span></div></article>
+        <article class="trust-card reveal"><div class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4c3 1 5 3 6 6l-6 6-6-6 6-6Z"/><path d="m8 10-3 2-1 4 4-1M14 16l-2 3-4 1 1-4M10 14l-3 3"/></svg></div><span class="trust-badge">Launch</span><h3>Launch &amp; Handover Support</h3><p>Domain and hosting guidance, basic SEO setup, responsive testing, deployment and final handover support according to the selected package.</p><div class="trust-mini"><span>Deployment Support</span><span>Basic SEO Setup</span><span>Handover Guidance</span></div></article>
     </div>
 </section>
 
-<section class="section">
-    <div class="container value-grid">
-        <div class="section-heading left">
-            <p class="eyebrow">Why choose me</p>
-            <h2>A practical website partner for small teams.</h2>
-            <p>I focus on clean layouts, mobile experience, clear CTAs, and launch details that make a business feel more trustworthy online.</p>
-        </div>
-        <div class="check-list">
-            <p>Responsive layouts for phones, tablets, and desktops.</p>
-            <p>Clear WhatsApp, call, map, and enquiry journeys.</p>
-            <p>Admin-ready enquiry and booking records.</p>
-            <p>Domain, hosting, and launch guidance when needed.</p>
-            <p>Pages planned for your industry: tours, menus, products, portfolios, services, or bookings.</p>
-        </div>
-    </div>
-</section>
+<section class="yuvi-partner" aria-labelledby="partner-title"><div class="container yuvi-partner-grid"><div class="yuvi-partner-copy reveal"><p class="eyebrow">Why work with Yuvi Creates</p><h2 id="partner-title">A Website Partner Who Understands the Business Behind the Design.</h2><p>I do not just build pages. I understand what your visitors need to see, how they should move through the website and what should encourage them to contact your business.</p><div class="founder-note">You work directly with Yuvraj—from understanding the requirement to final delivery.</div><div class="partner-actions"><a class="btn btn-primary" href="{% url 'contact' %}?source=Home%20Trust%20Section">Start a Project</a><a href="{% url 'packages' %}">View Packages →</a></div></div><div class="partner-benefits reveal">
+<div class="partner-benefit"><span aria-hidden="true">✓</span><div><strong>Custom design based on your industry and business personality</strong><small>A direction shaped around the real audience, offer and brand.</small></div></div>
+<div class="partner-benefit"><span aria-hidden="true">✓</span><div><strong>Responsive layouts for mobile, tablet and desktop</strong><small>Readable, usable experiences across modern screen sizes.</small></div></div>
+<div class="partner-benefit"><span aria-hidden="true">✓</span><div><strong>Clear enquiry, WhatsApp, call, map and booking journeys</strong><small>Important actions positioned with purpose.</small></div></div>
+<div class="partner-benefit"><span aria-hidden="true">✓</span><div><strong>Admin-ready content and enquiry management where required</strong><small>Practical backend control based on the confirmed scope.</small></div></div>
+<div class="partner-benefit"><span aria-hidden="true">✓</span><div><strong>Honest scope, pricing and project expectations</strong><small>Clear inclusions and decisions before development begins.</small></div></div>
+<div class="partner-benefit"><span aria-hidden="true">✓</span><div><strong>Direct communication with Yuvraj throughout the project</strong><small>Founder-led collaboration from requirement to delivery.</small></div></div>
+</div></div></section>
 
 <section class="section surface">
     <div class="container about-home-grid">
@@ -151,29 +144,28 @@
     </div>
 </section>
 
-<section class="section">
-    <div class="container section-heading">
-        <p class="eyebrow">Client reviews</p>
-        <h2>Feedback that helps new clients feel confident.</h2>
+<section class="section home-feedback" aria-labelledby="home-feedback-title">
+    <div class="container home-feedback-head reveal">
+        <div><p class="eyebrow">Client feedback</p><h2 id="home-feedback-title">Real experiences.<br><em>Clearer confidence.</em></h2></div>
+        <div class="home-feedback-intro"><p>Approved feedback from people who have worked with Yuvi Creates—covering communication, the build process and the final website experience.</p><a href="{% url 'feedback' %}">Share your experience <span aria-hidden="true">→</span></a></div>
     </div>
-    <div class="container testimonial-grid">
+    <div class="container testimonial-grid home-testimonials">
         {% if reviews %}
             {% for review in reviews %}
                 <article class="testimonial-card reveal">
-                    <span class="stars" aria-label="{{ review.rating }} out of 5 stars">{{ review.stars }}{{ review.empty_stars }}</span>
-                    <p>“{{ review.quote }}”</p>
-                    <strong>{{ review.client_name }}{% if review.business_name %}, {{ review.business_name }}{% endif %}</strong>
-                    {% if review.service_received or review.location %}<small>{% if review.service_received %}{{ review.service_received }}{% endif %}{% if review.service_received and review.location %} · {% endif %}{% if review.location %}{{ review.location }}{% endif %}</small>{% endif %}
+                    <div class="testimonial-top"><span class="stars" aria-label="{{ review.rating }} out of 5 stars">{{ review.stars }}{{ review.empty_stars }}</span><span class="quote-mark" aria-hidden="true">“</span></div>
+                    <blockquote>{{ review.quote }}</blockquote>
+                    <footer><span class="review-avatar" aria-hidden="true">{{ review.client_name|first }}</span><div><strong>{{ review.client_name }}{% if review.business_name %}, {{ review.business_name }}{% endif %}</strong>{% if review.service_received or review.location %}<small>{% if review.service_received %}{{ review.service_received }}{% endif %}{% if review.service_received and review.location %} · {% endif %}{% if review.location %}{{ review.location }}{% endif %}</small>{% endif %}</div></footer>
                 </article>
             {% endfor %}
         {% else %}
-            <article class="testimonial-card reveal"><span class="stars">★★★★★</span><p>“The site looks professional on mobile and customers can message us directly from every important section.”</p><strong>Restaurant owner demo</strong></article>
-            <article class="testimonial-card reveal"><span class="stars">★★★★★</span><p>“Tour packages, itinerary details, and enquiry forms are now organized clearly for new leads.”</p><strong>Travel business demo</strong></article>
-            <article class="testimonial-card reveal"><span class="stars">★★★★★</span><p>“Our services, pricing, FAQs, and contact flow finally look clean and business-ready.”</p><strong>Service brand demo</strong></article>
+            <article class="testimonial-card reveal"><div class="testimonial-top"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><span class="quote-mark" aria-hidden="true">“</span></div><blockquote>The site looks professional on mobile and customers can message us directly from every important section.</blockquote><footer><span class="review-avatar" aria-hidden="true">R</span><div><strong>Restaurant owner demo</strong><small>Example feedback layout</small></div></footer></article>
+            <article class="testimonial-card reveal"><div class="testimonial-top"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><span class="quote-mark" aria-hidden="true">“</span></div><blockquote>Tour packages, itinerary details and enquiry forms are organized clearly for new leads.</blockquote><footer><span class="review-avatar" aria-hidden="true">T</span><div><strong>Travel business demo</strong><small>Example feedback layout</small></div></footer></article>
+            <article class="testimonial-card reveal"><div class="testimonial-top"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><span class="quote-mark" aria-hidden="true">“</span></div><blockquote>Services, pricing, FAQs and the contact flow finally look clean and business-ready.</blockquote><footer><span class="review-avatar" aria-hidden="true">S</span><div><strong>Service brand demo</strong><small>Example feedback layout</small></div></footer></article>
         {% endif %}
     </div>
     <div class="container feedback-invite">
-        <div><strong>Worked with Yuvi Creates?</strong><span>Share your experience and help future clients choose with confidence.</span></div>
+        <div><small>YOUR EXPERIENCE MATTERS</small><strong>Worked with Yuvi Creates?</strong><span>Share an honest review. Submissions are saved securely and published only after review.</span></div>
         <a class="btn btn-primary" href="{% url 'feedback' %}">Leave Your Feedback</a>
     </div>
 </section>

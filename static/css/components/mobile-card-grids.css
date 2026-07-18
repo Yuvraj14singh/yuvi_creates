@@ -1,0 +1,42 @@
+@media(max-width:700px){
+  .page-services .services-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:34px}
+  .page-services .premium-service-card{min-width:0;min-height:0;border-radius:14px}
+  .page-services .premium-service-card>header{padding:10px 11px}
+  .page-services .service-number{font-size:.58rem}
+  .page-services .service-group{max-width:76%;padding:5px 7px;overflow:hidden;font-size:.52rem;text-overflow:ellipsis;white-space:nowrap}
+  .page-services .service-card-copy{padding:14px 12px}
+  .page-services .service-card-copy h3{font-size:1rem;line-height:1.12}
+  .page-services .service-card-copy>p,.page-services .service-card-copy ul{display:none}
+  .page-services .service-best{margin-top:12px;padding:10px;border-left-width:2px}
+  .page-services .service-best small{font-size:.5rem}
+  .page-services .service-best strong{font-size:.68rem;line-height:1.35}
+  .page-services .premium-service-card>footer{align-items:stretch;flex-direction:column;gap:8px;padding:10px 12px}
+  .page-services .service-demo-button{width:100%;min-width:0;gap:5px;padding:10px;font-size:.68rem}
+  .page-services .service-quote-link{text-align:center;font-size:.62rem}
+
+  .page-home .home-demo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .page-home .home-demo-card{min-width:0;border-radius:13px}
+  .page-home .home-demo-image{height:125px}
+  .page-home .home-demo-image img{object-fit:cover;object-position:center;filter:none;image-rendering:auto}
+  .page-home .home-demo-body{padding:12px 11px 13px}
+  .page-home .home-demo-badge{padding:4px 6px;font-size:.48rem}
+  .page-home .home-demo-card h3{margin:8px 0 5px;font-size:.9rem;line-height:1.15}
+  .page-home .home-demo-card p{margin-bottom:10px;font-size:.68rem;line-height:1.35}
+  .page-home .home-demo-button{min-height:38px;width:100%;justify-content:center;padding:8px!important;font-size:.68rem}
+  .page-home .card-grid.three{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .page-home .service-card-link,.page-home .card-grid.three>.service-card{min-width:0;min-height:190px;padding:16px 13px;border-radius:14px}
+  .page-home .service-card-link h3,.page-home .card-grid.three>.service-card h3{font-size:.95rem;line-height:1.16}
+  .page-home .service-card-link p,.page-home .card-grid.three>.service-card p{font-size:.7rem;line-height:1.4}
+}
+@media(max-width:380px){
+  .page-services .services-grid{gap:8px}
+  .page-services .service-card-copy{padding:12px 9px}
+  .page-services .service-card-copy h3{font-size:.88rem}
+  .page-services .service-best strong{font-size:.62rem}
+  .page-services .service-demo-button{font-size:.62rem}
+  .page-home .home-demo-image{height:105px}
+  .page-home .home-demo-card p{display:none}
+  .page-home .home-demo-card h3{font-size:.82rem}
+  .page-home .service-card-link,.page-home .card-grid.three>.service-card{min-height:170px;padding:13px 10px}
+  .page-home .service-card-link p,.page-home .card-grid.three>.service-card p{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:3}
+}

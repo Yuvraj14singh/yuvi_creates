@@ -113,6 +113,10 @@
 .page-home .about-home-copy{position:relative;z-index:2;min-width:0;max-width:680px;align-self:center}.page-home .about-home-role{display:inline-flex;margin:0 0 14px;color:#6842df;font-size:.72rem;font-weight:850;letter-spacing:.12em;text-transform:uppercase}.page-home .about-home-copy h2{max-width:650px;font-size:clamp(2.25rem,3.5vw,3.85rem);line-height:.98;letter-spacing:-.055em}.page-home .about-home-copy h2 em{color:#6842df;font-family:Georgia,"Times New Roman",serif;font-weight:500}.page-home .about-home-lead{color:#263754;font-size:1rem;line-height:1.68}
 .page-home .about-home-proof{display:grid;gap:3px;margin:22px 0;padding:16px 18px;border-left:3px solid #6842df;background:rgba(255,255,255,.7)}.page-home .about-home-proof strong{color:#10234a}.page-home .about-home-proof span{color:#68758a;font-size:.88rem}
 
+.page-home .home-feedback{position:relative;overflow:hidden;background:radial-gradient(circle at 8% 22%,rgba(104,66,223,.1),transparent 25%),linear-gradient(180deg,#fff,#f6f7ff)}
+.page-home .home-feedback-head{display:grid;grid-template-columns:1fr .72fr;align-items:end;gap:70px;margin-bottom:42px}.page-home .home-feedback-head h2{margin:12px 0 0;color:#0b1d42;font-size:clamp(2.8rem,5vw,5.2rem);line-height:.93;letter-spacing:-.055em}.page-home .home-feedback-head h2 em{color:#6842df;font-family:Georgia,serif;font-weight:500}.page-home .home-feedback-intro p{color:#647188;line-height:1.72}.page-home .home-feedback-intro a{display:inline-flex;align-items:center;gap:10px;margin-top:11px;padding-bottom:6px;border-bottom:1px solid #6842df;color:#17294d;font-weight:850}.page-home .home-feedback-intro a span{color:#6842df;transition:transform .2s}.page-home .home-feedback-intro a:hover span{transform:translateX(4px)}
+.page-home .home-testimonials{gap:20px}.page-home .home-testimonials .testimonial-card{display:flex;min-height:310px;flex-direction:column;padding:28px;border:1px solid rgba(104,66,223,.14);border-radius:22px;background:rgba(255,255,255,.9);box-shadow:0 20px 50px rgba(41,29,91,.08);transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}.page-home .home-testimonials .testimonial-card:hover{transform:translateY(-5px);border-color:rgba(104,66,223,.32);box-shadow:0 29px 62px rgba(41,29,91,.14)}.page-home .testimonial-top{display:flex;align-items:start;justify-content:space-between}.page-home .quote-mark{color:#dfd7fb;font:4.5rem/.65 Georgia,serif}.page-home .home-testimonials blockquote{flex:1;margin:28px 0;color:#1c2d4d;font-size:1.04rem;line-height:1.65}.page-home .home-testimonials footer{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px solid #e8e9f1}.page-home .review-avatar{display:grid;width:42px;height:42px;place-items:center;border-radius:50%;background:#eee9ff;color:#6842df;font-weight:900}.page-home .home-testimonials footer div{display:grid}.page-home .home-testimonials small{color:#758096;font-size:.72rem}.page-home .feedback-invite small{margin-bottom:5px;color:#6842df;font-size:.63rem;font-weight:900;letter-spacing:.12em}
+
 @media (max-width: 900px) {
     .page-home .hero-grid { grid-template-columns: 1fr; }
     .page-home .hero-panel { transform: none; }
@@ -122,6 +126,7 @@
     .page-home .about-home-grid { grid-template-columns: minmax(230px,.7fr) minmax(0,1.3fr); gap:28px; }
     .page-home .about-photo-panel { height: 360px; }
     .page-home .about-home-copy h2 { font-size:clamp(2rem,4.8vw,3rem); }
+    .page-home .home-feedback-head { grid-template-columns:1fr; gap:20px; }
 }
 
 @media (max-width: 560px) {
@@ -138,4 +143,8 @@
     .page-home .home-demos-more .btn { width: 100%; }
     .page-home .about-home-grid { grid-template-columns:1fr; padding:22px; }
     .page-home .about-photo-panel { height:300px; }
+    .page-home .home-feedback-head h2 { font-size:2.75rem; }
+    .page-home .home-testimonials .testimonial-card { min-height:270px; padding:22px; }
 }
+
+@media(prefers-reduced-motion:reduce){.page-home .home-testimonials .testimonial-card,.page-home .home-feedback-intro a span{transition:none}}

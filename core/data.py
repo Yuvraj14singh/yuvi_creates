@@ -16,6 +16,11 @@ SERVICES = [
     ("Responsive Website Development", "Websites built to work smoothly across desktop, tablet, and mobile screens.", "15"),
     ("Basic SEO-Friendly Website Setup", "Clean page structure, titles, descriptions, alt text, and search-friendly basics.", "16"),
     ("Domain/Hosting Setup Support", "Guidance for connecting domain, hosting, SSL, and launch setup.", "17"),
+    ("Coaching & Institute Websites", "Professional admission-focused websites for coaching centres, academies, tutors, and education institutes.", "18"),
+    ("Car Dealer & Auto Showroom Websites", "Premium inventory and enquiry websites for vehicle dealers, showrooms, and automotive businesses.", "19"),
+    ("Construction & Interior Design Websites", "Project-led websites for builders, contractors, architects, and interior design studios.", "20"),
+    ("Jewellery Store Websites", "Elegant collection and appointment websites for jewellers, boutiques, and custom jewellery brands.", "21"),
+    ("Corporate Business Websites", "Authority-led websites for companies, B2B teams, consultancies, and professional organisations.", "22"),
 ]
 
 SERVICE_CARD_CONTENT = {
@@ -38,6 +43,11 @@ SERVICE_CARD_CONTENT = {
     "Responsive Website Development": {"group":"Development", "best_for":"Websites that must work cleanly across modern screen sizes", "features":["Mobile, tablet and desktop layouts", "Touch-friendly navigation and CTAs", "Responsive media and content structure"]},
     "Basic SEO-Friendly Website Setup": {"group":"Website Foundation", "best_for":"Businesses that need a clean search-friendly technical base", "features":["Logical heading and page structure", "Titles, descriptions and image alt text", "Readable URLs and crawl-friendly basics"]},
     "Domain/Hosting Setup Support": {"group":"Launch Support", "best_for":"Clients who need guidance taking an approved website live", "features":["Domain and hosting connection guidance", "SSL and deployment setup support", "Final launch and form checks"]},
+    "Coaching & Institute Websites": {"group":"Education", "best_for":"Coaching centres, academies, tutors and training institutes", "features":["Courses, batches and faculty presentation", "Results, testimonials and student trust", "Admission enquiry and counselling flow"]},
+    "Car Dealer & Auto Showroom Websites": {"group":"Automotive", "best_for":"Car dealers, premium showrooms and automotive businesses", "features":["Vehicle inventory and model highlights", "Finance, exchange and showroom trust", "Test-drive and purchase enquiry flow"]},
+    "Construction & Interior Design Websites": {"group":"Build & Design", "best_for":"Builders, contractors, architects and interior studios", "features":["Project portfolio and capability presentation", "Process, materials and credibility sections", "Site-visit and project consultation flow"]},
+    "Jewellery Store Websites": {"group":"Luxury Retail", "best_for":"Jewellers, boutiques and custom jewellery brands", "features":["Collection and craftsmanship showcase", "Occasion, category and trust presentation", "Private appointment and product enquiry flow"]},
+    "Corporate Business Websites": {"group":"Corporate", "best_for":"Companies, B2B teams, consultancies and professional organisations", "features":["Authority-led company positioning", "Capabilities, sectors and case studies", "Partnership and business enquiry flow"]},
 }
 
 PACKAGES = [

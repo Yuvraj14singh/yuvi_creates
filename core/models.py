@@ -104,17 +104,36 @@ class PackageMarketPrice(models.Model):
 
 
 class PortfolioProject(models.Model):
+    class ExperienceLevel(models.TextChoices):
+        STARTER = "starter", "Starter"
+        PROFESSIONAL = "professional", "Professional"
+        PREMIUM = "premium", "Premium"
+        CUSTOM_SYSTEM = "custom_system", "Custom System"
+
     title = models.CharField(max_length=140)
     description = models.TextField()
     tech_stack = models.CharField(max_length=220)
     project_url = models.URLField(blank=True)
     order = models.PositiveIntegerField(default=0)
+    experience_level = models.CharField(max_length=20, choices=ExperienceLevel.choices, default=ExperienceLevel.PROFESSIONAL)
+    is_featured = models.BooleanField(default=False)
+    is_new = models.BooleanField(default=False)
+    is_popular = models.BooleanField(default=False)
+    is_luxury = models.BooleanField(default=False)
+    is_fast_launch = models.BooleanField(default=False)
+    is_mobile_first = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ["order", "title"]
 
     def __str__(self):
         return self.title
+
+    @property
+    def visible_status_badges(self):
+        labels = (("is_featured", "Featured", "★"), ("is_new", "New", "✦"), ("is_popular", "Popular", "↗"), ("is_luxury", "Luxury", "◇"), ("is_fast_launch", "Fast Launch", "ϟ"), ("is_mobile_first", "Mobile First", "▯"))
+        return [{"label": label, "icon": icon} for field, label, icon in labels if getattr(self, field)][:2]
 
 
 class Industry(models.Model):

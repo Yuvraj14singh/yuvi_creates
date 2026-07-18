@@ -21,7 +21,7 @@ PUBLIC_ABOUT = {
 
 INDUSTRY_ALIASES = {
     "restaurant-cafe": ("restaurant", "cafe", "bakery", "cloud kitchen", "food", "digital menu"),
-    "cricket-sports": ("cricket", "league", "academy", "tournament", "sports", "team"),
+    "cricket-sports": ("cricket", "cricket academy", "cricket league", "tournament", "sports team"),
     "real-estate": ("real estate", "property", "broker", "builder", "agent"),
     "clinic-healthcare": ("clinic", "doctor", "dentist", "skin clinic", "physio", "healthcare", "medical"),
     "travel-tourism": ("travel", "tour", "trip", "destination"),
@@ -36,6 +36,11 @@ INDUSTRY_ALIASES = {
     "creative-agencies": ("agency", "creative studio", "design agency"),
     "business-services": ("business", "service provider", "company"),
     "custom-systems": ("custom system", "dashboard", "user login", "api", "inventory"),
+    "coaching-institute": ("coaching", "institute", "academy", "education", "classes", "admissions", "courses", "faculty", "training centre"),
+    "car-dealer": ("car dealer", "auto showroom", "automobile", "vehicle inventory", "test drive", "car finance"),
+    "construction-interior": ("construction", "interior design", "builder", "architect", "architecture", "renovation", "design studio"),
+    "jewellery-store": ("jewellery", "jewelry", "gold", "diamond", "bridal jewellery", "luxury jewellery", "jewellery store"),
+    "corporate-business": ("corporate", "enterprise", "consulting", "consultancy", "corporate company", "business advisory"),
 }
 
 INTENT_NAMES = (
@@ -129,7 +134,64 @@ def package_for(industry, tier):
 def buttons(*items):
     return [{"label": label, "url": url} for label, url in items if url]
 
+def demo_badge_response(text):
+    """Answer demo-level/status questions from the active public project records."""
+    value = normalise(text)
+    level_terms = {
+        "starter": ("starter", "Starter demos are focused, practical concepts for a clear first online presence."),
+        "professional": ("professional", "Professional demos show a more complete business journey with stronger trust and enquiry sections."),
+        "premium": ("premium", "Premium demos use richer presentation, deeper content sections and a more distinctive visual experience."),
+        "custom system": ("custom_system", "Custom System demos represent advanced workflows such as dashboards, registrations, content management or tailored integrations."),
+    }
+    status_terms = {
+        "featured": "is_featured", "new": "is_new", "popular": "is_popular",
+        "luxury": "is_luxury", "fast launch": "is_fast_launch", "mobile first": "is_mobile_first",
+    }
+    asks_definition = any(word in value for word in ("mean", "meaning", "difference", "compare", "level"))
+    asks_demo = "demo" in value or (asks_definition and any(term in value for term in level_terms))
+    if not asks_demo:
+        return None
+
+    if ("difference" in value or "compare" in value) and any(term in value for term in level_terms):
+        return (
+            "Starter is a focused first presence; Professional adds a fuller business and enquiry journey; Premium adds richer presentation and deeper sections; Custom System is for tailored workflows, dashboards or integrations.",
+            buttons(("Compare Demos", "/portfolio/"), ("Discuss Your Scope", "/contact/?source=Assistant+Demo+Levels")),
+        )
+
+    queryset = PortfolioProject.objects.filter(is_active=True)
+    label = ""
+    explanation = ""
+    if any(term in value for term in ("small budget", "low budget", "budget friendly", "budget kam")):
+        queryset = queryset.filter(experience_level="starter")
+        label = "Starter"
+        explanation = "Starter demos are the closest level for a focused first presence or smaller initial scope. The final price still depends on confirmed requirements."
+    for term, (level, description) in level_terms.items():
+        if not label and term in value:
+            queryset = queryset.filter(experience_level=level)
+            label, explanation = term.title(), description
+            break
+    if not label:
+        for term, field in status_terms.items():
+            matched = term in value or (term == "fast launch" and "fast to launch" in value)
+            if matched:
+                queryset = queryset.filter(**{field: True})
+                label = term.title()
+                explanation = f"{label} demos are currently highlighted in the Yuvi Creates demo collection."
+                break
+    if not label:
+        return None
+
+    names = list(queryset.order_by("order", "title").values_list("title", flat=True)[:5])
+    if not names:
+        reply = f"There are no active {label} demos published right now. I can still help plan a matching concept without guessing what is live."
+    else:
+        reply = f"{explanation} Current active examples: {', '.join(names)}."
+    return reply, buttons((f"View {label} Demos", "/portfolio/?search=" + label), ("Request a Similar Website", "/contact/?source=Assistant+Demo+Badge"))
+
 def response_for(intent, text, context, used):
+    badge_answer = demo_badge_response(text)
+    if badge_answer:
+        return badge_answer
     industry = industry_data(context.get("industry"))
     market = context.get("market") or "IN"
     tier = context.get("tier")
@@ -154,7 +216,7 @@ def response_for(intent, text, context, used):
         return "Tell me your business type and the main result you want—for example enquiries, bookings, registrations or sales. I’ll narrow down a suitable package and demo.", buttons(("Browse Packages", "/packages/"), ("View Demos", "/portfolio/"))
     if intent in ("show_work", "demo_request", "no_demo") or intent.endswith("_website"):
         if industry:
-            demos = list(industry.demos.all()[:3]); names = ", ".join(d.title for d in demos)
+            demos = list(industry.demos.filter(is_active=True)[:3]); names = ", ".join(d.title for d in demos)
             reply = f"For {industry.title}, the closest current demo option{'s are' if len(demos)!=1 else ' is'} {names}." if demos else "There isn’t an exact public demo for that niche yet, but a custom concept can be planned."
             return reply, buttons(("View Demos", "/portfolio/?search=" + industry.slug), ("View Packages", industry.get_absolute_url()))
         return "You can explore complete website concepts by industry on the Demos page.", buttons(("Explore Demos", "/portfolio/"))

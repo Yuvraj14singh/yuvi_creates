@@ -1,0 +1,32 @@
+/* Keep Django's wrapper full-width; place the grid on the actual label/control row. */
+body.change-form .aligned .form-row > div {
+    display: block;
+    width: 100%;
+}
+
+body.change-form .aligned .form-row .flex-container {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    align-items: start;
+    gap: 18px;
+    width: 100%;
+}
+
+body.change-form .aligned .form-row .flex-container > input,
+body.change-form .aligned .form-row .flex-container > textarea,
+body.change-form .aligned .form-row .flex-container > select,
+body.change-form .aligned .form-row .flex-container > .related-widget-wrapper {
+    width: min(100%, 760px) !important;
+    max-width: 760px;
+}
+
+body.change-form .aligned .form-row .flex-container > .related-widget-wrapper select {
+    width: 100% !important;
+}
+
+@media (max-width: 900px) {
+    body.change-form .aligned .form-row .flex-container {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+}

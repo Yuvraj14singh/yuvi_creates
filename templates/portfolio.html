@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block body_class %}page-portfolio{% endblock %}
-{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/portfolio.css' %}"><link rel="stylesheet" href="{% static 'css/components/discovery-search.css' %}"><link rel="stylesheet" href="{% static 'css/components/demo-actions.css' %}"><link rel="stylesheet" href="{% static 'css/components/demo-actions-fix.css' %}"><link rel="stylesheet" href="{% static 'css/components/demo-grid-wide.css' %}">{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/pages/portfolio.css' %}"><link rel="stylesheet" href="{% static 'css/components/discovery-search.css' %}"><link rel="stylesheet" href="{% static 'css/components/demo-actions.css' %}"><link rel="stylesheet" href="{% static 'css/components/demo-actions-fix.css' %}"><link rel="stylesheet" href="{% static 'css/components/demo-grid-wide.css' %}"><link rel="stylesheet" href="{% static 'css/components/demo-badges.css' %}"><style>.demo-card-cta-row{display:block!important}.demo-card-cta-row .demo-view-button{width:100%}.demo-secondary-action{display:none!important}</style>{% endblock %}
 {% block title %}Website Demos for Different Industries | Yuvi Creates{% endblock %}
 {% block meta_description %}View Yuvi Creates demo website projects for restaurants, cafes, hotels, travel agencies, real estate, salons, pet shops, gyms, shops, personal brands, and service businesses.{% endblock %}
 {% block content %}
@@ -22,13 +22,16 @@
                 <button class="search-reset" type="button" data-demo-reset>Reset Search</button>
             </div>
         </form>
-        <div class="demo-filter-pills" role="group" aria-label="Filter demos by category"><button class="is-active" type="button" data-demo-filter="all" aria-pressed="true">All</button><button type="button" data-demo-filter="business">Business</button><button type="button" data-demo-filter="food">Food</button><button type="button" data-demo-filter="sports">Sports</button><button type="button" data-demo-filter="healthcare">Healthcare</button><button type="button" data-demo-filter="property">Property</button><button type="button" data-demo-filter="travel">Travel</button><button type="button" data-demo-filter="beauty">Beauty</button><button type="button" data-demo-filter="hospitality">Hospitality</button><button type="button" data-demo-filter="events">Events</button><button type="button" data-demo-filter="retail">Retail</button><button type="button" data-demo-filter="portfolio">Portfolio</button><button type="button" data-demo-filter="local-services">Local Services</button></div>
+        <div class="demo-filter-pills" role="group" aria-label="Filter demos by category"><button class="is-active" type="button" data-demo-filter="all" aria-pressed="true">All</button><button type="button" data-demo-filter="business">Business</button><button type="button" data-demo-filter="education">Education</button><button type="button" data-demo-filter="automotive">Automotive</button><button type="button" data-demo-filter="construction">Construction</button><button type="button" data-demo-filter="food">Food</button><button type="button" data-demo-filter="sports">Sports</button><button type="button" data-demo-filter="healthcare">Healthcare</button><button type="button" data-demo-filter="property">Property</button><button type="button" data-demo-filter="travel">Travel</button><button type="button" data-demo-filter="beauty">Beauty</button><button type="button" data-demo-filter="hospitality">Hospitality</button><button type="button" data-demo-filter="events">Events</button><button type="button" data-demo-filter="retail">Retail</button><button type="button" data-demo-filter="portfolio">Portfolio</button><button type="button" data-demo-filter="local-services">Local Services</button></div>
+        <div class="demo-level-filter" role="group" aria-label="Filter demos by project level"><span>Project Level</span><button class="is-active" type="button" data-level-filter="all" aria-pressed="true">All</button><button type="button" data-level-filter="starter">Starter</button><button type="button" data-level-filter="professional">Professional</button><button type="button" data-level-filter="premium">Premium</button><button type="button" data-level-filter="custom_system">Custom System</button></div>
         <p class="search-count" aria-live="polite" data-demo-count>{{ projects|length }} demos available</p>
     </div>
     <div class="container card-grid three">
         {% for project in projects %}
-            <article class="portfolio-card reveal" data-demo-card data-category="{{ project.filter_category }}" data-search="{{ project.search_terms|lower }}">
+            <article class="portfolio-card reveal" data-demo-card data-category="{{ project.filter_category }}" data-level="{{ project.experience_level }}" data-search="{{ project.search_terms|lower }}">
                 <div class="demo-card-visual">
+                <div class="demo-badge-top"><span class="demo-level-badge level-{{ project.experience_level }}"><i aria-hidden="true">{% if project.experience_level == 'starter' %}✓{% elif project.experience_level == 'professional' %}▦{% elif project.experience_level == 'premium' %}◇{% else %}⚙{% endif %}</i>{{ project.get_experience_level_display }}</span></div>
+                {% with status_badges=project.visible_status_badges %}{% if status_badges %}<div class="demo-status-badges">{% for badge in status_badges %}<span><i aria-hidden="true">{{ badge.icon }}</i>{{ badge.label }}</span>{% endfor %}</div>{% endif %}{% endwith %}
                 <div class="project-thumb">
                     {% if project.title == "Restaurant Website Demo" %}<img src="{% static 'images/portfolio/restaurant-demo-v2.png' %}" alt="Premium restaurant website displayed against a fine dining background" loading="lazy">
                     {% elif project.title == "Cafe Landing Page Demo" %}<img src="{% static 'images/portfolio/cafe-demo-v2.png' %}" alt="Premium cafe website displayed in an artisan coffee shop" loading="lazy">
@@ -45,6 +48,11 @@
                     {% elif project.title == "Trips & Tours Website Demo" %}<img src="{% static 'images/portfolio/travel-demo-v2.png' %}" alt="Premium travel website displayed against a mountain destination" loading="lazy">
                     {% elif project.title == "Local Service Business Demo" %}<img src="{% static 'images/portfolio/local-service-demo-v2.png' %}" alt="Premium local service website displayed in a professional workshop" loading="lazy">
                     {% elif project.title == "Shop Website Demo" %}<img src="{% static 'images/portfolio/shop-demo-v2.png' %}" alt="Premium shop website displayed in a modern boutique" loading="lazy">
+                    {% elif project.title == "Coaching Website Demo" %}<img src="{% static 'images/portfolio_demos/coaching/hero.png' %}" alt="Premium coaching institute website in a modern learning studio" loading="lazy">
+                    {% elif project.title == "Car Dealer Website Demo" %}<img src="{% static 'images/portfolio_demos/auto/hero.png' %}" alt="Premium car dealer website in a luxury showroom" loading="lazy">
+                    {% elif project.title == "Construction & Interior Design Demo" %}<img src="{% static 'images/portfolio_demos/construction/hero.png' %}" alt="Premium construction and interior design website" loading="lazy">
+                    {% elif project.title == "Luxury Jewellery Website Demo" %}<img src="{% static 'images/portfolio_demos/jewellery/hero.png' %}" alt="Premium jewellery website in a luxury atelier" loading="lazy">
+                    {% elif project.title == "Corporate Business Website Demo" %}<img src="{% static 'images/portfolio_demos/corporate/hero.png' %}" alt="Premium corporate consulting website" loading="lazy">
                     {% endif %}
                 </div>
                 <div class="portfolio-card-body">
@@ -60,7 +68,7 @@
                     {% endif %}
                 </div>
                 </div>
-                <div class="portfolio-card-action">
+                <div class="portfolio-card-action demo-card-cta-row">
                     {% if project.project_url %}
                         <a class="btn btn-small demo-view-button" href="{{ project.project_url }}" target="_blank" rel="noreferrer"><span>View Demo</span><span aria-hidden="true">↗</span></a>
                     {% else %}

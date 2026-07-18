@@ -58,6 +58,7 @@
     <link rel="stylesheet" href="{% static 'css/components/chatbot.css' %}">
   <link rel="stylesheet" href="{% static 'css/components/chatbot-upgrade.css' %}">
     <link rel="stylesheet" href="{% static 'css/components/chatbot-polish.css' %}">
+    {% if auto_demo_css and demo_css %}<link rel="stylesheet" href="{% static demo_css %}">{% endif %}
     {% block extra_head %}{% endblock %}
     <link rel="stylesheet" href="{% static 'css/components/premium-page-heroes.css' %}">
 </head>
@@ -97,8 +98,8 @@
     {% if matching_industry and request.resolver_match.url_name == "portfolio_demo" %}
         <aside class="demo-match-bar" aria-label="Matching website packages">
             <span>Want a website like this for your business?</span>
-            <a class="btn btn-primary" href="{{ matching_industry.get_absolute_url }}">View Matching Packages</a>
-            <a class="btn btn-secondary" href="{% url 'contact' %}?industry={{ matching_industry.slug }}&service={{ project.title|urlencode }}&source=Portfolio%20Demo">Request Similar Website</a>
+            <a class="btn btn-primary" href="{{ matching_industry.get_absolute_url }}"><span class="demo-action-long">View Matching Packages</span><span class="demo-action-short">Packages</span><b aria-hidden="true">&#8594;</b></a>
+            <a class="btn btn-secondary" href="{% url 'contact' %}?industry={{ matching_industry.slug }}&service={{ project.title|urlencode }}&source=Portfolio%20Demo"><span class="demo-action-long">Request Similar Website</span><span class="demo-action-short">Request Website</span><b aria-hidden="true">&#8594;</b></a>
         </aside>
     {% endif %}
 
