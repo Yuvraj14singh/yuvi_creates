@@ -1,0 +1,115 @@
+/* Demos: compact, readable two-column cards for normal mobile widths only. */
+@media (min-width:351px) and (max-width:767px){
+  .page-portfolio .card-grid.three{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:11px;
+  }
+
+  .page-portfolio .portfolio-card{
+    min-width:0;
+    padding:7px!important;
+    border-radius:14px!important;
+  }
+
+  .page-portfolio .demo-card-visual{
+    height:clamp(245px,70vw,300px);
+    border-radius:10px;
+  }
+
+  .page-portfolio .project-thumb:after{
+    background:linear-gradient(180deg,rgba(5,17,39,0) 30%,rgba(5,17,39,.34) 55%,rgba(5,17,39,.96) 100%)!important;
+  }
+
+  /* Keep the useful project-level badge; remove the noisy secondary badge stack. */
+  .page-portfolio .demo-badge-top{
+    top:7px;
+    right:7px;
+  }
+
+  .page-portfolio .demo-level-badge{
+    gap:4px;
+    max-width:112px;
+    padding:5px 7px;
+    overflow:hidden;
+    font-size:.49rem;
+    text-overflow:ellipsis;
+  }
+
+  .page-portfolio .demo-status-badges{display:none}
+
+  .page-portfolio .portfolio-card-body{
+    inset:auto 11px 12px;
+    max-width:none;
+  }
+
+  .page-portfolio .portfolio-card-body .demo-industry-badge{
+    display:block;
+    width:max-content;
+    max-width:100%;
+    margin-bottom:7px;
+    padding:4px 7px;
+    overflow:hidden;
+    font-size:.48rem;
+    line-height:1.1;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .page-portfolio .portfolio-card-body h3{
+    display:-webkit-box;
+    margin:0 0 7px;
+    overflow:hidden;
+    font-size:.88rem;
+    line-height:1.18;
+    overflow-wrap:anywhere;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+  }
+
+  .page-portfolio .portfolio-card-body p{
+    display:-webkit-box;
+    margin:0;
+    overflow:hidden;
+    font-size:.64rem;
+    line-height:1.42;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+  }
+
+  .page-portfolio .portfolio-card-body>span:last-child{display:none}
+
+  .page-portfolio .portfolio-card-action{
+    padding-top:7px!important;
+  }
+
+  .page-portfolio .demo-view-button,
+  .page-portfolio .demo-view-button:link,
+  .page-portfolio .demo-view-button:visited{
+    gap:6px;
+    min-height:36px!important;
+    padding:6px 8px!important;
+    border-radius:9px!important;
+    background:#0b1d42!important;
+    border-color:#0b1d42!important;
+    font-size:.67rem!important;
+    box-shadow:0 6px 14px rgba(8,11,18,.14)!important;
+  }
+
+  .page-portfolio .demo-view-button span:last-child{
+    width:18px;
+    height:18px;
+    background:rgba(255,255,255,.13)!important;
+    color:#fff!important;
+    font-size:.67rem;
+  }
+}
+
+@media (min-width:351px) and (max-width:420px){
+  .page-portfolio .card-grid.three{gap:8px}
+  .page-portfolio .portfolio-card{padding:6px!important}
+  .page-portfolio .portfolio-card-body{inset:auto 9px 10px}
+  .page-portfolio .portfolio-card-body h3{font-size:.82rem}
+  .page-portfolio .portfolio-card-body p{font-size:.6rem}
+  .page-portfolio .demo-view-button{font-size:.63rem!important}
+}
+
