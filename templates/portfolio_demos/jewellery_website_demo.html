@@ -1,1 +1,61 @@
-{% extends "base.html" %}{% load static %}{% block body_class %}industry-demo demo-jewel{% endblock %}{% block title %}Aurelia Atelier — Jewellery Website Demo{% endblock %}{% block content %}<main class="nd"><section class="nd-hero"><div><span class="nd-kicker">HANDCRAFTED FOR LIFE'S MOMENTS</span><h1>Rare beauty.<br><em>Made to endure.</em></h1><p>Fine jewellery, personal appointments and timeless craftsmanship presented with quiet confidence.</p><div class="nd-actions"><a href="#collections">Discover collections</a><a href="{% url 'contact' %}?service=Jewellery%20Store%20Website&source=Jewellery%20Demo">Create your luxury site</a></div></div><img src="{% static 'images/portfolio_demos/jewellery/hero.png' %}" alt="Luxury jewellery website concept"></section><section class="nd-stats"><b>Bespoke creations</b><b>Wedding jewellery</b><b>Private appointments</b><b>Master craftsmanship</b></section><section class="nd-section" id="collections"><span class="nd-kicker">SIGNATURE COLLECTIONS</span><h2>Pieces for the moments that become memories.</h2><div class="nd-grid"><article><b>01</b><h3>Solitaire Stories</h3><p>Rings designed around exceptional stones.</p></article><article><b>02</b><h3>Celestial Light</h3><p>Fine necklaces with luminous detail.</p></article><article><b>03</b><h3>The Wedding Edit</h3><p>Modern heirlooms for a lifetime together.</p></article></div></section><section class="nd-feature"><img src="{% static 'images/portfolio_demos/jewellery/detail.png' %}" alt="Jewellery collections and appointment website"><div><span class="nd-kicker">THE ATELIER</span><h2>Craftsmanship deserves a richer digital stage.</h2><p>Editorial collection stories, detailed product showcases and private appointment enquiries—balanced with generous luxury spacing.</p><ul><li>Collection and product showcases</li><li>Bridal and luxury edits</li><li>Private appointment flow</li></ul></div></section><section class="nd-cta"><span class="nd-kicker">PRIVATE APPOINTMENTS</span><h2>Let your collection feel unmistakably yours.</h2><a href="{% url 'contact' %}?service=Jewellery%20Store%20Website&source=Jewellery%20Demo">Request a similar website →</a></section></main>{% endblock %}
+{% extends "base.html" %}
+{% load static %}
+{% block body_class %}industry-demo demo-jewel jewel-showroom-demo{% endblock %}
+{% block title %}Aurelia House — Luxury Jewellery Showroom Demo{% endblock %}
+{% block meta_description %}A premium fictional jewellery showroom website concept featuring fine collections, bridal jewellery, bespoke craftsmanship and private appointments.{% endblock %}
+{% block content %}
+<main class="jewel-site">
+  <section class="jewel-hero" id="jewel-top">
+    <img class="jewel-hero-photo" src="{% static 'images/portfolio_demos/jewellery/hero-photo.png' %}" alt="Client receiving a private jewellery consultation inside a luxury showroom">
+    <div class="jewel-hero-overlay"></div>
+    <nav class="jewel-nav" aria-label="Jewellery showroom navigation">
+      <a class="jewel-logo" href="#jewel-top"><span>A</span><strong>AURELIA<small>FINE JEWELLERY HOUSE</small></strong></a>
+      <div><a href="#collections">Collections</a><a href="#craft">Craftsmanship</a><a href="#bridal">Bridal</a><a class="jewel-nav-appointment" href="#appointment">Private appointment</a></div>
+    </nav>
+    <div class="jewel-hero-copy">
+      <p class="jewel-kicker">FINE JEWELLERY · PRIVATE SHOWROOM</p>
+      <h1>Made for the<br>moments <em>you keep.</em></h1>
+      <p>Discover considered collections, rare stones and personal guidance in a showroom experience designed around you.</p>
+      <div class="jewel-actions"><a href="#collections">Explore the collection <span>↓</span></a><a href="#appointment">Book a private viewing</a></div>
+    </div>
+    <aside class="jewel-arrival"><span>NEW TO THE HOUSE</span><strong>The Solstice Ring</strong><small>18k gold · Lab-grown diamond · Made to order</small><a href="#collections">Discover the piece →</a></aside>
+    <div class="jewel-scroll">SCROLL TO DISCOVER <span>↓</span></div>
+  </section>
+
+  <section class="jewel-promises" aria-label="Jewellery showroom services">
+    <article><span>01</span><b>Certified stones</b></article><article><span>02</span><b>Bespoke design</b></article><article><span>03</span><b>Private consultation</b></article><article><span>04</span><b>Lifetime care</b></article>
+  </section>
+
+  <section class="jewel-collections" id="collections">
+    <header class="jewel-heading"><div><p class="jewel-kicker">SIGNATURE COLLECTIONS</p><h2>Find the piece that<br><em>feels like yours.</em></h2></div><p>From everyday icons to once-in-a-lifetime heirlooms, every collection is presented with room to appreciate the detail.</p></header>
+    <div class="jewel-collection-grid">
+      <article class="jewel-piece jewel-piece-ring"><div class="jewel-piece-art" aria-hidden="true"><i></i><b></b></div><span>01 · RINGS</span><h3>Solitaire Stories</h3><p>Clean settings built around exceptional stones.</p><a href="#appointment">Explore rings →</a></article>
+      <article class="jewel-piece jewel-piece-necklace"><div class="jewel-piece-art" aria-hidden="true"><i></i><b></b></div><span>02 · NECKLACES</span><h3>Celestial Light</h3><p>Fine silhouettes designed to sit close to the heart.</p><a href="#appointment">Explore necklaces →</a></article>
+      <article class="jewel-piece jewel-piece-earrings"><div class="jewel-piece-art" aria-hidden="true"><i></i><b></b></div><span>03 · EARRINGS</span><h3>Afterglow</h3><p>Modern forms with a quiet, luminous finish.</p><a href="#appointment">Explore earrings →</a></article>
+    </div>
+  </section>
+
+  <section class="jewel-craft" id="craft">
+    <figure><img src="{% static 'images/portfolio_demos/jewellery/detail-photo.png' %}" alt="Jeweller carefully setting a gemstone by hand"><figcaption><span>AT THE BENCH</span><b>Every detail considered by hand.</b></figcaption></figure>
+    <div class="jewel-craft-copy"><p class="jewel-kicker">THE AURELIA ATELIER</p><h2>Craft that can be<br><em>felt up close.</em></h2><p>From the first stone selection to the final polish, each piece passes through patient hands. The website gives this process the same attention as the showroom.</p><ol><li><span>01</span><div><b>Stone consultation</b><small>Compare shape, character and setting in a calm private session.</small></div></li><li><span>02</span><div><b>Bespoke sketch</b><small>Develop a personal design around your story and occasion.</small></div></li><li><span>03</span><div><b>Made and finished</b><small>Crafted, inspected and presented with complete care guidance.</small></div></li></ol></div>
+  </section>
+
+  <section class="jewel-bridal" id="bridal">
+    <div class="jewel-bridal-number">A / 04</div>
+    <div><p class="jewel-kicker">THE BRIDAL SALON</p><h2>One story.<br><em>Beautifully yours.</em></h2><p>Bring engagement rings, wedding bands, heirloom redesign and styling appointments together in one calm, considered journey.</p></div>
+    <aside><span>YOUR PRIVATE SESSION</span><ul><li>Personal design consultation</li><li>Stone and setting guidance</li><li>Wedding set styling</li><li>Family appointment options</li></ul><a href="#appointment">Plan your visit →</a></aside>
+  </section>
+
+  <section class="jewel-appointment" id="appointment">
+    <div><p class="jewel-kicker">VISIT THE SHOWROOM</p><h2>A personal appointment,<br><em>reserved for you.</em></h2><p>Share the occasion, preferred collection and a convenient time. A showroom advisor can continue the conversation privately.</p></div>
+    <form class="jewel-form" action="{% url 'contact' %}" method="get">
+      <input type="hidden" name="service" value="Jewellery Store Website"><input type="hidden" name="source" value="Jewellery Showroom Demo">
+      <label>Your name<input type="text" name="name" placeholder="Full name"></label>
+      <label>I'm interested in<select name="interest"><option>Engagement rings</option><option>Wedding jewellery</option><option>Bespoke design</option><option>Private collection viewing</option></select></label>
+      <label>Preferred contact<input type="text" name="contact" placeholder="Phone or email"></label>
+      <button type="submit">Request an appointment <span>↗</span></button>
+    </form>
+    <small>Fictional jewellery showroom concept created by Yuvi Creates. Collections and product details are demonstration content.</small>
+  </section>
+</main>
+{% endblock %}

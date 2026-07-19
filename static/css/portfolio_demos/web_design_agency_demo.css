@@ -12,3 +12,6 @@
  .og-badge{display:none}
  .case-main img{display:block;width:100%;height:auto;aspect-ratio:1448/1086;object-fit:contain;object-position:center;background:#151519}
 }
+/* Explicit contrast for dark agency case-study surfaces. */
+.offgrid .case-main h3,.offgrid .case-main h2{color:#fff}
+.offgrid .case-main p{color:#b9b9c1}

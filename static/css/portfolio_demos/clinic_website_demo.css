@@ -13,3 +13,5 @@
 .clinic-page .clinic-form-panel{padding:38px;border:1px solid #d9e7eb;border-radius:22px;background:linear-gradient(155deg,#fff,#f4fbfc);box-shadow:0 24px 60px rgba(23,63,85,.1)}
 @media(max-width:850px){.clinic-page .clinic-hero-grid{grid-template-columns:1fr}.clinic-page .clinic-hero-photo{max-width:720px}.clinic-page .clinic-hero{padding-block:70px 80px}}
 @media(max-width:560px){.clinic-page .clinic-hero h1{font-size:clamp(2.8rem,14vw,4.2rem)}.clinic-page .clinic-hero-photo img,.clinic-page .clinic-consultation-photo img{border-radius:18px}.clinic-page .clinic-form-panel{padding:25px 19px}.clinic-page .clinic-hero-photo span,.clinic-page .clinic-consultation-photo span{right:10px;bottom:10px}}
+/* Explicit contrast for the clinic closing CTA. */
+.clinic-page .clinic-final h2,.clinic-page .clinic-final h3{color:#fff}

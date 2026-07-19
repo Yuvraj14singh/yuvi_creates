@@ -480,11 +480,11 @@ PORTFOLIO_DEMO_DETAILS = {
         "css": "css/portfolio_demos/clinic_website_demo.css",
         "js": "js/portfolio_demos/clinic_website_demo.js",
     },
-    "coaching-website-demo": {"template": "portfolio_demos/coaching_website_demo.html", "css": "css/portfolio_demos/new_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
+    "coaching-website-demo": {"template": "portfolio_demos/coaching_website_demo.html", "css": "css/portfolio_demos/signature_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
     "car-dealer-website-demo": {"template": "portfolio_demos/car_dealer_website_demo.html", "css": "css/portfolio_demos/new_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
-    "construction-interior-design-demo": {"template": "portfolio_demos/construction_interior_demo.html", "css": "css/portfolio_demos/new_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
-    "luxury-jewellery-website-demo": {"template": "portfolio_demos/jewellery_website_demo.html", "css": "css/portfolio_demos/new_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
-    "corporate-business-website-demo": {"template": "portfolio_demos/corporate_business_demo.html", "css": "css/portfolio_demos/new_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
+    "construction-interior-design-demo": {"template": "portfolio_demos/construction_interior_demo.html", "css": "css/portfolio_demos/signature_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
+    "luxury-jewellery-website-demo": {"template": "portfolio_demos/jewellery_website_demo.html", "css": "css/portfolio_demos/jewellery_showroom.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
+    "corporate-business-website-demo": {"template": "portfolio_demos/corporate_business_demo.html", "css": "css/portfolio_demos/signature_industry_demos.css", "js": "js/portfolio_demos/new_industry_demos.js", "auto_css": True},
 }
 
 

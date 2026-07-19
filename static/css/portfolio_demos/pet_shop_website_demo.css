@@ -15,3 +15,6 @@
  .groom-photo img{display:block;width:100%;height:auto;aspect-ratio:1448/1086;object-fit:contain;object-position:center}
  .groom-photo span{font-size:.52rem}
 }
+/* Explicit contrast for the teal care panel and footer. */
+.pawco .care h2,.pawco .care h3,.pawco footer h2,.pawco footer h3{color:#fff}
+.pawco .care p{color:#e5f5f3}
