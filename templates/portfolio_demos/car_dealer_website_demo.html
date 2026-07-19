@@ -1,1 +1,62 @@
-{% extends "base.html" %}{% load static %}{% block body_class %}industry-demo demo-auto{% endblock %}{% block title %}Obsidian Motors — Car Dealer Website Demo{% endblock %}{% block content %}<main class="nd"><section class="nd-hero"><div><span class="nd-kicker">PREMIUM AUTO SHOWROOM</span><h1>Find the drive<br><em>that fits your life.</em></h1><p>Curated vehicles, transparent finance options and a seamless test-drive journey.</p><div class="nd-actions"><a href="#inventory">Browse inventory</a><a href="{% url 'contact' %}?service=Car%20Dealer%20Website&source=Auto%20Demo">Build your showroom site</a></div></div><img src="{% static 'images/portfolio_demos/auto/hero.png' %}" alt="Premium car dealer website concept"></section><section class="nd-stats"><b>Verified inventory</b><b>Flexible finance</b><b>Test-drive booking</b><b>Multi-brand showroom</b></section><section class="nd-section" id="inventory"><span class="nd-kicker">FEATURED INVENTORY</span><h2>Vehicles presented like premium products.</h2><div class="nd-grid"><article><b>SPORT</b><h3>Apex GT</h3><p>Dynamic performance · Automatic · Premium interior</p></article><article><b>URBAN</b><h3>Vertex X</h3><p>Connected SUV · Panoramic roof · Driver assist</p></article><article><b>EXECUTIVE</b><h3>Meridian S</h3><p>Luxury sedan · Hybrid · Comfort package</p></article></div></section><section class="nd-feature"><img src="{% static 'images/portfolio_demos/auto/detail.png' %}" alt="Vehicle inventory and finance interface"><div><span class="nd-kicker">BUY WITH CONFIDENCE</span><h2>Inventory, finance and enquiries—connected.</h2><p>Let buyers filter models, compare specifications, understand finance and book a test drive without friction.</p><ul><li>Vehicle detail and availability</li><li>Finance and exchange enquiries</li><li>Showroom gallery and reviews</li></ul></div></section><section class="nd-cta"><span class="nd-kicker">BOOK A TEST DRIVE</span><h2>Put your showroom in the spotlight.</h2><p>Every vehicle, brand, finance option and enquiry flow can be customized.</p><a href="{% url 'contact' %}?service=Car%20Dealer%20Website&source=Auto%20Demo">Request a similar website →</a></section></main>{% endblock %}
+{% extends "base.html" %}
+{% load static %}
+{% block body_class %}industry-demo demo-auto auto-showroom-demo{% endblock %}
+{% block title %}Vantage Auto House — Premium Car Showroom Demo{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/portfolio_demos/auto_showroom.css' %}?v=20260719-1">{% endblock %}
+{% block content %}
+<main class="auto-site">
+    <section class="auto-hero" id="top">
+        <img class="auto-hero-image" src="{% static 'images/portfolio_demos/auto/hero-photo.png' %}" alt="Premium multi-car showroom interior">
+        <div class="auto-hero-shade"></div>
+        <nav class="auto-nav" aria-label="Showroom navigation">
+            <a class="auto-mark" href="#top"><span>V</span><strong>VANTAGE<br><small>AUTO HOUSE</small></strong></a>
+            <div><a href="#inventory">Inventory</a><a href="#experience">Experience</a><a href="#finance">Finance</a><a class="auto-nav-cta" href="#test-drive">Book test drive</a></div>
+        </nav>
+        <div class="auto-hero-copy">
+            <p class="auto-kicker">CURATED PERFORMANCE · CONSIDERED SERVICE</p>
+            <h1>Your next drive<br><em>starts here.</em></h1>
+            <p>Discover a considered collection of performance, luxury and everyday vehicles—with clear finance options and a personal showroom experience.</p>
+            <div class="auto-actions"><a href="#inventory">Explore inventory <span>↘</span></a><a href="#test-drive">Schedule a test drive</a></div>
+        </div>
+        <div class="auto-featured"><span>FEATURED ARRIVAL</span><strong>Vantage R8</strong><small>Performance coupé · Automatic · Midnight black</small><a href="#inventory">View vehicle →</a></div>
+        <div class="auto-scroll">SCROLL TO DISCOVER <span>↓</span></div>
+    </section>
+
+    <section class="auto-proof" aria-label="Showroom benefits">
+        <article><b>01</b><span>Verified inventory</span></article>
+        <article><b>02</b><span>Flexible finance</span></article>
+        <article><b>03</b><span>Part exchange</span></article>
+        <article><b>04</b><span>Test-drive booking</span></article>
+    </section>
+
+    <section class="auto-inventory" id="inventory">
+        <header class="auto-section-head"><div><p class="auto-kicker">SELECTED INVENTORY</p><h2>Three ways to<br><em>move differently.</em></h2></div><a href="#finance">View finance options →</a></header>
+        <div class="auto-vehicle-grid">
+            <article class="vehicle-card vehicle-performance"><div class="vehicle-top"><span>PERFORMANCE</span><b>01</b></div><div class="vehicle-line" aria-hidden="true"><i></i></div><h3>Apex GT</h3><p>3.0L Twin Turbo · 382 hp · 0–100 in 4.3 sec</p><div class="vehicle-meta"><span>Automatic</span><span>Petrol</span><span>2026</span></div><a href="#test-drive">Enquire about this car →</a></article>
+            <article class="vehicle-card vehicle-urban"><div class="vehicle-top"><span>URBAN SUV</span><b>02</b></div><div class="vehicle-line" aria-hidden="true"><i></i></div><h3>Vertex X</h3><p>Panoramic roof · Driver assist · Connected cabin</p><div class="vehicle-meta"><span>Automatic</span><span>Hybrid</span><span>2026</span></div><a href="#test-drive">Enquire about this car →</a></article>
+            <article class="vehicle-card vehicle-executive"><div class="vehicle-top"><span>EXECUTIVE</span><b>03</b></div><div class="vehicle-line" aria-hidden="true"><i></i></div><h3>Meridian S</h3><p>Luxury comfort · Intelligent drive · Premium sound</p><div class="vehicle-meta"><span>Automatic</span><span>Electric</span><span>2026</span></div><a href="#test-drive">Enquire about this car →</a></article>
+        </div>
+    </section>
+
+    <section class="auto-match" id="experience">
+        <div><p class="auto-kicker">FIND YOUR MATCH</p><h2>Built around<br>how you drive.</h2><p>Help every buyer move from browsing to the right vehicle with a guided, low-friction discovery journey.</p></div>
+        <div class="auto-match-panel">
+            <div class="match-progress"><span>YOUR PREFERENCE</span><b>01 / 03</b></div>
+            <h3>What should your next car feel like?</h3>
+            <div class="match-options"><button type="button">Dynamic</button><button type="button">Refined</button><button type="button">Versatile</button><button type="button">Efficient</button></div>
+            <a href="#test-drive">Show my matches <span>→</span></a>
+        </div>
+    </section>
+
+    <section class="auto-consult" id="finance">
+        <figure><img src="{% static 'images/portfolio_demos/auto/detail-photo.png' %}" alt="Customer discussing a vehicle with a showroom advisor"><figcaption><b>Personal showroom support</b><span>From first enquiry to final handover.</span></figcaption></figure>
+        <div><p class="auto-kicker">CONFIDENCE AT EVERY TURN</p><h2>Clear decisions.<br><em>No pressure.</em></h2><p>Present availability, specifications, finance and exchange options clearly—then let buyers choose how they want to continue.</p><ul><li><span>01</span><div><b>Flexible finance</b><small>Illustrative plans, deposits and monthly options.</small></div></li><li><span>02</span><div><b>Part-exchange enquiry</b><small>A simple route to value the buyer’s current vehicle.</small></div></li><li><span>03</span><div><b>Advisor-led handover</b><small>Human support from shortlist to showroom collection.</small></div></li></ul></div>
+    </section>
+
+    <section class="auto-test-drive" id="test-drive">
+        <p class="auto-kicker">YOUR SHOWROOM, ONLINE</p><h2>Turn interest into<br><em>a booked test drive.</em></h2><p>Inventory, finance, trade-in and enquiry flows can all be customized for your dealership.</p>
+        <div class="auto-test-actions"><a href="{% url 'contact' %}?service=Car%20Dealer%20Website&source=Auto%20Demo">Request a similar website <span>↗</span></a><a href="{% url 'industry_packages' 'car-dealer' %}">View automotive packages</a></div>
+        <small>Fictional showroom concept created by Yuvi Creates. Vehicles and specifications are demonstration content.</small>
+    </section>
+</main>
+{% endblock %}

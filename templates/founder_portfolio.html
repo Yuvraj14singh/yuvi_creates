@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Yuvraj Singh | Founder & Django Developer at Yuvi Creates{% endblock %}
+{% block meta_description %}Meet Yuvraj Singh, founder of Yuvi Creates—a Python and Django developer building premium, responsive websites and practical digital products for modern businesses.{% endblock %}
+{% block og_title %}Yuvraj Singh — Founder of Yuvi Creates{% endblock %}
+{% block og_description %}Founder, Python and Django developer building thoughtful websites, business systems and digital products.{% endblock %}
+{% block body_class %}founder-portfolio-page{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Yuvraj Singh",
+  "jobTitle": "Founder and Web Developer",
+  "worksFor": {"@type": "Organization", "name": "Yuvi Creates"},
+  "url": "{{ request.build_absolute_uri }}",
+  "email": "mailto:contact.yuvicreates@gmail.com",
+  "knowsAbout": ["Python", "Django", "Web Development", "Responsive Design", "Business Websites", "UI Design"],
+  "sameAs": [
+    "https://github.com/Yuvraj14singh",
+    "https://www.linkedin.com/in/yuvraj-singh-127b88280/",
+    "https://www.instagram.com/yuvi_creates/"
+  ]
+}
+</script>
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/pages/founder-portfolio.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="fp-page">
+  <section class="fp-hero" aria-labelledby="fp-hero-title">
+    <div class="container fp-hero-grid">
+      <div class="fp-hero-copy" data-fp-reveal>
+        <span class="fp-badge"><i aria-hidden="true"></i> Founder of Yuvi Creates</span>
+        <p class="fp-kicker">Developer · Designer · Problem solver</p>
+        <h1 id="fp-hero-title">Hi, I'm <span>Yuvraj Singh.</span></h1>
+        <p class="fp-lead">I turn business ideas into polished digital products—combining thoughtful UI, responsive development and practical systems that help people take action.</p>
+        <div class="fp-actions">
+          <a class="fp-button fp-button-primary" href="#projects">View Projects <span aria-hidden="true">↗</span></a>
+          <a class="fp-button fp-button-secondary" href="#connect">Let's Connect <span aria-hidden="true">→</span></a>
+        </div>
+        <ul class="fp-proof" aria-label="Founder highlights">
+          <li><strong>Founder-led</strong><span>Direct collaboration</span></li>
+          <li><strong>Full-stack</strong><span>Idea to deployment</span></li>
+          <li><strong>Business-first</strong><span>Built around outcomes</span></li>
+        </ul>
+      </div>
+
+      <div class="fp-visual" aria-hidden="true" data-fp-reveal data-fp-parallax>
+        <div class="fp-orbit fp-orbit-one"></div><div class="fp-orbit fp-orbit-two"></div>
+        <div class="fp-float fp-float-python">PY<span>Python</span></div>
+        <div class="fp-float fp-float-django">DJ<span>Django</span></div>
+        <div class="fp-float fp-float-js">JS<span>JavaScript</span></div>
+        <div class="fp-laptop">
+          <div class="fp-laptop-top">
+            <div class="fp-browser-bar"><b></b><b></b><b></b><span>yuvraj.build</span></div>
+            <div class="fp-screen-grid">
+              <div class="fp-screen-intro"><small>BUILDING NEXT</small><strong>Digital products<br>with purpose.</strong><em>Python · Django · UI</em></div>
+              <div class="fp-screen-card fp-screen-card-dark"><small>LIVE PRODUCT</small><strong>PitchQI</strong><span>Cricket intelligence</span></div>
+              <div class="fp-screen-card"><small>STUDIO</small><strong>Yuvi Creates</strong><span>Business websites</span></div>
+            </div>
+          </div>
+          <div class="fp-laptop-base"></div>
+        </div>
+        <div class="fp-phone">
+          <span class="fp-phone-notch"></span>
+          <small>YC / MOBILE</small><strong>Ideas that<br><em>ship.</em></strong><i></i><i></i><i></i>
+        </div>
+        <div class="fp-status-card"><span></span><div><strong>Available for select builds</strong><small>Worldwide collaboration</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fp-section fp-about" id="about" aria-labelledby="fp-about-title">
+    <div class="container fp-about-grid">
+      <div class="fp-section-heading" data-fp-reveal>
+        <span class="fp-eyebrow">01 · About me</span>
+        <h2 id="fp-about-title">The founder behind the build.</h2>
+        <p class="fp-about-note">Every useful website starts with understanding the business—not choosing a template.</p>
+      </div>
+      <div class="fp-about-copy" data-fp-reveal>
+        <p class="fp-about-lead">I'm Yuvraj Singh, the founder of Yuvi Creates, a BCA final-year student and a Python and Django developer who enjoys turning real business needs into thoughtful digital products.</p>
+        <div class="fp-about-story">
+          <p>As a <strong>full-stack web developer</strong>, I build modern business websites, focused landing pages and web applications. My work combines responsive design, API integration and UI-focused development, but the process never begins with a list of technologies. It begins with a conversation.</p>
+          <blockquote>“I don't build websites based on my own preferences. Every business is different, so I first understand the client's goals, audience, requirements and vision before designing anything.”</blockquote>
+          <p>A website should feel like the business it represents. If I am building for a salon, the online experience should carry the same sense of care, style and atmosphere that a customer feels when visiting the salon in person. That consistency helps people recognise the business and trust what they see.</p>
+          <p>When a business needs more control, I also develop custom admin panels for managing images, content, enquiries, business records and other custom data. These panels follow the client's actual workflow instead of forcing every business into the same generic dashboard.</p>
+          <p>Two projects reflect this approach clearly. <strong>PitchQI</strong> is an AI-assisted cricket intelligence platform built with Django, bringing live scorecards, teams, players, match statistics and API-powered cricket data into one responsive web application. <strong>Yuvi Creates</strong> is where I design custom websites, landing pages and business-focused digital solutions for different industries.</p>
+          <p>I am still learning, improving my development skills and testing better ways to build. The goal is simple: create practical solutions that are clear to use and solve a real business problem.</p>
+        </div>
+      </div>
+      <div class="fp-quick-info" aria-label="Quick information about Yuvraj Singh" data-fp-reveal>
+        <div><span aria-hidden="true">👨‍💻</span><p><small>Role</small><strong>Founder of Yuvi Creates</strong></p></div>
+        <div><span aria-hidden="true">🎓</span><p><small>Education</small><strong>BCA Final-Year Student</strong></p></div>
+        <div><span aria-hidden="true">🐍</span><p><small>Backend</small><strong>Python &amp; Django Developer</strong></p></div>
+        <div><span aria-hidden="true">🌐</span><p><small>Development</small><strong>Full-Stack Web Developer</strong></p></div>
+        <div><span aria-hidden="true">⚡</span><p><small>Focus</small><strong>Business Website Specialist</strong></p></div>
+        <div><span aria-hidden="true">🚀</span><p><small>Currently building</small><strong>PitchQI &amp; Yuvi Creates</strong></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fp-section fp-expertise" aria-labelledby="fp-expertise-title">
+    <div class="container">
+      <div class="fp-section-heading fp-heading-row" data-fp-reveal>
+        <div><span class="fp-eyebrow">02 · Expertise</span><h2 id="fp-expertise-title">Capabilities from concept to launch.</h2></div>
+        <p>A focused mix of product thinking, interface craft and dependable development.</p>
+      </div>
+      <div class="fp-card-grid">
+        <article class="fp-skill-card" data-fp-reveal><span>01</span><h3>Website Development</h3><p>Fast, structured websites built for real users and business goals.</p></article>
+        <article class="fp-skill-card" data-fp-reveal><span>02</span><h3>Django Development</h3><p>Robust backend systems, admin workflows and database-driven builds.</p></article>
+        <article class="fp-skill-card" data-fp-reveal><span>03</span><h3>Python Automation</h3><p>Practical tools that reduce repetitive work and connect processes.</p></article>
+        <article class="fp-skill-card" data-fp-reveal><span>04</span><h3>Responsive Design</h3><p>Layouts carefully adapted for phones, tablets and large screens.</p></article>
+        <article class="fp-skill-card" data-fp-reveal><span>05</span><h3>UI Design</h3><p>Clear hierarchy, useful interactions and interfaces with character.</p></article>
+        <article class="fp-skill-card" data-fp-reveal><span>06</span><h3>Business Websites</h3><p>Conversion-minded journeys for services, products and enquiries.</p></article>
+        <article class="fp-skill-card" data-fp-reveal><span>07</span><h3>API Integration</h3><p>Reliable connections between products, services and external data.</p></article>
+        <article class="fp-skill-card" data-fp-reveal><span>08</span><h3>Technical Consulting</h3><p>Clear direction on scope, architecture and the smartest next step.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="fp-section fp-stack" aria-labelledby="fp-stack-title">
+    <div class="container fp-stack-grid">
+      <div class="fp-section-heading" data-fp-reveal><span class="fp-eyebrow">03 · Tech stack</span><h2 id="fp-stack-title">Tools chosen for the job—not the trend.</h2><p>Each build uses a practical stack matched to the product's needs.</p></div>
+      <div class="fp-stack-list" data-fp-reveal>
+        <div class="fp-stack-item" style="--level:92%"><span>Python</span><b>Core</b><i></i></div>
+        <div class="fp-stack-item" style="--level:90%"><span>Django</span><b>Core</b><i></i></div>
+        <div class="fp-stack-item" style="--level:94%"><span>HTML / CSS</span><b>Strong</b><i></i></div>
+        <div class="fp-stack-item" style="--level:82%"><span>JavaScript</span><b>Strong</b><i></i></div>
+        <div class="fp-stack-item" style="--level:76%"><span>REST APIs</span><b>Working</b><i></i></div>
+        <div class="fp-stack-item" style="--level:84%"><span>Git / GitHub</span><b>Strong</b><i></i></div>
+        <div class="fp-stack-item" style="--level:78%"><span>Deployment</span><b>Working</b><i></i></div>
+        <div class="fp-stack-item" style="--level:72%"><span>AI integrations</span><b>Working</b><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fp-section fp-projects" id="projects" aria-labelledby="fp-projects-title">
+    <div class="container">
+      <div class="fp-section-heading fp-heading-row" data-fp-reveal><div><span class="fp-eyebrow">04 · Selected work</span><h2 id="fp-projects-title">Projects built to solve something real.</h2></div><p>Products, platforms and websites shaped through strategy, design and code.</p></div>
+      <div class="fp-project-grid">
+        <article class="fp-project fp-project-featured" data-fp-reveal>
+          <div class="fp-project-art fp-art-pitch"><span>PITCHQI</span><div><i></i><i></i><i></i><i></i><i></i></div><b>Cricket intelligence,<br>made actionable.</b></div>
+          <div class="fp-project-body"><span class="fp-project-type">Featured product · Sports tech</span><h3>PitchQI</h3><p>A cricket intelligence platform designed to turn match data into structured, useful insights.</p><ul><li>Python</li><li>Django</li><li>Data UI</li></ul><div class="fp-project-links"><a href="https://pitchqi-production.up.railway.app/cricketAI/" target="_blank" rel="noopener">Live project ↗</a><a href="https://github.com/Yuvraj14singh/PitchQI" target="_blank" rel="noopener">GitHub ↗</a></div></div>
+        </article>
+        <article class="fp-project" data-fp-reveal>
+          <div class="fp-project-art fp-art-yc"><span>YC</span><b>BUILDING<br>DIGITAL<br>IDENTITIES</b><i></i></div>
+          <div class="fp-project-body"><span class="fp-project-type">Founder studio · Web platform</span><h3>Yuvi Creates</h3><p>A complete studio website with demos, market-aware packages, enquiries and staff workflows.</p><ul><li>Django</li><li>Responsive UI</li><li>CRM</li></ul><div class="fp-project-links"><a href="{% url 'home' %}">Visit website →</a><a href="{% url 'portfolio' %}">Explore demos →</a></div></div>
+        </article>
+        <article class="fp-project" data-fp-reveal>
+          <div class="fp-project-art fp-art-portfolio"><small>YOU ARE HERE</small><b>Founder<br>Portfolio</b><span>01—07</span></div>
+          <div class="fp-project-body"><span class="fp-project-type">Personal brand · Case study</span><h3>Yuvraj Singh Portfolio</h3><p>A founder-first digital profile designed to make capabilities, work and direction easy to understand.</p><ul><li>Strategy</li><li>CSS</li><li>JavaScript</li></ul><div class="fp-project-links"><a href="#about">Read the story ↑</a></div></div>
+        </article>
+        <article class="fp-project fp-project-soon" data-fp-reveal>
+          <div class="fp-project-art fp-art-soon"><span>Next build</span><b>Something useful<br>is taking shape.</b><i>COMING SOON</i></div>
+          <div class="fp-project-body"><span class="fp-project-type">Product experiment</span><h3>Coming Soon</h3><p>The next product will be shared when it is ready—not before it has something meaningful to show.</p><ul><li>Research</li><li>Build</li><li>Iterate</li></ul></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="fp-section fp-journey" aria-labelledby="fp-journey-title">
+    <div class="container fp-journey-grid">
+      <div class="fp-section-heading" data-fp-reveal><span class="fp-eyebrow">05 · Journey</span><h2 id="fp-journey-title">Learning by building, then building with intent.</h2><p>Select a chapter to trace the path from curiosity to founder-led work.</p></div>
+      <ol class="fp-timeline" data-fp-timeline data-fp-reveal>
+        <li class="is-active"><button type="button"><span>01</span><b>Started learning development</b><small>Curiosity became a craft.</small></button></li>
+        <li><button type="button"><span>02</span><b>Learned Python</b><small>Logic, automation and problem solving.</small></button></li>
+        <li><button type="button"><span>03</span><b>Built with Django</b><small>Ideas became working products.</small></button></li>
+        <li><button type="button"><span>04</span><b>Started freelancing</b><small>Code met real business needs.</small></button></li>
+        <li><button type="button"><span>05</span><b>Built PitchQI</b><small>A focused product challenge.</small></button></li>
+        <li><button type="button"><span>06</span><b>Launched Yuvi Creates</b><small>A studio with a clear point of view.</small></button></li>
+        <li><button type="button"><span>07</span><b>Present</b><small>Building, learning and shipping.</small></button></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="fp-section fp-process" aria-labelledby="fp-process-title">
+    <div class="container">
+      <div class="fp-section-heading" data-fp-reveal><span class="fp-eyebrow">06 · Process</span><h2 id="fp-process-title">A clear path from first question to working product.</h2></div>
+      <ol class="fp-process-track" data-fp-reveal>
+        <li><span>01</span><b>Discover</b></li><li><span>02</span><b>Research</b></li><li><span>03</span><b>Design</b></li><li><span>04</span><b>Develop</b></li><li><span>05</span><b>Test</b></li><li><span>06</span><b>Deploy</b></li><li><span>07</span><b>Support</b></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="fp-section fp-why" aria-labelledby="fp-why-title">
+    <div class="container">
+      <div class="fp-section-heading fp-heading-row" data-fp-reveal><div><span class="fp-eyebrow">07 · Why work with me</span><h2 id="fp-why-title">Small-studio attention. Product-level thinking.</h2></div><p>Direct communication, considered decisions and ownership throughout the build.</p></div>
+      <div class="fp-why-grid">
+        <article data-fp-reveal><span>✦</span><h3>Business-first thinking</h3></article><article data-fp-reveal><span>↗</span><h3>Founder-led communication</h3></article><article data-fp-reveal><span>◎</span><h3>Clean, responsive interfaces</h3></article><article data-fp-reveal><span>⌁</span><h3>Practical technology choices</h3></article><article data-fp-reveal><span>◇</span><h3>Clear scope and process</h3></article><article data-fp-reveal><span>✓</span><h3>Quality-focused delivery</h3></article><article data-fp-reveal><span>∞</span><h3>Built for maintainability</h3></article><article data-fp-reveal><span>→</span><h3>Support after launch</h3></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="fp-section fp-testimonials" aria-labelledby="fp-testimonials-title">
+    <div class="container fp-testimonials-card" data-fp-reveal>
+      <span class="fp-eyebrow">Testimonials coming soon</span>
+      <h2 id="fp-testimonials-title">The work comes first. The words will follow.</h2>
+      <p>Client feedback will be added here as projects are completed and approved for sharing. No placeholders, no invented praise.</p>
+    </div>
+  </section>
+
+  <section class="fp-section fp-facts" aria-labelledby="fp-facts-title">
+    <div class="container">
+      <div class="fp-section-heading" data-fp-reveal><span class="fp-eyebrow">A little more human</span><h2 id="fp-facts-title">Fun facts beyond the browser tab.</h2></div>
+      <div class="fp-facts-grid">
+        <div data-fp-reveal><span>01</span><p>I enjoy turning messy requirements into calm, clear interfaces.</p></div>
+        <div data-fp-reveal><span>02</span><p>Cricket data is more interesting when it becomes a useful product.</p></div>
+        <div data-fp-reveal><span>03</span><p>I notice spacing, alignment and tiny interaction details everywhere.</p></div>
+        <div data-fp-reveal><span>04</span><p>A good build should be impressive—and practical to maintain.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fp-connect" id="connect" aria-labelledby="fp-connect-title">
+    <div class="container fp-connect-card" data-fp-reveal>
+      <div><span class="fp-eyebrow">Start a conversation</span><h2 id="fp-connect-title">Have an idea worth building?</h2><p>Tell me what you are working on, what needs to improve and where you want it to go.</p></div>
+      <div class="fp-contact-links">
+        <a href="mailto:contact.yuvicreates@gmail.com">Email <span>↗</span></a>
+        <a href="https://wa.me/916353346509" target="_blank" rel="noopener">WhatsApp <span>↗</span></a>
+        <a href="https://www.instagram.com/yuvi_creates/" target="_blank" rel="noopener">Instagram <span>↗</span></a>
+        <a href="https://www.linkedin.com/in/yuvraj-singh-127b88280/" target="_blank" rel="noopener">LinkedIn <span>↗</span></a>
+        <a href="https://github.com/Yuvraj14singh" target="_blank" rel="noopener">GitHub <span>↗</span></a>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}<script src="{% static 'js/pages/founder-portfolio.js' %}"></script>{% endblock %}

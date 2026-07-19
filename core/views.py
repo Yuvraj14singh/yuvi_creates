@@ -1060,6 +1060,11 @@ def about(request):
     })
 
 
+def founder_portfolio(request):
+    """Standalone founder portfolio; intentionally separate from About and Demos."""
+    return render(request, "founder_portfolio.html")
+
+
 def faq(request):
     return render(request, "faq.html")
 
@@ -1227,6 +1232,7 @@ def sitemap_xml(request):
     urls = [
         "/",
         "/about/",
+        "/yuvraj-singh/",
         "/services/",
         "/packages/",
         "/portfolio/",
@@ -1292,6 +1298,7 @@ def sitemap_xml(request):
         "/portfolio/",
         "/process/",
         "/about/",
+        "/yuvraj-singh/",
         "/contact/",
         "/faq/",
 

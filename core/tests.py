@@ -414,3 +414,23 @@ class PackagesPageTests(TestCase):
         self.assertNotIn("final_quote_amount", fields)
         self.assertNotIn("final_quote_currency", fields)
         self.assertNotIn("displayed_price_context", fields)
+
+
+class FounderPortfolioPageTests(TestCase):
+    def test_founder_portfolio_is_a_separate_public_page(self):
+        response = self.client.get(reverse("founder_portfolio"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "founder_portfolio.html")
+        self.assertContains(response, "Hi, I'm <span>Yuvraj Singh.</span>", html=True)
+        self.assertContains(response, "Testimonials coming soon")
+        self.assertContains(response, "PitchQI")
+
+    def test_founder_portfolio_has_person_schema_and_real_contact_links(self):
+        response = self.client.get(reverse("founder_portfolio"))
+        self.assertContains(response, '"@type": "Person"')
+        self.assertContains(response, "contact.yuvicreates@gmail.com")
+        self.assertContains(response, "github.com/Yuvraj14singh")
+
+    def test_founder_portfolio_is_in_sitemap(self):
+        response = self.client.get(reverse("sitemap_xml"))
+        self.assertContains(response, "/yuvraj-singh/")

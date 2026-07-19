@@ -13,6 +13,7 @@ urlpatterns = [
     path("portfolio/demo/<int:project_id>/<slug:slug>/", views.portfolio_demo, name="portfolio_demo"),
     path("process/", views.process, name="process"),
     path("about/", views.about, name="about"),
+    path("yuvraj-singh/", views.founder_portfolio, name="founder_portfolio"),
     path("contact/", views.contact, name="contact"),
     path("faq/", views.faq, name="faq"),
     path("checkout/", views.checkout, name="checkout"),
